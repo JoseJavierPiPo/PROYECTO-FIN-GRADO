@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería Fotográfica - SOCIEDAD DE CAZADORES LOS PIPORROS</title>
+    <style>
+        /* Todos los estilos de la página principal se mantienen igual */
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background-color: #000;
+            overflow-x: hidden;
+        }
+        
+        /* Efecto Parallax mejorado */
+        .parallax-container {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../fotosociedad.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.7;
+            will-change: transform;
+        }
+        
+        /* Contenedor principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Encabezado */
+        .site-header {
+            position: relative;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .custom-header-media {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            overflow: hidden;
+        }
+        
+        .custom-header-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .site-branding {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+        
+        .custom-logo {
+            max-width: 305px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .site-title {
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+        
+        .site-description {
+            font-size: 1.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Menú de navegación */
+        nav {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px 0;
+            margin-bottom: 30px;
+            border-top: 1px solid #444;
+            border-bottom: 1px solid #444;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .menu-item {
+            margin: 0 15px;
+            position: relative;
+        }
+        
+        .menu-item a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            display: block;
+        }
+        
+        .menu-item a:hover {
+            color: #c0a000;
+        }
+        
+        /* Submenús */
+        .sub-menu {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.9);
+            min-width: 220px;
+            z-index: 100;
+            top: 100%;
+            left: 0;
+            border: 1px solid #444;
+            border-radius: 0 0 5px 5px;
+            padding: 10px 0;
+        }
+        
+        .sub-menu .sub-menu {
+            left: 100%;
+            top: 0;
+            border-radius: 5px;
+        }
+        
+        .menu-item:hover > .sub-menu {
+            display: block;
+        }
+        
+        .sub-menu .menu-item {
+            margin: 0;
+            padding: 5px 15px;
+        }
+        
+        /* Contenido principal */
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        h2 {
+            color: #c0a000;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        h3 {
+            color: #c0a000;
+            margin: 15px 0;
+            font-size: 1.4em;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        /* Estilos específicos para la galería */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .galeria-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            border: 1px solid #444;
+            transition: transform 0.3s;
+        }
+        
+        .galeria-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .galeria-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .galeria-caption {
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+        
+        .galeria-categoria {
+            margin-top: 40px;
+        }
+        
+        /* Área de búsqueda */
+        .search-form {
+            display: flex;
+            max-width: 500px;
+            margin-top: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 12px 20px;
+            background-color: #333;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+            border-right: none;
+        }
+        
+        .search-button {
+            padding: 12px 20px;
+            background-color: #c0a000;
+            color: #000;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .search-button:hover {
+            background-color: #e0c040;
+        }
+        
+        /* Pie de página */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            color: #777;
+            font-size: 0.9em;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        footer a {
+            color: #c0a000;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .menu-item {
+                margin: 5px 0;
+            }
+            
+            .sub-menu {
+                position: static;
+                display: none;
+                width: 100%;
+                background-color: transparent;
+                border: none;
+                padding-left: 15px;
+            }
+            
+            .galeria-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .site-title {
+                font-size: 2rem;
+            }
+            
+            .site-description {
+                font-size: 1.2rem;
+                text-align: center;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .search-input {
+                border-radius: 5px;
+                border-right: 1px solid #444;
+                margin-bottom: 10px;
+            }
+            
+            .search-button {
+                border-radius: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header con efecto parallax -->
+    <div class="parallax-container">
+        <div class="parallax-bg"></div>
+        
+        <div class="site-header">
+            <div class="custom-header-media">
+                <img src="fotosociedad.jpg" alt="Fondo de caza">
+            </div>
+            
+            <div class="site-branding">
+                <a href="SOCIEDAD.html"><img src="logo-aceuchal1-1.png" alt="Logo S. Cazadores" class="custom-logo"></a>
+                <a href="SOCIEDAD.html"><h1 class="site-title">SOCIEDAD DE CAZADORES</h1></a>
+                <p class="site-description">LOS PIPORROS</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Contenido principal -->
+    <div class="container">
+        <!-- Menú de navegación sticky -->
+        <nav class="main-navigation">
+            <ul class="nav-menu">
+                <li class="menu-item">
+                    <a href="SOCIEDAD.html">INICIO</a>
+                </li>
+                <li class="menu-item">
+                    <a href="historia.html">HISTORIA</a>
+                </li>
+                <li class="menu-item">
+                    <a href="galeria.html" class="active">GALERÍA FOTOGRÁFICA</a>
+                    <ul class="sub-menu">
+                        <li class="menu-item">
+                            <a href="batidas.php">BATIDAS</a>
+                            <ul class="sub-menu">
+                                <li class="menu-item"><a href="batidas-2012-2013.php">BATIDAS 2012-2013</a></li>
+                                <li class="menu-item"><a href="batidas-2013-2014.php">BATIDAS 2013-2014</a></li>
+                                <li class="menu-item"><a href="batidas-2014-2015.php">BATIDAS 2014-2015</a></li>
+                                <li class="menu-item"><a href="batidas-2015-2016.php">BATIDAS 2015-2016</a></li>
+                                <li class="menu-item"><a href="batidas-2016-2017.php">BATIDAS 2016-2017</a></li>
+                                <li class="menu-item"><a href="batidas-2021-2022.php">BATIDAS 2021-2022</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <a href="recechos.php">RECECHOS</a>
+                            <ul class="sub-menu">
+                                <li class="menu-item"><a href="recechos-2013-2014.php">RECECHOS 2013-2014</a></li>
+                                <li class="menu-item"><a href="recechos-2015-2016.php">RECECHOS 2015-2016</a></li>
+                                <li class="menu-item"><a href="recechos-2016-2017.php">RECECHOS 2016-2017</a></li>
+                                <li class="menu-item"><a href="recechos-2018-2019.php">RECECHOS 2018-2019</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="../documentacion/documentacion.php">DOCUMENTACIÓN</a>
+                    <ul class="sub-menu">
+                        <li class="menu-item"><a href="../documentacion/armas.php">ARMAS</a></li>
+                        <li class="menu-item"><a href="../documentacion/normativa.php">NORMATIVA</a></li>
+                        <li class="menu-item"><a href="../documentacion/inscripcion.php">INSCRIPCIÓN NUEVOS SOCIOS</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="../area-privada/area-privada.php">ÁREA PRIVADA</a>
+                    <ul class="sub-menu">
+                        <li class="menu-item"><a href="../area-privada/acuerdos.php">ACUERDOS Y OTROS</a></li>
+                        <li class="menu-item"><a href="../area-privada/cuentas.php">CUENTAS DE LA SOCIEDAD</a></li>
+                        <li class="menu-item"><a href="../area-privada/cotos.php">COTOS</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="../contacto/contacto.php">CONTACTO</a></li>
+            </ul>
+        </nav>
+        
+        <div class="main-content">
+            <main class="content">
+                <h1>GALERÍA FOTOGRÁFICA</h1>
+                <p>Explora nuestra colección de imágenes que documentan la historia y actividades de nuestra sociedad de cazadores.</p>
+                
+                <div class="galeria-categoria">
+                    <h2>BATIDAS</h2>
+                    <div class="galeria-grid">
+                        <div class="galeria-item">
+                            <img src="../images/batida-2022-01.jpg" alt="Batida 2022" class="galeria-img">
+                            <div class="galeria-caption">Batida 2021-2022</div>
+                        </div>
+                        <div class="galeria-item">
+                            <img src="../images/batida-2017-01.jpg" alt="Batida 2017" class="galeria-img">
+                            <div class="galeria-caption">Batida 2016-2017</div>
+                        </div>
+                        <div class="galeria-item">
+                            <img src="../images/batida-2015-01.jpg" alt="Batida 2015" class="galeria-img">
+                            <div class="galeria-caption">Batida 2015-2016</div>
+                        </div>
+                        <div class="galeria-item">
+                            <img src="../images/batida-2013-01.jpg" alt="Batida 2013" class="galeria-img">
+                            <div class="galeria-caption">Batida 2013-2014</div>
+                        </div>
+                        <div class="galeria-item">
+                            <img src="../images/batida-2012-01.jpg" alt="Batida 2012" class="galeria-img">
+                            <div class="galeria-caption">Batida 2012-2013</div>
+                        </div>
+                        <div class="galeria-item">
+                            <a href="batidas.php">
+                                <img src="../images/ver-mas.jpg" alt="Ver más batidas" class="galeria-img">
+                                <div class="galeria-caption">Ver todas las batidas</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="galeria-categoria">
+                    <h2>RECECHOS</h2>
+                    <div class="galeria-grid">
+                        <div class="galeria-item">
+                            <img src="../images/rececho-2019-01.jpg" alt="Rececho 2019" class="galeria-img">
+                            <div class="galeria-caption">Rececho 2018-2019</div>
+                        </div>
+                        <div class="galeria-item">
+                            <img src="../images/rececho-2017-01.jpg" alt="Rececho 2017" class="galeria-img">
+                            <div class="galeria-caption">Rececho 2016-2017</div>
+                        </div>
+                        <div class="galeria-item">
+                            <img src="../images/rececho-2016-01.jpg" alt="Rececho 2016" class="galeria-img">
+                            <div class="galeria-caption">Rececho 2015-2016</div>
+                        </div>
+                        <div class="galeria-item">
+                            <img src="../images/rececho-2014-01.jpg" alt="Rececho 2014" class="galeria-img">
+                            <div class="galeria-caption">Rececho 2013-2014</div>
+                        </div>
+                        <div class="galeria-item">
+                            <a href="recechos.php">
+                                <img src="../images/ver-mas.jpg" alt="Ver más recechos" class="galeria-img">
+                                <div class="galeria-caption">Ver todos los recechos</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="galeria-categoria">
+                    <h2>EVENTOS SOCIALES</h2>
+                    <div class="galeria-grid">
+                        <div class="galeria-item">
+                            <img src="../images/evento-2023-01.jpg" alt="Cena anual 2023" class="galeria-img">
+                            <div class="galeria-caption">Cena anual 2023</div>
+                        </div>
+                        <div class="galeria-item">
+                            <img src="../images/evento-2022-01.jpg" alt="Torneo 2022" class="galeria-img">
+                            <div class="galeria-caption">Torneo de caza 2022</div>
+                        </div>
+                        <div class="galeria-item">
+                            <img src="../images/evento-2020-01.jpg" alt="Aniversario 2020" class="galeria-img">
+                            <div class="galeria-caption">45º Aniversario</div>
+                        </div>
+                        <div class="galeria-item">
+                            <img src="../images/evento-2018-01.jpg" alt="Jornadas formativas 2018" class="galeria-img">
+                            <div class="galeria-caption">Jornadas formativas 2018</div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            
+            <aside class="sidebar">
+                <h3 class="sidebar-title">CATEGORÍAS</h3>
+                <ul class="sidebar-menu">
+                    <li class="sidebar-item"><a href="batidas.php" class="sidebar-link">Batidas</a></li>
+                    <li class="sidebar-item"><a href="recechos.php" class="sidebar-link">Recechos</a></li>
+                    <li class="sidebar-item"><a href="eventos.php" class="sidebar-link">Eventos sociales</a></li>
+                    <li class="sidebar-item"><a href="naturaleza.php" class="sidebar-link">Naturaleza y fauna</a></li>
+                    <li class="sidebar-item"><a href="instalaciones.php" class="sidebar-link">Instalaciones</a></li>
+                    <li class="sidebar-item"><a href="historicas.php" class="sidebar-link">Fotos históricas</a></li>
+                </ul>
+                
+                <h3 class="sidebar-title">ÚLTIMAS FOTOS</h3>
+                <div class="galeria-grid" style="grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    <div class="galeria-item">
+                        <img src="../images/reciente-1.jpg" alt="Foto reciente" class="galeria-img">
+                    </div>
+                    <div class="galeria-item">
+                        <img src="../images/reciente-2.jpg" alt="Foto reciente" class="galeria-img">
+                    </div>
+                    <div class="galeria-item">
+                        <img src="../images/reciente-3.jpg" alt="Foto reciente" class="galeria-img">
+                    </div>
+                    <div class="galeria-item">
+                        <img src="../images/reciente-4.jpg" alt="Foto reciente" class="galeria-img">
+                    </div>
+                </div>
+                
+        
+            </aside>
+        </div>
+        
+        <footer>
+            <span>Sociedad de Cazadores LOS PIPORROS &copy; 2025 </span>
+            <a href="https://aceuchal.com/">Ayuntamiento</a> - 924 680 003 <a href="mailto:info@aceuchal.com">info@aceuchal.com</a>
+        </footer>
+    </div>
+    
+    <script>
+        // Efecto parallax mejorado y optimizado
+        document.addEventListener('DOMContentLoaded', function() {
+            const parallaxBg = document.querySelector('.parallax-bg');
+            const header = document.querySelector('.site-header');
+            const headerHeight = header.offsetHeight;
+            
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.pageYOffset;
+                const limit = headerHeight;
+                
+                if (scrollPosition <= limit) {
+                    parallaxBg.style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

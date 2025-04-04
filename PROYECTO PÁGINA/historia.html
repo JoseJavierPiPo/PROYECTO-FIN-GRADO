@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia - SOCIEDAD DE CAZADORES LOS PIPORROS</title>
+    <style>
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background-color: #000;
+            overflow-x: hidden;
+        }
+        
+        /* Efecto Parallax mejorado */
+        .parallax-container {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../fotosociedad.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.7;
+            will-change: transform;
+        }
+        
+        /* Contenedor principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Encabezado */
+        .site-header {
+            position: relative;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .custom-header-media {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            overflow: hidden;
+        }
+        
+        .custom-header-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .site-branding {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+        
+        .custom-logo {
+            max-width: 305px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .site-title {
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+        
+        .site-description {
+            font-size: 1.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Menú de navegación */
+        nav {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px 0;
+            margin-bottom: 30px;
+            border-top: 1px solid #444;
+            border-bottom: 1px solid #444;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .menu-item {
+            margin: 0 15px;
+            position: relative;
+        }
+        
+        .menu-item a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            display: block;
+        }
+        
+        .menu-item a:hover {
+            color: #c0a000;
+        }
+        
+        /* Submenús */
+        .sub-menu {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.9);
+            min-width: 220px;
+            z-index: 100;
+            top: 100%;
+            left: 0;
+            border: 1px solid #444;
+            border-radius: 0 0 5px 5px;
+            padding: 10px 0;
+        }
+        
+        .sub-menu .sub-menu {
+            left: 100%;
+            top: 0;
+            border-radius: 5px;
+        }
+        
+        .menu-item:hover > .sub-menu {
+            display: block;
+        }
+        
+        .sub-menu .menu-item {
+            margin: 0;
+            padding: 5px 15px;
+        }
+        
+        /* Contenido principal */
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        h2 {
+            color: #c0a000;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        h3 {
+            color: #c0a000;
+            margin: 15px 0;
+            font-size: 1.4em;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .historia-imagen {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border: 1px solid #444;
+            border-radius: 5px;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 20px;
+            border: 1px solid #444;
+            border-radius: 5px;
+        }
+        
+        .sidebar-title {
+            color: #c0a000;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            text-transform: uppercase;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-item {
+            margin-bottom: 10px;
+        }
+        
+        .sidebar-link {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+        
+        .sidebar-link:hover {
+            color: #c0a000;
+        }
+        
+        /* Pie de página */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            color: #777;
+            font-size: 0.9em;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        footer a {
+            color: #c0a000;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .menu-item {
+                margin: 5px 0;
+            }
+            
+            .sub-menu {
+                position: static;
+                display: none;
+                width: 100%;
+                background-color: transparent;
+                border: none;
+                padding-left: 15px;
+            }
+            
+            .site-title {
+                font-size: 2rem;
+            }
+            
+            .site-description {
+                font-size: 1.2rem;
+                text-align: center;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .search-input {
+                border-radius: 5px;
+                border-right: 1px solid #444;
+                margin-bottom: 10px;
+            }
+            
+            .search-button {
+                border-radius: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header con efecto parallax -->
+    <div class="parallax-container">
+        <div class="parallax-bg"></div>
+        
+        <div class="site-header">
+            <div class="custom-header-media">
+                <img src="fotosociedad.jpg" alt="Fondo de caza">
+            </div>
+            
+            <div class="site-branding">
+                <a href="SOCIEDAD.html"><img src="logo-aceuchal1-1.png" alt="Logo S. Cazadores" class="custom-logo"></a>
+                <a href="SOCIEDAD.html"><h1 class="site-title">SOCIEDAD DE CAZADORES</h1></a>
+                <p class="site-description">LOS PIPORROS</p>
+            </div>
+            
+        </div>
+    </div>
+    
+    <!-- Contenido principal -->
+    <div class="container">
+        <!-- Menú de navegación sticky -->
+        <nav class="main-navigation">
+            <ul class="nav-menu">
+                <li class="menu-item">
+                    <a href="SOCIEDAD.html">INICIO</a>
+                </li>
+                <li class="menu-item">
+                    <a href="historia.html" class="active">HISTORIA</a>
+                </li>
+                <li class="menu-item">
+                    <a href="galeria.html">GALERÍA FOTOGRÁFICA</a>
+                    <ul class="sub-menu">
+                        <li class="menu-item">
+                            <a href="../galeria/batidas.php">BATIDAS</a>
+                            <ul class="sub-menu">
+                                <li class="menu-item"><a href="../galeria/batidas-2012-2013.php">BATIDAS 2012-2013</a></li>
+                                <li class="menu-item"><a href="../galeria/batidas-2013-2014.php">BATIDAS 2013-2014</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <a href="../galeria/recechos.php">RECECHOS</a>
+                            <ul class="sub-menu">
+                                <li class="menu-item"><a href="../galeria/recechos-2013-2014.php">RECECHOS 2013-2014</a></li>
+                                <li class="menu-item"><a href="../galeria/recechos-2015-2016.php">RECECHOS 2015-2016</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="../documentacion/documentacion.php">DOCUMENTACIÓN</a>
+                    <ul class="sub-menu">
+                        <li class="menu-item"><a href="../documentacion/armas.php">ARMAS</a></li>
+                        <li class="menu-item"><a href="../documentacion/normativa.php">NORMATIVA</a></li>
+                        <li class="menu-item"><a href="../documentacion/inscripcion.php">INSCRIPCIÓN NUEVOS SOCIOS</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="../area-privada/area-privada.php">ÁREA PRIVADA</a>
+                    <ul class="sub-menu">
+                        <li class="menu-item"><a href="../area-privada/acuerdos.php">ACUERDOS Y OTROS</a></li>
+                        <li class="menu-item"><a href="../area-privada/cuentas.php">CUENTAS DE LA SOCIEDAD</a></li>
+                        <li class="menu-item"><a href="../area-privada/cotos.php">COTOS</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="../contacto/contacto.php">CONTACTO</a></li>
+            </ul>
+        </nav>
+        
+        <div class="main-content">
+            <main class="content">
+                <h1>HISTORIA DE LA SOCIEDAD DE CAZADORES LOS PIPORROS</h1>
+                
+                <img src="../images/historia-antigua.jpg" alt="Fotografía histórica de la sociedad" class="historia-imagen">
+                
+                <h2>Nuestros orígenes</h2>
+                <p>La Sociedad de Cazadores LOS PIPORROS fue fundada en el año 1975 por un grupo de entusiastas de la caza y amantes de la naturaleza de la localidad. Desde sus inicios, la sociedad ha estado comprometida con la gestión sostenible de los recursos cinegéticos y la conservación del medio ambiente.</p>
+                
+                <h2>Evolución a lo largo de los años</h2>
+                <p>A lo largo de sus más de 45 años de historia, la sociedad ha experimentado un crecimiento constante:</p>
+                
+                <ul>
+                    <li><strong>1975:</strong> Fundación de la sociedad con 15 miembros</li>
+                    <li><strong>1982:</strong> Adquisición del primer coto de caza</li>
+                    <li><strong>1995:</strong> Construcción del primer refugio para socios</li>
+                    <li><strong>2005:</strong> Celebración del 30 aniversario</li>
+                    <li><strong>2015:</strong> Implementación del plan de gestión sostenible</li>
+                    <li><strong>2020:</strong> Digitalización de los registros y documentación</li>
+                </ul>
+                
+                <h2>Logros destacados</h2>
+                <p>Entre los principales logros de nuestra sociedad destacan:</p>
+                
+                <ol>
+                    <li>Recuperación de especies autóctonas en peligro</li>
+                    <li>Programas de repoblación forestal</li>
+                    <li>Premio regional a la mejor gestión cinegética (2018)</li>
+                    <li>Colaboración con la universidad en proyectos de investigación</li>
+                </ol>
+                
+                <h2>Nuestros valores</h2>
+                <p>La Sociedad de Cazadores LOS PIPORROS se rige por los siguientes principios fundamentales:</p>
+                
+                <p><strong>Respeto por la naturaleza:</strong> Promovemos una caza ética y sostenible que garantice la conservación de los ecosistemas.</p>
+                <p><strong>Tradición y modernidad:</strong> Combinamos los conocimientos tradicionales con las últimas técnicas de gestión.</p>
+                <p><strong>Comunidad:</strong> Fomentamos el compañerismo y la transmisión de conocimientos entre generaciones.</p>
+            </main>
+            
+            <aside class="sidebar">
+                <h3 class="sidebar-title">ARCHIVO HISTÓRICO</h3>
+                <ul class="sidebar-menu">
+                    <li class="sidebar-item"><a href="fundacion.html" class="sidebar-link">Fundación (1975)</a></li>
+                    <li class="sidebar-item"><a href="primeros-anos.html" class="sidebar-link">Primeros años</a></li>
+                    <li class="sidebar-item"><a href="expansion.html" class="sidebar-link">Expansión (1980-2000)</a></li>
+                    <li class="sidebar-item"><a href="modernizacion.html" class="sidebar-link">Modernización</a></li>
+                    <li class="sidebar-item"><a href="premios.html" class="sidebar-link">Premios y reconocimientos</a></li>
+                </ul>
+                
+                <h3 class="sidebar-title">ENTRADAS RECIENTES</h3>
+                <ul class="sidebar-menu">
+                    <li class="sidebar-item"><a href="aniversario.html" class="sidebar-link">45º Aniversario</a></li>
+                    <li class="sidebar-item"><a href="nuevos-proyectos.html" class="sidebar-link">Nuevos proyectos</a></li>
+                </ul>
+                
+            
+            </aside>
+        </div>
+        
+        <footer>
+            <span>Sociedad de Cazadores LOS PIPORROS &copy; 2025 </span>
+            <a href="https://aceuchal.com/">Ayuntamiento</a> - 924 680 003 <a href="mailto:info@aceuchal.com">info@aceuchal.com</a>
+        </footer>
+    </div>
+    
+    <script>
+        // Efecto parallax mejorado y optimizado
+        document.addEventListener('DOMContentLoaded', function() {
+            const parallaxBg = document.querySelector('.parallax-bg');
+            const header = document.querySelector('.site-header');
+            const headerHeight = header.offsetHeight;
+            
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.pageYOffset;
+                const limit = headerHeight;
+                
+                if (scrollPosition <= limit) {
+                    parallaxBg.style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
