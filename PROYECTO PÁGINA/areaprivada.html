@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área Privada | Nombre de tu Sitio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        nav {
+            background-color: #495057;
+            padding: 10px;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        .welcome-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: cewnter;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .logout-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Área Privada</h1>
+        <p>Bienvenido al contenido exclusivo para miembros</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Perfil</a></li>
+            <li><a href="#">Configuración</a></li>
+            <li><button class="logout-btn" onclick="logout()">Cerrar Sesión</button></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section class="welcome-section">
+            <h2>Bienvenido, Usuario</h2>
+            <p>Esta es tu área privada donde puedes acceder a contenido exclusivo y herramientas especiales.</p>
+        </section>
+        
+        <section class="features">
+            <div class="feature-card">
+                <h3>Documentos Privados</h3>
+                <p>Accede a todos tus documentos confidenciales en un solo lugar.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Estadísticas</h3>
+                <p>Consulta tus métricas y el progreso de tus proyectos.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Herramientas</h3>
+                <p>Utiliza nuestras herramientas exclusivas para miembros.</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 Nombre de tu Sitio. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script>
+        // Verificar si el usuario está logueado (en un caso real, esto se haría con sesiones o tokens)
+        function checkAuth() {
+            // Esto es solo un ejemplo básico, en producción usarías un método más seguro
+            if(!localStorage.getItem('loggedIn')) {
+                window.location.href = 'login.html';
+            }
+        }
+        
+        // Llamar a checkAuth cuando la página carga
+        checkAuth();
+        
+        // Función para cerrar sesión
+        function logout() {
+            localStorage.removeItem('loggedIn');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
