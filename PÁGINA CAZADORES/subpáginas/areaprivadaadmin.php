@@ -1,5 +1,24 @@
 <?php
 session_start();
+include_once("../php/funciones.php");
+
+// Check if the session variables exist before using them
+$nombre = isset($_SESSION['Nombre']) ? $_SESSION['Nombre'] : '';
+$dni = isset($_SESSION['DNI']) ? $_SESSION['DNI'] : '';
+
+// Only call mostrarvalores if both nombre and dni are set
+if ($nombre && $dni) {
+    mostrarvalores($conn, $nombre, $dni);
+}
+
+// Get session values with proper checks
+$rol = isset($_SESSION['ROL'])? $_SESSION['ROL'] : '';
+$nombre = isset($_SESSION['Nombre']) ? $_SESSION['Nombre'] : '';
+$a1 = isset($_SESSION['Apellido1']) ? $_SESSION['Apellido1'] : '';
+$a2 = isset($_SESSION['Apellido2']) ? $_SESSION['Apellido2'] : '';
+$id_socio = isset($_SESSION['ID_Socio']) ? $_SESSION['ID_Socio'] : '' ;
+$fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -227,25 +246,83 @@ session_start();
             text-align: center;
         }
 
-
+        /* Footer */
         .footer {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: #000000;
             border-top: 1px solid var(--color-oro);
             padding: 2rem 0;
             margin-top: 3rem;
         }
-
+        
+        /* Ajustes para el contenido del footer */
+        .footer .text-gold {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        /* Ajuste para los iconos y texto de contacto */
+        .footer p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer p .icon-wrapper {
+            margin-right: 0.3rem;
+        }
+        
+        /* Centrado de la sección "SÍGUENOS" */
+        .footer .social-section {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        
         .social-icons a {
             color: var(--color-oro);
             font-size: 1.5rem;
             margin: 0 10px;
             transition: all 0.3s;
         }
-
+        
         .social-icons a:hover {
             color: var(--color-oro-claro);
             transform: translateY(-3px);
         }
+        
+        /* Texto del copyright */
+        .footer .copyright {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--color-oro);
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .social-icons a {
+            color: var(--color-oro);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--color-oro-claro);
+            transform: translateY(-3px);
+        }
+        
 
         @media (max-width: 992px) {
             .parallax-header {
@@ -285,9 +362,9 @@ session_start();
         <div class="container header-content">
             <div class="row">
                 <div class="col-12 text-center">
-                    <a href="index.html"><img src="../PROYECTO PÁGINA/fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
-                    <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
-                    <h2 class="h3 nombre-sociedad">LOS PIPORROS</h2>
+                    <a href="../index.html"><img src="../fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
+                    <h1 class="display-4 fw-bold mb-3">BIENVENIDO AL ÁREA PRIVADA DE LA SOCIEDAD</h1>
+                    <h2 class="h3 nombre-sociedad">IDENTIDAD : <?php echo $nombre ?><br> ROL : <?php echo $rol?></h2>
                 </div>
             </div>
         </div>
@@ -303,7 +380,7 @@ session_start();
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="historia.html">
+                        <a class="nav-link" href="../historia.html">
                             <span class="icon-wrapper"><i class="fas fa-landmark icon-nav"></i></span>
                             HISTORIA
                         </a>
@@ -392,13 +469,13 @@ session_start();
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="x" id="areaPrivadaDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="../" id="areaPrivadaDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-lock icon-nav"></i></span>
                             ÁREA PRIVADA
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="../PROYECTO PÁGINA/subpáginas/login.php">
+                                <a class="dropdown-item dropdown-toggle" href="./login.php">
                                     <span class="icon-wrapper"><i class="bi bi-folder-fill"></i></span>
                                     ÁREA PRIVADA
                                 </a>
@@ -486,7 +563,7 @@ session_start();
                     </p>
                     
                     <!-- Añadir botón de Editar Perfil -->
-                    <i><?php echo "$apellido1 $apellido2, $nombre "?></i><br>
+                    <i><?php echo "$a1 $a2 $nombre "?></i><br>
                     <a href="#" class="btn btn-gold btn-sm mb-2">
                         <i class="fas fa-user-edit me-2"></i>Editar Perfil
                     </a>
@@ -494,10 +571,10 @@ session_start();
                     <!-- Añadir información de Socio -->
                     <div class="user-details mt-3">
                         <p><i class="fas fa-id-badge me-2"></i>Nº Socio: <?php echo "$id_socio"?></p>
-                        <p><i class="fas fa-calendar-alt me-2"></i>Antigüedad: <?php echo "$antiguedad"?></p>
+                        <p><i class="fas fa-calendar-alt me-2"></i>Antigüedad: <?php echo "$fecha_alta"?></p>
                     </div>
                     
-                    <a href="./" class="btn btn-gold btn-sm">
+                    <a href="../index.html" class="btn btn-gold btn-sm">
                         <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
                     </a>
                 </div>
@@ -541,19 +618,19 @@ session_start();
     </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-light py-4 mt-5">
+    <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                    <a href="index.html"><img src="../PROYECTO PÁGINA/fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
+                    <a href="https://aceuchal.com/"><img src="../fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
                 </div>
                 <div class="col-md-4 text-center mb-3 mb-md-0">
-                    <h5 class="text-gold mb-3">CONTACTO</h5>
-                    <p><span class="icon-wrapper"><i class="fas fa-phone icon-list"></i></span> 924 680 033</p>
-                    <p><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span> info@sociotral.com</p>
+                    <h5 class="text-gold">CONTACTO</h5>
+                    <p><span class="icon-wrapper"><i class="fas fa-phone icon-list"></i></span>924 680 033</p>
+                    <p><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>info@sociotral.com</p>
                 </div>
-                <div class="col-md-4 text-center text-md-end">
-                    <h5 class="text-gold mb-3">SÍGUENOS</h5>
+                <div class="col-md-4 social-section">
+                    <h5 class="text-gold">SÍGUENOS</h5>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -563,8 +640,8 @@ session_start();
                 </div>
             </div>
             <div class="row mt-3">
-                <div class="col-12 text-center">
-                    <p class="mb-0">Sociedad de Cazadores LOS PIPORROS &copy; 2005-2023</p>
+                <div class="col-12">
+                    <p class="copyright">Sociedad de Cazadores LOS PIPORROS &copy; 2005-2023</p>
                 </div>
             </div>
         </div>

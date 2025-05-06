@@ -8,261 +8,279 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>S. Cazadores LOS PIPORROS - Área Privada</title>
 
+    <!-- CSS Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-            /* Variables globales */
-            :root {
-                --color-oro: #D4AF37;
-                --color-oro-claro: #e8c252;
-                --color-oro-oscuro: #b8972e;
-                --color-fondo: #111;
-                --color-fondo-claro: #222;
-                --color-texto: #eee;
-            }
+        /* Variables globales */
+        :root {
+            --color-oro: #D4AF37;
+            --color-oro-claro: #e8c252;
+            --color-oro-oscuro: #b8972e;
+            --color-fondo: #111;
+            --color-fondo-claro: #222;
+            --color-texto: #eee;
+            --transition: all 0.3s;
+            --border-radius: 5px;
+            --box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+    
+        /* Estilos base */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            overflow-x: hidden;
+        }
+    
+        /* Utilidades */
+        .flex-center {
+            display: flex;
+            align-items: center;
+        }
         
-            /* Estilos base */
-            body {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                background-color: var(--color-fondo);
-                color: var(--color-texto);
-                overflow-x: hidden;
-            }
+        .text-center {
+            text-align: center;
+        }
         
-            /* Header con efecto parallax */
-            .parallax-header {
-                background-image: url('https://wallpaperaccess.com/full/412761.jpg');
-                background-attachment: fixed;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
-                height: 60vh;
-                position: relative;
-            }
+        .transition-all {
+            transition: var(--transition);
+        }
         
-            .parallax-overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.6);
-            }
+        .border-gold {
+            border: 1px solid var(--color-oro);
+        }
         
-            .header-content {
-                position: relative;
-                z-index: 2;
-            }
+        .bg-dark-transparent {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
         
-            .logo-img {
-                max-width: 150px;
-                filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7));
-            }
+        /* Header con efecto parallax */
+        .parallax-header {
+            background-image: url('https://wallpaperaccess.com/full/412761.jpg');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 60vh;
+            position: relative;
+        }
         
-            .nombre-sociedad {
-                text-align: center;
-                width: 100%;
-                display: block;
-            }
+        .parallax-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
         
-            /* Sistema de iconos */
-            .icon-wrapper {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 1.5em;
-                margin-right: 1rem;
-            }
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
         
-            .icon-nav {
-                font-size: 1rem;
-                width: 1.5em;
-                text-align: center;
-                color: var(--color-oro);
-            }
+        .logo-img {
+            max-width: 150px;
+            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7));
+        }
         
-            .icon-title {
-                font-size: 1.2em;
-                margin-right: 1rem;
-                color: var(--color-oro);
-            }
+        /* Sistema de iconos */
+        .icon-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.5em;
+            margin-right: 1rem;
+        }
         
-            .icon-list {
-                margin-right: 0.8rem;
-                color: var(--color-oro);
-            }
+        .icon-nav, .icon-title, .icon-list {
+            color: var(--color-oro);
+        }
         
-            .icon-btn {
-                margin-right: 0.8rem;
-            }
+        .icon-nav {
+            font-size: 1rem;
+            width: 1.5em;
+            text-align: center;
+        }
         
-            /* Menú de navegación */
-            .navbar-custom {
-                background-color: rgba(0, 0, 0, 0.9) !important;
-                border-top: 1px solid var(--color-oro);
-                border-bottom: 1px solid var(--color-oro);
-            }
+        .icon-title {
+            font-size: 1.2em;
+            margin-right: 1rem;
+        }
         
-            .navbar-custom .navbar-nav .nav-link {
-                color: white;
-                font-weight: 500;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                padding: 0.5rem 1rem;
-                transition: all 0.3s;
-                display: flex;
-                align-items: center;
-            }
+        .icon-list {
+            margin-right: 0.8rem;
+        }
         
-            .navbar-custom .navbar-nav .nav-link:hover,
-            .navbar-custom .navbar-nav .active > .nav-link {
-                color: var(--color-oro);
-            }
+        /* Menú de navegación */
+        .navbar-custom {
+            background-color: rgba(0, 0, 0, 0.9) !important;
+            border-top: 1px solid var(--color-oro);
+            border-bottom: 1px solid var(--color-oro);
+        }
         
-            /* Dropdown styles */
-            .dropdown-menu {
-                background-color: rgba(0, 0, 0, 0.95);
-                border: 1px solid var(--color-oro);
-            }
+        .navbar-custom .navbar-nav .nav-link {
+            color: white;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
         
-            .dropdown-item {
-                color: var(--color-texto);
-                padding: 0.5rem 1.5rem;
-                border-bottom: 1px solid #333;
-                display: flex;
-                align-items: center;
-            }
+        .navbar-custom .navbar-nav .nav-link:hover,
+        .navbar-custom .navbar-nav .active > .nav-link,
+        .dropdown-item:hover {
+            color: var(--color-oro);
+        }
         
-            .dropdown-item:hover {
-                background-color: rgba(212, 175, 55, 0.1);
-                color: var(--color-oro);
-            }
-            
-            /* Contenido principal y formulario de login */
-            .main-container {
-                display: flex;
-                gap: 2rem;
-                margin-top: 2rem;
-            }
+        /* Dropdown styles */
+        .dropdown-menu {
+            background-color: rgba(0, 0, 0, 0.95);
+            border: 1px solid var(--color-oro);
+        }
         
-            .login-form {
-                flex: 1;
-                background-color: rgba(0, 0, 0, 0.7);
-                padding: 2rem;
-                border-radius: 10px;
-                border: 1px solid var(--color-oro);
-                max-width: 500px;
-            }
-            
-
-            .content-section {
-                background-color: rgba(0, 0, 0, 0.7);
-                border: 1px solid var(--color-oro);
-                border-radius: 10px;
-                padding: 2rem;
-                margin-bottom: 2rem;
-            }
-
-            .section-title {
-                color: var(--color-oro);
-                text-align: center;
-                margin-bottom: 1.5rem;
-                font-size: 1.8em;
-                border-bottom: 2px solid var(--color-oro);
-                padding-bottom: 0.5rem;
-            }
-
-            .content-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 2rem;
-                margin: 2rem 0;
-            }
-
-            .content-item {
-                background-color: rgba(0, 0, 0, 0.5);
-                border: 1px solid var(--color-oro-oscuro);
-                border-radius: 8px;
-                padding: 1.5rem;
-                transition: transform 0.3s ease;
-            }
-
-            .content-item:hover {
-                transform: translateY(-5px);
-            }
-
-            .item-title {
-                color: var(--color-oro);
-                font-size: 1.2em;
-                margin-bottom: 1rem;
-                text-align: center;
-            }
-
-            .item-content {
-                text-align: justify;
-                line-height: 1.6;
-            }
-
-            /* Responsive adjustments */
-            @media (max-width: 768px) {
-                .content-grid {
-                    grid-template-columns: 1fr;
-                }
-                
-                .content-section {
-                    padding: 1.5rem;
-                }
-            }
+        .dropdown-item {
+            color: var(--color-texto);
+            padding: 0.5rem 1.5rem;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
         
-            .form-group {
-                margin-bottom: 20px;
-            }
+        /* Contenido principal */
+        .main-container {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
         
-            .login-form label {
-                font-size: 1.2em;
-                color: var(--color-oro);
-                margin-bottom: 5px;
-                display: block;
-            }
+        .content-section, .login-form, .sidebar {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--color-oro);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+        }
         
-            .login-form input[type="text"],
-            .login-form input[type="password"] {
-                width: 100%;
-                padding: 10px;
-                background-color: #333;
-                border: 1px solid #444;
-                color: #fff;
-                border-radius: 5px;
-                font-size: 1em;
-            }
+        .section-title {
+            color: var(--color-oro);
+            margin-bottom: 1.5rem;
+            font-size: 1.8em;
+            border-bottom: 2px solid var(--color-oro);
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
         
-            /* Botones */
-            .btn-gold {
-                background-color: var(--color-oro);
-                color: #000;
-                font-weight: 600;
-                border: none;
-                transition: all 0.3s;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                padding: 12px;
-                font-size: 1.2em;
-                border-radius: 5px;
-                cursor: pointer;
-            }
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
         
-            .btn-gold:hover {
-                background-color: var(--color-oro-claro);
-                transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            }
-             /* Footer */
+        .content-item {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--color-oro-oscuro);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .content-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .item-title {
+            color: var(--color-oro);
+            font-size: 1.2em;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        /* Formulario */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .login-form label {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: var(--border-radius);
+            font-size: 1em;
+        }
+        
+        /* Botones */
+        .btn-gold {
+            background-color: var(--color-oro);
+            color: #000;
+            font-weight: 600;
+            border: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            font-size: 1.2em;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+        }
+        
+        .btn-gold:hover {
+            background-color: var(--color-oro-claro);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Sidebar */
+        .sidebar-title {
+            border-bottom: 1px solid var(--color-oro);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar-link {
+            color: var(--color-texto);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #333;
+            transition: var(--transition);
+        }
+        
+        .sidebar-link:hover {
+            color: var(--color-oro);
+            padding-left: 5px;
+        }
+        
+        /* Footer */
         .footer {
             background-color: #000000;
             border-top: 1px solid var(--color-oro);
@@ -274,6 +292,7 @@ session_start();
         .footer .text-gold {
             margin-bottom: 1rem;
             text-align: center;
+            color: var(--color-oro);
         }
         
         /* Ajuste para los iconos y texto de contacto */
@@ -339,120 +358,84 @@ session_start();
             transform: translateY(-3px);
         }
         
-            /* Sidebar */
-            .content-sidebar {
-                width: 300px;
-            }
+        /* Mensaje de error */
+        .error-message {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: var(--color-oro);
+            padding: 1.5rem;
+            margin: 15px auto;
+            border-radius: var(--border-radius);
+            text-align: center;
+            max-width: 400px;
+            font-weight: 500;
+            border: 1px solid var(--color-oro);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            animation: fadeIn 0.3s ease-in-out;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
         
-            .sidebar {
-                background-color: rgba(20, 20, 20, 0.8);
-                border: 1px solid var(--color-oro);
-                border-radius: 5px;
-                padding: 1.5rem;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
             }
-        
-            .sidebar-title {
-                color: var(--color-oro);
-                border-bottom: 1px solid var(--color-oro);
-                padding-bottom: 0.5rem;
-                margin-bottom: 1rem;
-                display: flex;
-                align-items: center;
-            }
-        
-            .sidebar-menu {
-                list-style: none;
-                padding: 0;
-            }
-        
-            .sidebar-link {
-                color: var(--color-texto);
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-                padding: 0.5rem 0;
-                border-bottom: 1px solid #333;
-                transition: all 0.3s;
-            }
-        
-            .sidebar-link:hover {
-                color: var(--color-oro);
-                padding-left: 5px;
-            }
-        
-            /* Mensaje de error */
-            .error-message {
-                background-color: #f8d7da;
-                color: #842029;
-                padding: 15px;
-                margin: 15px auto;
-                border-radius: 5px;
-                text-align: center;
-                max-width: 400px;
-                font-weight: 500;
-                border: 1px solid #f5c2c7;
-                position: fixed;
-                top: 50%;
-                left: 50%;
+            to {
+                opacity: 1;
                 transform: translate(-50%, -50%);
-                z-index: 9999;
-                animation: fadeIn 0.3s ease-in-out;
             }
+        }
         
-            @keyframes fadeIn {
-                from {
-                    opacity: 0;
-                    transform: translate(-50%, -60%);
-                }
-                to {
-                    opacity: 1;
-                    transform: translate(-50%, -50%);
-                }
+        /* Responsive */
+        @media (max-width: 992px) {
+            .main-container {
+                flex-direction: column;
             }
-        
-            /* Responsive */
-            @media (max-width: 992px) {
-                .main-container {
-                    flex-direction: column;
-                }
-                
-                .content-sidebar {
-                    width: 100%;
-                    margin-top: 2rem;
-                }
-        
-                .parallax-header {
-                    background-attachment: scroll;
-                    height: 50vh;
-                }
+            
+            .content-sidebar {
+                width: 100%;
+                margin-top: 2rem;
             }
-        
-            @media (max-width: 768px) {
-                .header-content {
-                    text-align: center;
-                }
-        
-                .logo-img {
-                    max-width: 120px;
-                }
-        
-                .navbar-custom .navbar-nav .nav-link {
-                    padding: 0.5rem 0.75rem;
-                }
+    
+            .parallax-header {
+                background-attachment: scroll;
+                height: 50vh;
             }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                text-align: center;
+            }
+    
+            .logo-img {
+                max-width: 120px;
+            }
+    
+            .navbar-custom .navbar-nav .nav-link {
+                padding: 0.5rem 0.75rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
+
 </head>
 <body>
     <!-- Header con efecto parallax -->
     <header class="parallax-header d-flex align-items-center">
         <div class="parallax-overlay"></div>
-        <div class="container header-content">
+        <div class="container header-content text-center">
             <div class="row">
-                <div class="col-12 text-center">
-                <a href="../index.html"><img src="../fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
+                <div class="col-12">
+                    <a href="../index.html"><img src="../fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
                     <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
-                    <h2 class="h3 nombre-sociedad">LOS PIPORROS</h2>
+                    <h2 class="h3">LOS PIPORROS</h2>
                 </div>
             </div>
         </div>
@@ -637,29 +620,36 @@ session_start();
     <!-- Contenido principal -->
     <div class="container my-5">
         <div class="row">
-            <main class="content-main">
-                <div class="main-content">
-                    <div class="section">
+            <main class="col-lg-8">
+                <div class="content-section">
+
+                                    
                         <div class="login-form">
-                            <h2><span class="icon-wrapper"><i class="fas fa-lock icon-title"></i></span> Área Privada</h2>
-                      
+                            <h2><span class="icon-wrapper"><i class="fas fa-lock icon-title"></i></span>Área Privada</h2>
+                            
+                            <?php if(isset($_SESSION["Error"])): ?>
+                            <div class="error-message">
+                                <?php echo $_SESSION["Error"]; ?>
+                                <?php unset($_SESSION["Error"]); ?>
+                            </div>
+                            <?php endif; ?>
+                            
                             <form action="login.php" method="POST">
                                 <div class="form-group">
-                                    <label for="username"><i class="fas fa-user icon-list"></i> Nombre de usuario</label>
-                                    <input type="text" name="username" placeholder="Introduce tu numero de DNI" required>
+                                    <label for="username"><i class="fas fa-user icon-list"></i>DNI</label>
+                                    <input type="text" name="DNI" placeholder="Introduce tu numero de DNI" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="password"><i class="fas fa-key icon-list"></i> Contraseña</label>
-                                    <input type="password" name="password" placeholder="Introduce tu Nombre" required>
+                                    <label for="password"><i class="fas fa-key icon-list"></i>NOMBRE</label>
+                                    <input type="password" name="Nombre" placeholder="Introduce tu Nombre" required>
                                 </div>
                                 <button type="submit" class="btn-gold"><i class="fas fa-sign-in-alt icon-btn"></i> Iniciar sesión</button>
                             </form>
                         </div>
-                    </div>
                 </div>
             </main>
             
-            <aside class="content-sidebar">
+            <aside class="col-lg-4">
                 <div class="sidebar mb-4">
                     <h3 class="sidebar-title"><span class="icon-wrapper"><i class="fas fa-history icon-title"></i></span> HISTORIA</h3>
                     <ul class="sidebar-menu">
@@ -685,7 +675,7 @@ session_start();
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                <a href="https://aceuchal.com/"><img src="../PÁGINA CAZADORES/fotos/logo-aceuchal1-1" class="img-fluid" style="max-height: 50px;"></a>
+                    <a href="https://aceuchal.com/"><img src="../PÁGINA CAZADORES/fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
                 </div>
                 <div class="col-md-4 text-center mb-3 mb-md-0">
                     <h5 class="text-gold">CONTACTO</h5>
@@ -727,7 +717,7 @@ session_start();
                 }
             });
             
-
+            // Manejo de submenús
             const dropdownSubmenus = document.querySelectorAll('.dropdown-submenu');
             
             dropdownSubmenus.forEach(function(item) {
@@ -741,59 +731,16 @@ session_start();
             });
         });
     </script>
-</body>
-<?php
-            include_once("../php/funciones.php");   
-            iniciosesion($conn, $dni, $contraseña, $usuariono, $contraseñano);
-            if(isset($_SESSION['error'])){
-                echo "<div class='error-message'>".$_SESSION['error']."</div>";
-                unset($_SESSION['error']);
-            }
+    <?php
+    // Aquí iría el código PHP para manejar el inicio de sesión
+    include_once("../php/funciones.php");
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        $nombre = $_POST["Nombre"];
+        $dni = $_POST["DNI"];
 
+        iniciosesion($conn, $nombre, $dni);
+
+    }
     ?>
+</body>
 </html>
-
-<div class="container main-content">
-    <div class="content-section">
-        <h2 class="section-title">
-            <span class="icon-wrapper"><i class="fas fa-history icon-title"></i></span>
-            Historia
-        </h2>
-        <div class="content-grid">
-            <div class="content-item">
-                <h3 class="item-title">Nuestros Orígenes</h3>
-                <div class="item-content">
-                    <!-- Contenido de la historia -->
-                </div>
-            </div>
-            <div class="content-item">
-                <h3 class="item-title">Evolución</h3>
-                <div class="item-content">
-                    <!-- Contenido de la evolución -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="content-section">
-        <h2 class="section-title">
-            <span class="icon-wrapper"><i class="fas fa-newspaper icon-title"></i></span>
-            Últimas Entradas
-        </h2>
-        <div class="content-grid">
-            <div class="content-item">
-                <h3 class="item-title">Última Noticia</h3>
-                <div class="item-content">
-                    <!-- Contenido de la última entrada -->
-                </div>
-            </div>
-            <div class="content-item">
-                <h3 class="item-title">Eventos Próximos</h3>
-                <div class="item-content">
-                    <!-- Contenido de eventos próximos -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
