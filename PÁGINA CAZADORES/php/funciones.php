@@ -21,10 +21,8 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                 $_SESSION['error'] = $contraseñano;
                 exit();
             } else {
-                $row = mysqli_fetch_assoc($result1);
-                $_SESSION['dni'] = $row['DNI'];
                 unset($_SESSION['error']);
-                echo "<script>window.location.href = '../areaprivada.php';</script>";
+                echo "<script>window.location.href = '../subpáginas/areaprivadaadmin';</script>";
                 exit();
             }
         }
@@ -33,26 +31,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 }
 
 // ... existing code ...
-
-
-function mostrarinformacionusuario($conn, $dni) {
-    $sql = "SELECT * FROM socios WHERE DNI = '$dni'";
-    $result = mysqli_query($conn, $sql);
-
-    if($row = mysqli_fetch_assoc($result)){
-        // Almacenar datos en variables de sesión
-        $_SESSION['usuario'] = $row['Nombre'];
-        $_SESSION['apellido1'] = $row['Apellido1'];
-        $_SESSION['apellido2'] = $row['Apellido2'];
-        $_SESSION['dni'] = $row['DNI'];
-        $_SESSION['id_socio'] = $row['ID_Socio'];
-        $_SESSION['fecha_alta'] = $row['Fecha_Alta'];
-        $_SESSION['rol'] = isset($row['Rol']) ? $row['Rol'] : '';
-        $_SESSION['estado'] = $row['Estado'];
-        $_SESSION['antiguedad'] = isset($row['Antiguedad']) ? $row['Antiguedad'] : '';
-        
-    }
-}
 
 // ADMINISTRADOR - FUNCION
 // Commented out logout code for reference

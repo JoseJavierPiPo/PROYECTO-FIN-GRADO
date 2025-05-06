@@ -1,9 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario_nombre']) || empty($_SESSION['usuario_nombre'])) {
-    header("Location: subpáginas/login.php");
-    exit();
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -296,22 +292,6 @@ if (!isset($_SESSION['usuario_nombre']) || empty($_SESSION['usuario_nombre'])) {
             </div>
         </div>
     </header>
-    <?php
-        include_once("./php/funciones.php");
-        if (isset($_SESSION["dni"]) && isset($_SESSION["usuario"]) && isset($_SESSION["apellido1"]) && isset($_SESSION["apellido2"]) && isset($_SESSION["id_socio"]) && isset($_SESSION["fecha_alta"]) && isset($_SESSION["rol"]) && isset($_SESSION["estado"]) && isset($_SESSION["antiguedad"])) {  
-            $dni = $_SESSION["dni"];
-            $nombre = $_SESSION["usuario"];
-            $apellido1 = $_SESSION["apellido1"];
-            $apellido2 = $_SESSION["apellido2"];
-            $id_socio = $_SESSION["id_socio"];
-            $fecha_alta = $_SESSION["fecha_alta"];
-            $rol = $_SESSION["rol"];
-            $estado = $_SESSION["estado"];
-            $antiguedad = $_SESSION["antiguedad"];
-            mostrarinformacionusuario($conn, $dni);  
-            
-        }
-    ?>
       
     <!-- Menú de navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
