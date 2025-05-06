@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("../php/funciones.php");
+include_once("../../php/funciones.php");
 
 // Check if the session variables exist before using them
 $nombre = isset($_SESSION['Nombre']) ? $_SESSION['Nombre'] : '';

@@ -32,9 +32,9 @@ function iniciosesion($conn, $nombre, $dni){
 
                 // Redirigir según el rol
                 if ($rol === 'Admin') {
-                    echo "<script>window.location.href = '../';</script>"; // Redirigir a la página de administrador
+                    echo "<script>window.location.href = '../subpáginas/paginaadmin/areaprivadaadmin.php';</script>"; // Redirigir a la página de administrador
                 } else {
-                    echo "<script>window.location.href = '../';</script>"; // Redirigir a la página de socio
+                    echo "<script>window.location.href = '../subpáginas/paginasocios/areaprivadasocio.php';</script>"; // Redirigir a la página de socio
                 }
                 exit(); 
             }
