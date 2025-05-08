@@ -2,9 +2,17 @@
 session_start();
 include_once("../../php/funciones.php");
 
-// Check if the session variables exist before using them
+// Verificar variables de sesión
 $nombre = isset($_SESSION['Nombre']) ? $_SESSION['Nombre'] : '';
 $dni = isset($_SESSION['DNI']) ? $_SESSION['DNI'] : '';
+$rol = isset($_SESSION['ROL']) ? $_SESSION['ROL'] : '';
+
+// Verificar si el usuario es administrador
+if ($rol !== 'Admin') {
+    header("Location: ../login.php");
+    exit();
+}
+
 
 // Only call mostrarvalores if both nombre and dni are set
 if ($nombre && $dni) {
@@ -12,7 +20,7 @@ if ($nombre && $dni) {
 }
 
 // Get session values with proper checks
-$rol = isset($_SESSION['ROL'])? $_SESSION['ROL'] : '';
+$rol = isset($_SESSION['ROL'])? $_SESSION['ROL'] : '';                              
 $nombre = isset($_SESSION['Nombre']) ? $_SESSION['Nombre'] : '';
 $a1 = isset($_SESSION['Apellido1']) ? $_SESSION['Apellido1'] : '';
 $a2 = isset($_SESSION['Apellido2']) ? $_SESSION['Apellido2'] : '';
@@ -26,335 +34,14 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Área Privada - S. Cazadores LOS PIPORROS</title>
-    <link rel = "stylesheet" href="./css/areaprivada.css">
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/areaprivadaadmin.css">
+   
+    
 </head>
-<style>
-    
-    :root {
-            --color-oro: #D4AF37;
-            --color-oro-claro: #e8c252;
-            --color-oro-oscuro: #b8972e;
-            --color-fondo: #111;
-            --color-fondo-claro: #222;
-            --color-texto: #eee;
-        }
-
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--color-fondo);
-            color: var(--color-texto);
-            overflow-x: hidden;
-        }
-
-
-        .parallax-header {
-            background-image: url('https://wallpaperaccess.com/full/412761.jpg');
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            height: 60vh;
-            position: relative;
-        }
-
-        .parallax-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .logo-img {
-            max-width: 150px;
-            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7));
-        }
-
-
-        .navbar-custom {
-            background-color: rgba(0, 0, 0, 0.9) !important;
-            border-top: 1px solid var(--color-oro);
-            border-bottom: 1px solid var(--color-oro);
-        }
-
-        .navbar-custom .navbar-nav .nav-link {
-            color: white;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 0.5rem 1rem;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-        }
-
-        .navbar-custom .navbar-nav .nav-link .icon-nav {
-            color: var(--color-oro);
-        }
-
-        .navbar-custom .navbar-nav .nav-link:hover,
-        .navbar-custom .navbar-nav .active > .nav-link {
-            color: var(--color-oro);
-        }
-
-
-        .dropdown-menu {
-            background-color: rgba(0, 0, 0, 0.95);
-            border: 1px solid var(--color-oro);
-        }
-
-        .dropdown-item {
-            color: var(--color-texto);
-            padding: 0.5rem 1.5rem;
-            border-bottom: 1px solid #333;
-            display: flex;
-            align-items: center;
-        }
-
-        .dropdown-item:hover {
-            background-color: rgba(212, 175, 55, 0.1);
-            color: var(--color-oro);
-        }
-
-
-        .dashboard-card {
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 1px solid var(--color-oro);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
-        }
-
-        .dashboard-icon {
-            font-size: 2.5em;
-            color: var(--color-oro);
-            margin-bottom: 15px;
-        }
-
-        .dashboard-title {
-            color: var(--color-oro);
-            font-size: 1.2em;
-            margin-bottom: 10px;
-        }
-
-        
-        .user-info {
-            background-color: rgba(0, 0, 0, 0.8);
-            border: 1px solid var(--color-oro);
-            border-radius: 10px;
-            border-radius: 10px;
-            --transition-speed: 0.3s;
-            --border-color: var(--color-oro);
-            --shadow-color: rgba(212, 175, 55, 0.3);
-            --background-opacity: 0.8;
-        }
-        .user-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 3px solid var(--color-oro);
-            margin: 0 auto 15px;
-            font-size: 2.5rem;
-            color: var(--color-oro);
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .user-details {
-            text-align: left;
-            padding: 10px 0;
-        }
-
-        .user-details p {
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-
-        .user-details i {
-            color: var(--color-oro);
-            width: 20px;
-            text-align: center;
-        }
-
-        
-        .btn-gold {
-            background-color: var(--color-oro);
-            color: var(--color-fondo);
-            font-weight: 600;
-            border: none;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin: 5px 0;
-            padding: 8px 15px;
-            font-size: 0.9rem;
-        }
-
-        .btn-gold:hover {
-            background-color: var(--color-oro-claro);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .icon-wrapper {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 1.5em;
-            margin-right: 0.5rem;
-        }
-
-        .icon-nav {
-            color: var(--color-oro);
-            text-align: center;
-            font-size: 1rem;
-            width: 1.5em;
-        }
-
-        .icon-card {
-            color: var(--color-oro);
-            text-align: center;
-            font-size: 3em;
-            margin-bottom: 0.5rem;
-        }
-
-        .icon-list {
-            color: var(--color-oro);
-            text-align: center;
-        }
-
-        /* Footer */
-        .footer {
-            background-color: #000000;
-            border-top: 1px solid var(--color-oro);
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-        
-        /* Ajustes para el contenido del footer */
-        .footer .text-gold {
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        
-        /* Ajuste para los iconos y texto de contacto */
-        .footer p {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 0.5rem;
-        }
-        
-        .footer p .icon-wrapper {
-            margin-right: 0.3rem;
-        }
-        
-        /* Centrado de la sección "SÍGUENOS" */
-        .footer .social-section {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 0.5rem;
-        }
-        
-        .social-icons a {
-            color: var(--color-oro);
-            font-size: 1.5rem;
-            margin: 0 10px;
-            transition: all 0.3s;
-        }
-        
-        .social-icons a:hover {
-            color: var(--color-oro-claro);
-            transform: translateY(-3px);
-        }
-        
-        /* Texto del copyright */
-        .footer .copyright {
-            margin-top: 1.5rem;
-            text-align: center;
-            font-weight: 600;
-            color: var(--color-oro);
-            font-size: 1.1em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .social-icons a {
-            color: var(--color-oro);
-            font-size: 1.5rem;
-            margin: 0 10px;
-            transition: all 0.3s;
-        }
-        
-        .social-icons a:hover {
-            color: var(--color-oro-claro);
-            transform: translateY(-3px);
-        }
-        
-
-        @media (max-width: 992px) {
-            .parallax-header {
-                background-attachment: scroll;
-                height: 50vh;
-            }
-            
-            .content-main, 
-            .content-sidebar {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-content {
-                text-align: center;
-            }
-            
-            .logo-img {
-                max-width: 120px;
-            }
-            
-            .card-column {
-                width: 100%;
-            }
-            
-            .navbar-custom .navbar-nav .nav-link {
-                padding: 0.5rem 0.75rem;
-            }
-        }
-    
-</style>
 <body>
     <!-- Header con efecto parallax -->
     <header class="parallax-header d-flex align-items-center">
@@ -362,14 +49,14 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
         <div class="container header-content">
             <div class="row">
                 <div class="col-12 text-center">
-                    <a href="../index.html"><img src="../fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
-                    <h1 class="display-4 fw-bold mb-3">BIENVENIDO AL ÁREA PRIVADA DE LA SOCIEDAD</h1>
-                    <h2 class="h3 nombre-sociedad">IDENTIDAD : <?php echo $nombre ?><br> ROL : <?php echo $rol?></h2>
+                    <a href="../../index.html"><img src="../../fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
+                    <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
+                    <h2 class="h3 nombre-sociedad">LOS PIPORROS</h2>
                 </div>
             </div>
         </div>
     </header>
-      
+    
     <!-- Menú de navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
@@ -380,7 +67,7 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../historia.html">
+                        <a class="nav-link" href="../../historia.html">
                             <span class="icon-wrapper"><i class="fas fa-landmark icon-nav"></i></span>
                             HISTORIA
                         </a>
@@ -469,13 +156,13 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="../" id="areaPrivadaDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="x" id="areaPrivadaDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-lock icon-nav"></i></span>
                             ÁREA PRIVADA
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="./login.php">
+                                <a class="dropdown-item dropdown-toggle" href="../../subpáginas/login.php">
                                     <span class="icon-wrapper"><i class="bi bi-folder-fill"></i></span>
                                     ÁREA PRIVADA
                                 </a>
@@ -545,84 +232,99 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
             </div>
         </div>
     </nav>
-
-    <!-- Contenido Principal -->
+    
+    <!-- Contenido principal -->
     <div class="container my-5">
         <div class="row">
-            <!-- Sidebar con información del usuario -->
-            <div class="col-lg-3">
-                <div class="user-info text-center">
-                    <div class="user-avatar">
-                        <i class="bi bi-person-fill"></i>
-                    </div>
-                    <h4 class="text-gold mb-2">
-                        
-                    </h4>
-                    <p class="mb-2">
-                     
-                    </p>
-                    
-                    <!-- Añadir botón de Editar Perfil -->
-                    <i><?php echo "$a1 $a2 $nombre "?></i><br>
-                    <a href="#" class="btn btn-gold btn-sm mb-2">
-                        <i class="fas fa-user-edit me-2"></i>Editar Perfil
-                    </a>
-                    
-                    <!-- Añadir información de Socio -->
-                    <div class="user-details mt-3">
-                        <p><i class="fas fa-id-badge me-2"></i>Nº Socio: <?php echo "$id_socio"?></p>
-                        <p><i class="fas fa-calendar-alt me-2"></i>Antigüedad: <?php echo "$fecha_alta"?></p>
-                    </div>
-                    
-                    <a href="../index.html" class="btn btn-gold btn-sm">
-                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
-                    </a>
-                </div>
-            </div>
-
-            <!-- Contenido principal -->
-            <div class="col-lg-9">
+            <div class="container-fluid mt-5">
                 <div class="row">
-                    <!-- Tarjeta de Documentos -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="dashboard-card text-center">
-                            <i class="fas fa-file-alt dashboard-icon"></i>
-                            <h3 class="dashboard-title">Documentos</h3>
-                            <p>Accede a documentos importantes</p>
-                            <a href="#" class="btn btn-gold btn-sm">Ver Documentos</a>
+                    <!-- Perfil del Usuario (mitad superior) -->
+                    <div class="col-12 mb-4">
+                        <div class="user-info p-4">
+                            <div class="row align-items-center">
+                                <div class="col-md-3 text-center">
+                                    <div class="user-avatar mb-3">
+                                        <i class="fas fa-user fa-4x"></i> 
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <h3>Información del Usuario</h3>
+                                    <div class="row">    
+                                        <div class="col-md-6">
+                                            <p><i class="fas fa-id-card me-2"></i> ID: <?php echo "$id_socio"?></p>
+                                            <p><i class="fas fa-user me-2"></i> Nombre: <?php echo "$nombre"?></p>
+                                            <p><i class="fas fa-user-tag me-2"></i> Rol: <?php echo "$rol"?></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><i class="fas fa-user me-2"></i> Apellidos: <?php echo "$a1 $a2"?></p>
+                                            <p><i class="fas fa-calendar-alt me-2"></i> Antigüedad: <?php echo "$fecha_alta"?></p>
+                                        </div>
+                                    </div>
+                                    <div class="text-end mt-3">
+                                        <a href="../../php/cerrar_sesion.php" class="btn btn-gold">
+                                            <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Tarjeta de Acuerdos -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="dashboard-card text-center">
-                            <i class="fas fa-handshake dashboard-icon"></i>
-                            <h3 class="dashboard-title">Acuerdos</h3>
-                            <p>Consulta los últimos acuerdos</p>
-                            <a href="#" class="btn btn-gold btn-sm">Ver Acuerdos</a>
-                        </div>
-                    </div>
-
-                    <!-- Tarjeta de Cuentas -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="dashboard-card tewxt-center">
-                            <i class="fas fa-calculator dashboard-icon"></i>
-                            <h3 class="dashboard-title">Cuentas</h3>
-                            <p>Revisa el estado financiero</p>
-                            <a href="#" class="btn btn-gold btn-sm">Ver Cuentas</a>
+                
+                    <!-- Tarjetas de Gestión (mitad inferior) -->
+                    <div class="col-12">
+                        <div class="row g-4">
+                            <!-- Tarjeta de Gestión de Socios -->
+                            <div class="col-md-6 col-lg-3">
+                                <div class="dashboard-card text-center h-100">
+                                    <i class="fas fa-users-cog dashboard-icon"></i>
+                                    <h3 class="dashboard-title">Gestión de Socios</h3>
+                                    <p>Administrar socios del club</p>
+                                    <a href="gestion_admins.php" class="btn btn-gold btn-sm">Gestionar Socios</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Tarjeta de Gestión de Licencias -->
+                            <div class="col-md-6 col-lg-3">
+                                <div class="dashboard-card text-center h-100">
+                                    <i class="fas fa-id-card dashboard-icon"></i>
+                                    <h3 class="dashboard-title">Gestión de Licencias</h3>
+                                    <p>Control de licencias y permisos</p>
+                                    <a href="gestion_licencias.php" class="btn btn-gold btn-sm">Gestionar Licencias</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Tarjeta de Modalidades de Caza -->
+                            <div class="col-md-6 col-lg-3">
+                                <div class="dashboard-card text-center h-100">
+                                    <i class="fas fa-bullseye dashboard-icon"></i>
+                                    <h3 class="dashboard-title">Modalidades de Caza</h3>
+                                    <p>Gestión de modalidades</p>
+                                    <a href="gestion_modalidades.php" class="btn btn-gold btn-sm">Gestionar Modalidades</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Tarjeta de Funciones de Administrador -->
+                            <div class="col-md-6 col-lg-3">
+                                <div class="dashboard-card text-center h-100">
+                                    <i class="fas fa-user-shield dashboard-icon"></i>
+                                    <h3 class="dashboard-title">Panel Admin</h3>
+                                    <p>Funciones administrativas</p>
+                                    <a href="panel_admin.php" class="btn btn-gold btn-sm">Panel de Control</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                    <a href="https://aceuchal.com/"><img src="../fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
+             <div class="row">
+                   <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                    <a href="https://aceuchal.com/"><img src="../../fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
                 </div>
                 <div class="col-md-4 text-center mb-3 mb-md-0">
                     <h5 class="text-gold">CONTACTO</h5>
@@ -646,9 +348,37 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
             </div>
         </div>
     </footer>
-
-    <!-- Scripts de Bootstrap -->
+    
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Efecto parallax
+        document.addEventListener('DOMContentLoaded', function() {
+            const parallaxHeader = document.querySelector('.parallax-header');
+            const headerHeight = parallaxHeader.offsetHeight;
+            
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.pageYOffset;
+                const limit = headerHeight;
+                
+                if (scrollPosition <= limit) {
+                    parallaxHeader.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+                }
+            });
+            
+            // Submenús en dropdown
+            const dropdownSubmenus = document.querySelectorAll('.dropdown-submenu');
+            
+            dropdownSubmenus.forEach(function(item) {
+                item.addEventListener('mouseenter', function() {
+                    this.querySelector('.dropdown-menu').classList.add('show');
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.querySelector('.dropdown-menu').classList.remove('show');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
-
