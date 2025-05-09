@@ -12,6 +12,22 @@ if ($rol !== 'Admin') {
     header("Location: ../../login.php");
     exit();
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $dni = $_POST["dni"];
+    $nombre = $_POST["nombre"];
+    $apellido1 = $_POST["apellido1"];
+    $apellido2 = $_POST["apellido2"];
+    $fecha_nacimiento = $_POST["fecha_nacimiento"];
+    $localidad = $_POST["localidad"];
+    $domicilio = $_POST["domicilio"];
+    $codigo_postal = $_POST["codigo_postal"];
+    $telefono = $_POST["telefono"];
+    $email = $_POST["email"];
+    $fecha_alta = $_POST["fecha_alta"];
+
+    insertarsocio($conn, $dni, $nombre, $apellido1, $apellido2, $fecha_nacimiento, $localidad, $domicilio, $codigo_postal, $telefono, $email, $fecha_alta);
+}
 ?>
 
 <!DOCTYPE html>
@@ -114,7 +130,7 @@ if ($rol !== 'Admin') {
 
         .back-button:hover {
             background-color: var(--color-oro-claro);
-            color: var
+            color:var(--color-fondo)
         }
         /* Estilos para las alertas */
         .alert {
@@ -136,106 +152,85 @@ if ($rol !== 'Admin') {
     </style>
 </head>
 <body>
-    <?php
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if(isset($_SESSION['mensaje'])) {
-                    $clase = $_SESSION['tipo_mensaje'] == 'error' ? 'alert-danger' : 'alert-success';
-                    $icono = $_SESSION['tipo_mensaje'] == 'error' ? 'fa-exclamation-circle' : 'fa-check-circle';
-                    echo "<div class='alert {$clase} text-center' role='alert'>
-                            <i class='fas {$icono} me-2'></i>{$_SESSION['mensaje']}
-                          </div>";
-                    unset($_SESSION['mensaje']);
-                    unset($_SESSION['tipo_mensaje']);
-                }
-            }
-    ?>
     <!-- Botón de volver -->
-    <a href="../gestion_socios.php" class="back-button">
+    <a href="../gestion_admin.php" class="back-button">
         <i class="fas fa-arrow-left"></i> Volver
     </a>
 
     <div class="container">
         <div class="form-container">
-            <h1 class="form-title">Alta de Nuevo Socio</h1>
-            
+                    <h1 class="form-title">Alta de Nuevo Socio</h1>
+                    
+                    <?php
+                    if(isset($_SESSION['mensaje'])) {
+                        $clase = $_SESSION['tipo_mensaje'] == 'error' ? 'alert-danger' : 'alert-success';
+                        $icono = $_SESSION['tipo_mensaje'] == 'error' ? 'fa-exclamation-circle' : 'fa-check-circle';
+                        echo "<div class='alert {$clase} text-center' role='alert'>
+                                <i class='fas {$icono} me-2'></i>{$_SESSION['mensaje']}
+                              </div>";
+                        unset($_SESSION['mensaje']);
+                        unset($_SESSION['tipo_mensaje']);
+                    }
+                    ?>
 
-            <form method="POST" action="">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="dni" class="form-label">DNI</label>
-                            <input type="text" class="form-control" name="dni" required maxlength="9">
+                    <form method="POST" action="">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="dni" class="form-label">DNI</label>
+                                    <input type="text" class="form-control" name="dni" required maxlength="9">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" name="nombre" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="apellido1" class="form-label">Primer Apellido</label>
+                                    <input type="text" class="form-control" name="apellido1" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="apellido2" class="form-label">Segundo Apellido</label>
+                                    <input type="text" class="form-control" name="apellido2" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                                    <input type="date" class="form-control" name="fecha_nacimiento" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="domicilio" class="form-label">Domicilio</label>
+                                    <input type="text" class="form-control" name="domicilio" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="codigo_postal" class="form-label">Codigo Postal</label>
+                                    <input type="number" class="form-control" id="codigo_postal" name="codigo_postal" required maxlength="5">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="localidad" class="form-label">Localidad</label>
+                                    <input type="text" class="form-control" name="localidad" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="telefono" class="form-label">Teléfono</label>
+                                    <input type="tel" class="form-control" name="telefono" required maxlength="10">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fecha_alta" class="form-label">Fecha de Alta</label>
+                                    <input type="date" class="form-control" name="fecha_alta" required>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" name="nombre" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="apellido1" class="form-label">Primer Apellido</label>
-                            <input type="text" class="form-control" name="apellido1" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="apellido2" class="form-label">Segundo Apellido</label>
-                            <input type="text" class="form-control" name="apellido2" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
-                            <input type="date" class="form-control" name="fecha_nacimiento" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="domicilio" class="form-label">Domicilio</label>
-                            <input type="text" class="form-control" name="domicilio" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="codigo_postal" class="form-label">Codigo Postal</label>
-                            <input type="number" class="form-control" id="codigo_postal" name="codigo_postal" required maxlength="5">
-                        </div>
-                        <div class="mb-3">
-                            <label for="localidad" class="form-label">Localidad</label>
-                            <input type="text" class="form-control" name="localidad" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="telefono" class="form-label">Teléfono</label>
-                            <input type="tel" class="form-control" name="telefono" required maxlength="10">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="fecha_alta" class="form-label">Fecha de Alta</label>
-                            <input type="date" class="form-control" name="fecha_alta" required>
-                        </div>
-                    </div>
+                        
+                        <button type="submit" class="btn btn-gold">
+                            <i class="fas fa-user-plus me-2"></i>Dar de Alta
+                        </button>
+                    </form>
                 </div>
-                
-                <button type="submit" class="btn btn-gold">
-                    <i class="fas fa-user-plus me-2"></i>Dar de Alta
-                </button>
-            </form>
-        </div>
-    </div>
-    <?php 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Recoger los datos del formulario
-            $dni = $_POST["dni"];
-            $nombre = $_POST["nombre"];
-            $apellido1 = $_POST["apellido1"];
-            $apellido2 = $_POST["apellido2"];
-            $fecha_nacimiento = $_POST["fecha_nacimiento"];
-            $localidad = $_POST["localidad"];
-            $domicilio = $_POST["domicilio"];
-            $codigo_postal = $_POST["codigo_postal"];
-            $telefono = $_POST["telefono"];
-            $email = $_POST["email"];
-            $fecha_alta = $_POST["fecha_alta"];
-
-            // Llamar a la función para insertar el socio
-            insertarsocio($conn, $dni, $nombre, $apellido1, $apellido2, $fecha_nacimiento, $localidad, $domicilio, $codigo_postal, $telefono, $email, $fecha_alta);
-        }
-    ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 </html>

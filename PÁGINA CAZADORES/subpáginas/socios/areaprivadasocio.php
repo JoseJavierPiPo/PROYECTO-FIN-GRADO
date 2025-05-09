@@ -262,6 +262,7 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                                         <div class="col-md-6">
                                             <p><i class="fas fa-user me-2"></i> Apellidos: <?php echo "$a1 $a2"?></p>
                                             <p><i class="fas fa-calendar-alt me-2"></i> Antigüedad: <?php echo "$fecha_alta"?></p>
+                                            <p><i class="fas fa-user-check me-2"></i> Estado: <?php echo isset($_SESSION["Estado"]) ? $_SESSION["Estado"] : "Activo" ?></p>
                                         </div>
                                     </div>
                                     <div class="text-end mt-3">

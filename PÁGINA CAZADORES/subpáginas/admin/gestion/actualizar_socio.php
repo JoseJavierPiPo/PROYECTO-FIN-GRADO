@@ -12,28 +12,8 @@ if ($rol !== 'Admin') {
     header("Location: ../../login.php");
     exit();
 }
-
-// Procesar el formulario antes de cualquier salida HTML
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if(empty($_POST["dni"]) || empty($_POST["nombre"]) || empty($_POST["estado"])) {
-        $_SESSION['mensaje'] = "Por favor, complete todos los campos";
-        $_SESSION['tipo_mensaje'] = "error";
-    } else {
-        $dni = $_POST["dni"];
-        $nombre = $_POST["nombre"];
-        $estado = $_POST["estado"];
-        
-        if(modificarestadosocio($conn, $dni, $nombre, $estado)) {
-            $_SESSION['mensaje'] = "El socio ha sido dado de baja correctamente";
-            $_SESSION['tipo_mensaje'] = "success";
-        } else {
-            $_SESSION['mensaje'] = "Error al dar de baja al socio";
-            $_SESSION['tipo_mensaje'] = "error";
-        }
-    }
-
-}
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -117,6 +97,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             letter-spacing: 2px;
         }
 
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--color-oro);
+            color: var(--color-texto);
+            margin-bottom: 1rem;
+        }
 
         .form-control:focus {
             background-color: rgba(255, 255, 255, 0.2);
@@ -125,6 +111,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
         }
 
+        .form-label {
+            color: var(--color-oro);
+            font-weight: 500;
+        }
 
         .btn-gold {
             background-color: var(--color-oro);
@@ -191,43 +181,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container">
         <div class="form-container">
-            <h1 class="form-title">Dar de Baja a Socio</h1>
+            <h1 class="form-title">INTRODUCE LOS DATOS PARA MODIFICAR SOCIO</h1>
             
-            <?php if (isset($_SESSION['mensaje'])): ?>
-                <div class="alert alert-<?php echo $_SESSION['tipo_mensaje']; ?>" role="alert">
-                    <i class='fas <?php echo $_SESSION['tipo_mensaje'] == 'error' ? 'fa-exclamation-circle' : 'fa-check-circle'; ?> me-2'></i>
-                    <?php echo $_SESSION['mensaje']; ?>
-                </div>
-                <?php 
-                unset($_SESSION['mensaje']);
-                unset($_SESSION['tipo_mensaje']);
-                ?>
-            <?php endif; ?>
-            
-            <form action="../gestion/baja_socios.php" method="POST">
+            <form action="../gestion/actualizar_socio.php" method="POST">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label for="dni" class="form-label">DNI</label>
-                            <input type="text" class="form-control" name="dni" required maxlength="9">
-                        </div>
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" name="nombre" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="estado" class="form-label">Estado</label>
-                            <select class="form-control" name="estado" required>        
-                                <option value="" disabled selected>Selecciona un Estado</option>
-                                <option value="inactivo">Inactivo</option>
-                                <option value="suspendido">Suspendido</option>
-                            </select>
+                            <label for="id_socio" class="form-label">ID_SOCIO</label>
+                            <input type="number" class="form-control" name="id_socio" required>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-gold">Dar de Baja</button>
+                <button type="submit" class="btn btn-gold">BUSCAR SOCIO</button>
             </form>
     </div>
+    <?php
+    $id_socio = $_SESSION["id_socio"];
+    actualizarsocio1 ($conn, $id_socio);
+    if(isset($_SESSION["Error"])){
+        echo '<div class="alert alert-danger" role="alert">';
+        echo $_SESSION["Error"];
+        echo '</div>';
+        unset($_SESSION["Error"]);
+    }
+    ?>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

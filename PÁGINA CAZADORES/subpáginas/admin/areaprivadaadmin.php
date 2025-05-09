@@ -279,7 +279,7 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                                     <i class="fas fa-users-cog dashboard-icon"></i>
                                     <h3 class="dashboard-title">Gestión de Socios</h3>
                                     <p>Administrar socios del club</p>
-                                    <a href="gestion_admins.php" class="btn btn-gold btn-sm">Gestionar Socios</a>
+                                    <a href="../admin/gestion_admin.php" class="btn btn-gold btn-sm">Gestionar Socios</a>
                                 </div>
                             </div>
                             

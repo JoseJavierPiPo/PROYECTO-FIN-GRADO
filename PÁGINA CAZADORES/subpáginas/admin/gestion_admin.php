@@ -558,8 +558,9 @@ body {
                 <i class="fas fa-users gestion-icon"></i>
                 <h3>Filtrar Socios</h3>
                 <p>Realiza una busqueda y filtra todos los socios</p>
-                <a href="gestion/listado_socios.php" class="btn btn-gold">Ver Listado</a>
+                <a href="./gestion/filtrar_socio.php" class="btn btn-gold">Ver Listado</a>
             </div>
+            
         </div>
     </div>
     <!-- Footer -->

@@ -675,7 +675,7 @@ session_start();
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                    <a href="https://aceuchal.com/"><img src="../PÁGINA CAZADORES/fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
+                    <a href="https://aceuchal.com/"><img src="../fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
                 </div>
                 <div class="col-md-4 text-center mb-3 mb-md-0">
                     <h5 class="text-gold">CONTACTO</h5>

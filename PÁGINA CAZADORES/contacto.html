@@ -13,8 +13,8 @@
 
 
 
-    <style>
-         :root {
+   <style>
+    :root {
         --color-oro: #D4AF37;
         --color-oro-claro: #e8c252;
         --color-oro-oscuro: #b8972e;
@@ -23,7 +23,6 @@
         --color-texto: #eee;
     }
 
-    /* Estructura Base */
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background-color: var(--color-fondo);
@@ -60,7 +59,7 @@
         display: block;
     }
 
-    /* Navegación */
+    /* Navbar */
     .navbar-custom {
         background-color: rgba(0, 0, 0, 0.9) !important;
         border-top: 1px solid var(--color-oro);
@@ -111,37 +110,6 @@
         color: var(--color-oro) !important;
     }
 
-    /* Contenido principal */
-    .main-content {
-        background-color: rgba(0, 0, 0, 0.7);
-        border: 1px solid #333;
-        border-radius: 5px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    }
-
-    .section {
-        padding: 2rem;
-        border-bottom: 1px solid #333;
-    }
-
-    .section:last-child {
-        border-bottom: none;
-    }
-
-    h2, h3 {
-        color: var(--color-oro);
-        font-weight: 700;
-        text-transform: uppercase;
-    }
-
-    h2 {
-        border-bottom: 2px solid var(--color-oro);
-        padding-bottom: 0.5rem;
-        margin-bottom: 1.5rem;
-        display: flex;
-        align-items: center;
-    }
-
     /* Botones */
     .btn-gold {
         background-color: var(--color-oro);
@@ -160,48 +128,6 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    /* Sidebar */
-    .sidebar {
-        background-color: rgba(20, 20, 20, 0.8);
-        border: 1px solid #333;
-        border-radius: 5px;
-        padding: 1.5rem;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .sidebar-title {
-        color: var(--color-oro);
-        border-bottom: 1px solid var(--color-oro);
-        padding-bottom: 0.5rem;
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-    }
-
-    .sidebar-menu {
-        list-style: none;
-        padding-left: 0;
-    }
-
-    .sidebar-item {
-        margin-bottom: 0.5rem;
-    }
-
-    .sidebar-link {
-        color: var(--color-texto);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #333;
-        transition: all 0.3s;
-    }
-
-    .sidebar-link:hover {
-        color: var(--color-oro);
-        padding-left: 5px;
-    }
-
     /* Footer */
     .footer {
         background-color: #000;
@@ -210,11 +136,30 @@
         margin-top: 3rem;
     }
 
-    .text-gold {
-        color: var(--color-oro);
-        margin-bottom: 1rem;
-        text-align: center;
+    /* Estilos para la página de contacto */
+    .border-gold {
+        border: 1px solid var(--color-oro) !important;
     }
+
+    .card.bg-dark {
+        background-color: rgba(0, 0, 0, 0.8) !important;
+    }
+
+    .form-control.bg-dark {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .form-control:focus {
+        background-color: rgba(255, 255, 255, 0.2) !important;
+        border-color: var(--color-oro-claro) !important;
+        box-shadow: 0 0 5px rgba(212, 175, 55, 0.5) !important;
+        color: var(--color-texto) !important;
+    }
+
+    .text-gold {
+        color: var(--color-oro) !important;
+    }
+   
 
     .footer p {
         display: flex;
@@ -278,53 +223,11 @@
         color: var(--color-oro);
     }
 
-    /* Sistema de columnas */
-    .content-main {
-        flex: 0 0 auto;
-        width: 66.66666667%;
-    }
-
-    .content-sidebar {
-        flex: 0 0 auto;
-        width: 33.33333333%;
-    }
-
-    .card-column {
-        flex: 0 0 auto;
-        width: 50%;
-        padding: 0 0.75rem;
-        margin-bottom: 1.5rem;
-    }
-
-    /* Cards */
-    .feature-card {
-        background-color: var(--color-fondo);
-        border: 1px solid var(--color-oro-oscuro);
-        border-radius: 0.25rem;
-        height: 100%;
-        transition: all 0.3s;
-    }
-
-    .feature-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .feature-card-body {
-        padding: 1.5rem;
-        text-align: center;
-    }
-
     /* Responsive */
     @media (max-width: 992px) {
         .parallax-header {
             background-attachment: scroll;
             height: 50vh;
-        }
-        
-        .content-main, 
-        .content-sidebar {
-            width: 100%;
         }
     }
 
@@ -337,15 +240,11 @@
             max-width: 120px;
         }
         
-        .card-column {
-            width: 100%;
-        }
-        
         .navbar-custom .nav-link {
             padding: 0.5rem 0.75rem;
         }
     }
-    </style>
+   </style>
     
 </head>
 <body>
@@ -539,107 +438,61 @@
         </div>
     </nav>
     
-    
-    <div class="container my-5">
-        <div class="row">
-            <main class="content-main">
-                <div class="main-content">
-                    <div class="section">
-                        <h2><span class="icon-wrapper"><i class="fas fa-handshake icon-title"></i></span> Bienvenidos a la Sociedad de Cazadores Los Piporros</h2>
-                        <p>Somos una sociedad deportiva dedicada a la práctica de la caza en nuestro territorio, respetando la tradición y el medio ambiente.</p>
-                        <p>Nuestra organización tiene como objetivo principal fomentar la práctica de la caza responsable y sostenible, así como mantener las tradiciones cinegéticas locales.</p>
-                        
-                        <div class="row mt-4">
-                            <div class="card-column">
-                                <div class="feature-card">
-                                    <div class="feature-card-body">
-                                        <div class="icon-wrapper"><i class="fas fa-calendar-alt icon-card"></i></div>
-                                        <h4 class="card-title">Eventos Anuales</h4>
-                                        <p class="card-text">Participa en nuestras actividades programadas durante todo el año.</p>
-                                    </div>
-                                </div>
+    <!-- Contenido principal -->
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card bg-dark border-gold">
+                    <div class="card-body">
+                        <h2 class="text-center text-gold mb-4">Contacta con Nosotros</h2>
+                        <form id="contactForm">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label text-gold">Nombre completo</label>
+                                <input type="text" class="form-control bg-dark text-light border-gold" id="nombre" required>
                             </div>
-                            <div class="card-column">
-                                <div class="feature-card">
-                                    <div class="feature-card-body">
-                                        <div class="icon-wrapper"><i class="fas fa-book icon-card"></i></div>
-                                        <h4 class="card-title">Normativa</h4>
-                                        <p class="card-text">Consulta nuestra normativa y regulaciones para una caza responsable.</p>
-                                    </div>
-                                </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label text-gold">Correo electrónico</label>
+                                <input type="email" class="form-control bg-dark text-light border-gold" id="email" required>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <h3><span class="icon-wrapper"><i class="fas fa-newspaper icon-title"></i></span> Noticias</h3>
-                        <div class="alert alert-dark" role="alert">
-                            <span class="icon-wrapper"><i class="fas fa-info-circle icon-list"></i></span> No hay noticias disponibles en este momento.
-                        </div>
-                        <a href="#" class="btn btn-gold mt-2"><span class="icon-wrapper"><i class="fas fa-list icon-btn"></i></span>Ver todas las noticias</a>
-                    </div>
-                    
-                    <div class="section">
-                        <h3><span class="icon-wrapper"><i class="fas fa-calendar-check icon-title"></i></span> Calendario</h3>
-                        <div class="alert alert-dark" role="alert">
-                            <span class="icon-wrapper"><i class="fas fa-info-circle icon-list"></i></span> No hay eventos programados en este momento.
-                        </div>
-                        <a href="#" class="btn btn-gold mt-2"><span class="icon-wrapper"><i class="fas fa-calendar-alt icon-btn"></i></span>Ver calendario completo</a>
-                    </div>
-                    
-                    <div class="section">
-                        <h3><span class="icon-wrapper"><i class="fas fa-file-alt icon-title"></i></span> Documentación</h3>
-                        <p>Accede a los documentos importantes para los socios:</p>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><span class="icon-wrapper"><i class="fas fa-file-pdf icon-list"></i></span> Estatutos de la Sociedad</li>
-                            <li class="mb-2"><span class="icon-wrapper"><i class="fas fa-file-pdf icon-list"></i></span> Normativa actual</li>
-                        </ul>
-                        <div class="divider"></div>
-                        <div class="d-flex justify-content-around">
-                            <img src="https://via.placeholder.com/100x60.png?text=LOGO1" alt="Logo 1" class="img-fluid" style="max-height: 60px;">
-                            <img src="https://via.placeholder.com/100x60.png?text=LOGO2" alt="Logo 2" class="img-fluid" style="max-height: 60px;">
-                            <img src="https://via.placeholder.com/100x60.png?text=LOGO3" alt="Logo 3" class="img-fluid" style="max-height: 60px;">
-                        </div>
+                            <div class="mb-3">
+                                <label for="asunto" class="form-label text-gold">Asunto</label>
+                                <input type="text" class="form-control bg-dark text-light border-gold" id="asunto" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="mensaje" class="form-label text-gold">Mensaje</label>
+                                <textarea class="form-control bg-dark text-light border-gold" id="mensaje" rows="5" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-gold px-5">
+                                    <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </main>
-            
-            <aside class="content-sidebar">
-                <div class="sidebar mb-4">
-                    <h3 class="sidebar-title"><span class="icon-wrapper"><i class="fas fa-history icon-title"></i></span> HISTORIA</h3>
-                    <ul class="sidebar-menu">
-                        <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-camera icon-list"></i></span>Galería fotográfica</a></li>
-                        <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-file-alt icon-list"></i></span>Documentación</a></li>
-                        <li class="sidebar-item"><a href="./subpáginas/login.php" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-lock icon-list"></i></span>Área privada</a></li>
-                        <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>Contacto</a></li>
-                    </ul>
-                </div>
-                
-                <div class="sidebar mb-4">
-                    <h3 class="sidebar-title"><span class="icon-wrapper"><i class="fas fa-search icon-title"></i></span> BUSCAR</h3>
-                    <form class="search-form">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control bg-dark text-white border-secondary" placeholder="Buscar...">
-                            <button class="btn btn-gold" type="submit"><span class="icon-wrapper"><i class="fas fa-search"></i></span></button>
-                        </div>
-                    </form>
-                    
-                    <h3 class="sidebar-title mt-4"><span class="icon-wrapper"><i class="fas fa-bullhorn icon-title"></i></span> ÚLTIMAS ENTRADAS</h3>
-                    <div class="alert alert-dark" role="alert">
-                        <span class="icon-wrapper"><i class="fas fa-exclamation-circle icon-list"></i></span> NADA ENCONTRADO
+
+                <!-- Información de contacto adicional -->
+                <div class="row mt-5">
+                    <div class="col-md-4 text-center mb-4">
+                        <i class="fas fa-map-marker-alt icon-card"></i>
+                        <h4 class="text-gold">Dirección</h4>
+                        <p>Calle Medio, 5 C. <br>06207 Aceuchal<br>Badajoz</p>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <i class="fas fa-phone icon-card"></i>
+                        <h4 class="text-gold">Teléfono</h4>
+                        <p>924 680 033</p>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <i class="fas fa-envelope icon-card"></i>
+                        <h4 class="text-gold">Email</h4>
+                        <p>info@sociotral.com</p>
                     </div>
                 </div>
-                
-                <div class="sidebar">
-                    <h3 class="sidebar-title"><span class="icon-wrapper"><i class="fas fa-trophy icon-title"></i></span> TROFEOS</h3>
-                    <img src="https://via.placeholder.com/300x200.png?text=TROFEOS" alt="Trofeos" class="img-fluid rounded mb-3">
-                    <p>Galería de los mejores trofeos de la temporada.</p>
-                    <a href="#" class="btn btn-gold btn-sm w-100"><span class="icon-wrapper"><i class="fas fa-eye icon-btn"></i></span>Ver más</a>
-                </div>
-            </aside>
+            </div>
         </div>
-    </div>
-    
+    </main>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
