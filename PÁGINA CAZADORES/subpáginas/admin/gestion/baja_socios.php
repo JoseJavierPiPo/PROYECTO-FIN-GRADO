@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if(modificarestadosocio($conn, $dni, $nombre, $estado)) {
             $_SESSION['mensaje'] = "El socio ha sido dado de baja correctamente";
-            $_SESSION['tipo_mensaje'] = "success";
+            $_SESSION['tipo_mensaje'] = "correcto";
         } else {
             $_SESSION['mensaje'] = "Error al dar de baja al socio";
             $_SESSION['tipo_mensaje'] = "error";
@@ -171,12 +171,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: var(--color-texto);
         }
 
-        .alert-danger {
+        .alert-error {
             border-color: #dc3545;
             background-color: rgba(220, 53, 69, 0.1);
         }
 
-        .alert-success {
+        .alert-correcto {
             border-color: #198754;
             background-color: rgba(25, 135, 84, 0.1);
         }

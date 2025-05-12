@@ -213,52 +213,9 @@ function buscarsocios($conn){
 }
 
 
-function actualizarsocio1($conn, $id_socio){
-    if(isset($_POST["id_socio"])){
-        $id_socio = $_POST["id_socio"];
-        $_SESSION['id_socio'] = $_POST['id_socio'];
 
-        $sql = "SELECT * FROM socios WHERE ID_Socio = '$id_socio'";
-        $result = mysqli_query($conn, $sql);
-        if(mysqli_num_rows($result) > 0){
-            // Guardar los datos del socio en la sesión
-            $socio = mysqli_fetch_assoc($result);
-            $_SESSION['socio_actual'] = $socio;
-            
-            echo "<script>window.location.href = './subpáginas/admin/gestion/actualizar_socio1.php';</script>";
-            exit();
-        }
-        else{
-            $_SESSION["Error"] = "El socio no existe";
-        }
-    }
-}
-function actualizarsocio2 ($conn, $id_socio){
-    $sql = "SELECT * FROM socios WHERE ID_Socio = '$id_socio'";
-    $result = mysqli_query($conn, $sql);
-     if(mysqli_num_rows($result) > 0){
-         while($row = mysqli_fetch_assoc($result)){
-            echo "<table border='1' cellpadding='5' cellspacing='0'>";
-            echo "<tr>
-                <td>".$row['ID_Socio']."</td>
-                <td>".$row['DNI']."</td>
-                <td>".$row['Nombre']."</td>
-                <td>".$row['Apellido1']."</td>
-                <td>".$row['Apellido2']."</td>
-                <td>".$row['Fecha_Nacimiento']."</td>
-                <td>".$row['Localidad']."</td>
-                <td>".$row['Domicilio']."</td>
-                <td>".$row['Codigo_Postal']."</td>
-                <td>".$row['Telefono']."</td>
-                <td>".$row['Email']."</td>
-                <td>".$row['Fecha_Alta']."</td>
-                <td>".$row['Fecha_Baja']."</td>
-                <td>".$row['Estado']."</td>
-                <td>".$row['ROL']."</td>
-            </tr>";
-         }
-     }
-}
+
+
 /*
 session_start();
 session_destroy();

@@ -161,12 +161,12 @@ if ($rol !== 'Admin') {
             color: var(--color-texto);
         }
 
-        .alert-danger {
+        .alert-error {
             border-color: #dc3545;
             background-color: rgba(220, 53, 69, 0.1);
         }
 
-        .alert-success {
+        .alert-correcto {
             border-color: #198754;
             background-color: rgba(25, 135, 84, 0.1);
         }

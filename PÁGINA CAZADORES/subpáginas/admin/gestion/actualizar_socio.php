@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once("../../../php/funciones.php");
+include_once("../../../php/funcionesgsocios.php");
 
 // Verificar variables de sesión
 $nombre = isset($_SESSION['Nombre']) ? $_SESSION['Nombre'] : '';
@@ -166,7 +167,7 @@ if ($rol !== 'Admin') {
             background-color: rgba(220, 53, 69, 0.1);
         }
 
-        .alert-success {
+        .alert-correcto {
             border-color: #198754;
             background-color: rgba(25, 135, 84, 0.1);
         }
@@ -187,7 +188,7 @@ if ($rol !== 'Admin') {
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label for="id_socio" class="form-label">ID_SOCIO</label>
+                            <label for="id_socio" class="form-label">ID DEL SOCIO</label>
                             <input type="number" class="form-control" name="id_socio" required>
                         </div>
                     </div>
@@ -195,9 +196,12 @@ if ($rol !== 'Admin') {
                 <button type="submit" class="btn btn-gold">BUSCAR SOCIO</button>
             </form>
     </div>
+
     <?php
-    $id_socio = $_SESSION["id_socio"];
-    actualizarsocio1 ($conn, $id_socio);
+    if(isset($_POST["id_socio"])) {
+        $_SESSION["id_socio"] = $_POST["id_socio"];
+        actualizarsocio1($conn, $_SESSION["id_socio"]);
+    }
     if(isset($_SESSION["Error"])){
         echo '<div class="alert alert-danger" role="alert">';
         echo $_SESSION["Error"];

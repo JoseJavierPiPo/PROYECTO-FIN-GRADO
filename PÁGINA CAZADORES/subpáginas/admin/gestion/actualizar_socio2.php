@@ -1,21 +1,19 @@
 <?php
 session_start();
-include_once("../../../php/funciones.php");
+include_once("../../../php/funciones.php");    
+include_once("../../../php/funcionesgsocios.php");         
 
-// Verificar variables de sesión
-$nombre = isset($_SESSION['Nombre']) ? $_SESSION['Nombre'] : '';
-$dni = isset($_SESSION['DNI']) ? $_SESSION['DNI'] : '';
-$rol = isset($_SESSION['ROL']) ? $_SESSION['ROL'] : '';
-
-// Verificar si el usuario es administrador
-if ($rol !== 'Admin') {
-    header("Location: ../../login.php");
-    exit();
+// Obtener datos del socio si existe en la sesión
+$socio = null;
+if (isset($_SESSION["id_socio"])) {
+    $id_socio = $_SESSION["id_socio"];
+    $sql = "SELECT * FROM socios WHERE ID_Socio = '$id_socio'";
+    $result = mysqli_query($conn, $sql);
+    $socio = mysqli_fetch_assoc($result);
 }
 ?>
 <!DOCTYPE html>
 <html lang="es">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baja de Socios - S. Cazadores LOS PIPORROS</title>
@@ -24,7 +22,7 @@ if ($rol !== 'Admin') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-         :root {
+        :root {
             --color-oro: #D4AF37;
             --color-oro-claro: #e8c252;
             --color-oro-oscuro: #b8972e;
@@ -42,52 +40,23 @@ if ($rol !== 'Admin') {
             flex-direction: column;
         }
 
-        .form-container {
+        /* Estructuras principales */
+        .form-container, .search-panel, .results-container {
             background-color: rgba(0, 0, 0, 0.8);
             border: 1px solid var(--color-oro);
             border-radius: 10px;
-            padding: 2rem;
+            padding: 1.5rem;
             margin: 2rem auto;
-            max-width: 800px;
         }
 
-        /* Centrar el contenedor del formulario */
+        .form-container { max-width: 800px; }
+        .search-panel { max-width: 1000px; }
+
         .row {
             justify-content: center;
         }
 
-        .form-control {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--color-oro);
-            color: var(--color-texto);
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .form-label {
-            color: var(--color-oro);
-            font-weight: 500;
-            text-align: center;
-            display: block;
-        }
-
-        /* Estilo específico para el select */
-        select.form-control {
-            background-color: #000000;
-            color: var(--color-texto);
-            cursor: pointer;
-            text-align: center;
-            text-align-last: center;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-
-        select.form-control option {
-            background-color: #000000;
-            color: var(--color-texto);
-            text-align: center;
-        }
+        /* Tipografía y títulos */
         .form-title {
             color: var(--color-oro);
             text-align: center;
@@ -97,89 +66,107 @@ if ($rol !== 'Admin') {
             letter-spacing: 2px;
         }
 
+        /* Formularios y controles */
         .form-control {
             background-color: rgba(255, 255, 255, 0.1);
             border: 1px solid var(--color-oro);
-            color: var(--color-texto);
+            color: var(--color-texto); 
             margin-bottom: 1rem;
+            text-align: center;
         }
 
         .form-control:focus {
             background-color: rgba(255, 255, 255, 0.2);
             border-color: var(--color-oro-claro);
-            color: var(--color-texto);
             box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+            color: var(--color-texto); 
         }
 
         .form-label {
             color: var(--color-oro);
             font-weight: 500;
+            text-align: center;
+            display: block;
         }
 
-        .btn-gold {
+        select.form-control {
+            background-color: #000;
+            cursor: pointer;
+            text-align-last: center;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        select.form-control option {
+            background-color: #000;
+        }
+
+        /* Botones */
+        .btn-gold, .back-button, .btn-action, .btn-actualizar {
             background-color: var(--color-oro);
             color: var(--color-fondo);
-            padding: 0.8rem 2rem;
             border: none;
-            border-radius: 5px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.3s ease;
+        }
+
+        .btn-gold, .btn-actualizar {
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
             width: 100%;
             margin-top: 1rem;
         }
 
-        .btn-gold:hover {
-            background-color: var(--color-oro-claro);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
+        .btn-actualizar {
+            padding: 1rem 3rem;
+            border-radius: 8px;
+            letter-spacing: 2px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .back-button {
             position: fixed;
             top: 20px;
             left: 20px;
-            background-color: var(--color-oro);
-            color: var(--color-fondo);
             padding: 10px 20px;
             border-radius: 5px;
             text-decoration: none;
-            transition: all 0.3s ease;
             z-index: 1000;
         }
 
-        .back-button:hover {
-            background-color: var(--color-oro-claro);
-            color: var(--color-fondo);
+        .btn-action {
+            padding: 0.6rem 1.5rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            min-width: 120px;
         }
-        
+
+        .btn-gold:hover, .back-button:hover, .btn-action:hover, .btn-actualizar:hover {
+            background-color: var(--color-oro-claro);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-actualizar:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Alertas */
         .alert {
             margin-bottom: 1.5rem;
             border: 1px solid var(--color-oro);
             background-color: rgba(0, 0, 0, 0.8);
-            color: var(--color-texto);
         }
 
-        .alert-danger {
-            border-color: #dc3545;
-            background-color: rgba(220, 53, 69, 0.1);
-        }
+        .alert-danger { border-color: #dc3545; background-color: rgba(220, 53, 69, 0.1); }
+        .alert-correcto { border-color: #198754; background-color: rgba(25, 135, 84, 0.1); }
 
-        .alert-success {
-            border-color: #198754;
-            background-color: rgba(25, 135, 84, 0.1);
-        }
-           
-        .search-panel {
-            background-color: rgba(0, 0, 0, 0.8);
-            border: 1px solid var(--color-oro);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin: 0 auto 2rem;
-            max-width: 1000px;
-        }
-
+        /* Búsqueda avanzada */
         .search-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -203,7 +190,6 @@ if ($rol !== 'Admin') {
             margin-bottom: 0.3rem;
         }
 
-        /* Estilos para los botones de acción */
         .action-buttons {
             display: flex;
             gap: 1rem;
@@ -213,53 +199,13 @@ if ($rol !== 'Admin') {
             border-top: 1px solid var(--color-oro);
         }
 
-        .btn-action {
-            background-color: var(--color-oro);
-            color: var(--color-fondo);
-            padding: 0.6rem 1.5rem;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            min-width: 120px;
-        }
-
-        .btn-action:hover {
-            background-color: var(--color-oro-claro);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
-        }
-
-        /* Estilos para la búsqueda avanzada */
         .advanced-search {
             margin-top: 1rem;
             padding-top: 1rem;
             border-top: 1px solid rgba(212, 175, 55, 0.3);
         }
 
-        /* Ajustes responsive */
-        @media (max-width: 768px) {
-            .search-grid {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            }
-
-            .btn-action {
-                padding: 0.5rem 1rem;
-                font-size: 0.8rem;
-            }
-        }
-        .results-container {
-            background-color: rgba(0, 0, 0, 0.8);
-            border: 1px solid var(--color-oro);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            overflow-x: auto;
-        }
-
+        /* Tablas */
         .table {
             width: 100%;
             margin-bottom: 0;
@@ -295,56 +241,21 @@ if ($rol !== 'Admin') {
             text-align: center;
             vertical-align: middle;
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            color: var(--color-texto);
         }
 
-        /* Estado de los socios */
-        .estado-activo {
-            color: #28a745;
-            font-weight: 600;
+        /* Estados */
+        .estado-activo { color: #28a745; font-weight: 600; }
+        .estado-inactivo { color: #dc3545; font-weight: 600; }
+        .estado-suspendido { color: #ffc107; font-weight: 600; }
+
+        /* Contenedores */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
         }
 
-        .estado-inactivo {
-            color: #dc3545;
-            font-weight: 600;
-        }
-
-        .estado-suspendido {
-            color: #ffc107;
-            font-weight: 600;
-        }
-
-        /* Responsive para la tabla */
-        @media (max-width: 992px) {
-            .table thead {
-                display: none;
-            }
-
-            .table tbody tr {
-                display: block;
-                margin-bottom: 1rem;
-                border: 1px solid var(--color-oro);
-                border-radius: 5px;
-            }
-
-            .table td {
-                display: block;
-                text-align: right;
-                padding: 0.5rem 1rem;
-                position: relative;
-            }
-
-            .table td::before {
-                content: attr(data-label);
-                position: absolute;
-                left: 1rem;
-                font-weight: 600;
-                text-transform: uppercase;
-                color: var(--color-oro);
-            }
-        }
-
-        /* Paginación si la necesitas */
+        /* Paginación */
         .pagination {
             display: flex;
             justify-content: center;
@@ -371,7 +282,44 @@ if ($rol !== 'Admin') {
             box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
 
+        /* Responsive */
+        @media (max-width: 992px) {
+            .table thead { display: none; }
+            
+            .table tbody tr {
+                display: block;
+                margin-bottom: 1rem;
+                border: 1px solid var(--color-oro);
+                border-radius: 5px;
+            }
+            
+            .table td {
+                display: block;
+                text-align: right;
+                padding: 0.5rem 1rem;
+                position: relative;
+            }
+            
+            .table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 1rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                color: var(--color-oro);
+            }
+        }
 
+        @media (max-width: 768px) {
+            .search-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+
+            .btn-action {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -386,93 +334,104 @@ if ($rol !== 'Admin') {
         <!-- Contenedor de resultados -->
         <div class="results-container">
             
-            <?php
+        <?php
             if (isset($_SESSION["id_socio"])) {
                 $id_socio = $_SESSION["id_socio"];
                 actualizarsocio2($conn, $id_socio);
             }
-             
-            ?>
+        ?>
+
         </div>
-        
-        <!-- Panel de búsqueda -->
+        <!-- Panel de Datos -->
         <div class="search-panel">
-            <form action="../gestion/filtrar_socio.php" method="POST">
+            <form action="actualizar_socio2.php" method="POST">
+                <input type="hidden" name="id_socio" value="<?php echo isset($_SESSION['id_socio']) ? $_SESSION['id_socio'] : ''; ?>">
                 <div class="search-grid">
-                    <!-- Campos principales -->
+                    <!-- INPUTS-->
                     <div class="search-group">
                         <label for="dni" class="form-label">DNI</label>
-                        <input type="text" class="form-control" name="dni" maxlength="9" placeholder="DNI">
+                        <input type="text" class="form-control" value = "<?php echo isset($socio) ? $socio['DNI'] : '' ?>" name="dni" maxlength="9" placeholder="DNI">
                     </div>
                     <div class="search-group">
                         <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+                        <input type="text" class="form-control" value = "<?php echo isset($socio) ? $socio['Nombre'] : '' ?>" name="nombre" placeholder="Nombre">
                     </div>
                     <div class="search-group">
                         <label for="estado" class="form-label">Estado</label>
                         <select class="form-control" name="estado">
-                        <option value="" disabled selected>Selecciona un Estado</option>
-                            <option value="activo">Activo</option>
-                            <option value="inactivo">Inactivo</option>
-                            <option value="suspendido">Suspendido</option>
+                            <option value="activo" <?php echo (isset($socio) && $socio['Estado'] == 'activo') ? 'selected' : ''; ?>>Activo</option>
+                            <option value="inactivo" <?php echo (isset($socio) && $socio['Estado'] == 'inactivo') ? 'selected' : ''; ?>>Inactivo</option>
+                            <option value="suspendido" <?php echo (isset($socio) && $socio['Estado'] == 'suspendido') ? 'selected' : ''; ?>>Suspendido</option>
                         </select>
                     </div>
                     <div class="search-group">
                         <label for="rol" class="form-label">Rol</label>
                         <select class="form-control" name="rol">
-                            <option value="" disabled selected>Selecciona un Socio</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Socio">Socio</option>
+                            <option value="Admin" <?php echo (isset($socio) && $socio['ROL'] == 'Admin') ? 'selected' : ''; ?>>Admin</option>
+                            <option value="Socio" <?php echo (isset($socio) && $socio['ROL'] == 'Socio') ? 'selected' : ''; ?>>Socio</option>
+                        </select>
                         </select>
                     </div>
                     <div class="search-group">
-                            <label for="apellido1" class="form-label">Primer Apellido</label>
-                            <input type="text" class="form-control" name="apellido1">
-                        </div>
+                        <label for="apellido1" class="form-label">Primer Apellido</label>
+                        <input type="text" class="form-control" value="<?php echo isset($socio) ? $socio['Apellido1'] : '' ?>" name="apellido1">
+                    </div>
                         <div class="search-group">
                             <label for="apellido2" class="form-label">Segundo Apellido</label>
-                            <input type="text" class="form-control" name="apellido2">
+                            <input type="text" class="form-control" value = "<?php echo isset($socio) ? $socio['Apellido2'] : '' ?>" name="apellido2">
                         </div>
                         <div class="search-group">
                             <label for="fecha_nacimiento" class="form-label">Fecha Nacimiento</label>
-                            <input type="date" class="form-control" name="fecha_nacimiento">
+                            <input type="date" class="form-control" value = "<?php echo isset($socio) ? $socio['Fecha_Nacimiento'] : '' ?>" name="fecha_nacimiento">
                         </div>
                         <div class="search-group">
                             <label for="localidad" class="form-label">Localidad</label>
-                            <input type="text" class="form-control" name="localidad">
+                            <input type="text" class="form-control" value = "<?php echo isset($socio) ? $socio['Localidad'] : '' ?>" name="localidad">
                         </div>
                         <div class="search-group">
-                            <label for="telefono" class="form-label">Teléfono</label>
-                            <input type="number" class="form-control" name="telefono">
+                            <label for="telefono" class="form-label">Telefono</label>
+                            <input type="number" class="form-control" value = "<?php echo isset($socio) ? $socio['Telefono'] : '' ?>" name="telefono">
                         </div>
                         <div class="search-group">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email">
+                            <input type="email" class="form-control" value = "<?php echo isset($socio) ? $socio['Email'] : '' ?>" name="email">
                         </div>
                         <div class="search-group">
                             <label for="fecha_alta" class="form-label">Fecha Alta</label>
-                            <input type="date" class="form-control" name="fecha_alta">
+                            <input type="date" class="form-control" value = "<?php echo isset($socio) ? $socio['Fecha_Alta'] : '' ?>" name="fecha_alta">
                         </div>
                         <div class="search-group">
                             <label for="fecha_baja" class="form-label">Fecha Baja</label>
-                            <input type="date" class="form-control" name="fecha_baja">
+                            <input type="date" class="form-control" value = "<?php echo isset($socio) ? $socio['Fecha_Baja'] : '' ?>" name="fecha_baja">
                         </div>
                         <div class="search-group">
                             <label for="codigo_postal" class="form-label">Código Postal</label>
-                            <input type="number" class="form-control" name="codigo_postal">
+                            <input type="number" class="form-control" value="<?php echo isset($socio) ? $socio['Codigo_Postal'] : '' ?>" name="codigo_postal">
                         </div>
                         <div class="search-group">
                             <label for="domicilio" class="form-label">Domicilio</label>
-                            <input type="text" class="form-control" name="domicilio">
+                            <input type="text" class="form-control" value="<?php echo isset($socio) ? $socio['Domicilio'] : '' ?>" name="domicilio">
                         </div>
                 </div>
-                <button type="submit">ACTUALIZAR SOCIO</button>
+                <div class="button-container">
+                    <button type="submit" name="actualizar" class="btn-actualizar">ACTUALIZAR SOCIO</button>
+                </div>
             </form>
         </div>
 
         
     </div>
-
+            <?php
+               
+               if(isset($_SESSION['correcto'])) {
+                    echo '<div class="alert alert-correcto">'.$_SESSION['correcto'].'</div>';
+                    unset($_SESSION['correcto']);
+                }
+                if(isset($_SESSION['error'])) {
+                        echo '<div class="alert alert-danger">'.$_SESSION['error'].'</div>';
+                        unset($_SESSION['error']);
+                }
+            ?>
     <script>
         function toggleAdvancedSearch() {
             const advancedSearch = document.getElementById('advancedSearch');

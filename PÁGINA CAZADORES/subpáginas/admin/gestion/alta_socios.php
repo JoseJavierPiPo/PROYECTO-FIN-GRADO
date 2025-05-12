@@ -140,12 +140,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: var(--color-texto);
         }
 
-        .alert-danger {
+        .alert-error {
             border-color: #dc3545;
             background-color: rgba(220, 53, 69, 0.1);
         }
 
-        .alert-success {
+        .alert-correcto {
             border-color: #198754;
             background-color: rgba(25, 135, 84, 0.1);
         }
@@ -163,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     
                     <?php
                     if(isset($_SESSION['mensaje'])) {
-                        $clase = $_SESSION['tipo_mensaje'] == 'error' ? 'alert-danger' : 'alert-success';
+                        $clase = $_SESSION['tipo_mensaje'] == 'error' ? 'alert-error' : 'alert-correcto';
                         $icono = $_SESSION['tipo_mensaje'] == 'error' ? 'fa-exclamation-circle' : 'fa-check-circle';
                         echo "<div class='alert {$clase} text-center' role='alert'>
                                 <i class='fas {$icono} me-2'></i>{$_SESSION['mensaje']}
