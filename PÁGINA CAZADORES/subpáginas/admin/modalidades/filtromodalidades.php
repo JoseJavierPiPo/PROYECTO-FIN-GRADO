@@ -359,91 +359,73 @@ if ($rol !== 'Admin') {
 </head>
 <body>
     <!-- Botón de volver -->
-    <a href="../gestion_admin.php" class="back-button">
+    <a href="../modalidades_admin.php" class="back-button">
         <i class="fas fa-arrow-left"></i> Volver
     </a>
 
     <div class="main-container">
-        <h1 class="form-title">BÚSQUEDA DE SOCIOS</h1>
+        <h1 class="form-title">BÚSQUEDA DE MODALIDADES</h1>
         
         <!-- Panel de búsqueda -->
         <div class="search-panel">
-            <form action="../gestion/filtrar_socio.php" method="POST">
+            <form action="filtromodalidades.php" method="POST">
                 <div class="search-grid">
                     <!-- Campos principales -->
                     <div class="search-group">
-                        <label for="id" class="form-label">ID Socio</label>
-                        <input type="number" class="form-control" name="id" placeholder="ID">
+                        <label for="id" class="form-label">ID Modalidad</label>
+                        <input type="number" class="form-control" name="id_modalidad" placeholder="ID_Modalidad">
                     </div>
                     <div class="search-group">
-                        <label for="dni" class="form-label">DNI</label>
-                        <input type="text" class="form-control" name="dni" maxlength="9" placeholder="DNI">
+                        <label for="modalida" class="form-label">Nombre de Modalidad</label>
+                        <input type="text" class="form-control" name="nombre" placeholder="Nombre Modalidad">
                     </div>
                     <div class="search-group">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" name="descripcion" placeholder="Descripcion">
                     </div>
+
                     <div class="search-group">
-                        <label for="estado" class="form-label">Estado</label>
+                        <label for="estado" class="form-label">Selecciona un Estado</label>
                         <select class="form-control" name="estado">
                         <option value="" disabled selected>Selecciona un Estado</option>
-                            <option value="activo">Activo</option>
-                            <option value="inactivo">Inactivo</option>
-                            <option value="suspendido">Suspendido</option>
+                            <option value="Mayor">Mayor</option>
+                            <option value="Menor">Menor</option>
                         </select>
                     </div>
-                    <div class="search-group">
-                        <label for="rol" class="form-label">Rol</label>
-                        <select class="form-control" name="rol">
-                            <option value="" disabled selected>Selecciona un Socio</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Socio">Socio</option>
-                        </select>
-                    </div>
+                    
                 </div>
-
+                <?php
+                    if(isset($_SESSION['correcto'])) {
+                        echo '<div class="alert alert-correcto">'.$_SESSION['correcto'].'</div>';
+                        unset($_SESSION['correcto']);
+                    }
+                    if(isset($_SESSION['error'])) {
+                        echo '<div class="alert alert-error">'.$_SESSION['error'].'</div>';
+                        unset($_SESSION['error']);
+                    }
+                ?>
                 <!-- Campos adicionales (inicialmente ocultos) -->
                 <div class="advanced-search" id="advancedSearch" style="display: none;">
                     <div class="search-grid">
                         <div class="search-group">
-                            <label for="apellido1" class="form-label">Primer Apellido</label>
-                            <input type="text" class="form-control" name="apellido1">
+                            <label for="temporada_inicio" class="form-label">Temporada de Inicio</label>
+                            <input type="date" class="form-control" name="temporada_inicio">
                         </div>
                         <div class="search-group">
-                            <label for="apellido2" class="form-label">Segundo Apellido</label>
-                            <input type="text" class="form-control" name="apellido2">
+                            <label for="temporada_fin" class="form-label">Temporada Fin</label>
+                            <input type="date" class="form-control" name="temporada_fin">
                         </div>
                         <div class="search-group">
-                            <label for="fecha_nacimiento" class="form-label">Fecha Nacimiento</label>
-                            <input type="date" class="form-control" name="fecha_nacimiento">
+                            <label for="arma" class="form-label">Arma Predominante</label>
+                            <input type="text" class="form-control" name="arma">
                         </div>
                         <div class="search-group">
-                            <label for="localidad" class="form-label">Localidad</label>
-                            <input type="text" class="form-control" name="localidad">
-                        </div>
-                        <div class="search-group">
-                            <label for="telefono" class="form-label">Teléfono</label>
-                            <input type="number" class="form-control" name="telefono">
-                        </div>
-                        <div class="search-group">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email">
-                        </div>
-                        <div class="search-group">
-                            <label for="fecha_alta" class="form-label">Fecha Alta</label>
-                            <input type="date" class="form-control" name="fecha_alta">
-                        </div>
-                        <div class="search-group">
-                            <label for="fecha_baja" class="form-label">Fecha Baja</label>
-                            <input type="date" class="form-control" name="fecha_baja">
-                        </div>
-                        <div class="search-group">
-                            <label for="codigo_postal" class="form-label">Código Postal</label>
-                            <input type="number" class="form-control" name="codigo_postal">
-                        </div>
-                        <div class="search-group">
-                            <label for="domicilio" class="form-label">Domicilio</label>
-                            <input type="text" class="form-control" name="domicilio">
+                            <label for="permiso_especial" class="form-label">Permiso Especial</label>
+                            <select class="form-control" name="permiso_especial">
+                            <option value="" disabled selected>SELECCIONA PERMISO ESPECIAL</option>
+                                <option value="Si">Si</option>
+                                <option value="No">No</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -466,7 +448,7 @@ if ($rol !== 'Admin') {
         <div class="results-container">
             
             <?php
-             buscarsocios($conn);
+             listarmodalidades ($conn)
             ?>
         </div>
     </div>

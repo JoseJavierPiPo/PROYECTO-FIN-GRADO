@@ -13,27 +13,15 @@ if ($rol !== 'Admin') {
     exit();
 }
 
-// Procesar el formulario antes de cualquier salida HTML
+// Procesar el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if(empty($_POST["dni"]) || empty($_POST["nombre"]) || empty($_POST["estado"])) {
-        $_SESSION['mensaje'] = "Por favor, complete todos los campos";
-        $_SESSION['tipo_mensaje'] = "error";
-    } else {
-        $dni = $_POST["dni"];
-        $nombre = $_POST["nombre"];
-        $estado = $_POST["estado"];
-        
-        if(modificarestadosocio($conn, $dni, $nombre, $estado)) {
-            $_SESSION['mensaje'] = "El socio ha sido dado de baja correctamente";
-            $_SESSION['tipo_mensaje'] = "correcto";
-        } else {
-            $_SESSION['mensaje'] = "Error al dar de baja al socio";
-            $_SESSION['tipo_mensaje'] = "error";
-        }
-    }
-
+    $dni = $_POST["dni"];
+    $nombre = $_POST["nombre"];
+    $estado = $_POST["estado"];
+    modificarestadosocio($conn, $dni, $nombre, $estado);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -193,17 +181,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="form-container">
             <h1 class="form-title">Dar de Baja a Socio</h1>
             
-            <?php if (isset($_SESSION['mensaje'])): ?>
-                <div class="alert alert-<?php echo $_SESSION['tipo_mensaje']; ?>" role="alert">
-                    <i class='fas <?php echo $_SESSION['tipo_mensaje'] == 'error' ? 'fa-exclamation-circle' : 'fa-check-circle'; ?> me-2'></i>
-                    <?php echo $_SESSION['mensaje']; ?>
-                </div>
-                <?php 
-                unset($_SESSION['mensaje']);
-                unset($_SESSION['tipo_mensaje']);
-                ?>
-            <?php endif; ?>
-            
+            <?php
+            if(isset($_SESSION['correcto'])) {
+                echo '<div class="alert alert-correcto">'.$_SESSION['correcto'].'</div>';
+                unset($_SESSION['correcto']);
+            }
+            if(isset($_SESSION['error'])) {
+                echo '<div class="alert alert-error">'.$_SESSION['error'].'</div>';
+                unset($_SESSION['error']);
+            }
+            ?>
+
             <form action="../gestion/baja_socios.php" method="POST">
                 <div class="row">
                     <div class="col-md-6">

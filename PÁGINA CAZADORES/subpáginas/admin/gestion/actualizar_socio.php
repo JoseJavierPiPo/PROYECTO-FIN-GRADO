@@ -162,7 +162,7 @@ if ($rol !== 'Admin') {
             color: var(--color-texto);
         }
 
-        .alert-danger {
+        .alert-error {
             border-color: #dc3545;
             background-color: rgba(220, 53, 69, 0.1);
         }
@@ -203,7 +203,7 @@ if ($rol !== 'Admin') {
         actualizarsocio1($conn, $_SESSION["id_socio"]);
     }
     if(isset($_SESSION["Error"])){
-        echo '<div class="alert alert-danger" role="alert">';
+        echo '<div class="alert alert-error" role="alert">';
         echo $_SESSION["Error"];
         echo '</div>';
         unset($_SESSION["Error"]);

@@ -163,7 +163,7 @@ if (isset($_SESSION["id_socio"])) {
             background-color: rgba(0, 0, 0, 0.8);
         }
 
-        .alert-danger { border-color: #dc3545; background-color: rgba(220, 53, 69, 0.1); }
+        .alert-error { border-color: #dc3545; background-color: rgba(220, 53, 69, 0.1); }
         .alert-correcto { border-color: #198754; background-color: rgba(25, 135, 84, 0.1); }
 
         /* Búsqueda avanzada */
@@ -370,7 +370,6 @@ if (isset($_SESSION["id_socio"])) {
                             <option value="Admin" <?php echo (isset($socio) && $socio['ROL'] == 'Admin') ? 'selected' : ''; ?>>Admin</option>
                             <option value="Socio" <?php echo (isset($socio) && $socio['ROL'] == 'Socio') ? 'selected' : ''; ?>>Socio</option>
                         </select>
-                        </select>
                     </div>
                     <div class="search-group">
                         <label for="apellido1" class="form-label">Primer Apellido</label>
@@ -428,7 +427,7 @@ if (isset($_SESSION["id_socio"])) {
                     unset($_SESSION['correcto']);
                 }
                 if(isset($_SESSION['error'])) {
-                        echo '<div class="alert alert-danger">'.$_SESSION['error'].'</div>';
+                        echo '<div class="alert alert-error">'.$_SESSION['error'].'</div>';
                         unset($_SESSION['error']);
                 }
             ?>

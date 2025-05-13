@@ -53,7 +53,9 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
         <div class="container header-content">
             <div class="row">
                 <div class="col-12 text-center">
-                    <a href="../../index.html"><img src="../../fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
+                    <a href="../../index.html">
+                        <img src="../../imagenes/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4">
+                    </a>
                     <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
                     <h2 class="h3 nombre-sociedad">LOS PIPORROS</h2>
                 </div>
@@ -320,7 +322,8 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
         <div class="container">
              <div class="row">
                    <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                    <a href="https://aceuchal.com/"><img src="../../fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
+                    <a href="https://aceuchal.com/">
+                        <img src="../../imagenes/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;">
                 </div>
                 <div class="col-md-4 text-center mb-3 mb-md-0">
                     <h5 class="text-gold">CONTACTO</h5>

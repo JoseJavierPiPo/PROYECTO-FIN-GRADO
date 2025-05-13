@@ -14,7 +14,7 @@ function iniciosesion($conn, $nombre, $dni){
         $result = mysqli_query($conn, $sql);
 
         if(mysqli_num_rows($result) == 0){
-            $_SESSION["Error"] = $nombreno;
+            $_SESSION["error"] = $nombreno;
         }else{
             $sql1 = "SELECT * FROM socios WHERE Nombre = '$nombre' AND DNI = '$dni' "; 
             $result1 = mysqli_query($conn, $sql1);
@@ -40,8 +40,9 @@ function iniciosesion($conn, $nombre, $dni){
             }
         }
     } else {
-        $_SESSION["Error"] = "Por favor, complete todos los campos.";
+        $_SESSION["error"] = "Por favor, complete todos los campos.";
     }
+    
 }
 
 // MOSTRAR VALORES DEL SOCIO 
@@ -65,25 +66,22 @@ function mostrarvalores($conn, $nombre, $dni){
 
 // INSERTAR SOCIO
 function insertarsocio($conn, $dni, $nombre, $apellido1, $apellido2, $fecha_nacimiento, $localidad, $domicilio, $codigo_postal, $telefono, $email, $fecha_alta) {
-    try {
+    
+    try{
         $sql = "INSERT INTO `socios` (`DNI`, `Nombre`, `Apellido1`, `Apellido2`, `Fecha_Nacimiento`, `Localidad`, `Domicilio`, `Codigo_Postal`, `Telefono`, `Email`, `Fecha_Alta`, `Estado`, `ROL`) VALUES ('$dni', '$nombre', '$apellido1', '$apellido2', '$fecha_nacimiento', '$localidad', '$domicilio', '$codigo_postal', '$telefono', '$email', '$fecha_alta', 'Activo', 'Socio')";
-        
-        if(mysqli_query($conn, $sql)) {
-            $_SESSION['mensaje'] = "Socio dado de alta correctamente";
-            $_SESSION['tipo_mensaje'] = "success";
+        $result = mysqli_query($conn, $sql);
+        if($result){
+            $_SESSION["correcto"] = "Socio insertado correctamente";
         }
-    } catch (mysqli_sql_exception $e) {
-        if(strpos($e->getMessage(), 'Duplicate entry') !== false) {
-            $_SESSION['mensaje'] = "Error: El DNI $dni ya existe en la base de datos";
-            $_SESSION['tipo_mensaje'] = "error";
-        } else {
-            $_SESSION['mensaje'] = "Error al dar de alta al socio: " . $e->getMessage();
-            $_SESSION['tipo_mensaje'] = "error";
-        }
+    }
+    catch(mysqli_sql_exception $e){
+        $_SESSION["error"] = "Error al insertar el socio: ". mysqli_error($conn);
     }
 }
 
+
 //MODIFICAR ESTADO DE SOCIO
+
 function modificarestadosocio($conn, $dni, $nombre, $estado){
     $sql = "SELECT * FROM socios WHERE DNI = '$dni' AND Nombre = '$nombre'";
     $result = mysqli_query($conn, $sql);
@@ -91,20 +89,17 @@ function modificarestadosocio($conn, $dni, $nombre, $estado){
         $sql = "UPDATE socios SET Estado = '$estado' WHERE DNI = '$dni' AND Nombre = '$nombre';";
         $result = mysqli_query($conn, $sql);
         if($result){
-            $_SESSION['mensaje'] = "El socio ha sido dado de baja correctamente";
-            $_SESSION['tipo_mensaje'] = "success";
-            return true;
+            $_SESSION['correcto'] = "El socio ha sido dado de baja correctamente";
         } else {
-            $_SESSION['mensaje'] = "Error al dar de baja al socio";
-            $_SESSION['tipo_mensaje'] = "error";
-            return false;
+            $_SESSION['error'] = "Error al dar de baja al socio";
         }
     } else {
-        $_SESSION['mensaje'] = "El socio no existe";
-        $_SESSION['tipo_mensaje'] = "error";
-        return false;
+        $_SESSION['error'] = "El socio no existe";
     }
 }
+
+
+
 
 // FILTRO DE SOCIOS
 
@@ -213,8 +208,124 @@ function buscarsocios($conn){
 }
 
 
+ function nuevamodalidad($conn, $nombre, $descripcion, $temporada_inicio, $temporada_fin, $tipo_caza) {
+    if(isset($_POST["nombre"]) && isset($_POST["descripcion"]) && isset($_POST["temporada_inicio"]) && isset($_POST["temporada_fin"]) && isset($_POST["tipo_caza"]) && isset($_POST["permiso_especial"]) && isset($_POST["arma"])) {
+        $nombre = $_POST["nombre"];
+        $descripcion = $_POST["descripcion"];
+        $temporada_inicio = $_POST["temporada_inicio"];
+        $temporada_fin = $_POST["temporada_fin"];
+        $tipo_caza = $_POST["tipo_caza"];
+        $permiso_especial = $_POST["permiso_especial"];
+        $arma = $_POST["arma"];
+      
+        try{
+            $sql = "INSERT INTO `modalidades_caza` (`ID_Modalidad`, `Nombre_Modalidad`, `Descripcion`, `Temporada_Inicio`, `Temporada_Fin`, `Tipo_Caza`, `Arma_Predominante`, `Requiere_Permiso_Especial`) VALUES ('', '$nombre', '$descripcion', '$temporada_inicio', '$temporada_fin', '$tipo_caza', '$arma', '$permiso_especial')";
+            $result = mysqli_query($conn, $sql);
+            if ($result) {
+                $_SESSION["correcto"] = "Modalidad insertada correctamente";
+            } else {
+                $_SESSION["error"] = mysqli_error($conn);
+            }
+        }
+        catch(mysqli_sql_exception $e){
+            $_SESSION["error"] = "Error al insertar la modalidad: ". mysqli_error($conn);
+        }
+    }
+ }
 
+ function borrarmodalidad ($conn, $nombre, $id_modalidad) {
+    if(isset($_POST["nombre"]) && isset($_POST["id_modalidad"])) {
+        $nombre = $_POST["nombre"];
+        $id_modalidad = $_POST["id_modalidad"];
+        
+        $sql1 = "SELECT * FROM `modalidades_caza` WHERE ID_Modalidad = '$id_modalidad' AND Nombre_Modalidad = '$nombre'";
+        $result1 = mysqli_query($conn, $sql1);
+        if(mysqli_num_rows($result1) === 0){
+            $_SESSION["error"] = "No exite modalidad con ID $id_modalidad y Nombre $nombre";
+        }
+        else{
+            try{
+                $sql = "DELETE FROM `modalidades_caza` WHERE ID_Modalidad = '$id_modalidad' AND Nombre_Modalidad = '$nombre'";
+                $result = mysqli_query($conn, $sql);
+                if ($result) {
+                    $_SESSION["correcto"] = "Modalidad borrada correctamente";
+                } else {
+                    $_SESSION["error"] = mysqli_error($conn);
+                }
+            }
+            catch(mysqli_sql_exception $e){
+                $_SESSION["error"] = "Error al borrar la modalidad (comprueba si existe): ". mysqli_error($conn);
+            }
+        }
 
+    }
+ }
+
+ function listarmodalidades($conn) {
+     try {
+         $sql = "SELECT * FROM modalidades_caza WHERE 1=1";
+
+         // Añadir filtros si se han enviado
+         if(!empty($_POST["id_modalidad"])) {
+             $sql .= " AND ID_Modalidad = '".$_POST["id_modalidad"]."'";
+         }
+         if(!empty($_POST["nombre"])) {
+             $sql .= " AND Nombre_Modalidad = '".$_POST["nombre"]."'";
+         }
+         if(!empty($_POST["descripcion"])) {
+             $sql .= " AND Descripcion LIKE '%".$_POST["descripcion"]."%'";
+         }
+         if(!empty($_POST["estado"])) {
+             $sql .= " AND Tipo_Caza = '".$_POST["estado"]."'";
+         }
+         if(!empty($_POST["temporada_inicio"])) {
+             $sql .= " AND Temporada_Inicio = '".$_POST["temporada_inicio"]."'";
+         }
+         if(!empty($_POST["temporada_fin"])) {
+             $sql .= " AND Temporada_Fin = '".$_POST["temporada_fin"]."'";
+         }
+         if(!empty($_POST["arma"])) {
+             $sql .= " AND Arma_Predominante = '".$_POST["arma"]."'";
+         }
+         if(!empty($_POST["permiso_especial"])) {
+             $sql .= " AND Requiere_Permiso_Especial = '".$_POST["permiso_especial"]."'";
+         }
+
+         $result = mysqli_query($conn, $sql);
+
+         if($result && mysqli_num_rows($result) > 0) {
+             echo "<table border='1' cellpadding='5' cellspacing='0'>";
+             echo "<tr>
+                         <th>ID</th>
+                         <th>Nombre</th>
+                         <th>Descripción</th>
+                         <th>Temporada Inicio</th>
+                         <th>Temporada Fin</th>
+                         <th>Tipo de Caza</th>
+                         <th>Arma Predominante</th>
+                         <th>Requiere Permiso</th>
+                     </tr>";
+                 while($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>
+                        <td>{$row['ID_Modalidad']}</td>
+                        <td>{$row['Nombre_Modalidad']}</td>
+                        <td>{$row['Descripcion']}</td>
+                        <td>{$row['Temporada_Inicio']}</td>
+                        <td>{$row['Temporada_Fin']}</td>
+                        <td>{$row['Tipo_Caza']}</td>
+                        <td>{$row['Arma_Predominante']}</td>
+                        <td>{$row['Requiere_Permiso_Especial']}</td>
+                    </tr>";
+                 }
+                 echo "</table>";
+             } else {
+                $_SESSION['error'] = "No se encontraron resultados";
+            }
+         } catch(mysqli_sql_exception $e) {
+            $_SESSION["error"] = mysqli_error($conn);
+        }
+}
+ 
 
 /*
 session_start();

@@ -12,34 +12,338 @@ if ($rol !== 'Admin') {
     header("Location: ../login.php");
     exit();
 }
-
-
-// Only call mostrarvalores if both nombre and dni are set
-if ($nombre && $dni) {
-    mostrarvalores($conn, $nombre, $dni);
-}
-
-// Get session values with proper checks
-$rol = isset($_SESSION['ROL'])? $_SESSION['ROL'] : '';                              
-$nombre = isset($_SESSION['Nombre']) ? $_SESSION['Nombre'] : '';
-$a1 = isset($_SESSION['Apellido1']) ? $_SESSION['Apellido1'] : '';
-$a2 = isset($_SESSION['Apellido2']) ? $_SESSION['Apellido2'] : '';
-$id_socio = isset($_SESSION['ID_Socio']) ? $_SESSION['ID_Socio'] : '' ;
-$fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Área Privada - S. Cazadores LOS PIPORROS</title>
-    <!-- Bootstrap CSS -->
+    <title>S. Cazadores LOS PIPORROS</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- CSS -->
-    <link rel="stylesheet" href="../../css/areaprivadaadmin.css">
-   
+
+   <style>
+    :root {
+        --color-oro: #D4AF37;
+        --color-oro-claro: #e8c252;
+        --color-oro-oscuro: #b8972e;
+        --color-fondo: #111;
+        --color-fondo-claro: #222;
+        --color-texto: #eee;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--color-fondo);
+        color: var(--color-texto);
+        overflow-x: hidden;
+    }
+
+    /* Header */
+    .parallax-header {
+        background: url('https://wallpaperaccess.com/full/412761.jpg') fixed center/cover;
+        height: 60vh;
+        position: relative;
+    }
+
+    .parallax-overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .header-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .logo-img {
+        max-width: 150px;
+        filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7));
+    }
+
+    .nombre-sociedad {
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
+
+    /* Navbar */
+    .navbar-custom {
+        background-color: rgba(0, 0, 0, 0.9) !important;
+        border-top: 1px solid var(--color-oro);
+        border-bottom: 1px solid var(--color-oro);
+    }
+
+    .navbar-custom .nav-link {
+        color: white;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 0.5rem 1rem;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-custom .nav-link:hover,
+    .navbar-custom .active > .nav-link {
+        color: var(--color-oro);
+    }
+
+    /* Iconos en navbar y dropdown */
+    .navbar-custom .icon-nav,
+    .dropdown-menu .icon-nav {
+        color: var(--color-oro);
+        font-size: 1rem;
+        width: 1.5em;
+    }
+
+    /* Dropdown */
+    .dropdown-menu {
+        background-color: rgba(0, 0, 0, 0.95) !important;
+        border: 1px solid var(--color-oro);
+    }
+
+    .dropdown-item {
+        color: var(--color-texto) !important;
+        padding: 0.5rem 1.5rem;
+        border-bottom: 1px solid #333;
+        display: flex;
+        align-items: center;
+        background-color: transparent !important;
+    }
+
+    .dropdown-item:hover {
+        background-color: rgba(212, 175, 55, 0.1) !important;
+        color: var(--color-oro) !important;
+    }
+
+    /* Botones */
+    .btn-gold {
+        background-color: var(--color-oro);
+        color: #000;
+        font-weight: 600;
+        border: none;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-gold:hover {
+        background-color: var(--color-oro-claro);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    /* Contenido principal */
+
+    .gestion-container {
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 20px;
+        flex: 1;
+    }
+
+    .gestion-title {
+        color: var(--color-oro);
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 2.5em;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .gestion-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        padding: 2rem;
+        margin: 0 auto;
+        max-width: 1400px;
+    }
+
+    .gestion-card {
+        background-color: rgba(0, 0, 0, 0.8);
+        border: 1px solid var(--color-oro);
+        border-radius: 10px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        min-height: 350px;
+    }
+
+    .gestion-icon {
+        font-size: 3.5em;
+        color: var(--color-oro) !important;
+        margin-bottom: 1.5rem;
+    }
+
+    .gestion-card h3 {
+        color: var(--color-oro);
+        font-size: 1.5em;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .gestion-card p {
+        color: var(--color-texto);
+        margin-bottom: 1.5rem;
+        font-size: 1em;
+        line-height: 1.5;
+    }
+
+    /* Botones */
+    .btn-gold {
+        background-color: var(--color-oro);
+        color: var(--color-fondo);
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+        display: block;
+        text-align: center;
+        position: relative;
+        bottom: 1rem;
+    }
+
+    .btn-gold:hover {
+        background-color: var(--color-oro-claro);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
+    }
+
+    .back-button {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background-color: var(--color-oro);
+        color: var(--color-fondo);
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .back-button:hover {
+        background-color: var(--color-oro-claro);
+        color: var(--color-fondo);
+    }
+
+    /* Footer */
+    .footer {
+        background-color: #000;
+        border-top: 1px solid var(--color-oro);
+        padding: 2rem 0;
+        margin-top: 3rem;
+    }
+
+    .text-gold {
+        color: var(--color-oro);
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .footer p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .social-section {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    .social-icons a {
+        color: var(--color-oro);
+        font-size: 1.5rem;
+        transition: all 0.3s;
+    }
+
+    .social-icons a:hover {
+        color: var(--color-oro-claro);
+        transform: translateY(-3px);
+    }
+
+    .copyright {
+        margin-top: 1.5rem;
+        text-align: center;
+        font-weight: 600;
+        color: var(--color-oro);
+        font-size: 1.1em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Sistema de iconos */
+    .icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.5em;
+        margin-right: 0.5rem;
+    }
+
+    .icon-card {
+        font-size: 3em;
+        margin-bottom: 0.5rem;
+        color: var(--color-oro);
+    }
+
+    .icon-list {
+        margin-right: 0.5rem;
+        color: var(--color-oro);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+        .parallax-header {
+            background-attachment: scroll;
+            height: 50vh;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .header-content {
+            text-align: center;
+        }
+        
+        .logo-img {
+            max-width: 120px;
+        }
+        
+        .navbar-custom .nav-link {
+            padding: 0.5rem 0.75rem;
+        }
+    }
+   </style>
     
 </head>
 <body>
@@ -162,7 +466,7 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="../../subpáginas/login.php">
+                                <a class="dropdown-item dropdown-toggle" href="../../subpáginas/admin/areaprivadaadmin.php">
                                     <span class="icon-wrapper"><i class="bi bi-folder-fill"></i></span>
                                     ÁREA PRIVADA
                                 </a>
@@ -223,7 +527,7 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="../../contacto.html">
                             <span class="icon-wrapper"><i class="fas fa-envelope icon-nav"></i></span>
                             CONTACTO
                         </a>
@@ -234,87 +538,102 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
     </nav>
     
     <!-- Contenido principal -->
-    <div class="container my-5">
-        <div class="row">
-            <div class="container-fluid mt-5">
-                <div class="row">
-                    <!-- Perfil del Usuario (mitad superior) -->
-                    <div class="col-12 mb-4">
-                        <div class="user-info p-4">
-                            <div class="row align-items-center">
-                                <div class="col-md-3 text-center">
-                                    <div class="user-avatar mb-3">
-                                        <i class="fas fa-user fa-4x"></i> 
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <h3>Información del Usuario</h3>
-                                    <div class="row">    
-                                        <div class="col-md-6">
-                                            <p><i class="fas fa-id-card me-2"></i> ID: <?php echo "$id_socio"?></p>
-                                            <p><i class="fas fa-user me-2"></i> Nombre: <?php echo "$nombre"?></p>
-                                            <p><i class="fas fa-user-tag me-2"></i> Rol: <?php echo "$rol"?></p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p><i class="fas fa-user me-2"></i> Apellidos: <?php echo "$a1 $a2"?></p>
-                                            <p><i class="fas fa-calendar-alt me-2"></i> Antigüedad: <?php echo "$fecha_alta"?></p>
-                                        </div>
-                                    </div>
-                                    <div class="text-end mt-3">
-                                        <a href="../../php/cerrar_sesion.php" class="btn btn-gold">
-                                            <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <!-- Tarjetas de Gestión (mitad inferior) -->
-                    <div class="col-12">
-                        <div class="row g-4">
-                            <!-- Tarjeta de Gestión de Socios -->
-                            <div class="col-md-6 col-lg-3">
-                                <div class="dashboard-card text-center h-100">
-                                    <i class="fas fa-users-cog dashboard-icon"></i>
-                                    <h3 class="dashboard-title">Gestión de Socios</h3>
-                                    <p>Administrar socios del club</p>
-                                    <a href="../admin/gestion_admin.php" class="btn btn-gold btn-sm">Gestionar Socios</a>
-                                </div>
-                            </div>
-                            
-                            <!-- Tarjeta de Gestión de Licencias -->
-                            <div class="col-md-6 col-lg-3">
-                                <div class="dashboard-card text-center h-100">
-                                    <i class="fas fa-id-card dashboard-icon"></i>
-                                    <h3 class="dashboard-title">Gestión de Licencias</h3>
-                                    <p>Control de licencias y permisos</p>
-                                    <a href="gestion_licencias.php" class="btn btn-gold btn-sm">Gestionar Licencias</a>
-                                </div>
-                            </div>
-                            
-                            <!-- Tarjeta de Modalidades de Caza -->
-                            <div class="col-md-6 col-lg-3">
-                                <div class="dashboard-card text-center h-100">
-                                    <i class="fas fa-bullseye dashboard-icon"></i>
-                                    <h3 class="dashboard-title">Modalidades de Caza</h3>
-                                    <p>Gestión de modalidades</p>
-                                    <a href="./modalidades_admin.php" class="btn btn-gold btn-sm">Gestionar Modalidades</a>
-                                </div>
-                            </div>
-                            
-                            <!-- Tarjeta de Funciones de Administrador -->
-                            <div class="col-md-6 col-lg-3">
-                                <div class="dashboard-card text-center h-100">
-                                    <i class="fas fa-user-shield dashboard-icon"></i>
-                                    <h3 class="dashboard-title">Panel Admin</h3>
-                                    <p>Funciones administrativas</p>
-                                    <a href="panel_admin.php" class="btn btn-gold btn-sm">Panel de Control</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <a href="areaprivadaadmin.php" class="back-button">
+        <i class="fas fa-arrow-left"></i> Volver
+    </a>
+
+    <div class="gestion-container">
+        <h1 class="gestion-title">GESTIÓN DE MODALIDADES DE CAZA</h1>
+        
+        <!-- Grupo 1: Gestión de Modalidades -->
+        <h2 class="section-title">Gestión de Modalidades</h2>
+        <div class="gestion-grid">
+            <!-- Crear Modalidad -->
+            <div class="gestion-card">
+                <i class="fas fa-plus-circle gestion-icon"></i>
+                <h3>Crear Modalidad</h3>
+                <p>Añade nuevas modalidades de caza al sistema con sus respectivas características y requisitos.</p>
+                <a href="./modalidades/crearmodalidad.php" class="btn btn-gold">Crear Nueva</a>
+            </div>
+    
+            <!-- Borrar Modalidad -->
+            <div class="gestion-card">
+                <i class="fas fa-trash-alt gestion-icon"></i>
+                <h3>Borrar Modalidad</h3>
+                <p>Elimina modalidades de caza que ya no estén activas o sean necesarias.</p>
+                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Eliminar</a>
+            </div>
+    
+            <!-- Listar Modalidades -->
+            <div class="gestion-card">
+                <i class="fas fa-list-ul gestion-icon"></i>
+                <h3>Listar Modalidades</h3>
+                <p>Visualiza todas las modalidades de caza disponibles en el sistema.</p>
+                <a href="#" class="btn btn-gold">Ver Lista</a>
+            </div>
+    
+            <!-- Filtrar Modalidades -->
+            <div class="gestion-card">
+                <i class="fas fa-filter gestion-icon"></i>
+                <h3>Filtrar Modalidades</h3>
+                <p>Busca y filtra modalidades según diferentes criterios y temporadas.</p>
+                <a href="#" class="btn btn-gold">Filtrar</a>
+            </div>
+        </div>
+    
+        <!-- Grupo 2: Gestión de Asignaciones -->
+        <h2 class="section-title">Gestión de Asignaciones</h2>
+        <div class="gestion-grid">
+            <!-- Asignar Modalidad -->
+            <div class="gestion-card">
+                <i class="fas fa-user-plus gestion-icon"></i>
+                <h3>Asignar Modalidad</h3>
+                <p>Vincula socios a modalidades específicas de caza según sus preferencias y permisos.</p>
+                <a href="#" class="btn btn-gold">Asignar</a>
+            </div>
+    
+            <!-- Eliminar Asignación -->
+            <div class="gestion-card">
+                <i class="fas fa-user-minus gestion-icon"></i>
+                <h3>Eliminar Asignación</h3>
+                <p>Revoca la asignación de modalidades a socios cuando sea necesario.</p>
+                <a href="#" class="btn btn-gold">Eliminar Asignación</a>
+            </div>
+    
+            <!-- Comprobar Disponibilidad -->
+            <div class="gestion-card">
+                <i class="fas fa-calendar-check gestion-icon"></i>
+                <h3>Comprobar Disponibilidad</h3>
+                <p>Verifica la disponibilidad de cupos en las diferentes modalidades de caza.</p>
+                <a href="#" class="btn btn-gold">Verificar</a>
+            </div>
+        </div>
+    
+        <!-- Grupo 3: Modalidades Específicas -->
+        <h2 class="section-title">Modalidades Activas</h2>
+        <div class="gestion-grid">
+            <!-- Perdiz con Reclamo -->
+            <div class="gestion-card">
+                <i class="fas fa-dove gestion-icon"></i>
+                <h3>Perdiz con Reclamo</h3>
+                <p>Modalidad tradicional de caza de perdiz utilizando reclamo. Requiere paciencia y conocimiento específico de la especie.</p>
+                <a href="#" class="btn btn-gold">Gestionar</a>
+            </div>
+    
+            <!-- Al Salto con Escopeta -->
+            <div class="gestion-card">
+                <i class="fas fa-running gestion-icon"></i>
+                <h3>Al Salto con Escopeta</h3>
+                <p>Caza menor activa donde el cazador recorre el terreno en busca de piezas. Exige buena forma física y rapidez.</p>
+                <a href="#" class="btn btn-gold">Gestionar</a>
+            </div>
+    
+            <!-- Liebre con Galgos -->
+            <div class="gestion-card">
+                <i class="fas fa-paw gestion-icon"></i>
+                <h3>Liebre con Galgos</h3>
+                <p>Modalidad tradicional de caza de liebre con galgos. Combina la velocidad de los perros con la astucia de la liebre.</p>
+                <a href="#" class="btn btn-gold">Gestionar</a>
             </div>
         </div>
     </div>
@@ -322,8 +641,8 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-             <div class="row">
-                   <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+            <div class="row">
+                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
                     <a href="https://aceuchal.com/"><img src="../../fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
                 </div>
                 <div class="col-md-4 text-center mb-3 mb-md-0">
@@ -350,6 +669,22 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
     </footer>
     
     <!-- Bootstrap JS -->
+    <style>
+    .section-title {
+        color: var(--color-oro);
+        text-align: center;
+        margin: 40px 0 20px;
+        font-size: 1.8em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid var(--color-oro);
+        padding-bottom: 10px;
+    }
+    
+    .gestion-grid {
+        margin-bottom: 40px;
+    }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Efecto parallax
