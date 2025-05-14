@@ -325,8 +325,89 @@ function buscarsocios($conn){
             $_SESSION["error"] = mysqli_error($conn);
         }
 }
- 
 
+function perdizconreclamo($conn){
+    $sql = "SELECT * FROM modalidades_caza WHERE Nombre_Modalidad = 'Perdiz con reclamo'";
+    $result = mysqli_query($conn, $sql);
+    if($result && mysqli_num_rows($result) > 0){
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['ID_Modalidad'] = $row['ID_Modalidad']; 
+        $_SESSION['Nombre_Modalidad'] = $row['Nombre_Modalidad'];
+        $_SESSION['Descripcion'] = $row['Descripcion'];
+        $_SESSION['Temporada_Inicio'] = $row['Temporada_Inicio'];
+        $_SESSION['Temporada_Fin'] = $row['Temporada_Fin'];
+        $_SESSION['Tipo_Caza'] = $row['Tipo_Caza'];
+        $_SESSION['arma'] = $row['Arma_Predominante'];
+        $_SESSION['permiso'] = $row['Requiere_Permiso_Especial'];
+    }
+}
+
+function saltoconescopeta($conn){
+    $sql = "SELECT * FROM modalidades_caza WHERE Nombre_Modalidad = 'Salto con escopeta'";
+    $result = mysqli_query($conn, $sql);
+    if($result && mysqli_num_rows($result) > 0){
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['ID_Modalidad'] = $row['ID_Modalidad']; 
+        $_SESSION['Nombre_Modalidad'] = $row['Nombre_Modalidad'];
+        $_SESSION['Descripcion'] = $row['Descripcion'];
+        $_SESSION['Temporada_Inicio'] = $row['Temporada_Inicio'];
+        $_SESSION['Temporada_Fin'] = $row['Temporada_Fin'];
+        $_SESSION['Tipo_Caza'] = $row['Tipo_Caza'];
+        $_SESSION['arma'] = $row['Arma_Predominante'];
+        $_SESSION['permiso'] = $row['Requiere_Permiso_Especial'];
+    }
+}
+
+function liebrecongalgos($conn){
+    $sql = "SELECT * FROM modalidades_caza WHERE Nombre_Modalidad = 'Liebre con galgos'";
+    $result = mysqli_query($conn, $sql);
+    if($result && mysqli_num_rows($result) > 0){
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['ID_Modalidad'] = $row['ID_Modalidad']; 
+        $_SESSION['Nombre_Modalidad'] = $row['Nombre_Modalidad'];
+        $_SESSION['Descripcion'] = $row['Descripcion'];
+        $_SESSION['Temporada_Inicio'] = $row['Temporada_Inicio'];
+        $_SESSION['Temporada_Fin'] = $row['Temporada_Fin'];
+        $_SESSION['Tipo_Caza'] = $row['Tipo_Caza'];
+        $_SESSION['arma'] = $row['Arma_Predominante'];
+        $_SESSION['permiso'] = $row['Requiere_Permiso_Especial'];
+    }
+}
+
+function añadirmodalidadsocio($conn, $id_socio, $id_modalidad, $fecha_registro){
+        if (isset($_POST['id_modalidad']) && isset($_POST['id_socio'])){
+            $id_socio = $_POST['id_socio'];
+            $id_modalidad = $_POST['id_modalidad'];
+            $fecha_registro = date('Y-m-d');
+            
+            $sql = "SELECT * FROM socios WHERE ID_Socio = '$id_socio'";
+            $result = mysqli_query($conn, $sql);
+            if (!$result || mysqli_num_rows($result) === 0) {
+                $_SESSION["error"] = "El socio con id introducido no se ha encontrado";
+                return;
+            }
+            else{
+                $sql1 = "SELECT * FROM `modalidades_caza` WHERE ID_Modalidad = '$id_modalidad'";
+                $result1 = mysqli_query($conn, $sql1);
+                if($result1 && mysqli_num_rows($result1) > 0){
+                    $_SESSION["error"] = "La modalidad con id introducido no se ha encontrado";
+                }
+                else{
+                    try{
+                        $sql2 = "INSERT INTO `socio_modalidades` (`ID_Socio`, `ID_Modalidad`, `Fecha_Registro`) VALUES ('$id_socio', '$id_modalidad', '$fecha_registro')";
+                        $result2 = mysqli_query($conn, $sql2);
+                        if ($result2) {
+                            $_SESSION["correcto"] = "Modalidad insertada correctamente";
+                        } else {
+                            $_SESSION["error"] = mysqli_error($conn);}
+                    }
+                    catch(mysqli_sql_exception $e){
+                        $_SESSION["error"] = "Error al insertar la modalidad: ". mysqli_error($conn);
+                    }
+                }
+            }
+        }   
+}
 /*
 session_start();
 session_destroy();

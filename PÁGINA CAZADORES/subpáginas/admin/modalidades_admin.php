@@ -569,7 +569,7 @@ if ($rol !== 'Admin') {
                 <i class="fas fa-list-ul gestion-icon"></i>
                 <h3>Listar Modalidades</h3>
                 <p>Visualiza todas las modalidades de caza disponibles en el sistema.</p>
-                <a href="#" class="btn btn-gold">Ver Lista</a>
+                <a href="./modalidades/listarmodalidades.php" class="btn btn-gold">Ver Lista</a>
             </div>
     
             <!-- Filtrar Modalidades -->
@@ -577,7 +577,7 @@ if ($rol !== 'Admin') {
                 <i class="fas fa-filter gestion-icon"></i>
                 <h3>Filtrar Modalidades</h3>
                 <p>Busca y filtra modalidades según diferentes criterios y temporadas.</p>
-                <a href="#" class="btn btn-gold">Filtrar</a>
+                <a href="./modalidades/filtromodalidades.php" class="btn btn-gold">Filtrar</a>
             </div>
         </div>
     
@@ -598,42 +598,6 @@ if ($rol !== 'Admin') {
                 <h3>Eliminar Asignación</h3>
                 <p>Revoca la asignación de modalidades a socios cuando sea necesario.</p>
                 <a href="#" class="btn btn-gold">Eliminar Asignación</a>
-            </div>
-    
-            <!-- Comprobar Disponibilidad -->
-            <div class="gestion-card">
-                <i class="fas fa-calendar-check gestion-icon"></i>
-                <h3>Comprobar Disponibilidad</h3>
-                <p>Verifica la disponibilidad de cupos en las diferentes modalidades de caza.</p>
-                <a href="#" class="btn btn-gold">Verificar</a>
-            </div>
-        </div>
-    
-        <!-- Grupo 3: Modalidades Específicas -->
-        <h2 class="section-title">Modalidades Activas</h2>
-        <div class="gestion-grid">
-            <!-- Perdiz con Reclamo -->
-            <div class="gestion-card">
-                <i class="fas fa-dove gestion-icon"></i>
-                <h3>Perdiz con Reclamo</h3>
-                <p>Modalidad tradicional de caza de perdiz utilizando reclamo. Requiere paciencia y conocimiento específico de la especie.</p>
-                <a href="#" class="btn btn-gold">Gestionar</a>
-            </div>
-    
-            <!-- Al Salto con Escopeta -->
-            <div class="gestion-card">
-                <i class="fas fa-running gestion-icon"></i>
-                <h3>Al Salto con Escopeta</h3>
-                <p>Caza menor activa donde el cazador recorre el terreno en busca de piezas. Exige buena forma física y rapidez.</p>
-                <a href="#" class="btn btn-gold">Gestionar</a>
-            </div>
-    
-            <!-- Liebre con Galgos -->
-            <div class="gestion-card">
-                <i class="fas fa-paw gestion-icon"></i>
-                <h3>Liebre con Galgos</h3>
-                <p>Modalidad tradicional de caza de liebre con galgos. Combina la velocidad de los perros con la astucia de la liebre.</p>
-                <a href="#" class="btn btn-gold">Gestionar</a>
             </div>
         </div>
     </div>
