@@ -1,7 +1,10 @@
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
---
+CREATE DATABASE IF NOT EXISTS `cazadores_bd` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `cazadores_bd`;
+
+-- --------------------------------------------------------
 -- Servidor: 127.0.0.1
 -- Tiempo de generación: 13-05-2025 a las 13:08:19
 -- Versión del servidor: 10.4.32-MariaDB
@@ -231,6 +234,17 @@ ALTER TABLE `socio_modalidades`
   ADD CONSTRAINT `socio_modalidades_ibfk_2` FOREIGN KEY (`ID_Modalidad`) REFERENCES `modalidades_caza` (`ID_Modalidad`);
 COMMIT;
 
+INSERT INTO `socio_modalidades` (`ID`, `ID_Socio`, `ID_Modalidad`, `Fecha_Registro`) VALUES
+(1, 1, 3, '2023-01-05'),  -- Shenhao Zhou practica "Perdiz con reclamo"
+(2, 1, 1, '2023-02-10'),  -- Shenhao Zhou añade "Salto con escopeta"
+(3, 2, 1, '2022-07-02'),  -- Juan Gómez practica "Salto con escopeta"
+(4, 2, 2, '2022-09-15'),  -- Juan Gómez añade "Liebre con galgos"
+(5, 5, 1, '2022-03-12'),  -- Laura García practica "Salto con escopeta"
+(6, 5, 2, '2022-06-20'),  -- Laura García añade "Liebre con galgos"
+(7, 6, 2, '2021-09-26'),  -- Raúl Jiménez practica "Liebre con galgos"
+(8, 4, 3, '2020-02-20'),  -- Pedro Fernández practicaba "Perdiz con reclamo"
+(9, 4, 1, '2021-05-10'),  -- Pedro Fernández añadió "Salto con escopeta"
+(10, 6, 3, '2022-01-15'); -- Raúl Jiménez añadió "Perdiz con reclamo"
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

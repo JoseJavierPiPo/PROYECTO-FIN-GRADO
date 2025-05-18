@@ -447,16 +447,34 @@ body {
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="../PROYECTO PÁGINA/subpáginas/login.php" id="areaPrivadaDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="areaPrivadaDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-lock icon-nav"></i></span>
-                             ÁREA PRIVADA 
+                            ÁREA PRIVADA
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="./subpáginas/login.php">
-                                    <span class="icon-wrapper"><i class="bi bi-folder-fill"></i></span>
-                                     ÁREA PRIVADA
+                                <a class="dropdown-item dropdown-toggle" href="#">
+                                    <span class="icon-wrapper"><i class="fas fa-users-cog icon-nav"></i></span>
+                                    ÁREA PRIVADA
                                 </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="gestion_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-users icon-nav"></i></span>
+                                        Gestión Socios
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="gestion_licencias.php">
+                                        <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
+                                        Gestión de Licencias
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="modalidades_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-bullseye icon-nav"></i></span>
+                                        Modalidades de Caza
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="panel_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-user-shield icon-nav"></i></span>
+                                        Panel Admin
+                                    </a></li>
+                                </ul>
                             </li>
                             <li class="dropdown-submenu">
                                 <a class="dropdown-item dropdown-toggle" href="#">

@@ -374,7 +374,7 @@ function liebrecongalgos($conn){
     }
 }
 
-function añadirmodalidadsocio($conn, $id_socio, $id_modalidad, $fecha_registro){
+function asignarmodalidadsocio($conn, $id_socio, $id_modalidad, $fecha_registro){
         if (isset($_POST['id_modalidad']) && isset($_POST['id_socio'])){
             $id_socio = $_POST['id_socio'];
             $id_modalidad = $_POST['id_modalidad'];
@@ -389,7 +389,7 @@ function añadirmodalidadsocio($conn, $id_socio, $id_modalidad, $fecha_registro)
             else{
                 $sql1 = "SELECT * FROM `modalidades_caza` WHERE ID_Modalidad = '$id_modalidad'";
                 $result1 = mysqli_query($conn, $sql1);
-                if($result1 && mysqli_num_rows($result1) > 0){
+                if(!$result1 || mysqli_num_rows($result1) === 0){
                     $_SESSION["error"] = "La modalidad con id introducido no se ha encontrado";
                 }
                 else{
@@ -408,6 +408,76 @@ function añadirmodalidadsocio($conn, $id_socio, $id_modalidad, $fecha_registro)
             }
         }   
 }
+
+function sociomodalidades($conn){
+    try{    
+        $sql = "SELECT socio_modalidades.ID_Socio,modalidades_caza.ID_Modalidad, modalidades_caza.Nombre_Modalidad, socios.DNI, socios.Nombre, socio_modalidades.Fecha_Registro, modalidades_caza.Temporada_Inicio, modalidades_caza.Temporada_Fin 
+        FROM socio_modalidades
+        JOIN modalidades_caza ON socio_modalidades.ID_Modalidad = modalidades_caza.ID_Modalidad
+        JOIN socios socios ON socio_modalidades.ID_Socio = socios.ID_Socio
+        WHERE 1=1";
+        
+
+        if(!empty($_POST["id_socio"])) {
+            $sql.= " AND socio_modalidades.ID_Socio = '".$_POST["id_socio"]."'";
+        }
+        if(!empty($_POST["id_modalidad"])) {
+            $sql.= " AND modalidades_caza.ID_Modalidad = '".$_POST["id_modalidad"]."'";
+        }
+        if(!empty($_POST["nombre_modalidad"])) {
+            $sql.= " AND modalidades_caza.Nombre_Modalidad = '".$_POST["nombre_modalidad"]."'";
+        }
+        if(!empty($_POST["dni"])) {
+            $sql.= " AND socios.DNI = '".$_POST["dni"]."'";
+        }
+        if(!empty($_POST["nombre_socio"])) {
+            $sql.= " AND socios.Nombre = '".$_POST["nombre_socio"]."'";
+        }
+        if(!empty($_POST["fecha_registro"])) {
+            $sql.= " AND socio_modalidades.Fecha_Registro = '".$_POST["fecha_registro"]."'";
+        }
+        if(!empty($_POST["temporada_inicio"])) {
+            $sql = " AND temporada_inicio = '".$_POST["temporada_inicio"]."'";
+        }
+        if(!empty($_POST["temporada_fin"])) {
+            $sql = " AND temporada_fin = '".$_POST["temporada_fin"]."'";
+        }
+        $result = mysqli_query($conn, $sql);
+        if($result && mysqli_num_rows($result) > 0 ){
+            echo "<table class='table' border='1' cellpadding='5' cellspacing='0'>";
+            echo "<thead><tr>
+                        <th>ID Socio</th>
+                        <th>ID Modalidad</th>
+                        <th>Nombre Modalidad</th>
+                        <th>DNI</th>
+                        <th>Nombre</th>
+                        <th>Fecha Registro</th>
+                        <th>Temporada Inicio</th>
+                        <th>Temporada Fin</th>
+                    </tr></thead><tbody>";
+            while($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>
+                        <td>{$row['ID_Socio']}</td>
+                        <td>{$row['ID_Modalidad']}</td>
+                        <td>{$row['Nombre_Modalidad']}</td>
+                        <td>{$row['DNI']}</td>
+                        <td>{$row['Nombre']}</td>
+                        <td>{$row['Fecha_Registro']}</td>
+                        <td>{$row['Temporada_Inicio']}</td>
+                        <td>{$row['Temporada_Fin']}</td>
+                    </tr>";
+            }
+            echo "</table>";
+        } else {
+            $_SESSION['error'] = "No se encontraron resultados";}
+    }
+    catch(mysqli_sql_exception $e){
+        $_SESSION["error"] = "Error al insertar la modalidad: ". mysqli_error($conn);
+    }
+
+}
+
+
 /*
 session_start();
 session_destroy();

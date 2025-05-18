@@ -148,6 +148,20 @@ if ($rol !== 'Admin') {
         padding: 20px;
         flex: 1;
     }
+    .section-title {
+        color: var(--color-oro);
+        text-align: center;
+        margin: 40px 0 20px;
+        font-size: 1.8em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid var(--color-oro);
+        padding-bottom: 10px;
+    }
+    
+    .gestion-grid {
+        margin-bottom: 40px;
+    }
 
     .gestion-title {
         color: var(--color-oro);
@@ -160,11 +174,12 @@ if ($rol !== 'Admin') {
 
     .gestion-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
         padding: 2rem;
         margin: 0 auto;
-        max-width: 1400px;
+        max-width: 1200px;
+        justify-content: center;
     }
 
     .gestion-card {
@@ -589,7 +604,7 @@ if ($rol !== 'Admin') {
                 <i class="fas fa-user-plus gestion-icon"></i>
                 <h3>Asignar Modalidad</h3>
                 <p>Vincula socios a modalidades específicas de caza según sus preferencias y permisos.</p>
-                <a href="#" class="btn btn-gold">Asignar</a>
+                <a href="./modalidades/asignaciones/asignarmodalidad.php" class="btn btn-gold">Asignar</a>
             </div>
     
             <!-- Eliminar Asignación -->
@@ -599,8 +614,16 @@ if ($rol !== 'Admin') {
                 <p>Revoca la asignación de modalidades a socios cuando sea necesario.</p>
                 <a href="#" class="btn btn-gold">Eliminar Asignación</a>
             </div>
+
+            <div class="gestion-card">
+                <i class="fas fa-trash-alt gestion-icon"></i>
+                <h3>Busqueda de Socios por Modalidad</h3>
+                <p>Filtro/Busqueda de socios por modalidad</p>
+                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Busca</a>
+            </div>
         </div>
     </div>
+
     
     <!-- Footer -->
     <footer class="footer">
@@ -633,22 +656,6 @@ if ($rol !== 'Admin') {
     </footer>
     
     <!-- Bootstrap JS -->
-    <style>
-    .section-title {
-        color: var(--color-oro);
-        text-align: center;
-        margin: 40px 0 20px;
-        font-size: 1.8em;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border-bottom: 2px solid var(--color-oro);
-        padding-bottom: 10px;
-    }
-    
-    .gestion-grid {
-        margin-bottom: 40px;
-    }
-    </style>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Efecto parallax
@@ -681,3 +688,39 @@ if ($rol !== 'Admin') {
     </script>
 </body>
 </html>
+
+    <div class="gestion-container">
+        <h1 class="gestion-title">GESTIÓN DE MODALIDADES</h1>
+        
+        <div class="gestion-grid">
+            <!-- Tarjeta de Asignar Modalidad -->
+            <div class="gestion-card">
+                <i class="fas fa-user-plus gestion-icon"></i>
+                <h3>Asignar Modalidad</h3>
+                <p>Asigna modalidades a los socios del club.</p>
+                <a href="modalidades/asignaciones/asignarmodalidad.php" class="btn btn-gold">
+                    <i class="fas fa-plus-circle me-2"></i>Asignar
+                </a>
+            </div>
+
+            <!-- Tarjeta de Búsqueda de Modalidades por Socio -->
+            <div class="gestion-card">
+                <i class="fas fa-users-viewfinder gestion-icon"></i>
+                <h3>Búsqueda por Socio</h3>
+                <p>Busca las modalidades asignadas a cada socio.</p>
+                <a href="modalidades/asignaciones/busquedamodalidades.php" class="btn btn-gold">
+                    <i class="fas fa-search me-2"></i>Buscar
+                </a>
+            </div>
+
+            <!-- Tarjeta de Filtro de Modalidades -->
+            <div class="gestion-card">
+                <i class="fas fa-filter gestion-icon"></i>
+                <h3>Filtrar Modalidades</h3>
+                <p>Filtra las modalidades disponibles en el club.</p>
+                <a href="modalidades/filtromodalidades.php" class="btn btn-gold">
+                    <i class="fas fa-search me-2"></i>Filtrar
+                </a>
+            </div>
+        </div>
+    </div>

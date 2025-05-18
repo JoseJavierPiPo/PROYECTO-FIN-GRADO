@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("../../../php/funciones.php");
+include_once("../../../../php/funciones.php");
 
 // Verificar variables de sesión
 $nombre = isset($_SESSION['Nombre']) ? $_SESSION['Nombre'] : '';
@@ -235,7 +235,7 @@ if ($rol !== 'Admin') {
             }
         }
         .results-container {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: #000000;
             border: 1px solid var(--color-oro);
             border-radius: 10px;
             padding: 1.5rem;
@@ -247,14 +247,14 @@ if ($rol !== 'Admin') {
         .table {
             width: 100%;
             margin: 0 auto;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: #000000;
             border-collapse: separate;
             border-spacing: 0;
         }
 
         .table thead th {
             background-color: var(--color-oro);
-            color: var(--color-fondo);
+            color: #000000;
             border: none;
             padding: 1rem;
             font-weight: 600;
@@ -265,12 +265,12 @@ if ($rol !== 'Admin') {
         }
 
         .table tbody tr {
-            background-color: rgba(0, 0, 0, 0.8) !important;
+            background-color: #000000 !important;
             transition: all 0.3s ease;
         }
 
         .table tbody tr:hover {
-            background-color: rgba(212, 175, 55, 0.1) !important;
+            background-color: #1a1a1a !important;
             transform: scale(1.01);
         }
 
@@ -279,8 +279,8 @@ if ($rol !== 'Admin') {
             text-align: center;
             vertical-align: middle;
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            color: var(--color-texto) !important;
-            background-color: transparent;
+            color: #ffffff !important;
+            background-color: #000000;
         }
 
         /* Estado de los socios */
@@ -355,44 +355,44 @@ if ($rol !== 'Admin') {
             background-color: var(--color-oro-claro);
             box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
+
+
     </style>
 </head>
 <body>
     <!-- Botón de volver -->
-    <a href="../modalidades_admin.php" class="back-button">
+    <a href="../../modalidades_admin.php" class="back-button">
         <i class="fas fa-arrow-left"></i> Volver
     </a>
 
     <div class="main-container">
-        <h1 class="form-title">BÚSQUEDA DE MODALIDADES</h1>
+        <h1 class="form-title">BÚSQUEDA DE MODALIDADES POR SOCIO</h1>
         
         <!-- Panel de búsqueda -->
         <div class="search-panel">
-            <form action="filtromodalidades.php" method="POST">
+            <form action="busquedamodalidades.php" method="POST">
                 <div class="search-grid">
                     <!-- Campos principales -->
                     <div class="search-group">
-                        <label for="id" class="form-label">ID Modalidad</label>
+                        <label for="id_socio" class="form-label">ID Socio</label>
+                        <input type="number" class="form-control" name="id_socio" placeholder="ID_Socio">
+                    </div>
+                    <div class="search-group">
+                        <label for="id_modalidad" class="form-label">ID Modalidad</label>
                         <input type="number" class="form-control" name="id_modalidad" placeholder="ID_Modalidad">
                     </div>
                     <div class="search-group">
-                        <label for="modalida" class="form-label">Nombre de Modalidad</label>
-                        <input type="text" class="form-control" name="nombre" placeholder="Nombre Modalidad">
+                        <label for="nombre_modalida" class="form-label">Nombre de la Modalidad</label>
+                        <input type="text" class="form-control" name="nombre_modalidad" placeholder="Nombre Modalidad">
                     </div>
                     <div class="search-group">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <input type="text" class="form-control" name="descripcion" placeholder="Descripcion">
+                        <label for="dni" class="form-label">DNI SOCIO</label>
+                        <input type="text" class="form-control" name="dni" placeholder="DNI SOCIO" maxlength="9">
                     </div>
-
                     <div class="search-group">
-                        <label for="estado" class="form-label">Selecciona un Estado</label>
-                        <select class="form-control" name="estado">
-                        <option value="" disabled selected>Selecciona un Estado</option>
-                            <option value="Mayor">Mayor</option>
-                            <option value="Menor">Menor</option>
-                        </select>
-                    </div>
-                    
+                        <label for="nombre_socio" class="form-label">NOMBRE SOCIO</label>
+                        <input type="text" class="form-control" name="nombre_socio" placeholder="NOMBRE SOCIO">
+                    </div>          
                 </div>
                 <?php
                     if(isset($_SESSION['correcto'])) {
@@ -416,16 +416,8 @@ if ($rol !== 'Admin') {
                             <input type="date" class="form-control" name="temporada_fin">
                         </div>
                         <div class="search-group">
-                            <label for="arma" class="form-label">Arma Predominante</label>
-                            <input type="text" class="form-control" name="arma">
-                        </div>
-                        <div class="search-group">
-                            <label for="permiso_especial" class="form-label">Permiso Especial</label>
-                            <select class="form-control" name="permiso_especial">
-                            <option value="" disabled selected>SELECCIONA PERMISO ESPECIAL</option>
-                                <option value="Si">Si</option>
-                                <option value="No">No</option>
-                            </select>
+                            <label for="fecha_registro" class="form-label">Fecha Registro</label>
+                            <input type="date" class="form-control" name="fecha_registro">
                         </div>
                     </div>
                 </div>
@@ -448,7 +440,7 @@ if ($rol !== 'Admin') {
         <div class="results-container">
             
             <?php
-             listarmodalidades ($conn)
+             sociomodalidades($conn);
             ?>
         </div>
     </div>

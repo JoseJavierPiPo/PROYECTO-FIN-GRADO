@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $id_socio = $_POST['id_socio'];
     $id_modalidad = $_POST['id_modalidad'];
     $fecha_registro = date('Y-m-d');
-    añadirmodalidadsocio($conn, $id_socio, $id_modalidad, $fecha_registro);
+    asignarmodalidadsocio($conn, $id_socio, $id_modalidad, $fecha_registro);
 }
 ?>
 
@@ -217,7 +217,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 <body>
     <!-- Botón de volver -->
-    <a href="../modalidades_admin.php" class="back-button">
+    <a href="../../modalidades_admin.php" class="back-button">
         <i class="fas fa-arrow-left"></i> Volver
     </a>
 
