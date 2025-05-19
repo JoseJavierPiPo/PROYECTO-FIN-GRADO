@@ -201,6 +201,40 @@
         color: var(--color-oro);
         padding-left: 5px;
     }
+    /* MINI CALENDARIO */
+    #mini-calendario .datepicker-inline {
+        width: 100%;
+        max-width: 250px;  /* Reducido de 300px */
+        margin: 0 auto;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 10px;     /* Reducido de 15px */
+        border-radius: 8px;
+        border: 1px solid var(--color-oro);
+    }
+
+    #mini-calendario .datepicker table {
+        width: 100%;
+        background-color: var(--color-fondo);
+    }
+
+    #mini-calendario .datepicker table tr td,
+    #mini-calendario .datepicker table tr th {
+        color: var(--color-texto);
+        background-color: var(--color-fondo);
+        border: 1px solid var(--color-oro-oscuro);
+        padding: 0.2rem;   /* Reducido de 0.3rem */
+        font-size: 0.8rem; /* Reducido de 0.9rem */
+    }
+
+    #mini-calendario .datepicker table tr td.active {
+        background-color: var(--color-oro) !important;
+        color: var(--color-fondo) !important;
+    }
+
+    #mini-calendario .datepicker table tr td.today {
+        background-color: rgba(212, 175, 55, 0.3) !important;
+        color: var(--color-oro) !important;
+    }
 
     /* Footer */
     .footer {
@@ -450,7 +484,7 @@
                                 <span class="icon-wrapper"><i class="fas fa-gun icon-nav"></i></span>
                                 ARMAS
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="">
                                 <span class="icon-wrapper"><i class="fas fa-gavel icon-nav"></i></span>
                                 NORMATIVA
                             </a></li>
@@ -561,11 +595,11 @@
                             </div>
                             <div class="card-column">
                                 <div class="feature-card">
-                                    <div class="feature-card-body">
-                                        <div class="icon-wrapper"><i class="fas fa-book icon-card"></i></div>
-                                        <h4 class="card-title">Normativa</h4>
-                                        <p class="card-text">Consulta nuestra normativa y regulaciones para una caza responsable.</p>
-                                    </div>
+                                        <div class="feature-card-body">
+                                            <a href="./documentos/normativa.doc"><div class="icon-wrapper"><i class="fas fa-book icon-card"></i></div></a>
+                                            <h4 class="card-title">Normativa</h4>
+                                            <p class="card-text">Consulta nuestra normativa y regulaciones para una caza responsable.</p>
+                                        </div>
                                 </div>
                             </div>
                         </div>
@@ -581,10 +615,8 @@
                     
                     <div class="section">
                         <h3><span class="icon-wrapper"><i class="fas fa-calendar-check icon-title"></i></span> Calendario</h3>
-                        <div class="alert alert-dark" role="alert">
-                            <span class="icon-wrapper"><i class="fas fa-info-circle icon-list"></i></span> No hay eventos programados en este momento.
-                        </div>
-                        <a href="#" class="btn btn-gold mt-2"><span class="icon-wrapper"><i class="fas fa-calendar-alt icon-btn"></i></span>Ver calendario completo</a>
+                        <div id="mini-calendario" class="mt-3"></div>
+                        <a href="./documentos/CALENDARIO DE CAZA 24-25.pdf" class="btn btn-gold mt-2"><span class="icon-wrapper"><i class="fas fa-calendar-alt icon-btn"></i></span>Ver calendario completo</a>
                     </div>
                     
                     <div class="section">
@@ -611,7 +643,7 @@
                         <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-camera icon-list"></i></span>Galería fotográfica</a></li>
                         <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-file-alt icon-list"></i></span>Documentación</a></li>
                         <li class="sidebar-item"><a href="./subpáginas/login.php" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-lock icon-list"></i></span>Área privada</a></li>
-                        <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>Contacto</a></li>
+                        <li class="sidebar-item"><a href="./contacto.html" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>Contacto</a></li>
                     </ul>
                 </div>
                 
@@ -698,6 +730,21 @@
                 item.addEventListener('mouseleave', function() {
                     this.querySelector('.dropdown-menu').classList.remove('show');
                 });
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.es.min.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+            $('#mini-calendario').datepicker({
+                format: 'dd/mm/yyyy',
+                language: 'es',
+                todayHighlight: true,
+                autoclose: false,
+                defaultViewDate: { year: 2024, month: 0, day: 1 }
             });
         });
     </script>

@@ -355,8 +355,6 @@ if ($rol !== 'Admin') {
             background-color: var(--color-oro-claro);
             box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
-
-
     </style>
 </head>
 <body>

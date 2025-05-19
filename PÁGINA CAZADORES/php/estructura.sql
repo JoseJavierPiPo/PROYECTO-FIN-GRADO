@@ -1,9 +1,12 @@
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
---
+CREATE DATABASE IF NOT EXISTS `cazadores_bd` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `cazadores_bd`;
+
+-- --------------------------------------------------------
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-05-2025 a las 19:18:37
+-- Tiempo de generación: 13-05-2025 a las 13:08:19
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -33,7 +36,7 @@ CREATE TABLE `licencias` (
   `Descripcion` varchar(100) NOT NULL,
   `Vigencia` int(11) NOT NULL COMMENT 'Duración en años (1 para anual, 1-3 para federativa)',
   `Precio` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ;
 
 --
 -- Volcado de datos para la tabla `licencias`
@@ -61,7 +64,7 @@ CREATE TABLE `modalidades_caza` (
   `Tipo_Caza` enum('Mayor','Menor') NOT NULL,
   `Arma_Predominante` varchar(30) DEFAULT NULL,
   `Requiere_Permiso_Especial` enum('Si','No') DEFAULT 'No'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ;
 
 --
 -- Volcado de datos para la tabla `modalidades_caza`
@@ -94,7 +97,7 @@ CREATE TABLE `socios` (
   `Fecha_Baja` date DEFAULT NULL,
   `Estado` enum('Activo','Inactivo','Suspendido') DEFAULT 'Activo',
   `ROL` enum('Admin','Socio') DEFAULT 'Socio'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ;
 
 --
 -- Volcado de datos para la tabla `socios`
@@ -122,7 +125,7 @@ CREATE TABLE `socio_licencias` (
   `Numero_Licencia` varchar(20) DEFAULT NULL COMMENT 'Formato: CC-YYYY-NNNNN (CC=código, YYYY=año, NNNNN=número)',
   `Numero_Licencia_Federativa` varchar(20) DEFAULT NULL COMMENT 'Número de licencia federativa si aplica',
   `Estado` enum('Válida','Caducada','Revocada') DEFAULT 'Válida'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ;
 
 -- --------------------------------------------------------
 
@@ -136,22 +139,6 @@ CREATE TABLE `socio_modalidades` (
   `ID_Modalidad` int(11) NOT NULL,
   `Fecha_Registro` date NOT NULL DEFAULT curdate()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `socio_modalidades`
---
-
-INSERT INTO `socio_modalidades` (`ID`, `ID_Socio`, `ID_Modalidad`, `Fecha_Registro`) VALUES
-(1, 1, 3, '2023-01-05'),
-(2, 1, 1, '2023-02-10'),
-(3, 2, 1, '2022-07-02'),
-(4, 2, 2, '2022-09-15'),
-(5, 5, 1, '2022-03-12'),
-(6, 5, 2, '2022-06-20'),
-(7, 6, 2, '2021-09-26'),
-(8, 4, 3, '2020-02-20'),
-(9, 4, 1, '2021-05-10'),
-(10, 6, 3, '2022-01-15');
 
 --
 -- Índices para tablas volcadas
@@ -202,19 +189,19 @@ ALTER TABLE `socio_modalidades`
 -- AUTO_INCREMENT de la tabla `licencias`
 --
 ALTER TABLE `licencias`
-  MODIFY `ID_Licencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_Licencia` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `modalidades_caza`
 --
 ALTER TABLE `modalidades_caza`
-  MODIFY `ID_Modalidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_Modalidad` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `socios`
 --
 ALTER TABLE `socios`
-  MODIFY `ID_Socio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_Socio` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `socio_licencias`
@@ -226,7 +213,7 @@ ALTER TABLE `socio_licencias`
 -- AUTO_INCREMENT de la tabla `socio_modalidades`
 --
 ALTER TABLE `socio_modalidades`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -247,6 +234,17 @@ ALTER TABLE `socio_modalidades`
   ADD CONSTRAINT `socio_modalidades_ibfk_2` FOREIGN KEY (`ID_Modalidad`) REFERENCES `modalidades_caza` (`ID_Modalidad`);
 COMMIT;
 
+INSERT INTO `socio_modalidades` (`ID`, `ID_Socio`, `ID_Modalidad`, `Fecha_Registro`) VALUES
+(1, 1, 3, '2023-01-05'),  -- Shenhao Zhou practica "Perdiz con reclamo"
+(2, 1, 1, '2023-02-10'),  -- Shenhao Zhou añade "Salto con escopeta"
+(3, 2, 1, '2022-07-02'),  -- Juan Gómez practica "Salto con escopeta"
+(4, 2, 2, '2022-09-15'),  -- Juan Gómez añade "Liebre con galgos"
+(5, 5, 1, '2022-03-12'),  -- Laura García practica "Salto con escopeta"
+(6, 5, 2, '2022-06-20'),  -- Laura García añade "Liebre con galgos"
+(7, 6, 2, '2021-09-26'),  -- Raúl Jiménez practica "Liebre con galgos"
+(8, 4, 3, '2020-02-20'),  -- Pedro Fernández practicaba "Perdiz con reclamo"
+(9, 4, 1, '2021-05-10'),  -- Pedro Fernández añadió "Salto con escopeta"
+(10, 6, 3, '2022-01-15'); -- Raúl Jiménez añadió "Perdiz con reclamo"
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

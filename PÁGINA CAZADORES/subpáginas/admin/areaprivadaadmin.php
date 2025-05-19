@@ -14,12 +14,9 @@ if ($rol !== 'Admin') {
 }
 
 
-// Only call mostrarvalores if both nombre and dni are set
-if ($nombre && $dni) {
     mostrarvalores($conn, $nombre, $dni);
-}
 
-// Get session values with proper checks
+
 $rol = isset($_SESSION['ROL'])? $_SESSION['ROL'] : '';                              
 $nombre = isset($_SESSION['Nombre']) ? $_SESSION['Nombre'] : '';
 $a1 = isset($_SESSION['Apellido1']) ? $_SESSION['Apellido1'] : '';
@@ -171,7 +168,7 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                                         <span class="icon-wrapper"><i class="fas fa-users icon-nav"></i></span>
                                         Gestión Socios
                                     </a></li>
-                                    <li><a class="dropdown-item" href="gestion_licencias.php">
+                                    <li><a class="dropdown-item" href="./licencias_admin.php">
                                         <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
                                         Gestión de Licencias
                                     </a></li>

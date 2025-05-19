@@ -201,6 +201,20 @@ if ($rol !== 'Admin') {
         font-size: 1em;
         line-height: 1.5;
     }
+    .section-title {
+        color: var(--color-oro);
+        text-align: center;
+        margin: 40px 0 20px;
+        font-size: 1.8em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid var(--color-oro);
+        padding-bottom: 10px;
+    }
+    
+    .gestion-grid {
+        margin-bottom: 40px;
+    }
 
     /* Botones */
     .btn-gold {
@@ -547,33 +561,43 @@ if ($rol !== 'Admin') {
         
         <div class="gestion-grid">
             <div class="gestion-card">
-                <i class="fas fa-user-plus gestion-icon"></i>
-                <h3>Alta de Socios</h3>
-                <p>Registrar nuevos socios en el sistema</p>
+                <i class="fas fa-id-card-alt gestion-icon"></i>
+                <h3>Insertar Licencia</h3>
+                <p>Añadir nuevas licencias de caza al sistema de gestión</p>
                 <a href="gestion/alta_socios.php" class="btn btn-gold">Gestionar Altas</a>
             </div>
 
             <div class="gestion-card">
-                <i class="fas fa-user-minus gestion-icon"></i>
-                <h3>Baja de Socios</h3>
-                <p>Procesar bajas de socios existentes</p>
+                <i class="fas fa-id-card-slash gestion-icon"></i>
+                <h3>Eliminar licencia</h3>
+                <p>Dar de baja licencias de caza caducadas o revocadas</p>
                 <a href="gestion/baja_socios.php" class="btn btn-gold">Gestionar Bajas</a>
             </div>
 
+           
             <div class="gestion-card">
-                <i class="fas fa-user-edit gestion-icon"></i>
-                <h3>Modificar Socios</h3>
-                <p>Actualizar información de socios</p>
+                <i class="fas fa-calendar-check gestion-icon"></i>
+                <h3>Editar vigencia de licencias</h3>
+                <p>Actualizar fechas de validez y renovación de licencias</p>
                 <a href="./gestion/actualizar_socio.php" class="btn btn-gold">Modificar Datos</a>
             </div>
 
             <div class="gestion-card">
+                <i class="fas fa-search gestion-icon"></i>
+                <h3>Consultar licencias</h3>
+                <p>Verificar el estado y validez de las licencias existentes</p>
+                <a href="./gestion/consultar_socio.php" class="btn btn-gold">Consultar Datos</a>
+            </div>
+
+            <div class="gestion-card">
                 <i class="fas fa-users gestion-icon"></i>
-                <h3>Filtrar Socios</h3>
+                <h3>Editar precio de licencias</h3>
                 <p>Realiza una busqueda y filtra todos los socios</p>
                 <a href="./gestion/filtrar_socio.php" class="btn btn-gold">Ver Listado</a>
             </div>
-            
+        
+           
+
         </div>
     </div>
     
@@ -608,22 +632,6 @@ if ($rol !== 'Admin') {
     </footer>
     
     <!-- Bootstrap JS -->
-    <style>
-    .section-title {
-        color: var(--color-oro);
-        text-align: center;
-        margin: 40px 0 20px;
-        font-size: 1.8em;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border-bottom: 2px solid var(--color-oro);
-        padding-bottom: 10px;
-    }
-    
-    .gestion-grid {
-        margin-bottom: 40px;
-    }
-    </style>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Efecto parallax
@@ -656,3 +664,4 @@ if ($rol !== 'Admin') {
     </script>
 </body>
 </html>
+
