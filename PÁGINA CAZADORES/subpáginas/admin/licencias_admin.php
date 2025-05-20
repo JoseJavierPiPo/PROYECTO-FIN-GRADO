@@ -564,42 +564,116 @@ if ($rol !== 'Admin') {
                 <i class="fas fa-id-card-alt gestion-icon"></i>
                 <h3>Insertar Licencia</h3>
                 <p>Añadir nuevas licencias de caza al sistema de gestión</p>
-                <a href="gestion/alta_socios.php" class="btn btn-gold">Gestionar Altas</a>
+                <a href="./licencias/insertarlicencia.php" class="btn btn-gold">Gestionar Altas</a>
             </div>
 
             <div class="gestion-card">
                 <i class="fas fa-id-card-slash gestion-icon"></i>
                 <h3>Eliminar licencia</h3>
                 <p>Dar de baja licencias de caza caducadas o revocadas</p>
-                <a href="gestion/baja_socios.php" class="btn btn-gold">Gestionar Bajas</a>
+                <a href="./licencias/borrarlicencia.php" class="btn btn-gold">Gestionar Bajas</a>
             </div>
 
            
             <div class="gestion-card">
                 <i class="fas fa-calendar-check gestion-icon"></i>
-                <h3>Editar vigencia de licencias</h3>
+                <h3>Editar información de licencias</h3>
                 <p>Actualizar fechas de validez y renovación de licencias</p>
-                <a href="./gestion/actualizar_socio.php" class="btn btn-gold">Modificar Datos</a>
+                <a href="./licencias/editarlicencias.php" class="btn btn-gold">Modificar Datos</a>
             </div>
 
             <div class="gestion-card">
                 <i class="fas fa-search gestion-icon"></i>
                 <h3>Consultar licencias</h3>
                 <p>Verificar el estado y validez de las licencias existentes</p>
-                <a href="./gestion/consultar_socio.php" class="btn btn-gold">Consultar Datos</a>
+                <a href="./licencias/filtrolicencias.php" class="btn btn-gold">Consultar Datos</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Grupo 2: Gestión de Licencias / Socio -->
+    <h2 class="section-title">Panel Asignaciones de Licencias</h2>
+        <div class="gestion-grid">
+            <!-- Asignar Modalidad -->
+            <div class="gestion-card">
+                <i class="fas fa-user-plus gestion-icon"></i>
+                <h3>Asignar Licencia a Socio</h3>
+                <p>Vincula socios a modalidades específicas de caza según sus preferencias y permisos.</p>
+                <a href="./modalidades/asignaciones/asignarmodalidad.php" class="btn btn-gold">Asignar</a>
+            </div>
+    
+            <!-- Eliminar Asignación -->
+            <div class="gestion-card">
+                <i class="fas fa-user-minus gestion-icon"></i>
+                <h3>Revocar Licencia a Socio</h3>
+                <p>Revoca la asignación de modalidades a socios cuando sea necesario.</p>
+                <a href="#" class="btn btn-gold">Eliminar Asignación</a>
             </div>
 
             <div class="gestion-card">
-                <i class="fas fa-users gestion-icon"></i>
-                <h3>Editar precio de licencias</h3>
-                <p>Realiza una busqueda y filtra todos los socios</p>
-                <a href="./gestion/filtrar_socio.php" class="btn btn-gold">Ver Listado</a>
+                <i class="fas fa-clipboard-check gestion-icon"></i>
+                <h3>Verificación y Renovación</h3>
+                <p>Verificar estado y gestionar renovaciones de licencias</p>
+                <a href="./licencias/verificacion_renovacion.php" class="btn btn-gold">Gestionar</a>
             </div>
-        
-           
+
+            <div class="gestion-card">
+                <i class="fas fa-trash-alt gestion-icon"></i>
+                <h3>Verificación de estado de Licencia</h3>
+                <p>Filtro/Busqueda de socios por modalidad</p>
+                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Busca</a>
+            </div>
+
+            <div class="gestion-card">
+                <i class="fas fa-trash-alt gestion-icon"></i>
+                <h3>Actualizar licencia a un socio</h3>
+                <p>Filtro/Busqueda de socios por modalidad</p>
+                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Busca</a>
+            </div>
+
+            <div class="gestion-card">
+                <i class="fas fa-search gestion-icon"></i>
+                <h3>Búsqueda de Licencias</h3>
+                <p>Buscar y consultar licencias por número o tipo</p>
+                <a href="./licencias/busqueda_licencias.php" class="btn btn-gold">Buscar</a>
+            </div>
+
+            <div class="gestion-card">
+                <i class="fas fa-cogs gestion-icon"></i>
+                <h3>Configuración de Licencias</h3>
+                <p>Gestionar tipos y parámetros de licencias del sistema</p>
+                <a href="./licencias/config_licencias.php" class="btn btn-gold">Configurar</a>
+            </div>
+
 
         </div>
     </div>
+
+    <div class="gestion-container">
+        <h1 class="gestion-title">Gestión de Licencias</h1>
+        
+        <div class="gestion-grid">
+            <div class="gestion-card">
+                <i class="fas fa-id-badge gestion-icon"></i>
+                <h3>Gestión Integral de Licencias</h3>
+                <p>Administrar altas, bajas y modificaciones de licencias</p>
+                <div class="btn-group">
+                    <a href="./licencias/insertarlicencia.php" class="btn btn-gold">Alta</a>
+                    <a href="./licencias/editarlicencias.php" class="btn btn-gold">Modificar</a>
+                    <a href="./licencias/borrarlicencia.php" class="btn btn-gold">Baja</a>
+                </div>
+            </div>
+
+            <div class="gestion-card">
+                <i class="fas fa-search gestion-icon"></i>
+                <h3>Consulta y Filtrado</h3>
+                <p>Buscar y filtrar licencias por diferentes criterios</p>
+                <a href="./licencias/filtrolicencias.php" class="btn btn-gold">Consultar</a>
+            </div>
+        </div>
+    </div>
+
     
     <!-- Footer -->
     <footer class="footer">
@@ -664,4 +738,5 @@ if ($rol !== 'Admin') {
     </script>
 </body>
 </html>
+
 

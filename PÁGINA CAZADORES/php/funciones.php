@@ -157,10 +157,8 @@ function buscarsocios($conn){
 
 
             $result = mysqli_query($conn, $sql);
-
-            //TABLA DE RESULTADOS
             if($result && mysqli_num_rows($result) > 0){
-                echo "<table border='1' cellpadding='5' cellspacing='0'>";
+                echo "<table class='table' border='1' cellpadding='5' cellspacing='0'>";
                 echo "<tr>
                     <th>ID</th>
                     <th>DNI</th>
@@ -178,8 +176,6 @@ function buscarsocios($conn){
                     <th>Estado</th>
                     <th>ROL</th>
                 </tr>";
-
-                //REPETIMOS LA MUESTRA DE LA TABLA CON BUCLE WHILE
 
                 while($row = mysqli_fetch_assoc($result)){
                     
@@ -477,12 +473,146 @@ function sociomodalidades($conn){
 
 }
 
+function insertarlicencia($conn, $id_licencia, $tipo_licencia, $descripcion, $vigencia, $precio){
+    $sql = "SELECT * FROM licencias WHERE ID_Licencia = '$id_licencia'";
+    $result = mysqli_query($conn, $sql);
+    if($result && mysqli_num_rows($result) === 0){
+        $sql1 = "INSERT INTO `licencias` (`ID_Licencia`, `Tipo_Licencia`, `Descripcion`, `Vigencia`, `Precio`) VALUES ('$id_licencia', '$tipo_licencia', '$descripcion', '$vigencia', '$precio')";    
+        if(mysqli_query($conn, $sql1)){
+            $_SESSION['correcto'] = "Licencia insertada correctamente";
+        }else{
+            $_SESSION['error'] = mysqli_error($conn);
+        }
+    }else{
+        $_SESSION['error'] = "La licencia con ID $id_licencia ya existe";
+    }
+}
 
-/*
-session_start();
-session_destroy();
-header('Location: login.php');
-exit();
-*/
 
+function eliminarlicencia($conn, $id_licencia, $tipo_licencia){ 
+  
+    $sql = "SELECT * FROM licencias WHERE ID_Licencia = '$id_licencia'"; 
+    $result = mysqli_query($conn, $sql); 
+    
+    if($result && mysqli_num_rows($result) === 1){ 
+        $sql1 = "SELECT * FROM licencias WHERE ID_Licencia = '$id_licencia' AND Tipo_Licencia = '$tipo_licencia'"; 
+        $result1 = mysqli_query($conn, $sql1); 
+        
+        if($result1 && mysqli_num_rows($result1) === 1){ 
+            $sql2 = "DELETE FROM licencias WHERE ID_Licencia = '$id_licencia' AND Tipo_Licencia = '$tipo_licencia'"; 
+            if(mysqli_query($conn, $sql2)){ 
+                $_SESSION['correcto'] = "Licencia eliminada correctamente"; // Corregido el mensaje
+            }else{ 
+                $_SESSION['error'] = "Error al eliminar la licencia: " . mysqli_error($conn); 
+            } 
+        } else { 
+            $_SESSION['error'] = "La licencia con ID $id_licencia y tipo $tipo_licencia no existe o no coincide"; 
+        } 
+    } else {
+        $_SESSION['error'] = "La licencia con ID $id_licencia no existe";
+    }
+}
+
+function filtrolicencias($conn){
+    try{    
+        $sql = "SELECT * FROM licencias WHERE 1=1";
+
+
+        if(!empty($_POST["id_licencia"])) {
+            $sql.= " AND licencias.ID_Licencia = '".$_POST["id_licencia"]."'";
+        }
+        if(!empty($_POST["tipo_licencia"])) {
+            $sql.= " AND licencias.Tipo_Licencia = '".$_POST["tipo_licencia"]."'";
+        }
+        if(!empty($_POST["descripcion"])) {
+            $sql.= " AND licencias.Descripcion = '".$_POST["descripcion"]."'";
+        }
+        if(!empty($_POST["vigencia"])) {
+            $sql.= " AND licencias.Vigencia = '".$_POST["vigencia"]."'";
+        }
+        if(!empty($_POST["precio"])) {
+            $sql.= " AND licencias.Precio = '".$_POST["precio"]."'";
+        }
+        $result = mysqli_query($conn, $sql);
+        if($result && mysqli_num_rows($result) > 0 ){
+            echo "<table class='table' border='1' cellpadding='5' cellspacing='0'>";
+            echo "<thead><tr>
+                        <th>ID Licencia</th>
+                        <th>Tipo Licencia</th>
+                        <th>Descripcion</th>
+                        <th>Vigencia</th>
+                        <th>Precio</th>
+                    </tr></thead><tbody>";
+            while($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>
+                        <td>{$row['ID_Licencia']}</td>
+                        <td>{$row['Tipo_Licencia']}</td>
+                        <td>{$row['Descripcion']}</td>
+                        <td>{$row['Vigencia']}</td>
+                        <td>{$row['Precio']}</td>
+                    </tr>";
+            }
+            echo "</table>";
+        } else {
+            $_SESSION['error'] = "No se encontraron resultados";}
+    }
+    catch(mysqli_sql_exception $e){
+        $_SESSION["error"] = "Error al insertar la modalidad: ". mysqli_error($conn);
+    }
+}
+
+function editarlicencia($conn, $id_licencia) {
+    if(isset($_POST["id_licencia"])) {
+        $id_licencia = $_POST["id_licencia"];
+        $_SESSION['id_licencia'] = $_POST['id_licencia'];
+
+        $sql = "SELECT * FROM licencias WHERE ID_Licencia = '$id_licencia'";
+        $result = mysqli_query($conn, $sql);
+        
+        if(mysqli_num_rows($result) > 0) {
+            // Guardar los datos de la licencia en la sesión
+            $licencia = mysqli_fetch_assoc($result);
+            $_SESSION['licencia_actual'] = $licencia;
+            
+            echo "<script>window.location.href = '../licencias/insertarlicencias2.php';</script>";
+            exit();
+        } else {
+            $_SESSION["error"] = "La licencia no existe";
+        }
+    }
+}
+
+
+function editarlicencia2 ($conn, $id_licencia){
+    if(isset($_POST["id_licencia"])){
+        $id_licencia = $_POST["id_licencia"];
+        
+        $sql = "SELECT * FROM licencias WHERE ID_Licencia = '$id_licencia'";
+        $result = mysqli_query($conn, $sql);
+        $licencia = mysqli_fetch_assoc($result);
+
+        if(isset($_POST["actualizar"])){
+         //Recoge los datos del formulario
+            $id_licencia = $_POST["id_licencia"];
+            $tipo_licencia =!empty($_POST["tipo_licencia"])? "'". $_POST["tipo_licencia"]. "'" : "NULL";
+            $descripcion =!empty($_POST["descripcion"])? "'". $_POST["descripcion"]. "'" : "NULL";
+            $vigencia =!empty($_POST["vigencia"])? "'". $_POST["vigencia"]. "'" : "NULL";
+            $precio =!empty($_POST["precio"])? "'". $_POST["precio"]. "'" : "NULL";
+
+            //Actualiza los datos en la base de datos
+            $sql = "UPDATE licencias SET 
+                Tipo_Licencia = $tipo_licencia, 
+                Descripcion = $descripcion, 
+                Vigencia = $vigencia, 
+                Precio = $precio WHERE ID_Licencia = $id_licencia";
+            if(mysqli_query($conn, $sql)){
+                $_SESSION["correcto"] = "Licencia actualizada correctamente";
+                echo "<script>window.location.href = '../licencias_admin.php';</script>";
+                exit();
+            } else {
+                $_SESSION["error"] = "Error al actualizar la licencia: ". mysqli_error($conn);
+            }
+        }
+    }
+}
 ?>

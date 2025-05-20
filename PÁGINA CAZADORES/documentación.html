@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>S. Cazadores LOS PIPORROS</title>
-
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-   <style>
+    
+    <style>
     :root {
         --color-oro: #D4AF37;
         --color-oro-claro: #e8c252;
@@ -49,8 +50,15 @@
     }
 
     .logo-img {
-        max-width: 150px;
+        max-width: 400px; 
         filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7));
+    }
+
+    
+    @media (max-width: 768px) {
+        .logo-img {
+            max-width: 200px; 
+        }
     }
 
     .nombre-sociedad {
@@ -108,6 +116,143 @@
     .dropdown-item:hover {
         background-color: rgba(212, 175, 55, 0.1) !important;
         color: var(--color-oro) !important;
+    }
+    
+    .doc-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .doc-title {
+        color: var(--color-oro);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 3rem;
+        font-weight: 600;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Grid de tarjetas */
+    .doc-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    /* Tarjetas de documentación */
+    .doc-card {
+        background: linear-gradient(145deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9));
+        border: 1px solid var(--color-oro);
+        border-radius: 15px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 300px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .doc-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(212, 175, 55, 0.2);
+        border-color: var(--color-oro-claro);
+    }
+
+    .doc-icon {
+        font-size: 3rem;
+        color: var(--color-oro);
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .doc-card:hover .doc-icon {
+        transform: scale(1.1);
+        color: var(--color-oro-claro);
+    }
+
+    .doc-card h3 {
+        color: var(--color-oro);
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    .doc-card p {
+        color: var(--color-texto);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Botón de documentación */
+    .doc-btn {
+        background-color: var(--color-oro);
+        color: var(--color-fondo);
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .doc-btn:hover {
+        background-color: var(--color-oro-claro);
+        transform: translateY(-2px);
+    }
+
+    /* Contenido expandible */
+    .doc-content {
+        display: none;
+        background: linear-gradient(145deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95));
+        border: 1px solid var(--color-oro);
+        border-radius: 15px;
+        padding: 2.5rem;
+        margin: 2rem auto;
+        max-width: 1000px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Acordeón personalizado */
+    .accordion-item {
+        background-color: transparent;
+        border: 1px solid var(--color-oro-oscuro);
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        overflow: hidden;
+    }
+
+    .accordion-button {
+        background: linear-gradient(145deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.2));
+        color: var(--color-oro);
+        padding: 1rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background: linear-gradient(145deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.3));
+        color: var(--color-oro-claro);
+    }
+
+    .accordion-button::after {
+        filter: invert(70%) sepia(50%) saturate(500%) hue-rotate(355deg) brightness(89%) contrast(95%);
+    }
+
+    .accordion-body {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: var(--color-texto);
+        padding: 1.5rem;
+        font-size: 0.9rem;
+        line-height: 1.6;
     }
 
     /* Botones */
@@ -183,160 +328,6 @@
         text-transform: uppercase;
         letter-spacing: 1px;
     }
-    /* Estilos para la sección de documentación */
-    .doc-container {
-        max-width: 1200px;
-        margin: 2rem auto;
-        padding: 0 1rem;
-    }
-
-    .doc-title {
-        color: var(--color-oro);
-        text-align: center;
-        margin-bottom: 1.5rem;
-        font-size: 2rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        border-bottom: 2px solid var(--color-oro);
-        padding-bottom: 0.5rem;
-        display: inline-block;
-        width: auto;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .doc-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .doc-card {
-        background-color: rgba(0, 0, 0, 0.8);
-        border: 1px solid var(--color-oro);
-        border-radius: 8px;
-        padding: 1.5rem;
-        text-align: center;
-        transition: all 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 100%;
-        min-height: 280px;
-    }
-
-    .doc-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
-    }
-
-    .doc-icon {
-        font-size: 2.5rem;
-        color: var(--color-oro);
-        margin-bottom: 1rem;
-    }
-
-    .doc-card h3 {
-        color: var(--color-oro);
-        font-size: 1.2rem;
-        margin-bottom: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .doc-card p {
-        color: var(--color-texto);
-        margin-bottom: 1.2rem;
-        font-size: 0.9rem;
-        line-height: 1.4;
-    }
-
-    .doc-btn {
-        background-color: var(--color-oro);
-        color: #000;
-        padding: 0.6rem 1.2rem;
-        border: none;
-        border-radius: 5px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: all 0.3s ease;
-        font-size: 0.85rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: auto;
-    }
-
-    .doc-btn:hover {
-        background-color: var(--color-oro-claro);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
-        color: #000;
-    }
-
-    .doc-content {
-        display: none;
-        margin-top: 1rem;
-        background-color: rgba(0, 0, 0, 0.7);
-        border: 1px solid var(--color-oro);
-        border-radius: 8px;
-        padding: 1.5rem;
-    }
-
-    .doc-content.active {
-        display: block;
-        animation: fadeIn 0.5s ease;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-
-    /* Estilos para tablas en documentación */
-    .doc-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
-        font-size: 0.9rem;
-    }
-
-    .doc-table th {
-        background-color: rgba(212, 175, 55, 0.2);
-        color: var(--color-oro);
-        padding: 0.5rem;
-        text-align: left;
-        border: 1px solid var(--color-oro-oscuro);
-    }
-
-    .doc-table td {
-        padding: 0.5rem;
-        border: 1px solid var(--color-oro-oscuro);
-        color: var(--color-texto);
-    }
-
-    .doc-table tr:hover {
-        background-color: rgba(212, 175, 55, 0.1);
-    }
-
-    /* Responsive */
-    @media (max-width: 992px) {
-        .doc-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 768px) {
-        .doc-grid {
-            grid-template-columns: 1fr;
-        }
-        
-        .doc-card {
-            min-height: 250px;
-        }
-    }
 
     /* Sistema de iconos */
     .icon-wrapper {
@@ -356,6 +347,66 @@
     .icon-list {
         margin-right: 0.5rem;
         color: var(--color-oro);
+    }
+
+    /* Estilos específicos para contenido de documentación */
+    .doc-content {
+        display: none;
+        background-color: rgba(0, 0, 0, 0.8);
+        border: 1px solid var(--color-oro);
+        border-radius: 10px;
+        padding: 2rem;
+        margin-top: 2rem;
+    }
+
+    .doc-list {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .doc-list li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .doc-file {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        border: 1px solid var(--color-oro-oscuro);
+        border-radius: 5px;
+        margin-bottom: 1rem;
+    }
+
+    .doc-file-icon {
+        font-size: 2rem;
+        color: var(--color-oro);
+    }
+
+    .doc-file-info {
+        flex-grow: 1;
+    }
+
+    .auth-card {
+        background-color: rgba(0, 0, 0, 0.5);
+        border: 1px solid var(--color-oro-oscuro);
+        border-radius: 5px;
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .auth-icon {
+        font-size: 2rem;
+        color: var(--color-oro);
+        margin-bottom: 1rem;
+    }
+
+    .doc-grid-inner {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
     }
 
     /* Responsive */
@@ -378,9 +429,23 @@
         .navbar-custom .nav-link {
             padding: 0.5rem 0.75rem;
         }
+        
+        .doc-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .doc-card {
+            min-height: auto;
+            padding: 1.5rem;
+        }
+
+        .doc-content {
+            padding: 1.5rem;
+            margin: 1.5rem auto;
+        }
     }
-   </style>
-    
+    </style>
 </head>
 <body>
     <!-- Header con efecto parallax -->
@@ -389,7 +454,7 @@
         <div class="container header-content">
             <div class="row">
                 <div class="col-12 text-center">
-                    <a href="index.html"><img src="./fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
+                    <a href="index.html"><img src="./fotos/logosociedad.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
                     <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
                     <h2 class="h3 nombre-sociedad">LOS PIPORROS</h2>
                 </div>
@@ -397,6 +462,7 @@
         </div>
     </header>
     
+    <!-- Menú de navegación -->
     <!-- Menú de navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
@@ -463,7 +529,7 @@
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="documentación.html" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-file-alt icon-nav"></i></span>
                             DOCUMENTACIÓN
                         </a>
@@ -496,16 +562,34 @@
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="x" id="areaPrivadaDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="areaPrivadaDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-lock icon-nav"></i></span>
                             ÁREA PRIVADA
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
                                 <a class="dropdown-item dropdown-toggle" href="./subpáginas/login.php">
-                                    <span class="icon-wrapper"><i class="bi bi-folder-fill"></i></span>
+                                    <span class="icon-wrapper"><i class="fas fa-users-cog icon-nav"></i></span>
                                     ÁREA PRIVADA
                                 </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="gestion_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-users icon-nav"></i></span>
+                                        Gestión Socios
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="./licencias_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
+                                        Gestión de Licencias
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="modalidades_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-bullseye icon-nav"></i></span>
+                                        Modalidades de Caza
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="panel_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-user-shield icon-nav"></i></span>
+                                        Panel Admin
+                                    </a></li>
+                                </ul>
                             </li>
                             <li class="dropdown-submenu">
                                 <a class="dropdown-item dropdown-toggle" href="#">
@@ -573,886 +657,315 @@
         </div>
     </nav>
     
-    
     <!-- Contenido principal -->
     <div class="doc-container">
         <h1 class="doc-title text-center">DOCUMENTACIÓN</h1>
         
         <div class="doc-grid">
-            <!-- Tarjeta ACTAS -->
-            <div class="doc-card" data-target="actas-content">
-                <div>
-                    <i class="fas fa-file-signature doc-icon"></i>
-                    <h3>Actas</h3>
-                    <p>Consulta las actas de reuniones y asambleas de nuestra sociedad de cazadores.</p>
-                </div>
+            <div class="doc-card">
+                <i class="fas fa-file-signature doc-icon"></i>
+                <h3>Actas</h3>
+                <p>Documentos oficiales de las reuniones y asambleas de la sociedad.</p>
                 <button class="doc-btn" onclick="toggleContent('actas-content')">
-                    <i class="fas fa-eye me-2"></i>Ver Actas
+                    <i class="fas fa-eye me-2"></i>Ver contenido
                 </button>
             </div>
             
-            <!-- Tarjeta ESTATUTOS -->
-            <div class="doc-card" data-target="estatutos-content">
-                <div>
-                    <i class="fas fa-book doc-icon"></i>
-                    <h3>Estatutos</h3>
-                    <p>Consulta los estatutos que rigen nuestra sociedad de cazadores.</p>
-                </div>
+            <div class="doc-card">
+                <i class="fas fa-book doc-icon"></i>
+                <h3>Estatutos</h3>
+                <p>Normativa que rige el funcionamiento de nuestra sociedad de cazadores.</p>
                 <button class="doc-btn" onclick="toggleContent('estatutos-content')">
-                    <i class="fas fa-eye me-2"></i>Ver Estatutos
+                    <i class="fas fa-eye me-2"></i>Ver contenido
                 </button>
             </div>
             
-            <!-- Tarjeta AUTORIZACIONES -->
-            <div class="doc-card" data-target="autorizaciones-content">
-                <div>
-                    <i class="fas fa-file-contract doc-icon"></i>
-                    <h3>Autorizaciones</h3>
-                    <p>Documentos de autorización para las diferentes actividades cinegéticas.</p>
-                </div>
+            <div class="doc-card">
+                <i class="fas fa-file-contract doc-icon"></i>
+                <h3>Autorizaciones</h3>
+                <p>Documentos necesarios para diferentes actividades cinegéticas.</p>
                 <button class="doc-btn" onclick="toggleContent('autorizaciones-content')">
-                    <i class="fas fa-eye me-2"></i>Ver Autorizaciones
+                    <i class="fas fa-eye me-2"></i>Ver contenido
                 </button>
             </div>
             
-            <!-- Tarjeta ARMAS -->
-            <div class="doc-card" data-target="armas-content">
-                <div>
-                    <i class="fas fa-gun doc-icon"></i>
-                    <h3>Armas</h3>
-                    <p>Información sobre permisos y normativa relacionada con armas de caza.</p>
-                </div>
+            <div class="doc-card">
+                <i class="fas fa-gun doc-icon"></i>
+                <h3>Armas</h3>
+                <p>Información sobre permisos y normativa relacionada con armas de caza.</p>
                 <button class="doc-btn" onclick="toggleContent('armas-content')">
-                    <i class="fas fa-eye me-2"></i>Ver Información
+                    <i class="fas fa-eye me-2"></i>Ver contenido
                 </button>
             </div>
             
-            <!-- Tarjeta NORMATIVA -->
-            <div class="doc-card" data-target="normativa-content">
-                <div>
-                    <i class="fas fa-gavel doc-icon"></i>
-                    <h3>Normativa</h3>
-                    <p>Consulta la normativa vigente para la práctica de la caza en nuestra sociedad.</p>
-                </div>
+            <div class="doc-card">
+                <i class="fas fa-gavel doc-icon"></i>
+                <h3>Normativa</h3>
+                <p>Regulaciones y leyes aplicables a la actividad cinegética.</p>
                 <button class="doc-btn" onclick="toggleContent('normativa-content')">
-                    <i class="fas fa-eye me-2"></i>Ver Normativa
+                    <i class="fas fa-eye me-2"></i>Ver contenido
                 </button>
             </div>
             
-            <!-- Tarjeta INSCRIPCIÓN SOCIOS -->
-            <div class="doc-card" data-target="inscripcion-content">
-                <div>
-                    <i class="fas fa-user-plus doc-icon"></i>
-                    <h3>Inscripción Socios</h3>
-                    <p>Formularios e información para nuevos socios que deseen unirse a la sociedad.</p>
-                </div>
+            <div class="doc-card">
+                <i class="fas fa-user-plus doc-icon"></i>
+                <h3>Inscripción Socios</h3>
+                <p>Requisitos y formularios para nuevos miembros de la sociedad.</p>
                 <button class="doc-btn" onclick="toggleContent('inscripcion-content')">
-                    <i class="fas fa-download me-2"></i>Descargar Formulario
+                    <i class="fas fa-eye me-2"></i>Ver contenido
                 </button>
             </div>
         </div>
         
-        <!-- Contenidos expandibles -->
         <!-- Contenido ACTAS -->
         <div id="actas-content" class="doc-content">
             <h4 class="text-center mb-3" style="color: var(--color-oro);">ACTAS DE LA SOCIEDAD</h4>
             <p class="small">Últimas actas de reuniones y asambleas de la Sociedad de Cazadores Los Piporros.</p>
             
             <div class="accordion mt-3" id="actasAccordion">
-                <!-- Acta 1 -->
-                <div class="accordion-item" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro-oscuro); margin-bottom: 10px;">
+                <div class="accordion-item">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acta1" style="background-color: rgba(212, 175, 55, 0.2); color: var(--color-oro); padding: 0.5rem 1rem; font-size: 0.9rem;">
-                            <i class="fas fa-file-signature me-2"></i> Acta Asamblea General Ordinaria (15/12/2023)
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acta1">
+                            <i class="fas fa-file-signature me-2"></i>Acta Asamblea General - 15/01/2024
                         </button>
                     </h2>
                     <div id="acta1" class="accordion-collapse collapse" data-bs-parent="#actasAccordion">
-                        <div class="accordion-body py-2 small">
-                            <p>En Aceuchal, siendo las 20:00 horas del día 15 de diciembre de 2023, se reúne la Asamblea General Ordinaria de la Sociedad de Cazadores "Los Piporros" con la asistencia de 45 socios.</p>
-                            
-                            <p><strong>Orden del día:</strong></p>
-                            <ol>
-                                <li>Lectura y aprobación del acta anterior</li>
-                                <li>Estado de cuentas</li>
-                                <li>Planificación de la temporada 2024</li>
-                                <li>Ruegos y preguntas</li>
-                            </ol>
-                            
-                            <p><strong>Acuerdos:</strong></p>
-                            <ul>
-                                <li>Se aprueba por unanimidad el acta anterior</li>
-                                <li>Se presenta el balance económico con un saldo positivo de 3.250€</li>
-                                <li>Se acuerda realizar dos batidas de jabalí en febrero de 2024</li>
-                                <li>Se aprueba la cuota anual de 150€ para la próxima temporada</li>
-                            </ul>
-                            
-                            <div class="text-center mt-2">
-                                <a href="#" class="doc-btn btn-sm"><i class="fas fa-download me-1"></i>Descargar Acta Completa</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Acta 2 -->
-                <div class="accordion-item" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro-oscuro); margin-bottom: 10px;">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acta2" style="background-color: rgba(212, 175, 55, 0.2); color: var(--color-oro); padding: 0.5rem 1rem; font-size: 0.9rem;">
-                            <i class="fas fa-file-signature me-2"></i> Acta Junta Directiva (20/09/2023)
-                        </button>
-                    </h2>
-                    <div id="acta2" class="accordion-collapse collapse" data-bs-parent="#actasAccordion">
-                        <div class="accordion-body py-2 small">
-                            <p>En Aceuchal, siendo las 19:30 horas del día 20 de septiembre de 2023, se reúne la Junta Directiva de la Sociedad de Cazadores "Los Piporros".</p>
-                            
-                            <p><strong>Asistentes:</strong> Presidente, Vicepresidente, Secretario, Tesorero y 3 vocales.</p>
-                            
-                            <p><strong>Temas tratados:</strong></p>
-                            <ul>
-                                <li>Preparación de la Asamblea General Ordinaria</li>
-                                <li>Revisión de solicitudes de nuevos socios</li>
-                                <li>Organización de la jornada de limpieza del coto</li>
-                                <li>Planificación de las batidas de la temporada</li>
-                            </ul>
-                            
-                            <p><strong>Decisiones:</strong></p>
-                            <ul>
-                                <li>Se aceptan 5 nuevas solicitudes de socios</li>
-                                <li>Se fija la jornada de limpieza para el 15 de octubre</li>
-                                <li>Se programan 3 batidas para la temporada</li>
-                            </ul>
-                            
-                            <div class="text-center mt-2">
-                                <a href="#" class="doc-btn btn-sm"><i class="fas fa-download me-1"></i>Descargar Acta Completa</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Acta 3 -->
-                <div class="accordion-item" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro-oscuro);">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acta3" style="background-color: rgba(212, 175, 55, 0.2); color: var(--color-oro); padding: 0.5rem 1rem; font-size: 0.9rem;">
-                            <i class="fas fa-file-signature me-2"></i> Acta Asamblea Extraordinaria (05/06/2023)
-                        </button>
-                    </h2>
-                    <div id="acta3" class="accordion-collapse collapse" data-bs-parent="#actasAccordion">
-                        <div class="accordion-body py-2 small">
-                            <p>En Aceuchal, siendo las 20:30 horas del día 5 de junio de 2023, se reúne la Asamblea General Extraordinaria de la Sociedad de Cazadores "Los Piporros" con la asistencia de 38 socios.</p>
-                            
-                            <p><strong>Orden del día:</strong></p>
-                            <ol>
-                                <li>Renovación de la Junta Directiva</li>
-                                <li>Modificación de estatutos</li>
-                                <li>Ruegos y preguntas</li>
-                            </ol>
-                            
-                            <p><strong>Acuerdos:</strong></p>
-                            <ul>
-                                <li>Se aprueba la nueva Junta Directiva por mayoría (35 votos a favor, 3 abstenciones)</li>
-                                <li>Se modifica el artículo 12 de los estatutos referente a las cuotas anuales</li>
-                                <li>Se acuerda revisar el convenio con propietarios de terrenos</li>
-                            </ul>
-                            
-                            <div class="text-center mt-2">
-                                <a href="#" class="doc-btn btn-sm"><i class="fas fa-download me-1"></i>Descargar Acta Completa</a>
-                            </div>
+                        <div class="accordion-body">
+                            <p>Contenido del acta...</p>
+                            <a href="#" class="btn btn-gold btn-sm"><i class="fas fa-download me-2"></i>Descargar PDF</a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Contenido ESTATUTOS -->
+        <div id="estatutos-content" class="doc-content">
+            <h4 class="text-center mb-3" style="color: var(--color-oro);">ESTATUTOS DE LA SOCIEDAD</h4>
+            <p class="small">Documentos oficiales que rigen el funcionamiento de nuestra sociedad.</p>
             
-            <div class="text-center mt-3">
-                <a href="#" class="doc-btn"><i class="fas fa-archive me-2"></i>Ver Todas las Actas</a>
+            <div class="doc-files mt-4">
+                <div class="doc-file">
+                    <i class="fas fa-file-pdf doc-file-icon"></i>
+                    <div class="doc-file-info">
+                        <h5>Estatutos Vigentes 2024</h5>
+                        <p>Última actualización: 01/01/2024</p>
+                    </div>
+                    <a href="./documentos/Estatutos-Nuevo.doc" class="btn btn-gold btn-sm"><i class="fas fa-download me-2"></i>Descargar</a>
+                </div>
             </div>
         </div>
         
         <!-- Contenido AUTORIZACIONES -->
         <div id="autorizaciones-content" class="doc-content">
             <h4 class="text-center mb-3" style="color: var(--color-oro);">AUTORIZACIONES</h4>
-            <p class="small">Formularios de autorización disponibles para las diferentes actividades cinegéticas.</p>
+            <p class="small">Documentos necesarios para diferentes actividades cinegéticas.</p>
             
-            <div class="row row-cols-1 row-cols-md-2 g-4 mt-2">
-                <!-- Autorización Conejos -->
-                <div class="col">
-                    <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro-oscuro);">
-                        <div class="card-body text-center py-3">
-                            <i class="fas fa-rabbit fa-2x mb-2" style="color: var(--color-oro);"></i>
-                            <h6 class="card-title" style="color: var(--color-oro);">Autorización Control de Conejos</h6>
-                            <p class="card-text small">Solicitud para el control poblacional de conejos en terrenos agrícolas. Válida para la temporada 2023-2024.</p>
-                            <p class="card-text small"><strong>Requisitos:</strong> Licencia de caza en vigor, seguro de responsabilidad civil y permiso del propietario del terreno.</p>
-                            <div class="d-flex justify-content-center gap-2">
-                                <a href="#" class="doc-btn btn-sm"><i class="fas fa-download me-1"></i>Descargar</a>
-                                <a href="#" class="doc-btn btn-sm"><i class="fas fa-info-circle me-1"></i>Instrucciones</a>
-                            </div>
-                        </div>
-                    </div>
+            <div class="doc-grid-inner mt-4">
+                <div class="auth-card">
+                    <i class="fas fa-file-contract auth-icon"></i>
+                    <h5>Autorizaciones Conejos</h5>
+                    <a href="./documentos/Autorizacion conejos.pdf" class="btn btn-gold btn-sm mt-2"><i class="fas fa-download me-2"></i>Descargar</a>
                 </div>
-                
-                <!-- Autorización Suelta de Perdices -->
-                <div class="col">
-                    <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro-oscuro);">
-                        <div class="card-body text-center py-3">
-                            <i class="fas fa-dove fa-2x mb-2" style="color: var(--color-oro);"></i>
-                            <h6 class="card-title" style="color: var(--color-oro);">Autorización Suelta de Perdices</h6>
-                            <p class="card-text small">Solicitud para la suelta controlada de perdices en el coto. Incluye certificado de origen y sanidad de las aves.</p>
-                            <p class="card-text small"><strong>Plazo de solicitud:</strong> 30 días antes de la fecha prevista para la suelta. Requiere aprobación previa de la Junta Directiva.</p>
-                            <div class="d-flex justify-content-center gap-2">
-                                <a href="#" class="doc-btn btn-sm"><i class="fas fa-download me-1"></i>Descargar</a>
-                                <a href="#" class="doc-btn btn-sm"><i class="fas fa-calendar-alt me-1"></i>Fechas Disponibles</a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="auth-card">
+                    <i class="fas fa-file-contract auth-icon"></i>
+                    <h5>Autorización Suelta de Perdices</h5>
+                    <a href="./documentos/Autorizacion suelta perdices.pdf" class="btn btn-gold btn-sm mt-2"><i class="fas fa-download me-2"></i>Descargar</a>
                 </div>
-            </div>
-            
-            <div class="alert alert-warning mt-4" style="background-color: rgba(212, 175, 55, 0.1); border: 1px solid var(--color-oro); color: var(--color-texto);">
-                <i class="fas fa-exclamation-triangle me-2" style="color: var(--color-oro);"></i>
-                <strong>Importante:</strong> Todas las autorizaciones deben presentarse con al menos 15 días de antelación y estar firmadas por el solicitante. La documentación incompleta no será tramitada.
             </div>
         </div>
         
         <!-- Contenido ARMAS -->
         <div id="armas-content" class="doc-content">
-            <h4 class="text-center mb-3" style="color: var(--color-oro);">INFORMACIÓN SOBRE ARMAS</h4>
-            <div class="accordion" id="armasAccordion">
-                <!-- Licencias -->
-                <div class="accordion-item mb-3" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro);">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#licencias"
-                            style="background-color: rgba(212, 175, 55, 0.1); color: var(--color-oro);">
-                            Licencias de Armas
-                        </button>
-                    </h2>
-                    <div id="licencias" class="accordion-collapse collapse show" data-bs-parent="#armasAccordion">
-                        <div class="accordion-body">
-                            <h6 style="color: var(--color-oro);">Vigencia de Licencias</h6>
-                            <ul class="small">
-                                <li>Menores de 60 años: 5 años</li>
-                                <li>Entre 60 y 70 años: 2 años</li>
-                                <li>Mayores de 70 años: 1 año</li>
-                            </ul>
-                        </div>
-                    </div>
+            <h4 class="text-center mb-3" style="color: var(--color-oro);">DOCUMENTACIÓN DE ARMAS</h4>
+            <p class="small">Información y documentos relacionados con permisos de armas.</p>
+            
+            <div class="info-sections mt-4">
+                <div class="info-section">
+                    <h5><i class="fas fa-gun me-2"></i>Licencias de Armas</h5>
+                    <ul class="doc-list">
+                        <li>Requisitos para licencia tipo E</li>
+                        <li>Renovación de licencias</li>
+                        <li>Guía de trámites</li>
+                    </ul>
                 </div>
-
-                <!-- Pruebas de Capacitación -->
-                <div class="accordion-item mb-3" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro);">
+            </div>
+        </div>
+        
+        <!-- Contenido NORMATIVA -->
+        <div id="normativa-content" class="doc-content">
+            <h4 class="text-center mb-3" style="color: var(--color-oro);">NORMATIVA DE CAZA</h4>
+            <p class="small">Normativa vigente para la práctica de la caza en nuestra sociedad.</p>
+            
+            <div class="accordion mt-3" id="normativaAccordion">
+                <div class="accordion-item">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pruebas"
-                            style="background-color: rgba(212, 175, 55, 0.1); color: var(--color-oro);">
-                            Pruebas de Capacitación
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#normativa1">
+                            <i class="fas fa-gavel me-2"></i>Normativa General
                         </button>
                     </h2>
-                    <div id="pruebas" class="accordion-collapse collapse" data-bs-parent="#armasAccordion">
+                    <div id="normativa1" class="accordion-collapse collapse" data-bs-parent="#normativaAccordion">
                         <div class="accordion-body">
-                            <p class="small">Información sobre las pruebas necesarias para obtener la licencia de armas.</p>
-                            <a href="#" class="doc-btn btn-sm">Más Información</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Documentación -->
-                <div class="accordion-item" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro);">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#documentacion"
-                            style="background-color: rgba(212, 175, 55, 0.1); color: var(--color-oro);">
-                            Documentación Necesaria
-                        </button>
-                    </h2>
-                    <div id="documentacion" class="accordion-collapse collapse" data-bs-parent="#armasAccordion">
-                        <div class="accordion-body">
-                            <ul class="small">
-                                <li>Solicitud oficial</li>
-                                <li>Certificado médico</li>
-                                <li>Certificado de antecedentes</li>
-                                <li>Justificante de pago de tasas</li>
-                            </ul>
+                            <div class="doc-file">
+                                <i class="fas fa-file-pdf doc-file-icon"></i>
+                                <div class="doc-file-info">
+                                    <h5>Normativa General SOCIEDAD DE CAZADORES LOS PIPORROS 2024</h5>
+                                    <p>Última actualización: Enero 2024</p>
+                                    <small>Este documento contiene la normativa general que rige las actividades de caza en nuestra sociedad, incluyendo períodos hábiles, modalidades permitidas y restricciones específicas.</small>
+                                </div>
+                                <a href="./documentoS/normativa.doc" class="btn btn-gold btn-sm">
+                                    <i class="fas fa-download me-2"></i>Descargar PDF
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Script para manejar la visualización de contenidos -->
-        <script>
-            function toggleContent(contentId) {
-                // Ocultar todos los contenidos
-                document.querySelectorAll('.doc-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                // Mostrar el contenido seleccionado
-                document.getElementById(contentId).classList.add('active');
-                
-                // Desplazarse suavemente hasta el contenido
-                document.getElementById(contentId).scrollIntoView({behavior: 'smooth'});
-            }
-        </script>
         
-        <!-- Responsive -->
-        @media (max-width: 992px) {
-            .doc-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .doc-grid {
-                grid-template-columns: 1fr;
-            }
+        <!-- Contenido INSCRIPCIÓN SOCIOS -->
+        <div id="inscripcion-content" class="doc-content">
+            <h4 class="text-center mb-3" style="color: var(--color-oro);">INSCRIPCIÓN DE SOCIOS</h4>
+            <p class="small">Documentación necesaria para nuevos socios.</p>
             
-            .doc-card {
-                min-height: 250px;
-            }
-        }
+            <div class="requirements-section mt-4">
+                <div class="doc-category mb-4">
+                    <h5 class="mb-3"><i class="fas fa-id-card me-2"></i>Documentación Personal</h5>
+                    <ul class="doc-list">
+                        <li><i class="fas fa-check-circle icon-list"></i>DNI/NIE en vigor (original y copia)</li>
+                        <li><i class="fas fa-check-circle icon-list"></i>Certificado de antecedentes penales (actualizado)</li>
+                    </ul>
+                </div>
         
-        /* Sistema de iconos */
-        .icon-wrapper {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 1.5em;
-            margin-right: 0.5rem;
-        }
+                <div class="doc-category mb-4">
+                    <h5 class="mb-3"><i class="fas fa-bullseye me-2"></i>Documentación Cinegética</h5>
+                    <ul class="doc-list">
+                        <li><i class="fas fa-check-circle icon-list"></i>Licencia de caza vigente de la comunidad autónoma</li>
+                        <li><i class="fas fa-check-circle icon-list"></i>Permiso de armas</li>
+                        <li><i class="fas fa-check-circle icon-list"></i>Certificado médico de aptitud física y psíquica</li>
+                    </ul>
+                </div>
         
-        .icon-card {
-            font-size: 3em;
-            margin-bottom: 0.5rem;
-            color: var(--color-oro);
-        }
+                <div class="doc-category mb-4">
+                    <h5 class="mb-3"><i class="fas fa-file-alt me-2"></i>Documentación de la Sociedad</h5>
+                    <ul class="doc-list">
+                        <li><i class="fas fa-check-circle icon-list"></i>Formulario Oficial Sociedad</li>
+                    </ul>
+                </div>
         
-        .icon-list {
-            margin-right: 0.5rem;
-            color: var(--color-oro);
-        }
-        
-        /* Responsive */
-        @media (max-width: 992px) {
-            .parallax-header {
-                background-attachment: scroll;
-                height: 50vh;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .header-content {
-                text-align: center;
-            }
-            
-            .logo-img {
-                max-width: 120px;
-            }
-            
-            .navbar-custom .nav-link {
-                padding: 0.5rem 0.75rem;
-            }
-        }
-       </style>
-        
-</head>
-<body>
-    <!-- Header con efecto parallax -->
-    <header class="parallax-header d-flex align-items-center">
-        <div class="parallax-overlay"></div>
-        <div class="container header-content">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <a href="index.html"><img src="./fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
-                    <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
-                    <h2 class="h3 nombre-sociedad">LOS PIPORROS</h2>
+                <div class="text-center mt-4">
+                    <a href="#" class="btn btn-gold">
+                        <i class="fas fa-download me-2"></i>Descargar Formulario de Inscripción
+                    </a>
                 </div>
             </div>
         </div>
-    </header>
-    
-    <!-- Menú de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarContent">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="historia.html">
-                            <span class="icon-wrapper"><i class="fas fa-landmark icon-nav"></i></span>
-                            HISTORIA
-                        </a>
-                    </li>
-                    
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="galeriaDropdown" role="button" data-bs-toggle="dropdown">
-                            <span class="icon-wrapper"><i class="fas fa-camera icon-nav"></i></span>
-                            GALERÍA
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
-                                    <span class="icon-wrapper"><i class="fas fa-images icon-nav"></i></span>
-                                    BATIDAS
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2012-2013</a></li>
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
-                                    <span class="icon-wrapper"><i class="fas fa-deer icon-nav"></i></span>
-                                    RECECHOS
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
-                                    <li><a class="dropdown-item" href="#">2015-2016</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
-                                    <span class="icon-wrapper"><i class="fas fa-calendar-alt icon-nav"></i></span>
-                                    TEMPORADAS
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
-                                    <li><a class="dropdown-item" href="#">2015-2016</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
-                                    <span class="icon-wrapper"><i class="fas fa-calendar-day icon-nav"></i></span>
-                                    JORNADAS
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
-                                    <li><a class="dropdown-item" href="#">2015-2016</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
-                            <span class="icon-wrapper"><i class="fas fa-file-alt icon-nav"></i></span>
-                            DOCUMENTACIÓN
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">
-                                <span class="icon-wrapper"><i class="fas fa-file-signature icon-nav"></i></span>
-                                ACTAS
-                            </a></li>
-                            <li><a class="dropdown-item" href="#">
-                                <span class="icon-wrapper"><i class="fas fa-book icon-nav"></i></span>
-                                ESTATUTOS
-                            </a></li>
-                            <li><a class="dropdown-item" href="#">
-                                <span class="icon-wrapper"><i class="fas fa-file-contract icon-nav"></i></span>
-                                AUTORIZACIONES
-                            </a></li>
-                            <li><a class="dropdown-item" href="#">
-                                <span class="icon-wrapper"><i class="fas fa-gun icon-nav"></i></span>
-                                ARMAS
-                            </a></li>
-                            <li><a class="dropdown-item" href="#">
-                                <span class="icon-wrapper"><i class="fas fa-gavel icon-nav"></i></span>
-                                NORMATIVA
-                            </a></li>
-                            <li><a class="dropdown-item" href="#">
-                                <span class="icon-wrapper"><i class="fas fa-user-plus icon-nav"></i></span>
-                                INSCRIPCIÓN SOCIOS
-                            </a></li>
-                        </ul>
-                    </li>
-                    
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="x" id="areaPrivadaDropdown" role="button" data-bs-toggle="dropdown">
-                            <span class="icon-wrapper"><i class="fas fa-lock icon-nav"></i></span>
-                            ÁREA PRIVADA
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="./subpáginas/login.php">
-                                    <span class="icon-wrapper"><i class="bi bi-folder-fill"></i></span>
-                                    ÁREA PRIVADA
-                                </a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
-                                    <span class="icon-wrapper"><i class="fas fa-handshake icon-nav"></i></span>
-                                    ACUERDOS
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">
-                                        <span class="icon-wrapper"><i class="fas fa-vote-yea icon-nav"></i></span>
-                                        ELECCIONES
-                                    </a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
-                                    <span class="icon-wrapper"><i class="fas fa-calculator icon-nav"></i></span>
-                                    CUENTAS
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2023-2024</a></li>
-                                    <li><a class="dropdown-item" href="#">2022-2023</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
-                                    <span class="icon-wrapper"><i class="fas fa-map-marked-alt icon-nav"></i></span>
-                                    COTOS
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">ELECCIONES</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="datosInteresDropdown" role="button" data-bs-toggle="dropdown">
-                            <span class="icon-wrapper"><i class="fas fa-info-circle icon-nav"></i></span>
-                            DATOS DE INTERÉS
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">
-                                <span class="icon-wrapper"><i class="fas fa-map-marker-alt icon-nav"></i></span>
-                                DIRECCIONES
-                            </a></li>
-                            <li><a class="dropdown-item" href="#">
-                                <span class="icon-wrapper"><i class="fas fa-shield-alt icon-nav"></i></span>
-                                ZONAS DE SEGURIDAD
-                            </a></li>
-                            <li><a class="dropdown-item" href="#">
-                                <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
-                                LICENCIAS +65
-                            </a></li>
-                        </ul>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span class="icon-wrapper"><i class="fas fa-envelope icon-nav"></i></span>
-                            CONTACTO
-                        </a>
-                    </li>
-                </ul>
+            <div class="row">
+                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                    <a href="https://aceuchal.com/"><img src="./fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
+                </div>
+                <div class="col-md-4 text-center mb-3 mb-md-0">
+                    <h5 class="text-gold">CONTACTO</h5>
+                    <p><span class="icon-wrapper"><i class="fas fa-phone icon-list"></i></span>924 680 033</p>
+                    <p><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>info@sociotral.com</p>
+                </div>
+                <div class="col-md-4 social-section">
+                    <h5 class="text-gold">SÍGUENOS</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <p class="copyright">Sociedad de Cazadores LOS PIPORROS &copy; 2005-2023</p>
+                </div>
             </div>
         </div>
-    </nav>
-    
-    
-    <!-- Contenido principal -->
-    <div class="doc-container">
-        <h1 class="doc-title text-center">DOCUMENTACIÓN</h1>
-        
-        <div class="doc-grid">
-            <!-- Tarjeta ACTAS -->
-            <div class="doc-card" data-target="actas-content">
-                <div>
-                    <i class="fas fa-file-signature doc-icon"></i>
-                    <h3>Actas</h3>
-                    <p>Consulta las actas de reuniones y asambleas de nuestra sociedad de cazadores.</p>
-                </div>
-                <button class="doc-btn" onclick="toggleContent('actas-content')">
-                    <i class="fas fa-eye me-2"></i>Ver Actas
-                </button>
-            </div>
-            
-            <!-- Tarjeta ESTATUTOS -->
-            <div class="doc-card" data-target="estatutos-content">
-                <div>
-                    <i class="fas fa-book doc-icon"></i>
-                    <h3>Estatutos</h3>
-                    <p>Consulta los estatutos que rigen nuestra sociedad de cazadores.</p>
-                </div>
-                <button class="doc-btn" onclick="toggleContent('estatutos-content')">
-                    <i class="fas fa-eye me-2"></i>Ver Estatutos
-                </button>
-            </div>
-            
-            <!-- Tarjeta AUTORIZACIONES -->
-            <div class="doc-card" data-target="autorizaciones-content">
-                <div>
-                    <i class="fas fa-file-contract doc-icon"></i>
-                    <h3>Autorizaciones</h3>
-                    <p>Documentos de autorización para las diferentes actividades cinegéticas.</p>
-                </div>
-                <button class="doc-btn" onclick="toggleContent('autorizaciones-content')">
-                    <i class="fas fa-eye me-2"></i>Ver Autorizaciones
-                </button>
-            </div>
-            
-            <!-- Tarjeta ARMAS -->
-            <div class="doc-card" data-target="armas-content">
-                <div>
-                    <i class="fas fa-gun doc-icon"></i>
-                    <h3>Armas</h3>
-                    <p>Información sobre permisos y normativa relacionada con armas de caza.</p>
-                </div>
-                <button class="doc-btn" onclick="toggleContent('armas-content')">
-                    <i class="fas fa-eye me-2"></i>Ver Información
-                </button>
-            </div>
-            
-            <!-- Tarjeta NORMATIVA -->
-            <div class="doc-card" data-target="normativa-content">
-                <div>
-                    <i class="fas fa-gavel doc-icon"></i>
-                    <h3>Normativa</h3>
-                    <p>Consulta la normativa vigente para la práctica de la caza en nuestra sociedad.</p>
-                </div>
-                <button class="doc-btn" onclick="toggleContent('normativa-content')">
-                    <i class="fas fa-eye me-2"></i>Ver Normativa
-                </button>
-            </div>
-            
-            <!-- Tarjeta INSCRIPCIÓN SOCIOS -->
-            <div class="doc-card" data-target="inscripcion-content">
-                <div>
-                    <i class="fas fa-user-plus doc-icon"></i>
-                    <h3>Inscripción Socios</h3>
-                    <p>Formularios e información para nuevos socios que deseen unirse a la sociedad.</p>
-                </div>
-                <button class="doc-btn" onclick="toggleContent('inscripcion-content')">
-                    <i class="fas fa-download me-2"></i>Descargar Formulario
-                </button>
-            </div>
-        </div>
-        
-        <!-- Contenidos expandibles -->
-        <!-- Contenido ACTAS -->
-        <div id="actas-content" class="doc-content">
-            <h4 class="text-center mb-3" style="color: var(--color-oro);">ACTAS DE LA SOCIEDAD</h4>
-            <p class="small">Últimas actas de reuniones y asambleas de la Sociedad de Cazadores Los Piporros.</p>
-            
-            <div class="accordion mt-3" id="actasAccordion">
-                <!-- Acta 1 -->
-                <div class="accordion-item" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro-oscuro); margin-bottom: 10px;">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acta1" style="background-color: rgba(212, 175, 55, 0.2); color: var(--color-oro); padding: 0.5rem 1rem; font-size: 0.9rem;">
-                            <i class="fas fa-file-signature me-2"></i> Acta Asamblea General Ordinaria (15/12/2023)
-                        </button>
-                    </h2>
-                    <div id="acta1" class="accordion-collapse collapse" data-bs-parent="#actasAccordion">
-                        <div class="accordion-body py-2 small">
-                            <p>En Aceuchal, siendo las 20:00 horas del día 15 de diciembre de 2023, se reúne la Asamblea General Ordinaria de la Sociedad de Cazadores "Los Piporros" con la asistencia de 45 socios.</p>
-                            
-                            <p><strong>Orden del día:</strong></p>
-                            <ol>
-                                <li>Lectura y aprobación del acta anterior</li>
-                                <li>Estado de cuentas</li>
-                                <li>Planificación de la temporada 2024</li>
-                                <li>Ruegos y preguntas</li>
-                            </ol>
-                            
-                            <p><strong>Acuerdos:</strong></p>
-                            <ul>
-                                <li>Se aprueba por unanimidad el acta anterior</li>
-                                <li>Se presenta el balance económico con un saldo positivo de 3.250€</li>
-                                <li>Se acuerda realizar dos batidas de jabalí en febrero de 2024</li>
-                                <li>Se aprueba la cuota anual de 150€ para la próxima temporada</li>
-                            </ul>
-                            
-                            <div class="text-center mt-2">
-                                <a href="#" class="doc-btn btn-sm"><i class="fas fa-download me-1"></i>Descargar Acta Completa</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Acta 2 -->
-                <div class="accordion-item" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro-oscuro); margin-bottom: 10px;">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acta2" style="background-color: rgba(212, 175, 55, 0.2); color: var(--color-oro); padding: 0.5rem 1rem; font-size: 0.9rem;">
-                            <i class="fas fa-file-signature me-2"></i> Acta Junta Directiva (20/09/2023)
-                        </button>
-                    </h2>
-                    <div id="acta2" class="accordion-collapse collapse" data-bs-parent="#actasAccordion">
-                        <div class="accordion-body py-2 small">
-                            <p>En Aceuchal, siendo las 19:30 horas del día 20 de septiembre de 2023, se reúne la Junta Directiva de la Sociedad de Cazadores "Los Piporros".</p>
-                            
-                            <p><strong>Asistentes:</strong> Presidente, Vicepresidente, Secretario, Tesorero y 3 vocales.</p>
-                            
-                            <p><strong>Temas tratados:</strong></p>
-                            <ul>
-                                <li>Preparación de la Asamblea General Ordinaria</li>
-                                <li>Revisión de solicitudes de nuevos socios</li>
-                                <li>Organización de la jornada de limpieza del coto</li>
-                                <li>Planificación de las batidas de la temporada</li>
-                            </ul>
-                            
-                            <p><strong>Decisiones:</strong></p>
-                            <ul>
-                                <li>Se aceptan 5 nuevas solicitudes de socios</li>
-                                <li>Se fija la jornada de limpieza para el 15 de octubre</li>
-                                <li>Se programan 3 batidas para la temporada</li>
-                            </ul>
-                            
-                            <div class="text-center mt-2">
-                                <a href="#" class="doc-btn btn-sm"><i class="fas fa-download me-1"></i>Descargar Acta Completa</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Acta 3 -->
-                <div class="accordion-item" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro-oscuro);">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acta3" style="background-color: rgba(212, 175, 55, 0.2); color: var(--color-oro); padding: 0.5rem 1rem; font-size: 0.9rem;">
-                            <i class="fas fa-file-signature me-2"></i> Acta Asamblea Extraordinaria (05/06/2023)
-                        </button>
-                    </h2>
-                    <div id="acta3" class="accordion-collapse collapse" data-bs-parent="#actasAccordion">
-                        <div class="accordion-body py-2 small">
-                            <p>En Aceuchal, siendo las 20:30 horas del día 5 de junio de 2023, se reúne la Asamblea General Extraordinaria de la Sociedad de Cazadores "Los Piporros" con la asistencia de 38 socios.</p>
-                            
-                            <p><strong>Orden del día:</strong></p>
-                            <ol>
-                                <li>Renovación de la Junta Directiva</li>
-                                <li>Modificación de estatutos</li>
-                                <li>Ruegos y preguntas</li>
-                            </ol>
-                            
-                            <p><strong>Acuerdos:</strong></p>
-                            <ul>
-                                <li>Se aprueba la nueva Junta Directiva por mayoría (35 votos a favor, 3 abstenciones)</li>
-                                <li>Se modifica el artículo 12 de los estatutos referente a las cuotas anuales</li>
-                                <li>Se acuerda revisar el convenio con propietarios de terrenos</li>
-                            </ul>
-                            
-                            <div class="text-center mt-2">
-                                <a href="#" class="doc-btn btn-sm"><i class="fas fa-download me-1"></i>Descargar Acta Completa</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-3">
-                <a href="#" class="doc-btn"><i class="fas fa-archive me-2"></i>Ver Todas las Actas</a>
-            </div>
-        </div>
-        
-        <!-- Contenido AUTORIZACIONES -->
-        <div id="autorizaciones-content" class="doc-content">
-            <h4 class="text-center mb-3" style="color: var(--color-oro);">AUTORIZACIONES</h4>
-            <p class="small">Formularios de autorización disponibles para las diferentes actividades cinegéticas.</p>
-            
-            <div class="row row-cols-1 row-cols-md-2 g-4 mt-2">
-                <!-- Autorización Conejos -->
-                <div class="col">
-                    <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro-oscuro);">
-                        <div class="card-body text-center py-3">
-                            <i class="fas fa-rabbit fa-2x mb-2" style="color: var(--color-oro);"></i>
-                            <h6 class="card-title" style="color: var(--color-oro);">Autorización Control de Conejos</h6>
-                            <p class="card-text small">Solicitud para el control poblacional de conejos en terrenos agrícolas. Válida para la temporada 2023-2024.</p>
-                            <p class="card-text small"><strong>Requisitos:</strong> Licencia de caza en vigor, seguro de responsabilidad civil y permiso del propietario del terreno.</p>
-                            <div class="d-flex justify-content-center gap-2">
-                                <a href="#" class="doc-btn btn-sm"><i class="fas fa-download me-1"></i>Descargar</a>
-                                <a href="#" class="doc-btn btn-sm"><i class="fas fa-info-circle me-1"></i>Instrucciones</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Autorización Suelta de Perdices -->
-                <div class="col">
-                    <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro-oscuro);">
-                        <div class="card-body text-center py-3">
-                            <i class="fas fa-dove fa-2x mb-2" style="color: var(--color-oro);"></i>
-                            <h6 class="card-title" style="color: var(--color-oro);">Autorización Suelta de Perdices</h6>
-                            <p class="card-text small">Solicitud para la suelta controlada de perdices en el coto. Incluye certificado de origen y sanidad de las aves.</p>
-                            <p class="card-text small"><strong>Plazo de solicitud:</strong> 30 días antes de la fecha prevista para la suelta. Requiere aprobación previa de la Junta Directiva.</p>
-                            <div class="d-flex justify-content-center gap-2">
-                                <a href="#" class="doc-btn btn-sm"><i class="fas fa-download me-1"></i>Descargar</a>
-                                <a href="#" class="doc-btn btn-sm"><i class="fas fa-calendar-alt me-1"></i>Fechas Disponibles</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="alert alert-warning mt-4" style="background-color: rgba(212, 175, 55, 0.1); border: 1px solid var(--color-oro); color: var(--color-texto);">
-                <i class="fas fa-exclamation-triangle me-2" style="color: var(--color-oro);"></i>
-                <strong>Importante:</strong> Todas las autorizaciones deben presentarse con al menos 15 días de antelación y estar firmadas por el solicitante. La documentación incompleta no será tramitada.
-            </div>
-        </div>
-        
-        <!-- Contenido ARMAS -->
-        <div id="armas-content" class="doc-content">
-            <h4 class="text-center mb-3" style="color: var(--color-oro);">INFORMACIÓN SOBRE ARMAS</h4>
-            <div class="accordion" id="armasAccordion">
-                <!-- Licencias -->
-                <div class="accordion-item mb-3" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro);">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#licencias"
-                            style="background-color: rgba(212, 175, 55, 0.1); color: var(--color-oro);">
-                            Licencias de Armas
-                        </button>
-                    </h2>
-                    <div id="licencias" class="accordion-collapse collapse show" data-bs-parent="#armasAccordion">
-                        <div class="accordion-body">
-                            <h6 style="color: var(--color-oro);">Vigencia de Licencias</h6>
-                            <ul class="small">
-                                <li>Menores de 60 años: 5 años</li>
-                                <li>Entre 60 y 70 años: 2 años</li>
-                                <li>Mayores de 70 años: 1 año</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+    </footer>
 
-                <!-- Pruebas de Capacitación -->
-                <div class="accordion-item mb-3" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro);">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pruebas"
-                            style="background-color: rgba(212, 175, 55, 0.1); color: var(--color-oro);">
-                            Pruebas de Capacitación
-                        </button>
-                    </h2>
-                    <div id="pruebas" class="accordion-collapse collapse" data-bs-parent="#armasAccordion">
-                        <div class="accordion-body">
-                            <p class="small">Información sobre las pruebas necesarias para obtener la licencia de armas.</p>
-                            <a href="#" class="doc-btn btn-sm">Más Información</a>
-                        </div>
-                    </div>
-                </div>
+     <!-- Bootstrap JS -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     <script>
+         // Efecto parallax
+         document.addEventListener('DOMContentLoaded', function() {
+             const parallaxHeader = document.querySelector('.parallax-header');
+             const headerHeight = parallaxHeader.offsetHeight;
+             
+             window.addEventListener('scroll', function() {
+                 const scrollPosition = window.pageYOffset;
+                 const limit = headerHeight;
+                 
+                 if (scrollPosition <= limit) {
+                     parallaxHeader.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+                 }
+             });
+             
+             // Submenús en dropdown
+             const dropdownSubmenus = document.querySelectorAll('.dropdown-submenu');
+             
+             dropdownSubmenus.forEach(function(item) {
+                 item.addEventListener('mouseenter', function() {
+                     this.querySelector('.dropdown-menu').classList.add('show');
+                 });
+                 
+                 item.addEventListener('mouseleave', function() {
+                     this.querySelector('.dropdown-menu').classList.remove('show');
+                 });
+             });
+         });
+     </script>
+    <script>
+    function toggleContent(contentId) {
+        // Ocultar todos los contenidos primero
+        document.querySelectorAll('.doc-content').forEach(content => {
+            content.style.display = 'none';
+        });
+        
+        // Mostrar el contenido seleccionado
+        const selectedContent = document.getElementById(contentId);
+        if (selectedContent) {
+            selectedContent.style.display = 'block';
+            
+            // Scroll suave hasta el contenido
+            selectedContent.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }
 
-                <!-- Documentación -->
-                <div class="accordion-item" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid var(--color-oro);">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#documentacion"
-                            style="background-color: rgba(212, 175, 55, 0.1); color: var(--color-oro);">
-                            Documentación Necesaria
-                        </button>
-                    </h2>
-                    <div id="documentacion" class="accordion-collapse collapse" data-bs-parent="#armasAccordion">
-                        <div class="accordion-body">
-                            <ul class="small">
-                                <li>Solicitud oficial</li>
-                                <li>Certificado médico</li>
-                                <li>Certificado de antecedentes</li>
-                                <li>Justificante de pago de tasas</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Script para manejar la visualización de contenidos -->
-        <script>
-            function toggleContent(contentId) {
-                // Ocultar todos los contenidos
-                document.querySelectorAll('.doc-content').forEach(content => {
-                    content.classList.remove('active');
-                });
+    // Inicializar los acordeones de Bootstrap
+    document.addEventListener('DOMContentLoaded', function() {
+        // Los acordeones funcionarán automáticamente con Bootstrap
+        // Solo necesitamos asegurarnos de que el JS de Bootstrap esté cargado
+        
+        // También podemos inicializar los dropdowns anidados
+        document.querySelectorAll('.dropdown-menu a.dropdown-toggle').forEach(function(element) {
+            element.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 
-                // Mostrar el contenido seleccionado
-                document.getElementById(contentId).classList.add('active');
-                
-                // Desplazarse suavemente hasta el contenido
-                document.getElementById(contentId).scrollIntoView({behavior: 'smooth'});
-            }
-        </script>
+                const parent = this.parentElement;
+                if (parent.classList.contains('show')) {
+                    parent.classList.remove('show');
+                } else {
+                    document.querySelectorAll('.dropdown-menu .show').forEach(function(openMenu) {
+                        openMenu.classList.remove('show');
+                    });
+                    parent.classList.add('show');
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>

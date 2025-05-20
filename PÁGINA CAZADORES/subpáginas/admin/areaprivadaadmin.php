@@ -304,7 +304,7 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                                     <i class="fas fa-id-card dashboard-icon"></i>
                                     <h3 class="dashboard-title">Gestión de Licencias</h3>
                                     <p>Control de licencias y permisos</p>
-                                    <a href="gestion_licencias.php" class="btn btn-gold btn-sm">Gestionar Licencias</a>
+                                    <a href="./licencias_admin.php" class="btn btn-gold btn-sm">Gestionar Licencias</a>
                                 </div>
                             </div>
                             

@@ -594,6 +594,15 @@ if ($rol !== 'Admin') {
                 <p>Busca y filtra modalidades según diferentes criterios y temporadas.</p>
                 <a href="./modalidades/filtromodalidades.php" class="btn btn-gold">Filtrar</a>
             </div>
+
+            <div class="gestion-card">
+                <i class="fas fa-users-viewfinder gestion-icon"></i>
+                <h3>Búsqueda por Socio</h3>
+                <p>Busca las modalidades asignadas a cada socio.</p>
+                <a href="modalidades/asignaciones/busquedamodalidades.php" class="btn btn-gold">
+                    <i class="fas fa-search me-2"></i>Buscar
+                </a>
+            </div>
         </div>
     
         <!-- Grupo 2: Gestión de Asignaciones -->
@@ -688,39 +697,3 @@ if ($rol !== 'Admin') {
     </script>
 </body>
 </html>
-
-    <div class="gestion-container">
-        <h1 class="gestion-title">GESTIÓN DE MODALIDADES</h1>
-        
-        <div class="gestion-grid">
-            <!-- Tarjeta de Asignar Modalidad -->
-            <div class="gestion-card">
-                <i class="fas fa-user-plus gestion-icon"></i>
-                <h3>Asignar Modalidad</h3>
-                <p>Asigna modalidades a los socios del club.</p>
-                <a href="modalidades/asignaciones/asignarmodalidad.php" class="btn btn-gold">
-                    <i class="fas fa-plus-circle me-2"></i>Asignar
-                </a>
-            </div>
-
-            <!-- Tarjeta de Búsqueda de Modalidades por Socio -->
-            <div class="gestion-card">
-                <i class="fas fa-users-viewfinder gestion-icon"></i>
-                <h3>Búsqueda por Socio</h3>
-                <p>Busca las modalidades asignadas a cada socio.</p>
-                <a href="modalidades/asignaciones/busquedamodalidades.php" class="btn btn-gold">
-                    <i class="fas fa-search me-2"></i>Buscar
-                </a>
-            </div>
-
-            <!-- Tarjeta de Filtro de Modalidades -->
-            <div class="gestion-card">
-                <i class="fas fa-filter gestion-icon"></i>
-                <h3>Filtrar Modalidades</h3>
-                <p>Filtra las modalidades disponibles en el club.</p>
-                <a href="modalidades/filtromodalidades.php" class="btn btn-gold">
-                    <i class="fas fa-search me-2"></i>Filtrar
-                </a>
-            </div>
-        </div>
-    </div>

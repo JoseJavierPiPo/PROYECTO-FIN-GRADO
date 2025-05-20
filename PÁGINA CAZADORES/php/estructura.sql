@@ -1,34 +1,5 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
 CREATE DATABASE IF NOT EXISTS `cazadores_bd` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `cazadores_bd`;
-
--- --------------------------------------------------------
--- Servidor: 127.0.0.1
--- Tiempo de generación: 13-05-2025 a las 13:08:19
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `cazadores_bd`
---
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `licencias`
---
 
 CREATE TABLE `licencias` (
   `ID_Licencia` int(11) NOT NULL,
@@ -38,9 +9,6 @@ CREATE TABLE `licencias` (
   `Precio` decimal(10,2) NOT NULL
 ) ;
 
---
--- Volcado de datos para la tabla `licencias`
---
 
 INSERT INTO `licencias` (`ID_Licencia`, `Tipo_Licencia`, `Descripcion`, `Vigencia`, `Precio`) VALUES
 (1, 'Anual', 'Licencia de caza anual', 1, 50.00),
@@ -48,12 +16,6 @@ INSERT INTO `licencias` (`ID_Licencia`, `Tipo_Licencia`, `Descripcion`, `Vigenci
 (3, 'Federativa', 'Licencia federativa avanzada', 3, 200.00),
 (4, 'Especial', 'Licencia para caza mayor', 1, 150.00),
 (5, 'Especial', 'Licencia para caza menor', 1, 100.00);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `modalidades_caza`
---
 
 CREATE TABLE `modalidades_caza` (
   `ID_Modalidad` int(11) NOT NULL,
@@ -66,20 +28,13 @@ CREATE TABLE `modalidades_caza` (
   `Requiere_Permiso_Especial` enum('Si','No') DEFAULT 'No'
 ) ;
 
---
--- Volcado de datos para la tabla `modalidades_caza`
---
 
 INSERT INTO `modalidades_caza` (`ID_Modalidad`, `Nombre_Modalidad`, `Descripcion`, `Temporada_Inicio`, `Temporada_Fin`, `Tipo_Caza`, `Arma_Predominante`, `Requiere_Permiso_Especial`) VALUES
 (1, 'Salto con escopeta', 'Caza menor en la que el cazador camina y dispara a las aves al vuelo.', '2025-10-01', '2026-02-28', 'Menor', 'Escopeta', 'No'),
 (2, 'Liebre con galgos', 'Caza menor donde los galgos persiguen a la liebre para capturarla.', '2025-11-15', '2026-01-31', 'Menor', 'Galgos', 'No'),
 (3, 'Perdiz con reclamo', 'Caza menor que utiliza una perdiz macho para atraer a otras perdices.', '2025-12-01', '2026-02-28', 'Menor', 'Escopeta', 'No');
 
--- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `socios`
---
 
 CREATE TABLE `socios` (
   `ID_Socio` int(11) NOT NULL,
@@ -99,9 +54,6 @@ CREATE TABLE `socios` (
   `ROL` enum('Admin','Socio') DEFAULT 'Socio'
 ) ;
 
---
--- Volcado de datos para la tabla `socios`
---
 
 INSERT INTO `socios` (`ID_Socio`, `DNI`, `Nombre`, `Apellido1`, `Apellido2`, `Fecha_Nacimiento`, `Localidad`, `Domicilio`, `Codigo_Postal`, `Telefono`, `Email`, `Fecha_Alta`, `Fecha_Baja`, `Estado`, `ROL`) VALUES
 (1, '12345678Z', 'Shenhao', 'Zhou', 'Zhou', '1990-05-15', 'Cáceres', 'Calle Mayor 5', '10001', '600123456', 'shenhao.zhou@example.com', '2023-01-01', NULL, 'Activo', 'Admin'),
@@ -110,11 +62,8 @@ INSERT INTO `socios` (`ID_Socio`, `DNI`, `Nombre`, `Apellido1`, `Apellido2`, `Fe
 (5, '56789012T', 'Laura', 'García', 'Sánchez', '2000-02-14', 'Trujillo', 'Calle Santa María 7', '10200', '640567890', 'laura.garcia@example.com', '2022-03-10', NULL, 'Activo', 'Socio'),
 (6, '67890123Q', 'Raúl', 'Jiménez', 'Domínguez', '1980-12-01', 'Zafra', 'Camino de la Estación 23', '06300', '650678901', 'raul.jimenez@example.com', '2021-09-25', NULL, 'Activo', 'Socio');
 
--- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `socio_licencias`
---
+
 
 CREATE TABLE `socio_licencias` (
   `ID` int(11) NOT NULL,
@@ -127,11 +76,27 @@ CREATE TABLE `socio_licencias` (
   `Estado` enum('Válida','Caducada','Revocada') DEFAULT 'Válida'
 ) ;
 
--- --------------------------------------------------------
+-- Insertar datos en socio_licencias
+INSERT INTO `socio_licencias` (`ID`, `ID_Socio`, `ID_Licencia`, `Fecha_Expedicion`, `Fecha_Caducidad`, `Numero_Licencia`, `Numero_Licencia_Federativa`, `Estado`) VALUES
+-- Licencias para Shenhao Zhou (ID_Socio 1 - Admin)
+(1, 1, 3, '2023-01-02', '2026-01-01', 'CC-2023-00001', 'FED-2023-00123', 'Válida'),  -- Licencia federativa avanzada (3 años)
+(2, 1, 4, '2023-01-02', '2024-01-01', 'CC-2023-00002', NULL, 'Válida'),               -- Licencia caza mayor (1 año)
 
---
--- Estructura de tabla para la tabla `socio_modalidades`
---
+-- Licencias para Juan Gómez (ID_Socio 2)
+(3, 2, 2, '2022-07-02', '2023-07-01', 'CC-2022-00045', 'FED-2022-00456', 'Caducada'), -- Licencia federativa básica (caducada)
+(4, 2, 1, '2023-07-15', '2024-07-14', 'CC-2023-00078', NULL, 'Válida'),               -- Licencia anual renovada
+
+-- Licencia para Pedro Fernández (ID_Socio 4 - Inactivo)
+(5, 4, 5, '2020-02-20', '2021-02-19', 'CC-2020-00123', NULL, 'Caducada'),             -- Licencia caza menor (caducada)
+
+-- Licencias para Laura García (ID_Socio 5)
+(6, 5, 2, '2022-03-12', '2023-03-11', 'CC-2022-00156', 'FED-2022-00567', 'Caducada'), -- Licencia federativa básica (caducada)
+(7, 5, 3, '2023-03-15', '2026-03-14', 'CC-2023-00189', 'FED-2023-00234', 'Válida'),   -- Licencia federativa avanzada (3 años)
+
+-- Licencias para Raúl Jiménez (ID_Socio 6)
+(8, 6, 1, '2021-09-26', '2022-09-25', 'CC-2021-00234', NULL, 'Caducada'),             -- Licencia anual (caducada)
+(9, 6, 1, '2022-10-01', '2023-09-30', 'CC-2022-00345', NULL, 'Válida'),               -- Licencia anual renovada
+(10, 6, 4, '2022-11-15', '2023-11-14', 'CC-2022-00367', NULL, 'Válida');              -- Licencia caza mayor adicional
 
 CREATE TABLE `socio_modalidades` (
   `ID` int(11) NOT NULL,
@@ -140,11 +105,20 @@ CREATE TABLE `socio_modalidades` (
   `Fecha_Registro` date NOT NULL DEFAULT curdate()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Índices para tablas volcadas
---
 
---
+INSERT INTO `socio_modalidades` (`ID`, `ID_Socio`, `ID_Modalidad`, `Fecha_Registro`) VALUES
+(1, 1, 3, '2023-01-05'),  -- Shenhao Zhou practica "Perdiz con reclamo"
+(2, 1, 1, '2023-02-10'),  -- Shenhao Zhou añade "Salto con escopeta"
+(3, 2, 1, '2022-07-02'),  -- Juan Gómez practica "Salto con escopeta"
+(4, 2, 2, '2022-09-15'),  -- Juan Gómez añade "Liebre con galgos"
+(5, 5, 1, '2022-03-12'),  -- Laura García practica "Salto con escopeta"
+(6, 5, 2, '2022-06-20'),  -- Laura García añade "Liebre con galgos"
+(7, 6, 2, '2021-09-26'),  -- Raúl Jiménez practica "Liebre con galgos"
+(8, 4, 3, '2020-02-20'),  -- Pedro Fernández practicaba "Perdiz con reclamo"
+(9, 4, 1, '2021-05-10'),  -- Pedro Fernández añadió "Salto con escopeta"
+(10, 6, 3, '2022-01-15'); -- Raúl Jiménez añadió "Perdiz con reclamo"
+
+
 -- Indices de la tabla `licencias`
 --
 ALTER TABLE `licencias`
@@ -233,18 +207,3 @@ ALTER TABLE `socio_modalidades`
   ADD CONSTRAINT `socio_modalidades_ibfk_1` FOREIGN KEY (`ID_Socio`) REFERENCES `socios` (`ID_Socio`),
   ADD CONSTRAINT `socio_modalidades_ibfk_2` FOREIGN KEY (`ID_Modalidad`) REFERENCES `modalidades_caza` (`ID_Modalidad`);
 COMMIT;
-
-INSERT INTO `socio_modalidades` (`ID`, `ID_Socio`, `ID_Modalidad`, `Fecha_Registro`) VALUES
-(1, 1, 3, '2023-01-05'),  -- Shenhao Zhou practica "Perdiz con reclamo"
-(2, 1, 1, '2023-02-10'),  -- Shenhao Zhou añade "Salto con escopeta"
-(3, 2, 1, '2022-07-02'),  -- Juan Gómez practica "Salto con escopeta"
-(4, 2, 2, '2022-09-15'),  -- Juan Gómez añade "Liebre con galgos"
-(5, 5, 1, '2022-03-12'),  -- Laura García practica "Salto con escopeta"
-(6, 5, 2, '2022-06-20'),  -- Laura García añade "Liebre con galgos"
-(7, 6, 2, '2021-09-26'),  -- Raúl Jiménez practica "Liebre con galgos"
-(8, 4, 3, '2020-02-20'),  -- Pedro Fernández practicaba "Perdiz con reclamo"
-(9, 4, 1, '2021-05-10'),  -- Pedro Fernández añadió "Salto con escopeta"
-(10, 6, 3, '2022-01-15'); -- Raúl Jiménez añadió "Perdiz con reclamo"
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
