@@ -556,30 +556,22 @@ if ($rol !== 'Admin') {
         <i class="fas fa-arrow-left"></i> Volver
     </a>
 
-    <div class="gestion-container">
-        <h1 class="gestion-title">Gestión de Licencias</h1>
-        
+    <!-- GRUPO 1  -->
+    <h2 class="section-title">Panel Gestión de Licencias</h2>
         <div class="gestion-grid">
-            <div class="gestion-card">
-                <i class="fas fa-id-card-alt gestion-icon"></i>
-                <h3>Insertar Licencia</h3>
-                <p>Añadir nuevas licencias de caza al sistema de gestión</p>
-                <a href="./licencias/insertarlicencia.php" class="btn btn-gold">Gestionar Altas</a>
-            </div>
 
             <div class="gestion-card">
-                <i class="fas fa-id-card-slash gestion-icon"></i>
-                <h3>Eliminar licencia</h3>
-                <p>Dar de baja licencias de caza caducadas o revocadas</p>
-                <a href="./licencias/borrarlicencia.php" class="btn btn-gold">Gestionar Bajas</a>
+                <i class="fas fa-user-plus gestion-icon"></i>
+                <h3>Crear Licencia</h3>
+                <p>Vincula socios a modalidades específicas de caza según sus preferencias y permisos.</p>
+                <a href="./licencias/insertarlicencia.php" class="btn btn-gold">CREAR</a>
             </div>
-
-           
+    
             <div class="gestion-card">
-                <i class="fas fa-calendar-check gestion-icon"></i>
-                <h3>Editar información de licencias</h3>
-                <p>Actualizar fechas de validez y renovación de licencias</p>
-                <a href="./licencias/editarlicencias.php" class="btn btn-gold">Modificar Datos</a>
+                <i class="fas fa-user-minus gestion-icon"></i>
+                <h3>Eliminar Licencia</h3>
+                <p>Revoca la asignación de modalidades a socios cuando sea necesario.</p>
+                <a href="./licencias/borrarlicencia.php" class="btn btn-gold">ELIMINAR</a>
             </div>
 
             <div class="gestion-card">
@@ -588,91 +580,63 @@ if ($rol !== 'Admin') {
                 <p>Verificar el estado y validez de las licencias existentes</p>
                 <a href="./licencias/filtrolicencias.php" class="btn btn-gold">Consultar Datos</a>
             </div>
+
+            <div class="gestion-card">
+                <i class="fas fa-calendar-check gestion-icon"></i>
+                <h3>Editar información de licencias</h3>
+                <p>Actualizar fechas de validez y renovación de licencias</p>
+                <a href="./licencias/editarlicencias.php" class="btn btn-gold">Modificar Datos</a>
+            </div>
+
         </div>
     </div>
 
 
-    <!-- Grupo 2: Gestión de Licencias / Socio -->
-    <h2 class="section-title">Panel Asignaciones de Licencias</h2>
-        <div class="gestion-grid">
-            <!-- Asignar Modalidad -->
-            <div class="gestion-card">
-                <i class="fas fa-user-plus gestion-icon"></i>
-                <h3>Asignar Licencia a Socio</h3>
-                <p>Vincula socios a modalidades específicas de caza según sus preferencias y permisos.</p>
-                <a href="./modalidades/asignaciones/asignarmodalidad.php" class="btn btn-gold">Asignar</a>
-            </div>
-    
-            <!-- Eliminar Asignación -->
-            <div class="gestion-card">
-                <i class="fas fa-user-minus gestion-icon"></i>
-                <h3>Revocar Licencia a Socio</h3>
-                <p>Revoca la asignación de modalidades a socios cuando sea necesario.</p>
-                <a href="#" class="btn btn-gold">Eliminar Asignación</a>
-            </div>
-
-            <div class="gestion-card">
-                <i class="fas fa-clipboard-check gestion-icon"></i>
-                <h3>Verificación y Renovación</h3>
-                <p>Verificar estado y gestionar renovaciones de licencias</p>
-                <a href="./licencias/verificacion_renovacion.php" class="btn btn-gold">Gestionar</a>
-            </div>
-
-            <div class="gestion-card">
-                <i class="fas fa-trash-alt gestion-icon"></i>
-                <h3>Verificación de estado de Licencia</h3>
-                <p>Filtro/Busqueda de socios por modalidad</p>
-                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Busca</a>
-            </div>
-
-            <div class="gestion-card">
-                <i class="fas fa-trash-alt gestion-icon"></i>
-                <h3>Actualizar licencia a un socio</h3>
-                <p>Filtro/Busqueda de socios por modalidad</p>
-                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Busca</a>
-            </div>
-
-            <div class="gestion-card">
+    <!-- GRUPO 2 -->
+    <h2 class="section-title">Panel de Asignación de Licencias</h2>
+    <div class="gestion-grid">
+        <div class="gestion-card">
+            <i class="fas fa-user-plus gestion-icon"></i>
+            <h3>Asignar Licencia a Socio</h3>
+            <p>Asigna licencias de caza a los socios según sus requisitos y documentación.</p>
+            <a href="./licencias/asignar_licencia.php" class="btn btn-gold">Asignar</a>
+        </div>
+        <div class="gestion-card">
+            <i class="fas fa-user-minus gestion-icon"></i>
+            <h3>Revocar Licencia</h3>
+            <p>Revoca o cancela licencias por incumplimiento o solicitud.</p>
+            <a href="./licencias/revocar_licencia.php" class="btn btn-gold">Revocar</a>
+        </div>
+        <div class="gestion-card">
+            <i class="fas fa-sync-alt gestion-icon"></i>
+            <h3>Renovar Licencia</h3>
+            <p>Gestiona la renovación de licencias próximas a caducar o ya caducadas.</p>
+            <a href="./licencias/renovar_licencia.php" class="btn btn-gold">Renovar</a>
+        </div>
+        <div class="gestion-card">
                 <i class="fas fa-search gestion-icon"></i>
-                <h3>Búsqueda de Licencias</h3>
-                <p>Buscar y consultar licencias por número o tipo</p>
-                <a href="./licencias/busqueda_licencias.php" class="btn btn-gold">Buscar</a>
+                <h3>Filtro Socios por Licencias</h3>
+                <p>Muestra las licencias asignadas a socios existentes</p>
+                <a href="./licencias/filtrosociolicencias.php" class="btn btn-gold">Consultar Datos</a>
             </div>
-
-            <div class="gestion-card">
-                <i class="fas fa-cogs gestion-icon"></i>
-                <h3>Configuración de Licencias</h3>
-                <p>Gestionar tipos y parámetros de licencias del sistema</p>
-                <a href="./licencias/config_licencias.php" class="btn btn-gold">Configurar</a>
-            </div>
-
-
-        </div>
-    </div>
-
-    <div class="gestion-container">
-        <h1 class="gestion-title">Gestión de Licencias</h1>
         
-        <div class="gestion-grid">
-            <div class="gestion-card">
-                <i class="fas fa-id-badge gestion-icon"></i>
-                <h3>Gestión Integral de Licencias</h3>
-                <p>Administrar altas, bajas y modificaciones de licencias</p>
-                <div class="btn-group">
-                    <a href="./licencias/insertarlicencia.php" class="btn btn-gold">Alta</a>
-                    <a href="./licencias/editarlicencias.php" class="btn btn-gold">Modificar</a>
-                    <a href="./licencias/borrarlicencia.php" class="btn btn-gold">Baja</a>
-                </div>
-            </div>
 
-            <div class="gestion-card">
-                <i class="fas fa-search gestion-icon"></i>
-                <h3>Consulta y Filtrado</h3>
-                <p>Buscar y filtrar licencias por diferentes criterios</p>
-                <a href="./licencias/filtrolicencias.php" class="btn btn-gold">Consultar</a>
-            </div>
-        </div>
+        
     </div>
+
+    <!-- GRUPO 3 -->
+    <h2 class="section-title">Panel de Gestión y Modificación de Licencias</h2>
+    <div class="gestion-grid">
+        <div class="gestion-card">
+            <i class="fas fa-edit gestion-icon"></i>
+            <h3>Modificar Licencia</h3>
+            <p>Actualiza o modifica los datos de las licencias existentes.</p>
+            <a href="./licencias/modificar_licencia.php" class="btn btn-gold">Modificar</a>
+        </div>
+
+        
+    </div>
+
 
     
     <!-- Footer -->
@@ -685,7 +649,7 @@ if ($rol !== 'Admin') {
                 <div class="col-md-4 text-center mb-3 mb-md-0">
                     <h5 class="text-gold">CONTACTO</h5>
                     <p><span class="icon-wrapper"><i class="fas fa-phone icon-list"></i></span>924 680 033</p>
-                    <p><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>info@sociotral.com</p>
+                    <p><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>cazadorespiporros@hotmail.com</p>
                 </div>
                 <div class="col-md-4 social-section">
                     <h5 class="text-gold">SÍGUENOS</h5>

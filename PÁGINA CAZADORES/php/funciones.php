@@ -615,4 +615,113 @@ function editarlicencia2 ($conn, $id_licencia){
         }
     }
 }
+
+function asignarlicenciasocio1($conn, $id_socio, $nombresocio){
+    $sql = "SELECT * FROM socios WHERE ID_Socio = '$id_socio'";
+    $result = mysqli_query($conn, $sql);
+    if (!$result || mysqli_num_rows($result) === 0) {
+        $_SESSION["error"] = "El socio con id introducido no se ha encontrado";
+        return;
+    }
+    else{
+        $sql1 = "SELECT * FROM socios WHERE ID_Socio = '$id_socio' AND Nombre = '$nombresocio'";
+        $result1 = mysqli_query($conn, $sql1);
+        if(!$result1 || mysqli_num_rows($result1) === 0){
+            $_SESSION["error"] = "El socio con nombre introducido no coincide con el id introducido";
+        }
+        else{
+            $_SESSION["correcto"] = "Socio encontrado correctamente";
+            echo "<script>window.location.href = '../licencias/asignarlicenciasocio2.php';</script>";
+            exit();
+        }
+    }
+}
+
+function filtrolicenciassocio($conn){
+    try {    
+        $sql = "SELECT socio_licencias.ID_Socio, socio_licencias.ID_Licencia, 
+                       licencias.Tipo_Licencia, socios.DNI, socios.Nombre, 
+                       socio_licencias.Fecha_Expedicion, socio_licencias.Fecha_Caducidad,
+                       socio_licencias.Numero_Licencia, socio_licencias.Numero_Licencia_Federativa,
+                       socio_licencias.Estado
+                FROM socio_licencias
+                JOIN licencias ON socio_licencias.ID_Licencia = licencias.ID_Licencia
+                JOIN socios ON socio_licencias.ID_Socio = socios.ID_Socio
+                WHERE 1=1";
+        
+        if(!empty($_POST["nombre"])) {
+            $sql.= " AND socios.Nombre = '".$_POST["nombre"]."'";
+        }
+        if(!empty($_POST["id_licencia"])) {
+            $sql .= " AND socio_licencias.ID_Licencia = '".$_POST["id_licencia"]."'";
+        }
+        if(!empty($_POST["id_socio"])) {
+            $sql .= " AND socio_licencias.ID_Socio = '".$_POST["id_socio"]."'";
+        }
+        if(!empty($_POST["fecha_expedicion"])) {
+            $sql .= " AND socio_licencias.Fecha_Expedicion = '".$_POST["fecha_expedicion"]."'";
+        }
+        if(!empty($_POST["tipo_licencia"])) {
+            $sql.= " AND licencias.Tipo_Licencia = '".$_POST["tipo_licencia"]."'";
+        }
+        if(!empty($_POST["fecha_caducidad"])) {
+            $sql .= " AND socio_licencias.Fecha_Caducidad = '".$_POST["fecha_caducidad"]."'";
+        }
+        if(!empty($_POST["numero_licencia"])) {
+            $sql .= " AND socio_licencias.Numero_Licencia = '".$_POST["numero_licencia"]."'";
+        }
+        if(!empty($_POST["numero_licencia_federativa"])) {
+            $sql .= " AND socio_licencias.Numero_Licencia_Federativa = '".$_POST["numero_licencia_federativa"]."'";
+        }
+        if(!empty($_POST["estado"])) {
+            $sql .= " AND socio_licencias.Estado = '".$_POST["estado"]."'";
+        }
+
+        $result = mysqli_query($conn, $sql);
+        if($result && mysqli_num_rows($result) > 0) {
+            echo "<table class='table' border='1' cellpadding='5' cellspacing='0'>";
+            echo "<thead><tr>
+                    <th>ID Socio</th>
+                    <th>ID Licencia</th>
+                    <th>Tipo Licencia</th>
+                    <th>Nombre</th>
+                    <th>Fecha Expedición</th>
+                    <th>Fecha Caducidad</th>
+                    <th>Número Licencia</th>
+                    <th>Número Licencia Federativa</th>
+                    <th>Estado</th>
+                </tr></thead><tbody>";
+            
+            while($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>
+                    <td>{$row['ID_Socio']}</td>
+                    <td>{$row['ID_Licencia']}</td>
+                    <td>{$row['Tipo_Licencia']}</td>
+                    <td>{$row['Nombre']}</td>
+                    <td>{$row['Fecha_Expedicion']}</td>
+                    <td>{$row['Fecha_Caducidad']}</td>
+                    <td>{$row['Numero_Licencia']}</td>
+                    <td>{$row['Numero_Licencia_Federativa']}</td>
+                    <td>{$row['Estado']}</td>
+                </tr>";
+            }
+            echo "</tbody></table>";
+        } else {
+            $_SESSION['error'] = "No se encontraron resultados";
+        }
+    } catch(mysqli_sql_exception $e) {
+        $_SESSION["error"] = "Error al consultar las licencias: " . mysqli_error($conn);
+    }
+}
+
+function asignarlicenciasocio2($conn, $id_socio, $id_licencia, $fecha_expedicion, $fecha_caducidad, $numero_licencia, $numero_licencia_federativa, $estado){
+    $sql = "SELECT * FROM socio_licencias";
+    $result = mysqli_query($conn, $sql);
+    if($result && mysqli_num_rows($result) > 0){
+     
+    }
+}
+
+
+
 ?>

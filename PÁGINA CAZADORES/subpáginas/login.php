@@ -83,7 +83,7 @@ session_start();
         }
         
         .logo-img {
-            max-width: 150px;
+            max-width: 400px;
             filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7));
         }
         
@@ -412,7 +412,7 @@ session_start();
             }
     
             .logo-img {
-                max-width: 120px;
+                max-width: 200px;
             }
     
             .navbar-custom .navbar-nav .nav-link {
@@ -433,7 +433,7 @@ session_start();
         <div class="container header-content text-center">
             <div class="row">
                 <div class="col-12">
-                    <a href="../index.html"><img src="../fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
+                    <a href="../index.html"><img src="../fotos/logosociedad.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
                     <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
                     <h2 class="h3">LOS PIPORROS</h2>
                 </div>
@@ -444,7 +444,7 @@ session_start();
     <!-- Menú de navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-label="Menú de navegación" title="Menú de navegación">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
@@ -507,32 +507,32 @@ session_start();
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="../documentación.html" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-file-alt icon-nav"></i></span>
                             DOCUMENTACIÓN
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="../documentación.html#actas-content">
                                 <span class="icon-wrapper"><i class="fas fa-file-signature icon-nav"></i></span>
                                 ACTAS
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="../documentación.html#estatutos-content">
                                 <span class="icon-wrapper"><i class="fas fa-book icon-nav"></i></span>
                                 ESTATUTOS
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="../documentación.html#autorizaciones-content">
                                 <span class="icon-wrapper"><i class="fas fa-file-contract icon-nav"></i></span>
                                 AUTORIZACIONES
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="../documentación.html#armas-content">
                                 <span class="icon-wrapper"><i class="fas fa-gun icon-nav"></i></span>
                                 ARMAS
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="../documentación.html#normativa-content">
                                 <span class="icon-wrapper"><i class="fas fa-gavel icon-nav"></i></span>
                                 NORMATIVA
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="../documentación.html#inscripcion-content">
                                 <span class="icon-wrapper"><i class="fas fa-user-plus icon-nav"></i></span>
                                 INSCRIPCIÓN SOCIOS
                             </a></li>
@@ -546,20 +546,26 @@ session_start();
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
-                                    <span class="icon-wrapper"><i class="bi bi-folder-fill"></i></span>
+                                <a class="dropdown-item dropdown-toggle" href="../subpáginas/login.php">
+                                    <span class="icon-wrapper"><i class="fas fa-users-cog icon-nav"></i></span>
                                     ÁREA PRIVADA
                                 </a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
-                                    <span class="icon-wrapper"><i class="fas fa-handshake icon-nav"></i></span>
-                                    ACUERDOS
-                                </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">
-                                        <span class="icon-wrapper"><i class="fas fa-vote-yea icon-nav"></i></span>
-                                        ELECCIONES
+                                    <li><a class="dropdown-item" href="../subpáginas/admin/gestion_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-users icon-nav"></i></span>
+                                        Gestión Socios
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="../subpáginas/admin/licencias_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
+                                        Gestión de Licencias
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="../subpáginas/admin/modalidades_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-bullseye icon-nav"></i></span>
+                                        Modalidades de Caza
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="panel_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-user-shield icon-nav"></i></span>
+                                        Panel Admin
                                     </a></li>
                                 </ul>
                             </li>
@@ -607,7 +613,7 @@ session_start();
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="./contacto.html">
                             <span class="icon-wrapper"><i class="fas fa-envelope icon-nav"></i></span>
                             CONTACTO
                         </a>
@@ -654,9 +660,9 @@ session_start();
                     <h3 class="sidebar-title"><span class="icon-wrapper"><i class="fas fa-history icon-title"></i></span> HISTORIA</h3>
                     <ul class="sidebar-menu">
                         <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-camera icon-list"></i></span>Galería fotográfica</a></li>
-                        <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-file-alt icon-list"></i></span>Documentación</a></li>
-                        <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-lock icon-list"></i></span>Área privada</a></li>
-                        <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>Contacto</a></li>
+                        <li class="sidebar-item"><a href="../documentación.html" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-file-alt icon-list"></i></span>Documentación</a></li>
+                        <li class="sidebar-item"><a href="../subpáginas/login.php" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-lock icon-list"></i></span>Área privada</a></li>
+                        <li class="sidebar-item"><a href="../contacto.html" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>Contacto</a></li>
                     </ul>
                 </div>
                 
@@ -717,7 +723,7 @@ session_start();
                 }
             });
             
-            // Manejo de submenús
+            // Submenús en dropdown
             const dropdownSubmenus = document.querySelectorAll('.dropdown-submenu');
             
             dropdownSubmenus.forEach(function(item) {
@@ -732,7 +738,6 @@ session_start();
         });
     </script>
     <?php
-    // Aquí iría el código PHP para manejar el inicio de sesión
     include_once("../php/funciones.php");
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $nombre = $_POST["Nombre"];

@@ -644,7 +644,7 @@ if ($rol !== 'Admin') {
                 <div class="col-md-4 text-center mb-3 mb-md-0">
                     <h5 class="text-gold">CONTACTO</h5>
                     <p><span class="icon-wrapper"><i class="fas fa-phone icon-list"></i></span>924 680 033</p>
-                    <p><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>info@sociotral.com</p>
+                    <p><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>cazadorespiporros@hotmail.com</p>
                 </div>
                 <div class="col-md-4 social-section">
                     <h5 class="text-gold">SÍGUENOS</h5>

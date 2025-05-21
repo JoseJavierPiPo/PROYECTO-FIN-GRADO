@@ -120,32 +120,32 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="../../documentación.html" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-file-alt icon-nav"></i></span>
                             DOCUMENTACIÓN
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="../../documentación.html#actas-content">
                                 <span class="icon-wrapper"><i class="fas fa-file-signature icon-nav"></i></span>
                                 ACTAS
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="../../documentación.html#estatutos-content">
                                 <span class="icon-wrapper"><i class="fas fa-book icon-nav"></i></span>
                                 ESTATUTOS
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="../../documentación.html#autorizaciones-content">
                                 <span class="icon-wrapper"><i class="fas fa-file-contract icon-nav"></i></span>
                                 AUTORIZACIONES
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="../../documentación.html#armas-content">
                                 <span class="icon-wrapper"><i class="fas fa-gun icon-nav"></i></span>
                                 ARMAS
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="../../documentación.html#normativa-content">
                                 <span class="icon-wrapper"><i class="fas fa-gavel icon-nav"></i></span>
                                 NORMATIVA
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="../../documentación.html#inscripcion-content">
                                 <span class="icon-wrapper"><i class="fas fa-user-plus icon-nav"></i></span>
                                 INSCRIPCIÓN SOCIOS
                             </a></li>
@@ -159,38 +159,26 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
+                                <a class="dropdown-item dropdown-toggle" href="../subpáginas/login.php">
                                     <span class="icon-wrapper"><i class="fas fa-users-cog icon-nav"></i></span>
                                     ÁREA PRIVADA
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="gestion_admin.php">
+                                    <li><a class="dropdown-item" href="../../subpáginas/admin/gestion_admin.php">
                                         <span class="icon-wrapper"><i class="fas fa-users icon-nav"></i></span>
                                         Gestión Socios
                                     </a></li>
-                                    <li><a class="dropdown-item" href="./licencias_admin.php">
+                                    <li><a class="dropdown-item" href="../../subpáginas/admin/licencias_admin.php">
                                         <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
                                         Gestión de Licencias
                                     </a></li>
-                                    <li><a class="dropdown-item" href="modalidades_admin.php">
+                                    <li><a class="dropdown-item" href="../../subpáginas/admin/modalidades_admin.php">
                                         <span class="icon-wrapper"><i class="fas fa-bullseye icon-nav"></i></span>
                                         Modalidades de Caza
                                     </a></li>
                                     <li><a class="dropdown-item" href="panel_admin.php">
                                         <span class="icon-wrapper"><i class="fas fa-user-shield icon-nav"></i></span>
                                         Panel Admin
-                                    </a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
-                                    <span class="icon-wrapper"><i class="fas fa-handshake icon-nav"></i></span>
-                                    ACUERDOS
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">
-                                        <span class="icon-wrapper"><i class="fas fa-vote-yea icon-nav"></i></span>
-                                        ELECCIONES
                                     </a></li>
                                 </ul>
                             </li>
@@ -238,7 +226,7 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="../../contacto.html">
                             <span class="icon-wrapper"><i class="fas fa-envelope icon-nav"></i></span>
                             CONTACTO
                         </a>
@@ -339,12 +327,12 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
         <div class="container">
              <div class="row">
                    <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                    <a href="https://aceuchal.com/"><img src="../../fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
+                    <a href="https://aceuchal.com/"><img src="../../fotos/logosociedad.png" class="img-fluid" style="max-height: 50px;"></a>
                 </div>
                 <div class="col-md-4 text-center mb-3 mb-md-0">
                     <h5 class="text-gold">CONTACTO</h5>
                     <p><span class="icon-wrapper"><i class="fas fa-phone icon-list"></i></span>924 680 033</p>
-                    <p><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>info@sociotral.com</p>
+                    <p><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>cazadorespiporros@hotmail.com</p>
                 </div>
                 <div class="col-md-4 social-section">
                     <h5 class="text-gold">SÍGUENOS</h5>

@@ -68,7 +68,7 @@
         }
     
         .logo-img {
-            max-width: 150px;
+            max-width: 400px;
             filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7));
         }
     
@@ -352,7 +352,7 @@
             }
             
             .logo-img {
-                max-width: 120px;
+                max-width: 200px; 
             }
             
             .card-column {
