@@ -433,17 +433,9 @@ if ($id_socio) {
                     <div class="card-body">
                         <div class="licencias-section mb-4">
                             <h4>Licencias Activas</h4>
-                            <?php
-                            if(isset($_SESSION['licencias'])) {
-                                foreach($_SESSION['licencias'] as $licencia) {
-                                    echo "<div class='licencia-item'>";
-                                    echo "<p><strong>Tipo:</strong> {$licencia['Tipo_Licencia']}</p>";
-                                    echo "<p><strong>Estado:</strong> {$licencia['Estado']}</p>";
-                                    echo "<p><strong>Caducidad:</strong> {$licencia['Fecha_Caducidad']}</p>";
-                                    echo "</div>";
-                                }
-                            }
-                            ?>
+        
+                            <p><i class="fas fa-id-card icon-info"></i> ID Licencia: <?php echo "$id_socio" ?></p>
+                            
                         </div>
                         <div class="modalidades-section">
                             <h4>Modalidades Inscritas</h4>
