@@ -129,7 +129,7 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="../../documentación.html" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="x" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-file-alt icon-nav"></i></span>
                             DOCUMENTACIÓN
                         </a>
@@ -168,7 +168,7 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="../subpáginas/login.php">
+                                <a class="dropdown-item dropdown-toggle" href="../../subpáginas/login.php">
                                     <span class="icon-wrapper"><i class="fas fa-users-cog icon-nav"></i></span>
                                     ÁREA PRIVADA
                                 </a>
@@ -219,15 +219,11 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                             DATOS DE INTERÉS
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">
-                                <span class="icon-wrapper"><i class="fas fa-map-marker-alt icon-nav"></i></span>
-                                DIRECCIONES
-                            </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="../../documentos/cuadro limites zonas de seguridad y terrenos no cinegeticos.pdf">
                                 <span class="icon-wrapper"><i class="fas fa-shield-alt icon-nav"></i></span>
                                 ZONAS DE SEGURIDAD
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="../../documentos/Licencia de caza mayores 65.pdf">
                                 <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
                                 LICENCIAS +65
                             </a></li>
@@ -300,9 +296,9 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                             <div class="col-md-4">
                                 <div class="dashboard-card text-center h-100">
                                     <i class="fas fa-handshake dashboard-icon"></i>
-                                    <h3 class="dashboard-title">Acuerdos</h3>
-                                    <p>Consulta los últimos acuerdos</p>
-                                    <a href="#" class="btn btn-gold btn-sm">Ver Acuerdos</a>
+                                    <h3 class="dashboard-title">DATOS DEL SOCIO</h3>
+                                    <p>Consulta las novedades del socio</p>
+                                    <a href="./socio/datossocio.php" class="btn btn-gold btn-sm">Ver Datos</a>
                                 </div>
                             </div>
 

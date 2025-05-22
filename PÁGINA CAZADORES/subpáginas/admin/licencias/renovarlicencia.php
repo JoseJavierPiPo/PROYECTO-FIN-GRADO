@@ -11,19 +11,10 @@ if (!isset($_SESSION['ROL']) || $_SESSION['ROL'] !== 'Admin') {
 // Procesar formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    $id_licencia = $_POST['id_licencia'];
     $id_socio = $_POST['id_socio'];
-    $fecha_expedicion = $_POST['fecha_expedicion'];
-    $fecha_caducidad = $_POST['fecha_caducidad'];
-    $numero_licencia = $_POST['numero_licencia'];
-    $numero_licencia_federativa = $_POST['numero_licencia_federativa'];
-    $estado = $_POST['estado'];
-    // Validar fechas
-    if (strtotime($fecha_expedicion) > strtotime($fecha_caducidad)) {
-        $_SESSION['error'] = "La fecha de expedición no puede ser posterior a la de caducidad";
-    } else {
-    asignarlicenciasocio2($conn, $id_socio, $id_licencia, $fecha_expedicion, $fecha_caducidad, $numero_licencia, $numero_licencia_federativa, $estado);
-    }
+    $id_licencia = $_POST['id_licencia'];
+    
+    renovarlicencia($conn, $id_socio, $id_licencia);
 }
 ?>
 <!DOCTYPE html>
@@ -271,22 +262,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </a>
 
     <div class="container">
-        <h1 class="form-title">ASIGNACIÓN LICENCIA A SOCIO</h1>
+        <h1 class="form-title">Renovar Licencia a Socio</h1>
         
         <!-- Mostrar mensajes una sola vez -->
+          
         <?php
-        if(isset($_SESSION['correcto'])) {
-            echo '<div class="alert alert-correcto">'.$_SESSION['correcto'].'</div>';
-            unset($_SESSION['correcto']);
-        }
-        if(isset($_SESSION['error'])) {
-                echo '<div class="alert alert-error">'.$_SESSION['error'].'</div>';
-                unset($_SESSION['error']);
-        }
+            if(isset($_SESSION['correcto'])) {
+                echo '<div class="alert alert-correcto">'.$_SESSION['correcto'].'</div>';
+                unset($_SESSION['correcto']);
+            }
+            if(isset($_SESSION['error'])) {
+                    echo '<div class="alert alert-error">'.$_SESSION['error'].'</div>';
+                    unset($_SESSION['error']);
+            }
         ?>
 
         <div class="search-panel">
-            <form method="POST">
+            <form action="renovarlicencia.php" method="POST">
                 <div class="search-grid">
                     <div class="mb-3">
                         <label for="id_socio" class="form-label">ID Socio</label>
@@ -297,40 +289,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <label for="id_licencia" class="form-label">ID Licencia</label>
                         <input type="number" class="form-control" name="id_licencia" required>
                     </div>
-                    
-                    <div class="mb-3">
-                        <label for="fecha_expedicion" class="form-label">Fecha Expedición</label>
-                        <input type="date" class="form-control" name="fecha_expedicion" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="fecha_caducidad" class="form-label">Fecha Caducidad</label>
-                        <input type="date" class="form-control" name="fecha_caducidad" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="numero_licencia" class="form-label">Número Licencia</label>
-                        <input type="text" class="form-control" name="numero_licencia" maxlength="15">
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="numero_licencia_federativa" class="form-label">Número Licencia Federativa</label>
-                        <input type="text" class="form-control" name="numero_licencia_federativa" maxlength="16">
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="estado" class="form-label">Estado</label>
-                        <select class="form-control" name="estado" required>
-                            <option value="" disabled selected>Seleccione estado</option>
-                            <option value="Válida">Válida</option>
-                            <option value="Caducada">Caducada</option>
-                            <option value="Revocada">Revocada</option>
-                        </select>
-                    </div>
-                </div>
+                </div>  
                 
                 <button type="submit" class="btn-gold">
-                    <i class="fas fa-id-card"></i> Asignar Licencia
+                    <i class="fas fa-id-card"></i> Revocar Licencia
                 </button>
             </form>
         </div>

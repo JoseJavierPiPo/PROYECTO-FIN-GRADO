@@ -51,18 +51,27 @@ function mostrarvalores($conn, $nombre, $dni){
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
 
-    $rol = $row['ROL']; $_SESSION["ROL"] = $rol;
+    $id_socio = $row['ID_Socio']; $_SESSION["ID_Socio"] = $id_socio;
+    $dni = $row['DNI']; $_SESSION["DNI"] = $dni;
+    $nombre = $row['Nombre']; $_SESSION["Nombre"] = $nombre;
     $a1 = $row['Apellido1']; $_SESSION["Apellido1"] = $a1;
     $a2 = $row['Apellido2']; $_SESSION['Apellido2'] = $a2;
-    $id_socio = $row['ID_Socio']; $_SESSION["ID_Socio"] = $id_socio;
+    $fecha_nacimiento = $row['Fecha_Nacimiento']; $_SESSION["Fecha_Nacimiento"] = $fecha_nacimiento;
+    $localidad = $row['Localidad']; $_SESSION["Localidad"] = $localidad;
+    $domicilio = $row['Domicilio']; $_SESSION["Domicilio"] = $domicilio;
+    $codigo_postal = $row['Codigo_Postal']; $_SESSION["Codigo_Postal"] = $codigo_postal;
+    $telefono = $row['Telefono']; $_SESSION["Telefono"] = $telefono;
+    $email = $row['Email']; $_SESSION["Email"] = $email;
     $fecha_alta = $row['Fecha_Alta']; $_SESSION["Fecha_Alta"] = $fecha_alta;
+    $rol = $row['ROL']; $_SESSION["ROL"] = $rol;
     $estado = $row['Estado']; $_SESSION["Estado"] = $estado;
-    
-    
+    $fecha_baja = $row['Fecha_Baja']; $_SESSION["Fecha_Baja"] = $fecha_baja;
+
 }
 
 
-// ADMINISTRADOR - FUNCIONES
+
+//////////////////////// PANEL ADMINISTRADOR  //////////////////////////////////////
 
 // INSERTAR SOCIO
 function insertarsocio($conn, $dni, $nombre, $apellido1, $apellido2, $fecha_nacimiento, $localidad, $domicilio, $codigo_postal, $telefono, $email, $fecha_alta) {
@@ -616,26 +625,7 @@ function editarlicencia2 ($conn, $id_licencia){
     }
 }
 
-function asignarlicenciasocio1($conn, $id_socio, $nombresocio){
-    $sql = "SELECT * FROM socios WHERE ID_Socio = '$id_socio'";
-    $result = mysqli_query($conn, $sql);
-    if (!$result || mysqli_num_rows($result) === 0) {
-        $_SESSION["error"] = "El socio con id introducido no se ha encontrado";
-        return;
-    }
-    else{
-        $sql1 = "SELECT * FROM socios WHERE ID_Socio = '$id_socio' AND Nombre = '$nombresocio'";
-        $result1 = mysqli_query($conn, $sql1);
-        if(!$result1 || mysqli_num_rows($result1) === 0){
-            $_SESSION["error"] = "El socio con nombre introducido no coincide con el id introducido";
-        }
-        else{
-            $_SESSION["correcto"] = "Socio encontrado correctamente";
-            echo "<script>window.location.href = '../licencias/asignarlicenciasocio2.php';</script>";
-            exit();
-        }
-    }
-}
+
 
 function filtrolicenciassocio($conn){
     try {    
@@ -715,13 +705,106 @@ function filtrolicenciassocio($conn){
 }
 
 function asignarlicenciasocio2($conn, $id_socio, $id_licencia, $fecha_expedicion, $fecha_caducidad, $numero_licencia, $numero_licencia_federativa, $estado){
-    $sql = "SELECT * FROM socio_licencias";
-    $result = mysqli_query($conn, $sql);
-    if($result && mysqli_num_rows($result) > 0){
-     
+    
+    try{
+        $sql = "INSERT INTO socio_licencias (`ID`, `ID_Socio`, `ID_Licencia`, `Fecha_Expedicion`, `Fecha_Caducidad`, `Numero_Licencia`, `Numero_Licencia_Federativa`, `Estado`) VALUES ('', '$id_socio', '$id_licencia', '$fecha_expedicion', '$fecha_caducidad', '$numero_licencia', '$numero_licencia_federativa', '$estado')";
+        $result = mysqli_query($conn, $sql);
+        if($result){
+            $_SESSION["correcto"] = "Licencia asignada correctamente";
+        }
+        else{
+            $_SESSION["error"] = "Error al asignar la licencia: ". mysqli_error($conn);
+        }
+    }
+    catch(mysqli_sql_exception $e){
+        $_SESSION["error"] = "Error al asignar la licencia: ". mysqli_error($conn);
+    }
+    
+}
+
+function revocarlicencia($conn, $id_socio, $id_licencia) {
+    try {
+        $sql = "SELECT * FROM socio_licencias WHERE ID_Socio = '$id_socio' AND ID_Licencia = '$id_licencia'";
+        $result = mysqli_query($conn, $sql);
+        
+        if (!$result === 0) {
+            $_SESSION["error"] = "No se encontró la licencia asignada al socio especificado";
+        }
+
+        $sql2 = "UPDATE socio_licencias SET Estado = 'Revocada' WHERE ID_Socio = '$id_socio' AND ID_Licencia = '$id_licencia'";
+        
+        $result2 = mysqli_query($conn, $sql2);
+        
+        if ($result2) {
+            $_SESSION["correcto"] = "Licencia revocada correctamente";
+            return true;
+        } else {
+            $_SESSION["error"] = "Error al revocar la licencia: " . mysqli_error($conn);
+            return false;
+        }
+    } catch(mysqli_sql_exception $e) {
+        $_SESSION["error"] = "Error al revocar la licencia: " . $e->getMessage();
+        return false;
     }
 }
 
+function renovarlicencia($conn, $id_socio, $id_licencia) {
+    try {
+        $sql = "SELECT * FROM socio_licencias WHERE ID_Socio = '$id_socio' AND ID_Licencia = '$id_licencia'";
+        $result = mysqli_query($conn, $sql);
+        
+        if (!$result === 0) {
+            $_SESSION["error"] = "No se encontró la licencia asignada al socio especificado";
+        }
 
+        $sql2 = "UPDATE socio_licencias SET Estado = 'Válida' WHERE ID_Socio = '$id_socio' AND ID_Licencia = '$id_licencia'";
+        
+        $result2 = mysqli_query($conn, $sql2);
+        
+        if ($result2) {
+            $_SESSION["correcto"] = "Licencia renovada correctamente";
+            return true;
+        } else {
+            $_SESSION["error"] = "Error al renovar la licencia: " . mysqli_error($conn);
+            return false;
+        }
+    } catch(mysqli_sql_exception $e) {
+        $_SESSION["error"] = "Error al renovar la licencia: " . $e->getMessage();
+        return false;
+    }
+}
 
+//////////////////////// PANEL SOCIOS //////////////////////////////////////
+function mostrarvalores2($conn, $id_socio) {
+    
+    $sql = "SELECT licencias.Tipo_Licencia, licencias.Descripcion, licencias.Precio, licencias.Vigencia, 
+                   socio_licencias.Fecha_Expedicion, socio_licencias.Fecha_Caducidad, socio_licencias.Numero_Licencia, 
+                   socio_licencias.Numero_Licencia_Federativa, socio_licencias.Estado
+            FROM socio_licencias 
+            INNER JOIN licencias  ON socio_licencias.ID_Licencia = licencias.ID_Licencia
+            WHERE sl.ID_Socio = '$id_socio'";
+
+    $result = mysqli_query($conn, $sql);
+    
+    if (!$result) {
+        $_SESSION['error'] = "Error en la consulta: " . mysqli_error($conn);
+        return false;
+    }
+
+    $row = mysqli_fetch_assoc($result);
+    
+    $_SESSION["ID_Socio"] = $row['ID_Socio'];
+    $_SESSION["ID_Licencia"] = $row['ID_Licencia'];
+    $_SESSION["Tipo_Licencia"] = $row['Tipo_Licencia'];
+    $_SESSION["Descripcion"] = $row['Descripcion'];
+    $_SESSION["Precio"] = $row['Precio'];
+    $_SESSION["Vigencia"] = $row['Vigencia'];
+    $_SESSION["Fecha_Expedicion"] = $row['Fecha_Expedicion'];
+    $_SESSION["Fecha_Caducidad"] = $row['Fecha_Caducidad'];
+    $_SESSION["Numero_Licencia"] = $row['Numero_Licencia'];
+    $_SESSION["Numero_Licencia_Federativa"] = $row['Numero_Licencia_Federativa'];
+    $_SESSION['Estado'] = $row['Estado'];
+    
+    return true;
+}
 ?>
