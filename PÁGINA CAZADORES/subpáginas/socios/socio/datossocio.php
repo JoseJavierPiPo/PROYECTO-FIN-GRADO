@@ -27,7 +27,6 @@ if ($nombre && $dni) {
     $telefono = isset($_SESSION['Telefono']) ? $_SESSION['Telefono'] : '';
     $estado = isset($_SESSION['Estado']) ? $_SESSION['Estado'] : '';
     $email = isset($_SESSION['Email']) ? $_SESSION['Email'] : '';
-    $rol = isset ($_SESSION['ROL'])? $_SESSION['ROL'] : '';
     $fecha_baja = isset($_SESSION['Fecha_Baja'])? $_SESSION['Fecha_Baja'] : '';
     mostrarvalores($conn, $nombre, $dni);
 }
@@ -41,11 +40,21 @@ if ($id_socio) {
     $numero_licencia_federativa = isset ($_SESSION['Numero_Licencia_federativa'])? $_SESSION['Numero_Licencia_federativa'] : '';
     $estado = isset ($_SESSION['Estado'])? $_SESSION['Estado'] : '';
     mostrarvalores2($conn, $id_socio);
+
+    $nombre_modalidad = isset ($_SESSION['Nombre_Modalidad'])? $_SESSION['Nombre_Modalidad'] : '';
+    $descripcion = isset ($_SESSION['Descripcion'])? $_SESSION['Descripcion'] : '';
+    $temporada_inicio = isset ($_SESSION['Temporada_Inicio'])? $_SESSION['Temporada_Inicio'] : '';
+    $temporada_fin = isset ($_SESSION['Temporada_Fin'])? $_SESSION['Temporada_Fin'] : '';
+    $tipo_caza = isset ($_SESSION["Tipo_Caza"])? $_SESSION["Tipo_Caza"] : '';
+    $arma_predominante = isset ($_SESSION["Arma_Predominante"])? $_SESSION["Arma_Predominante"] : '';
+    $requiere_permiso_especial = isset ($_SESSION["Requiere_Permiso_Especial"])? $_SESSION["Requiere_Permiso_Especial"] : '';
+    $fecha_registro = isset ($_SESSION["Fecha_Registro"])? $_SESSION["Fecha_Registro"] : '';
+
+    mostrarpagos($conn,$id_socio);
+    
 }
-
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -395,93 +404,148 @@ if ($id_socio) {
 
     
     <!-- Contenido principal -->
-    <div class="container my-5">
-        <div class="row justify-content-center">
-            <!-- Tarjeta 1: Información Personal -->
-            <div class="col-md-4 mb-4">
-                <div class="dashboard-card h-100">
-                    <div class="card-header text-center">
-                        <i class="fas fa-user-circle dashboard-icon"></i>
-                        <h3 class="dashboard-title">Información Personal</h3>
-                    </div>
-                    <div class="card-body">
-                        <p><i class="fas fa-id-card icon-info"></i> ID: <?php echo "$id_socio" ?></p>
-                        <p><i class="fas fa-address-card icon-info"></i> DNI: <?php echo $dni ?></p>
-                        <p><i class="fas fa-user icon-info"></i> Nombre: <?php echo "$nombre" ?></p>
-                        <p><i class="fas fa-users icon-info"></i> Apellidos: <?php echo $a1 ." , ". $a2 ?></p>
-                        <p><i class="fas fa-birthday-cake icon-info"></i> Fecha Nacimiento: <?php echo $fecha_nacimiento ?></p>
-                        <p><i class="fas fa-map-marker-alt icon-info"></i> Localidad: <?php echo $localidad ?></p>
-                        <p><i class="fas fa-home icon-info"></i> Domicilio: <?php echo $domicilio ?></p>
-                        <p><i class="fas fa-mail-bulk icon-info"></i> Código Postal: <?php echo $codigo_postal ?></p>
-                        <p><i class="fas fa-phone icon-info"></i> Teléfono: <?php echo $telefono ?></p>
-                        <p><i class="fas fa-envelope icon-info"></i> Email: <?php echo $email ?></p>
-                        <p><i class="fas fa-calendar-plus icon-info"></i> Fecha Alta: <?php echo $fecha_alta ?></p>
-                        <p><i class="fas fa-calendar-plus icon-info"></i> Fecha Baja: <?php echo $fecha_baja ?></p>
-                        <p><i class="fas fa-user-shield icon-info"></i> Estado: <?php echo $estado ?></p>
-                        <p><i class="fas fa-user-tag icon-info"></i> ROL: <?php echo $rol ?></p>
-                    </div>
+<div class="container mt-5">
+    <!-- Sección de información personal modificada -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card bg-dark border-gold mb-4">
+                <div class="card-header bg-black text-gold">
+                    <h3><i class="fas fa-user-circle me-2"></i>Información Personal</h3>
                 </div>
-            </div>
-
-            <!-- Tarjeta 2: Licencias y Modalidades -->
-            <div class="col-md-4 mb-4">
-                <div class="dashboard-card h-100">
-                    <div class="card-header text-center">
-                        <i class="fas fa-id-badge dashboard-icon"></i>
-                        <h3 class="dashboard-title">Licencias y Modalidades</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="licencias-section mb-4">
-                            <h4>Licencias Activas</h4>
-        
-                            <p><i class="fas fa-id-card icon-info"></i> ID Licencia: <?php echo "$id_socio" ?></p>
-                            
+                <div class="card-body text-white">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><i class="fas fa-id-card icon-info"></i>ID: <?php echo $id_socio; ?></p>
+                            <p><i class="fas fa-address-card icon-info"></i>DNI: <?php echo $dni; ?></p>
+                            <p><i class="fas fa-user icon-info"></i>Nombre: <?php echo $nombre; ?></p>
+                            <p><i class="fas fa-users icon-info"></i>Apellidos: <?php echo "$a1 $a2"; ?></p>
+                            <p><i class="fas fa-birthday-cake icon-info"></i>Fecha Nacimiento: <?php echo $fecha_nacimiento; ?></p>
+                            <p><i class="fas fa-map-marker-alt icon-info"></i>Localidad: <?php echo $localidad; ?></p>
+                            <p><i class="fas fa-home icon-info"></i>Domicilio: <?php echo $domicilio; ?></p>
                         </div>
-                        <div class="modalidades-section">
-                            <h4>Modalidades Inscritas</h4>
-                            <?php
-                            if(isset($_SESSION['modalidades'])) {
-                                foreach($_SESSION['modalidades'] as $modalidad) {
-                                    echo "<div class='modalidad-item'>";
-                                    echo "<p><strong>Modalidad:</strong> {$modalidad['Nombre_Modalidad']}</p>";
-                                    echo "<p><strong>Fecha Registro:</strong> {$modalidad['Fecha_Registro']}</p>";
-                                    echo "</div>";
-                                }
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 3: Estado de Pagos -->
-            <div class="col-md-4 mb-4">
-                <div class="dashboard-card h-100">
-                    <div class="card-header text-center">
-                        <i class="fas fa-money-bill-wave dashboard-icon"></i>
-                        <h3 class="dashboard-title">Estado de Pagos</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="pagos-section">
-                            <?php
-                            if(isset($_SESSION['pagos'])) {
-                                foreach($_SESSION['pagos'] as $pago) {
-                                    $estadoClase = $pago['Estado'] == 'Pagado' ? 'text-success' : 'text-danger';
-                                    echo "<div class='pago-item mb-3'>";
-                                    echo "<p><strong>Concepto:</strong> {$pago['Concepto']}</p>";
-                                    echo "<p><strong>Importe:</strong> {$pago['Importe']}€</p>";
-                                    echo "<p><strong>Estado:</strong> <span class='{$estadoClase}'>{$pago['Estado']}</span></p>";
-                                    echo "<p><strong>Fecha Vencimiento:</strong> {$pago['Fecha_Vencimiento']}</p>";
-                                    echo "</div>";
-                                }
-                            }
-                            ?>
+                        <div class="col-md-6">
+                            <p><i class="fas fa-mail-bulk icon-info"></i>Código Postal: <?php echo $codigo_postal; ?></p>
+                            <p><i class="fas fa-phone icon-info"></i>Teléfono: <?php echo $telefono; ?></p>
+                            <p><i class="fas fa-envelope icon-info"></i>Email: <?php echo $email; ?></p>
+                            <p><i class="fas fa-calendar-plus icon-info"></i>Fecha Alta: <?php echo $fecha_alta; ?></p>
+                            <p><i class="fas fa-calendar-minus icon-info"></i>Fecha Baja: <?php echo $fecha_baja; ?></p>
+                            <p><i class="fas fa-user-shield icon-info"></i>Estado: <?php echo $estado; ?></p>
+                            <p><i class="fas fa-user-tag icon-info"></i>ROL: <?php echo $rol; ?></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Sección de Licencias -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card bg-dark border-gold mb-4">
+                <div class="card-header bg-black text-gold">
+                    <h3><i class="fas fa-id-card me-2"></i>Licencias</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Número de Licencia</th>
+                                    <th>Licencia Federativa</th>
+                                    <th>Fecha Expedición</th>
+                                    <th>Fecha Caducidad</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><?php echo $numero_licencia; ?></td>
+                                    <td><?php echo $numero_licencia_federativa; ?></td>
+                                    <td><?php echo $fecha_expedicion; ?></td>
+                                    <td><?php echo $fecha_caducidad; ?></td>
+                                    <td><span class="badge bg-<?php echo $estado == 'Activo' ? 'success' : 'danger'; ?>"><?php echo $estado; ?></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Modalidades -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card bg-dark border-gold mb-4">
+                <div class="card-header bg-black text-gold">
+                    <h3><i class="fas fa-bullseye me-2"></i>Modalidades de Caza</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Modalidad</th>
+                                    <th>Tipo de Caza</th>
+                                    <th>Temporada</th>
+                                    <th>Arma Predominante</th>
+                                    <th>Permiso Especial</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><?php echo $nombre_modalidad; ?></td>
+                                    <td><?php echo $tipo_caza; ?></td>
+                                    <td><?php echo $temporada_inicio . ' - ' . $temporada_fin; ?></td>
+                                    <td><?php echo $arma_predominante; ?></td>
+                                    <td><?php echo $requiere_permiso_especial ? 'Sí' : 'No'; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Pagos -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card bg-dark border-gold mb-4">
+                <div class="card-header bg-black text-gold">
+                    <h3><i class="fas fa-money-bill-wave me-2"></i>Estado de Pagos</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Concepto</th>
+                                    <th>Descripción</th>
+                                    <th>Monto</th>
+                                    <th>Fecha de Pago</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><?php echo isset($_SESSION["Concepto"]) ? $_SESSION["Concepto"] : 'No disponible'; ?></td>
+                                    <td><?php echo isset($_SESSION["Descripcion"]) ? $_SESSION["Descripcion"] : 'No disponible'; ?></td>
+                                    <td><?php echo isset($_SESSION["Monto"]) ? $_SESSION["Monto"] . '€' : 'No disponible'; ?></td>
+                                    <td><?php echo isset($_SESSION["Fecha_Pago"]) ? $_SESSION["Fecha_Pago"] : 'No disponible'; ?></td>
+                                    <td><span class="badge bg-<?php echo isset($_SESSION["Estado_Pago"]) && $_SESSION["Estado_Pago"] == 'Pagado' ? 'success' : 'danger'; ?>"><?php echo isset($_SESSION["Estado_Pago"]) ? $_SESSION["Estado_Pago"] : 'Pendiente'; ?></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
 
     <!-- Botón Volver -->
     <a href="../areaprivadasocio.php" class="back-button">
@@ -498,7 +562,7 @@ if ($id_socio) {
                 <div class="col-md-4 text-center mb-3 mb-md-0">
                     <h5 class="text-gold">CONTACTO</h5>
                     <p><span class="icon-wrapper"><i class="fas fa-phone icon-list"></i></span>924 680 033</p>
-                    <p><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>info@sociotral.com</p>
+                    <p><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>cazadorespiporros@hotmail.com</p>
                 </div>
                 <div class="col-md-4 social-section">
                     <h5 class="text-gold">SÍGUENOS</h5>
@@ -518,7 +582,7 @@ if ($id_socio) {
         </div>
     </footer>
     
-    <!-- Bootstrap JS -->
+    <!-- Botones JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Efecto parallax
@@ -551,4 +615,8 @@ if ($id_socio) {
     </script>
 </body>
 </html>
+
+
+
+
 

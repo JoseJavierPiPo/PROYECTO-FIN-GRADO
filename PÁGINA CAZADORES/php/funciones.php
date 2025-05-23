@@ -782,7 +782,7 @@ function mostrarvalores2($conn, $id_socio) {
                    socio_licencias.Numero_Licencia_Federativa, socio_licencias.Estado
             FROM socio_licencias 
             INNER JOIN licencias  ON socio_licencias.ID_Licencia = licencias.ID_Licencia
-            WHERE sl.ID_Socio = '$id_socio'";
+            WHERE socio_licencias.ID_Socio = '$id_socio'";
 
     $result = mysqli_query($conn, $sql);
     
@@ -793,18 +793,71 @@ function mostrarvalores2($conn, $id_socio) {
 
     $row = mysqli_fetch_assoc($result);
     
-    $_SESSION["ID_Socio"] = $row['ID_Socio'];
-    $_SESSION["ID_Licencia"] = $row['ID_Licencia'];
-    $_SESSION["Tipo_Licencia"] = $row['Tipo_Licencia'];
-    $_SESSION["Descripcion"] = $row['Descripcion'];
-    $_SESSION["Precio"] = $row['Precio'];
-    $_SESSION["Vigencia"] = $row['Vigencia'];
-    $_SESSION["Fecha_Expedicion"] = $row['Fecha_Expedicion'];
-    $_SESSION["Fecha_Caducidad"] = $row['Fecha_Caducidad'];
-    $_SESSION["Numero_Licencia"] = $row['Numero_Licencia'];
-    $_SESSION["Numero_Licencia_Federativa"] = $row['Numero_Licencia_Federativa'];
-    $_SESSION['Estado'] = $row['Estado'];
+    $_SESSION["ID_Socio"] = isset($row['ID_Socio']) ? $row['ID_Socio'] : '';
+    $_SESSION["ID_Licencia"] = isset($row['ID_Licencia']) ? $row['ID_Licencia'] : '';
+    $_SESSION["Tipo_Licencia"] = isset($row['Tipo_Licencia']) ? $row['Tipo_Licencia'] : '';
+    $_SESSION["Descripcion"] = isset($row['Descripcion']) ? $row['Descripcion'] : '';
+    $_SESSION["Precio"] = isset($row['Precio']) ? $row['Precio'] : '';
+    $_SESSION["Vigencia"] = isset($row['Vigencia']) ? $row['Vigencia'] : '';
+    $_SESSION["Fecha_Expedicion"] = isset($row['Fecha_Expedicion']) ? $row['Fecha_Expedicion'] : '';
+    $_SESSION["Fecha_Caducidad"] = isset($row['Fecha_Caducidad']) ? $row['Fecha_Caducidad'] : '';
+    $_SESSION["Numero_Licencia"] = isset($row['Numero_Licencia']) ? $row['Numero_Licencia'] : '';
+    $_SESSION["Numero_Licencia_Federativa"] = isset($row['Numero_Licencia_Federativa']) ? $row['Numero_Licencia_Federativa'] : '';
+    $_SESSION["Estado"] = isset($row['Estado']) ? $row['Estado'] : '';
     
     return true;
 }
+
+
+function mostrarvalores3($conn, $id_socio) {
+    $sql = "SELECT modalidades_caza.Nombre_Modalidad, modalidades_caza.Descripcion, modalidades_caza.Temporada_Inicio, modalidades_caza.Temporada_Fin, modalidades_caza.Tipo_Caza, modalidades_caza.Arma_Predominante, modalidades_caza.Requiere_Permiso_Especial, socio_modalidades.ID_Socio, socio_modalidades.Fecha_Registro
+    FROM modalidades_caza
+    INNER JOIN socio_modalidades  ON modalidades_caza.ID_Modalidad = socio_modalidades.ID_Modalidad
+    WHERE socio_modalidades.ID_Socio = '$id_socio';";
+
+    $result = mysqli_query($conn, $sql);
+
+    if (!$result) {
+        $_SESSION['error'] = "Error en la consulta: ". mysqli_error($conn);
+        return false;
+    }
+    $row = mysqli_fetch_array($result);
+    
+    $_SESSION["Nombre_Modalidad"] = isset($row['Nombre_Modalidad'])? $row['Nombre_Modalidad'] : '';
+    $_SESSION["Descripcion"] = isset($row['Descripcion'])? $row['Descripcion'] : '';
+    $_SESSION["Temporada_Inicio"] = isset($row['Temporada_Inicio'])? $row['Temporada_Inicio'] : '';
+    $_SESSION["Temporada_Fin"] = isset($row['Temporada_Fin'])? $row['Temporada_Fin'] : '';
+    $_SESSION["Tipo_Caza"] = isset($row['Tipo_Caza'])? $row['Tipo_Caza'] : '';
+    $_SESSION["Arma_Predominante"] = isset($row['Arma_Predominante'])? $row['Arma_Predominante'] : '';
+    $_SESSION["Requiere_Permiso_Especial"] = isset($row['Requiere_Permiso_Especial'])? $row['Requiere_Permiso_Especial'] : '';
+    $_SESSION["ID_Socio"] = isset($row['ID_Socio'])? $row['ID_Socio'] : '';
+    $_SESSION["Fecha_Registro"] = isset($row['Fecha_Registro'])? $row['Fecha_Registro'] : '';
+
+    return true;
+
+}
+
+function mostrarpagos($conn,$id_socio){
+    $sql = "SELECT socios.Nombre, licencias.Descripcion, pago_socios.Concepto, pago_socios.Monto, pago_socios.Fecha_Pago 
+    FROM pago_socios
+    INNER JOIN licencias  ON pago_socios.ID_Licencia = licencias.ID_Licencia
+    INNER JOIN socios  ON pago_socios.ID_Socio = socios.ID_Socio
+    WHERE pago_socios.ID_Socio = '$id_socio';";
+
+    $result = mysqli_query($conn, $sql);
+
+    if (!$result) {
+        $_SESSION['error'] = "Error en la consulta: ". mysqli_error($conn);
+    }
+    $row = mysqli_fetch_array($result);
+
+    $_SESSION["Nombre"] = isset($row['Nombre'])? $row['Nombre'] : '';
+    $_SESSION["Descripcion"] = isset($row['Descripcion'])? $row['Descripcion'] : '';
+    $_SESSION["Concepto"] = isset($row['Concepto'])? $row['Concepto'] : '';
+    $_SESSION["Monto"] = isset($row['Monto'])? $row['Monto'] : '';
+    $_SESSION['Fecha_Pago'] = isset($row['Fecha_Pago'])? $row['Fecha_Pago'] : '';
+
+}
+
+
 ?>

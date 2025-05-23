@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-05-2025 a las 12:37:55
+-- Tiempo de generación: 23-05-2025 a las 13:28:49
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,10 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `cazadores_bd`
 --
-CREATE IF NOT EXISTS `cazadores_bd` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `cazadores_bd`;
 
--- --------------------------------------------------------
 -- --------------------------------------------------------
 
 --
@@ -74,6 +71,34 @@ INSERT INTO `modalidades_caza` (`ID_Modalidad`, `Nombre_Modalidad`, `Descripcion
 (1, 'Salto con escopeta', 'Caza menor en la que el cazador camina y dispara a las aves al vuelo.', '2025-10-01', '2026-02-28', 'Menor', 'Escopeta', 'No'),
 (2, 'Liebre con galgos', 'Caza menor donde los galgos persiguen a la liebre para capturarla.', '2025-11-15', '2026-01-31', 'Menor', 'Galgos', 'No'),
 (3, 'Perdiz con reclamo', 'Caza menor que utiliza una perdiz macho para atraer a otras perdices.', '2025-12-01', '2026-02-28', 'Menor', 'Escopeta', 'No');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pago_socios`
+--
+
+CREATE TABLE `pago_socios` (
+  `ID_Pago` int(11) NOT NULL,
+  `ID_Socio` int(11) NOT NULL,
+  `ID_Licencia` int(11) NOT NULL,
+  `Concepto` enum('Licencia','1_Cuota','2_Cuota') NOT NULL,
+  `Monto` decimal(10,2) NOT NULL,
+  `Fecha_Pago` date NOT NULL DEFAULT curdate()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pago_socios`
+--
+
+INSERT INTO `pago_socios` (`ID_Pago`, `ID_Socio`, `ID_Licencia`, `Concepto`, `Monto`, `Fecha_Pago`) VALUES
+(1, 1, 3, 'Licencia', 200.00, '2023-01-05'),
+(2, 2, 2, '1_Cuota', 40.00, '2022-07-05'),
+(3, 2, 2, '2_Cuota', 40.00, '2022-08-05'),
+(4, 5, 1, '1_Cuota', 50.00, '2022-03-15'),
+(5, 4, 3, 'Licencia', 200.00, '2020-02-20'),
+(6, 6, 1, '2_Cuota', 50.00, '2022-10-05'),
+(7, 1, 1, 'Licencia', 50.00, '2023-01-10');
 
 -- --------------------------------------------------------
 
@@ -190,6 +215,14 @@ ALTER TABLE `modalidades_caza`
   ADD UNIQUE KEY `Nombre_Modalidad` (`Nombre_Modalidad`);
 
 --
+-- Indices de la tabla `pago_socios`
+--
+ALTER TABLE `pago_socios`
+  ADD PRIMARY KEY (`ID_Pago`),
+  ADD KEY `ID_Socio` (`ID_Socio`),
+  ADD KEY `ID_Licencia` (`ID_Licencia`);
+
+--
 -- Indices de la tabla `socios`
 --
 ALTER TABLE `socios`
@@ -230,6 +263,12 @@ ALTER TABLE `modalidades_caza`
   MODIFY `ID_Modalidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `pago_socios`
+--
+ALTER TABLE `pago_socios`
+  MODIFY `ID_Pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT de la tabla `socios`
 --
 ALTER TABLE `socios`
@@ -252,6 +291,13 @@ ALTER TABLE `socio_modalidades`
 --
 
 --
+-- Filtros para la tabla `pago_socios`
+--
+ALTER TABLE `pago_socios`
+  ADD CONSTRAINT `pago_socios_ibfk_1` FOREIGN KEY (`ID_Socio`) REFERENCES `socios` (`ID_Socio`),
+  ADD CONSTRAINT `pago_socios_ibfk_2` FOREIGN KEY (`ID_Licencia`) REFERENCES `licencias` (`ID_Licencia`);
+
+--
 -- Filtros para la tabla `socio_licencias`
 --
 ALTER TABLE `socio_licencias`
@@ -269,17 +315,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-CREATE TABLE `pagos_licencias` (
-  `ID_Pago` INT(11) NOT NULL AUTO_INCREMENT,
-  `ID_Socio_Licencia` INT(11) NOT NULL,
-  `Fecha_Pago` DATE NOT NULL DEFAULT CURDATE(),
-  `Metodo_Pago` ENUM('Efectivo', 'Transferencia', 'Tarjeta', 'Bizum') NOT NULL,
-  `Importe` DECIMAL(10,2) NOT NULL,
-  `Estado_Pago` ENUM('Pendiente', 'Pagado', 'Rechazado') DEFAULT 'Pagado',
-  `Referencia_Transaccion` VARCHAR(50) DEFAULT NULL,
-  PRIMARY KEY (`ID_Pago`),
-  FOREIGN KEY (`ID_Socio_Licencia`) REFERENCES `socio_licencias`(`ID`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
