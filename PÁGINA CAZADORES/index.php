@@ -389,7 +389,7 @@
         <div class="container header-content">
             <div class="row">
                 <div class="col-12 text-center">
-                    <a href="index.html"><img src="./fotos/logosociedad.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
+                    <a href="index.php"><img src="./fotos/logosociedad.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
                     <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
                     <h2 class="h3 nombre-sociedad">LOS PIPORROS</h2>
                 </div>
@@ -472,23 +472,23 @@
                                 <span class="icon-wrapper"><i class="fas fa-file-signature icon-nav"></i></span>
                                 ACTAS
                             </a></li>
-                            <li><a class="dropdown-item" href="documentación.html#estatutos-content">
+                            <li><a class="dropdown-item" href="#">
                                 <span class="icon-wrapper"><i class="fas fa-book icon-nav"></i></span>
                                 ESTATUTOS
                             </a></li>
-                            <li><a class="dropdown-item" href="documentación.html#autorizaciones-content">
+                            <li><a class="dropdown-item" href="#">
                                 <span class="icon-wrapper"><i class="fas fa-file-contract icon-nav"></i></span>
                                 AUTORIZACIONES
                             </a></li>
-                            <li><a class="dropdown-item" href="documentación.html#armas-content">
+                            <li><a class="dropdown-item" href="#">
                                 <span class="icon-wrapper"><i class="fas fa-gun icon-nav"></i></span>
                                 ARMAS
                             </a></li>
-                            <li><a class="dropdown-item" href="documentación.html#normativa-content">
+                            <li><a class="dropdown-item" href="#">
                                 <span class="icon-wrapper"><i class="fas fa-gavel icon-nav"></i></span>
                                 NORMATIVA
                             </a></li>
-                            <li><a class="dropdown-item" href="documentación.html#inscripcion-content">
+                            <li><a class="dropdown-item" href="#">
                                 <span class="icon-wrapper"><i class="fas fa-user-plus icon-nav"></i></span>
                                 INSCRIPCIÓN SOCIOS
                             </a></li>
@@ -553,15 +553,11 @@
                             DATOS DE INTERÉS
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">
-                                <span class="icon-wrapper"><i class="fas fa-map-marker-alt icon-nav"></i></span>
-                                DIRECCIONES
-                            </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="./documentos/cuadro limites zonas de seguridad y terrenos no cinegeticos.pdf">
                                 <span class="icon-wrapper"><i class="fas fa-shield-alt icon-nav"></i></span>
                                 ZONAS DE SEGURIDAD
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="./documentos/Licencia de caza mayores 65.pdf">
                                 <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
                                 LICENCIAS +65
                             </a></li>
@@ -579,7 +575,7 @@
         </div>
     </nav>
     
-    
+    <!-- Contenido Principal -->
     <div class="container my-5">
         <div class="row">
             <main class="content-main">
@@ -625,20 +621,7 @@
                         <a href="./documentos/CALENDARIO DE CAZA 24-25.pdf" class="btn btn-gold mt-2"><span class="icon-wrapper"><i class="fas fa-calendar-alt icon-btn"></i></span>Ver calendario completo</a>
                     </div>
                     
-                    <div class="section">
-                        <h3><span class="icon-wrapper"><i class="fas fa-file-alt icon-title"></i></span> Documentación</h3>
-                        <p>Accede a los documentos importantes para los socios:</p>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><span class="icon-wrapper"><i class="fas fa-file-pdf icon-list"></i></span> Estatutos de la Sociedad</li>
-                            <li class="mb-2"><span class="icon-wrapper"><i class="fas fa-file-pdf icon-list"></i></span> Normativa actual</li>
-                        </ul>
-                        <div class="divider"></div>
-                        <div class="d-flex justify-content-around">
-                            <img src="https://via.placeholder.com/100x60.png?text=LOGO1" alt="Logo 1" class="img-fluid" style="max-height: 60px;">
-                            <img src="https://via.placeholder.com/100x60.png?text=LOGO2" alt="Logo 2" class="img-fluid" style="max-height: 60px;">
-                            <img src="https://via.placeholder.com/100x60.png?text=LOGO3" alt="Logo 3" class="img-fluid" style="max-height: 60px;">
-                        </div>
-                    </div>
+                
                 </div>
             </main>
             
@@ -708,6 +691,13 @@
         </div>
     </footer>
     
+    <!-- Script Base de Datos -->
+    <?php 
+    include_once('./php/conn2.php');
+    initializeDatabase($conn1, $db_name); 
+    ?>
+
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>

@@ -433,7 +433,7 @@ session_start();
         <div class="container header-content text-center">
             <div class="row">
                 <div class="col-12">
-                    <a href="../index.html"><img src="../fotos/logosociedad.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
+                    <a href="../index.php"><img src="../fotos/logosociedad.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
                     <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
                     <h2 class="h3">LOS PIPORROS</h2>
                 </div>
@@ -451,7 +451,7 @@ session_start();
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../historia.html">
+                        <a class="nav-link" href="historia.html">
                             <span class="icon-wrapper"><i class="fas fa-landmark icon-nav"></i></span>
                             HISTORIA
                         </a>
@@ -507,32 +507,32 @@ session_start();
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="../documentación.html" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="documentación.html" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-file-alt icon-nav"></i></span>
                             DOCUMENTACIÓN
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="../documentación.html#actas-content">
+                            <li><a class="dropdown-item" href="documentación.html#actas-content">
                                 <span class="icon-wrapper"><i class="fas fa-file-signature icon-nav"></i></span>
                                 ACTAS
                             </a></li>
-                            <li><a class="dropdown-item" href="../documentación.html#estatutos-content">
+                            <li><a class="dropdown-item" href="#">
                                 <span class="icon-wrapper"><i class="fas fa-book icon-nav"></i></span>
                                 ESTATUTOS
                             </a></li>
-                            <li><a class="dropdown-item" href="../documentación.html#autorizaciones-content">
+                            <li><a class="dropdown-item" href="#">
                                 <span class="icon-wrapper"><i class="fas fa-file-contract icon-nav"></i></span>
                                 AUTORIZACIONES
                             </a></li>
-                            <li><a class="dropdown-item" href="../documentación.html#armas-content">
+                            <li><a class="dropdown-item" href="#">
                                 <span class="icon-wrapper"><i class="fas fa-gun icon-nav"></i></span>
                                 ARMAS
                             </a></li>
-                            <li><a class="dropdown-item" href="../documentación.html#normativa-content">
+                            <li><a class="dropdown-item" href="#">
                                 <span class="icon-wrapper"><i class="fas fa-gavel icon-nav"></i></span>
                                 NORMATIVA
                             </a></li>
-                            <li><a class="dropdown-item" href="../documentación.html#inscripcion-content">
+                            <li><a class="dropdown-item" href="#">
                                 <span class="icon-wrapper"><i class="fas fa-user-plus icon-nav"></i></span>
                                 INSCRIPCIÓN SOCIOS
                             </a></li>
@@ -546,20 +546,20 @@ session_start();
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="../subpáginas/login.php">
+                                <a class="dropdown-item dropdown-toggle" href="./subpáginas/login.php">
                                     <span class="icon-wrapper"><i class="fas fa-users-cog icon-nav"></i></span>
                                     ÁREA PRIVADA
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="../subpáginas/admin/gestion_admin.php">
+                                    <li><a class="dropdown-item" href="./subpáginas/admin/gestion_admin.php">
                                         <span class="icon-wrapper"><i class="fas fa-users icon-nav"></i></span>
                                         Gestión Socios
                                     </a></li>
-                                    <li><a class="dropdown-item" href="../subpáginas/admin/licencias_admin.php">
+                                    <li><a class="dropdown-item" href="./subpáginas/admin/licencias_admin.php">
                                         <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
                                         Gestión de Licencias
                                     </a></li>
-                                    <li><a class="dropdown-item" href="../subpáginas/admin/modalidades_admin.php">
+                                    <li><a class="dropdown-item" href="./subpáginas/admin/modalidades_admin.php">
                                         <span class="icon-wrapper"><i class="fas fa-bullseye icon-nav"></i></span>
                                         Modalidades de Caza
                                     </a></li>
@@ -592,20 +592,16 @@ session_start();
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="datosInteresDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="../../documentación.html" id="datosInteresDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-info-circle icon-nav"></i></span>
                             DATOS DE INTERÉS
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">
-                                <span class="icon-wrapper"><i class="fas fa-map-marker-alt icon-nav"></i></span>
-                                DIRECCIONES
-                            </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="./documentos/cuadro limites zonas de seguridad y terrenos no cinegeticos.pdf">
                                 <span class="icon-wrapper"><i class="fas fa-shield-alt icon-nav"></i></span>
                                 ZONAS DE SEGURIDAD
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="./documentos/Licencia de caza mayores 65.pdf">
                                 <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
                                 LICENCIAS +65
                             </a></li>
@@ -633,10 +629,13 @@ session_start();
                         <div class="login-form">
                             <h2><span class="icon-wrapper"><i class="fas fa-lock icon-title"></i></span>Área Privada</h2>
                             
+                            <?php  ?>
                             <?php if(isset($_SESSION["Error"])): ?>
                             <div class="error-message">
-                                <?php echo $_SESSION["Error"]; ?>
-                                <?php unset($_SESSION["Error"]); ?>
+                                <?php
+                                 echo $_SESSION["Error"]; 
+                                 unset($_SESSION["Error"]);
+                                ?>
                             </div>
                             <?php endif; ?>
                             
@@ -739,10 +738,10 @@ session_start();
     </script>
     <?php
     include_once("../php/funciones.php");
-    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nombre = $_POST["Nombre"];
         $dni = $_POST["DNI"];
-
+    
         iniciosesion($conn, $nombre, $dni);
 
     }

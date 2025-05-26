@@ -46,7 +46,7 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
         <div class="container header-content">
             <div class="row">
                 <div class="col-12 text-center">
-                    <a href="../../index.html"><img src="../../fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
+                    <a href="../../index.php"><img src="../../fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
                     <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
                     <h2 class="h3 nombre-sociedad">LOS PIPORROS</h2>
                 </div>

@@ -41,6 +41,7 @@ if ($id_socio) {
     $estado = isset ($_SESSION['Estado'])? $_SESSION['Estado'] : '';
     mostrarvalores2($conn, $id_socio);
 
+    mostrarvalores3($conn, $id_socio);
     $nombre_modalidad = isset ($_SESSION['Nombre_Modalidad'])? $_SESSION['Nombre_Modalidad'] : '';
     $descripcion = isset ($_SESSION['Descripcion'])? $_SESSION['Descripcion'] : '';
     $temporada_inicio = isset ($_SESSION['Temporada_Inicio'])? $_SESSION['Temporada_Inicio'] : '';
@@ -394,7 +395,7 @@ if ($id_socio) {
         <div class="container header-content">
             <div class="row">
                 <div class="col-12 text-center">
-                    <a href="index.html"><img src="../../../fotos/logosociedad.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
+                    <a href="index.php"><img src="../../../fotos/logosociedad.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
                     <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
                     <h2 class="h3 nombre-sociedad">LOS PIPORROS</h2>
                 </div>
@@ -459,11 +460,11 @@ if ($id_socio) {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><?php echo $numero_licencia; ?></td>
-                                    <td><?php echo $numero_licencia_federativa; ?></td>
-                                    <td><?php echo $fecha_expedicion; ?></td>
-                                    <td><?php echo $fecha_caducidad; ?></td>
-                                    <td><span class="badge bg-<?php echo $estado == 'Activo' ? 'success' : 'danger'; ?>"><?php echo $estado; ?></span></td>
+                                    <td><?php echo isset($numero_licencia) ? $numero_licencia : 'No disponible'; ?></td>
+                                    <td><?php echo isset($numero_licencia_federativa) ? $numero_licencia_federativa : 'No disponible'; ?></td>
+                                    <td><?php echo isset($fecha_expedicion) ? $fecha_expedicion : 'No disponible'; ?></td>
+                                    <td><?php echo isset($fecha_caducidad) ? $fecha_caducidad : 'No disponible'; ?></td>
+                                    <td><span class="badge bg-<?php echo isset($estado) ? ($estado == 'Activo' ? 'success' : 'danger') : 'secondary'; ?>"><?php echo isset($estado) ? $estado : 'No disponible'; ?></span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -494,11 +495,11 @@ if ($id_socio) {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><?php echo $nombre_modalidad; ?></td>
-                                    <td><?php echo $tipo_caza; ?></td>
-                                    <td><?php echo $temporada_inicio . ' - ' . $temporada_fin; ?></td>
-                                    <td><?php echo $arma_predominante; ?></td>
-                                    <td><?php echo $requiere_permiso_especial ? 'Sí' : 'No'; ?></td>
+                                    <td><?php echo isset($nombre_modalidad) ? $nombre_modalidad : 'No disponible'; ?></td>
+                                    <td><?php echo isset($tipo_caza) ? $tipo_caza : 'No disponible'; ?></td>
+                                    <td><?php echo (isset($temporada_inicio) && isset($temporada_fin)) ? ($temporada_inicio.' - '.$temporada_fin) : 'No disponible'; ?></td>
+                                    <td><?php echo isset($arma_predominante) ? $arma_predominante : 'No disponible'; ?></td>
+                                    <td><?php echo isset($permiso_especial) ? $permiso_especial : 'No disponible'; ?></td>
                                 </tr>
                             </tbody>
                         </table>
