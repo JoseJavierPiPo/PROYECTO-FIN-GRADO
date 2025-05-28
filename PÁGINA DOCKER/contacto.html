@@ -1,18 +1,3 @@
-<?php
-session_start();
-include_once("../../php/funciones.php");
-
-// Verificar variables de sesión
-$nombre = isset($_SESSION['Nombre']) ? $_SESSION['Nombre'] : '';
-$dni = isset($_SESSION['DNI']) ? $_SESSION['DNI'] : '';
-$rol = isset($_SESSION['ROL']) ? $_SESSION['ROL'] : '';
-
-// Verificar si el usuario es administrador
-if ($rol !== 'Admin') {
-    header("Location: ../login.php");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,6 +10,8 @@ if ($rol !== 'Admin') {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
 
    <style>
     :root {
@@ -62,9 +49,9 @@ if ($rol !== 'Admin') {
     }
 
     .logo-img {
-        max-width: 150px;
-        filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7));
-    }
+            max-width: 400px;
+            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7));
+        }
 
     .nombre-sociedad {
         text-align: center;
@@ -140,126 +127,6 @@ if ($rol !== 'Admin') {
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-    /* Contenido principal */
-
-    .gestion-container {
-        max-width: 1200px;
-        margin: 50px auto;
-        padding: 20px;
-        flex: 1;
-    }
-    .section-title {
-        color: var(--color-oro);
-        text-align: center;
-        margin: 40px 0 20px;
-        font-size: 1.8em;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border-bottom: 2px solid var(--color-oro);
-        padding-bottom: 10px;
-    }
-    
-    .gestion-grid {
-        margin-bottom: 40px;
-    }
-
-    .gestion-title {
-        color: var(--color-oro);
-        text-align: center;
-        margin-bottom: 40px;
-        font-size: 2.5em;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-    }
-
-    .gestion-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-        padding: 2rem;
-        margin: 0 auto;
-        max-width: 1200px;
-        justify-content: center;
-    }
-
-    .gestion-card {
-        background-color: rgba(0, 0, 0, 0.8);
-        border: 1px solid var(--color-oro);
-        border-radius: 10px;
-        padding: 2rem;
-        text-align: center;
-        transition: all 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 100%;
-        min-height: 350px;
-    }
-
-    .gestion-icon {
-        font-size: 3.5em;
-        color: var(--color-oro) !important;
-        margin-bottom: 1.5rem;
-    }
-
-    .gestion-card h3 {
-        color: var(--color-oro);
-        font-size: 1.5em;
-        margin-bottom: 1rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .gestion-card p {
-        color: var(--color-texto);
-        margin-bottom: 1.5rem;
-        font-size: 1em;
-        line-height: 1.5;
-    }
-
-    /* Botones */
-    .btn-gold {
-        background-color: var(--color-oro);
-        color: var(--color-fondo);
-        padding: 0.8rem 1.5rem;
-        border: none;
-        border-radius: 5px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: all 0.3s ease;
-        width: 100%;
-        max-width: 200px;
-        margin: 0 auto;
-        display: block;
-        text-align: center;
-        position: relative;
-        bottom: 1rem;
-    }
-
-    .btn-gold:hover {
-        background-color: var(--color-oro-claro);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
-    }
-
-    .back-button {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        background-color: var(--color-oro);
-        color: var(--color-fondo);
-        padding: 10px 20px;
-        border-radius: 5px;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        z-index: 1000;
-    }
-
-    .back-button:hover {
-        background-color: var(--color-oro-claro);
-        color: var(--color-fondo);
-    }
 
     /* Footer */
     .footer {
@@ -269,11 +136,30 @@ if ($rol !== 'Admin') {
         margin-top: 3rem;
     }
 
-    .text-gold {
-        color: var(--color-oro);
-        margin-bottom: 1rem;
-        text-align: center;
+    /* Estilos para la página de contacto */
+    .border-gold {
+        border: 1px solid var(--color-oro) !important;
     }
+
+    .card.bg-dark {
+        background-color: rgba(0, 0, 0, 0.8) !important;
+    }
+
+    .form-control.bg-dark {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .form-control:focus {
+        background-color: rgba(255, 255, 255, 0.2) !important;
+        border-color: var(--color-oro-claro) !important;
+        box-shadow: 0 0 5px rgba(212, 175, 55, 0.5) !important;
+        color: var(--color-texto) !important;
+    }
+
+    .text-gold {
+        color: var(--color-oro) !important;
+    }
+   
 
     .footer p {
         display: flex;
@@ -351,7 +237,7 @@ if ($rol !== 'Admin') {
         }
         
         .logo-img {
-            max-width: 120px;
+            max-width: 200px;
         }
         
         .navbar-custom .nav-link {
@@ -368,7 +254,7 @@ if ($rol !== 'Admin') {
         <div class="container header-content">
             <div class="row">
                 <div class="col-12 text-center">
-                    <a href="../../index.php"><img src="../../fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
+                    <a href="index.php"><img src="./fotos/logosociedad.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
                     <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
                     <h2 class="h3 nombre-sociedad">LOS PIPORROS</h2>
                 </div>
@@ -386,7 +272,7 @@ if ($rol !== 'Admin') {
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../../historia.html">
+                        <a class="nav-link" href="historia.html">
                             <span class="icon-wrapper"><i class="fas fa-landmark icon-nav"></i></span>
                             HISTORIA
                         </a>
@@ -442,32 +328,32 @@ if ($rol !== 'Admin') {
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="documentación.html" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-file-alt icon-nav"></i></span>
                             DOCUMENTACIÓN
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="documentación.html#actas-content">
                                 <span class="icon-wrapper"><i class="fas fa-file-signature icon-nav"></i></span>
                                 ACTAS
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="documentación.html#estatutos-content">
                                 <span class="icon-wrapper"><i class="fas fa-book icon-nav"></i></span>
                                 ESTATUTOS
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="documentación.html#autorizaciones-content">
                                 <span class="icon-wrapper"><i class="fas fa-file-contract icon-nav"></i></span>
                                 AUTORIZACIONES
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="documentación.html#armas-content">
                                 <span class="icon-wrapper"><i class="fas fa-gun icon-nav"></i></span>
                                 ARMAS
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="documentación.html#normativa-content">
                                 <span class="icon-wrapper"><i class="fas fa-gavel icon-nav"></i></span>
                                 NORMATIVA
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="documentación.html#inscripcion-content">
                                 <span class="icon-wrapper"><i class="fas fa-user-plus icon-nav"></i></span>
                                 INSCRIPCIÓN SOCIOS
                             </a></li>
@@ -475,26 +361,32 @@ if ($rol !== 'Admin') {
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="x" id="areaPrivadaDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="areaPrivadaDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-lock icon-nav"></i></span>
                             ÁREA PRIVADA
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="../../subpáginas/admin/areaprivadaadmin.php">
-                                    <span class="icon-wrapper"><i class="bi bi-folder-fill"></i></span>
+                                <a class="dropdown-item dropdown-toggle" href="./subpáginas/login.php">
+                                    <span class="icon-wrapper"><i class="fas fa-users-cog icon-nav"></i></span>
                                     ÁREA PRIVADA
                                 </a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
-                                    <span class="icon-wrapper"><i class="fas fa-handshake icon-nav"></i></span>
-                                    ACUERDOS
-                                </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">
-                                        <span class="icon-wrapper"><i class="fas fa-vote-yea icon-nav"></i></span>
-                                        ELECCIONES
+                                    <li><a class="dropdown-item" href="./subpáginas/admin/gestion_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-users icon-nav"></i></span>
+                                        Gestión Socios
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="./subpáginas/admin/licencias_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
+                                        Gestión de Licencias
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="./subpáginas/admin/modalidades_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-bullseye icon-nav"></i></span>
+                                        Modalidades de Caza
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="panel_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-user-shield icon-nav"></i></span>
+                                        Panel Admin
                                     </a></li>
                                 </ul>
                             </li>
@@ -542,7 +434,7 @@ if ($rol !== 'Admin') {
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="../../contacto.html">
+                        <a class="nav-link" href="./contacto.html">
                             <span class="icon-wrapper"><i class="fas fa-envelope icon-nav"></i></span>
                             CONTACTO
                         </a>
@@ -553,93 +445,66 @@ if ($rol !== 'Admin') {
     </nav>
     
     <!-- Contenido principal -->
-    <a href="areaprivadaadmin.php" class="back-button">
-        <i class="fas fa-arrow-left"></i> Volver
-    </a>
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card bg-dark border-gold">
+                    <div class="card-body">
+                        <h2 class="text-center text-gold mb-4">Contacta con Nosotros</h2>
+                        <form id="contactForm">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label text-gold">Nombre completo</label>
+                                <input type="text" class="form-control bg-dark text-light border-gold" id="nombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label text-gold">Correo electrónico</label>
+                                <input type="email" class="form-control bg-dark text-light border-gold" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="asunto" class="form-label text-gold">Asunto</label>
+                                <input type="text" class="form-control bg-dark text-light border-gold" id="asunto" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="mensaje" class="form-label text-gold">Mensaje</label>
+                                <textarea class="form-control bg-dark text-light border-gold" id="mensaje" rows="5" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-gold px-5">
+                                    <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
-    <div class="gestion-container">
-        <h1 class="gestion-title">GESTIÓN DE MODALIDADES DE CAZA</h1>
-        
-        <!-- Grupo 1: Gestión de Modalidades -->
-        <h2 class="section-title">Gestión de Modalidades</h2>
-        <div class="gestion-grid">
-            <!-- Crear Modalidad -->
-            <div class="gestion-card">
-                <i class="fas fa-plus-circle gestion-icon"></i>
-                <h3>Crear Modalidad</h3>
-                <p>Añade nuevas modalidades de caza al sistema con sus respectivas características y requisitos.</p>
-                <a href="./modalidades/crearmodalidad.php" class="btn btn-gold">Crear Nueva</a>
-            </div>
-    
-            <!-- Borrar Modalidad -->
-            <div class="gestion-card">
-                <i class="fas fa-trash-alt gestion-icon"></i>
-                <h3>Borrar Modalidad</h3>
-                <p>Elimina modalidades de caza que ya no estén activas o sean necesarias.</p>
-                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Eliminar</a>
-            </div>
-    
-            <!-- Listar Modalidades -->
-            <div class="gestion-card">
-                <i class="fas fa-list-ul gestion-icon"></i>
-                <h3>Listar Modalidades</h3>
-                <p>Visualiza todas las modalidades de caza disponibles en el sistema.</p>
-                <a href="./modalidades/listarmodalidades.php" class="btn btn-gold">Ver Lista</a>
-            </div>
-    
-            <!-- Filtrar Modalidades -->
-            <div class="gestion-card">
-                <i class="fas fa-filter gestion-icon"></i>
-                <h3>Filtrar Modalidades</h3>
-                <p>Busca y filtra modalidades según diferentes criterios y temporadas.</p>
-                <a href="./modalidades/filtromodalidades.php" class="btn btn-gold">Filtrar</a>
-            </div>
-
-            <div class="gestion-card">
-                <i class="fas fa-users-viewfinder gestion-icon"></i>
-                <h3>Búsqueda por Socio</h3>
-                <p>Busca las modalidades asignadas a cada socio.</p>
-                <a href="modalidades/asignaciones/busquedamodalidades.php" class="btn btn-gold">
-                    <i class="fas fa-search me-2"></i>Buscar
-                </a>
+                <!-- Información de contacto adicional -->
+                <div class="row mt-5">
+                    <div class="col-md-4 text-center mb-4">
+                        <i class="fas fa-map-marker-alt icon-card"></i>
+                        <h4 class="text-gold">Dirección</h4>
+                        <p>Calle Medio, 5 C. <br>06207 Aceuchal<br>Badajoz</p>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <i class="fas fa-phone icon-card"></i>
+                        <h4 class="text-gold">Teléfono</h4>
+                        <p>924 680 033</p>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <i class="fas fa-envelope icon-card"></i>
+                        <h4 class="text-gold">Email</h4>
+                        <p>cazadorespiporros@hotmail.com</p>
+                    </div>
+                </div>
             </div>
         </div>
-    
-        <!-- Grupo 2: Gestión de Asignaciones -->
-        <h2 class="section-title">Gestión de Asignaciones</h2>
-        <div class="gestion-grid">
-            <!-- Asignar Modalidad -->
-            <div class="gestion-card">
-                <i class="fas fa-user-plus gestion-icon"></i>
-                <h3>Asignar Modalidad</h3>
-                <p>Vincula socios a modalidades específicas de caza según sus preferencias y permisos.</p>
-                <a href="./modalidades/asignaciones/asignarmodalidad.php" class="btn btn-gold">Asignar</a>
-            </div>
-    
-            <!-- Eliminar Asignación -->
-            <div class="gestion-card">
-                <i class="fas fa-user-minus gestion-icon"></i>
-                <h3>Eliminar Asignación</h3>
-                <p>Revoca la asignación de modalidades a socios cuando sea necesario.</p>
-                <a href="./modalidades/asignaciones/borrarasignacion.php" class="btn btn-gold">Eliminar Asignación</a>
-            </div>
+    </main>
 
-            <div class="gestion-card">
-                <i class="fas fa-trash-alt gestion-icon"></i>
-                <h3>Busqueda de Socios por Modalidad</h3>
-                <p>Filtro/Busqueda de socios por modalidad</p>
-                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Busca</a>
-            </div>
-        </div>
-    </div>
-
-    
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                    <a href="https://aceuchal.com/"><img src="../../fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
+                    <a href="https://aceuchal.com/"><img src="../PÁGINA CAZADORES/fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
                 </div>
                 <div class="col-md-4 text-center mb-3 mb-md-0">
                     <h5 class="text-gold">CONTACTO</h5>

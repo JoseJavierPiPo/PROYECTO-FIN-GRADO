@@ -1,18 +1,3 @@
-<?php
-session_start();
-include_once("../../php/funciones.php");
-
-// Verificar variables de sesión
-$nombre = isset($_SESSION['Nombre']) ? $_SESSION['Nombre'] : '';
-$dni = isset($_SESSION['DNI']) ? $_SESSION['DNI'] : '';
-$rol = isset($_SESSION['ROL']) ? $_SESSION['ROL'] : '';
-
-// Verificar si el usuario es administrador
-if ($rol !== 'Admin') {
-    header("Location: ../login.php");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -26,8 +11,10 @@ if ($rol !== 'Admin') {
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-   <style>
-    :root {
+
+
+    <style>
+         :root {
         --color-oro: #D4AF37;
         --color-oro-claro: #e8c252;
         --color-oro-oscuro: #b8972e;
@@ -36,6 +23,7 @@ if ($rol !== 'Admin') {
         --color-texto: #eee;
     }
 
+    /* Estructura Base */
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background-color: var(--color-fondo);
@@ -62,7 +50,7 @@ if ($rol !== 'Admin') {
     }
 
     .logo-img {
-        max-width: 150px;
+        max-width: 400px;
         filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7));
     }
 
@@ -72,7 +60,7 @@ if ($rol !== 'Admin') {
         display: block;
     }
 
-    /* Navbar */
+    /* Navegación */
     .navbar-custom {
         background-color: rgba(0, 0, 0, 0.9) !important;
         border-top: 1px solid var(--color-oro);
@@ -123,6 +111,37 @@ if ($rol !== 'Admin') {
         color: var(--color-oro) !important;
     }
 
+    /* Contenido principal */
+    .main-content {
+        background-color: rgba(0, 0, 0, 0.7);
+        border: 1px solid #333;
+        border-radius: 5px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .section {
+        padding: 2rem;
+        border-bottom: 1px solid #333;
+    }
+
+    .section:last-child {
+        border-bottom: none;
+    }
+
+    h2, h3 {
+        color: var(--color-oro);
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    h2 {
+        border-bottom: 2px solid var(--color-oro);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+    }
+
     /* Botones */
     .btn-gold {
         background-color: var(--color-oro);
@@ -140,125 +159,81 @@ if ($rol !== 'Admin') {
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-    /* Contenido principal */
 
-    .gestion-container {
-        max-width: 1200px;
-        margin: 50px auto;
-        padding: 20px;
-        flex: 1;
+    /* Sidebar */
+    .sidebar {
+        background-color: rgba(20, 20, 20, 0.8);
+        border: 1px solid #333;
+        border-radius: 5px;
+        padding: 1.5rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
-    .section-title {
+
+    .sidebar-title {
         color: var(--color-oro);
-        text-align: center;
-        margin: 40px 0 20px;
-        font-size: 1.8em;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border-bottom: 2px solid var(--color-oro);
-        padding-bottom: 10px;
-    }
-    
-    .gestion-grid {
-        margin-bottom: 40px;
-    }
-
-    .gestion-title {
-        color: var(--color-oro);
-        text-align: center;
-        margin-bottom: 40px;
-        font-size: 2.5em;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-    }
-
-    .gestion-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-        padding: 2rem;
-        margin: 0 auto;
-        max-width: 1200px;
-        justify-content: center;
-    }
-
-    .gestion-card {
-        background-color: rgba(0, 0, 0, 0.8);
-        border: 1px solid var(--color-oro);
-        border-radius: 10px;
-        padding: 2rem;
-        text-align: center;
-        transition: all 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 100%;
-        min-height: 350px;
-    }
-
-    .gestion-icon {
-        font-size: 3.5em;
-        color: var(--color-oro) !important;
-        margin-bottom: 1.5rem;
-    }
-
-    .gestion-card h3 {
-        color: var(--color-oro);
-        font-size: 1.5em;
+        border-bottom: 1px solid var(--color-oro);
+        padding-bottom: 0.5rem;
         margin-bottom: 1rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
     }
 
-    .gestion-card p {
+    .sidebar-menu {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .sidebar-item {
+        margin-bottom: 0.5rem;
+    }
+
+    .sidebar-link {
         color: var(--color-texto);
-        margin-bottom: 1.5rem;
-        font-size: 1em;
-        line-height: 1.5;
-    }
-
-    /* Botones */
-    .btn-gold {
-        background-color: var(--color-oro);
-        color: var(--color-fondo);
-        padding: 0.8rem 1.5rem;
-        border: none;
-        border-radius: 5px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: all 0.3s ease;
-        width: 100%;
-        max-width: 200px;
-        margin: 0 auto;
-        display: block;
-        text-align: center;
-        position: relative;
-        bottom: 1rem;
-    }
-
-    .btn-gold:hover {
-        background-color: var(--color-oro-claro);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
-    }
-
-    .back-button {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        background-color: var(--color-oro);
-        color: var(--color-fondo);
-        padding: 10px 20px;
-        border-radius: 5px;
         text-decoration: none;
-        transition: all 0.3s ease;
-        z-index: 1000;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #333;
+        transition: all 0.3s;
     }
 
-    .back-button:hover {
-        background-color: var(--color-oro-claro);
-        color: var(--color-fondo);
+    .sidebar-link:hover {
+        color: var(--color-oro);
+        padding-left: 5px;
+    }
+    /* MINI CALENDARIO */
+    #mini-calendario .datepicker-inline {
+        width: 100%;
+        max-width: 250px;  /* Reducido de 300px */
+        margin: 0 auto;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 10px;     /* Reducido de 15px */
+        border-radius: 8px;
+        border: 1px solid var(--color-oro);
+    }
+
+    #mini-calendario .datepicker table {
+        width: 100%;
+        background-color: var(--color-fondo);
+    }
+
+    #mini-calendario .datepicker table tr td,
+    #mini-calendario .datepicker table tr th {
+        color: var(--color-texto);
+        background-color: var(--color-fondo);
+        border: 1px solid var(--color-oro-oscuro);
+        padding: 0.2rem;   /* Reducido de 0.3rem */
+        font-size: 0.8rem; /* Reducido de 0.9rem */
+    }
+
+    #mini-calendario .datepicker table tr td.active {
+        background-color: var(--color-oro) !important;
+        color: var(--color-fondo) !important;
+    }
+
+    #mini-calendario .datepicker table tr td.today {
+        background-color: rgba(212, 175, 55, 0.3) !important;
+        color: var(--color-oro) !important;
     }
 
     /* Footer */
@@ -337,11 +312,53 @@ if ($rol !== 'Admin') {
         color: var(--color-oro);
     }
 
+    /* Sistema de columnas */
+    .content-main {
+        flex: 0 0 auto;
+        width: 66.66666667%;
+    }
+
+    .content-sidebar {
+        flex: 0 0 auto;
+        width: 33.33333333%;
+    }
+
+    .card-column {
+        flex: 0 0 auto;
+        width: 50%;
+        padding: 0 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Cards */
+    .feature-card {
+        background-color: var(--color-fondo);
+        border: 1px solid var(--color-oro-oscuro);
+        border-radius: 0.25rem;
+        height: 100%;
+        transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-card-body {
+        padding: 1.5rem;
+        text-align: center;
+    }
+
     /* Responsive */
     @media (max-width: 992px) {
         .parallax-header {
             background-attachment: scroll;
             height: 50vh;
+        }
+        
+        .content-main, 
+        .content-sidebar {
+            width: 100%;
         }
     }
 
@@ -351,14 +368,18 @@ if ($rol !== 'Admin') {
         }
         
         .logo-img {
-            max-width: 120px;
+            max-width: 200px; 
+        }
+        
+        .card-column {
+            width: 100%;
         }
         
         .navbar-custom .nav-link {
             padding: 0.5rem 0.75rem;
         }
     }
-   </style>
+    </style>
     
 </head>
 <body>
@@ -368,7 +389,7 @@ if ($rol !== 'Admin') {
         <div class="container header-content">
             <div class="row">
                 <div class="col-12 text-center">
-                    <a href="../../index.php"><img src="../../fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
+                    <a href="index.php"><img src="./fotos/logosociedad.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
                     <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
                     <h2 class="h3 nombre-sociedad">LOS PIPORROS</h2>
                 </div>
@@ -386,7 +407,7 @@ if ($rol !== 'Admin') {
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../../historia.html">
+                        <a class="nav-link" href="historia.html">
                             <span class="icon-wrapper"><i class="fas fa-landmark icon-nav"></i></span>
                             HISTORIA
                         </a>
@@ -442,12 +463,12 @@ if ($rol !== 'Admin') {
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="documentación.html" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-file-alt icon-nav"></i></span>
                             DOCUMENTACIÓN
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="documentación.html#actas-content">
                                 <span class="icon-wrapper"><i class="fas fa-file-signature icon-nav"></i></span>
                                 ACTAS
                             </a></li>
@@ -475,26 +496,32 @@ if ($rol !== 'Admin') {
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="x" id="areaPrivadaDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="areaPrivadaDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-lock icon-nav"></i></span>
                             ÁREA PRIVADA
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="../../subpáginas/admin/areaprivadaadmin.php">
-                                    <span class="icon-wrapper"><i class="bi bi-folder-fill"></i></span>
+                                <a class="dropdown-item dropdown-toggle" href="./subpáginas/login.php">
+                                    <span class="icon-wrapper"><i class="fas fa-users-cog icon-nav"></i></span>
                                     ÁREA PRIVADA
                                 </a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
-                                    <span class="icon-wrapper"><i class="fas fa-handshake icon-nav"></i></span>
-                                    ACUERDOS
-                                </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">
-                                        <span class="icon-wrapper"><i class="fas fa-vote-yea icon-nav"></i></span>
-                                        ELECCIONES
+                                    <li><a class="dropdown-item" href="./subpáginas/admin/gestion_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-users icon-nav"></i></span>
+                                        Gestión Socios
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="./subpáginas/admin/licencias_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
+                                        Gestión de Licencias
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="./subpáginas/admin/modalidades_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-bullseye icon-nav"></i></span>
+                                        Modalidades de Caza
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="panel_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-user-shield icon-nav"></i></span>
+                                        Panel Admin
                                     </a></li>
                                 </ul>
                             </li>
@@ -526,15 +553,11 @@ if ($rol !== 'Admin') {
                             DATOS DE INTERÉS
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">
-                                <span class="icon-wrapper"><i class="fas fa-map-marker-alt icon-nav"></i></span>
-                                DIRECCIONES
-                            </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="./documentos/cuadro limites zonas de seguridad y terrenos no cinegeticos.pdf">
                                 <span class="icon-wrapper"><i class="fas fa-shield-alt icon-nav"></i></span>
                                 ZONAS DE SEGURIDAD
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="./documentos/Licencia de caza mayores 65.pdf">
                                 <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
                                 LICENCIAS +65
                             </a></li>
@@ -542,7 +565,7 @@ if ($rol !== 'Admin') {
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="../../contacto.html">
+                        <a class="nav-link" href="./contacto.html">
                             <span class="icon-wrapper"><i class="fas fa-envelope icon-nav"></i></span>
                             CONTACTO
                         </a>
@@ -552,94 +575,98 @@ if ($rol !== 'Admin') {
         </div>
     </nav>
     
-    <!-- Contenido principal -->
-    <a href="areaprivadaadmin.php" class="back-button">
-        <i class="fas fa-arrow-left"></i> Volver
-    </a>
-
-    <div class="gestion-container">
-        <h1 class="gestion-title">GESTIÓN DE MODALIDADES DE CAZA</h1>
-        
-        <!-- Grupo 1: Gestión de Modalidades -->
-        <h2 class="section-title">Gestión de Modalidades</h2>
-        <div class="gestion-grid">
-            <!-- Crear Modalidad -->
-            <div class="gestion-card">
-                <i class="fas fa-plus-circle gestion-icon"></i>
-                <h3>Crear Modalidad</h3>
-                <p>Añade nuevas modalidades de caza al sistema con sus respectivas características y requisitos.</p>
-                <a href="./modalidades/crearmodalidad.php" class="btn btn-gold">Crear Nueva</a>
-            </div>
-    
-            <!-- Borrar Modalidad -->
-            <div class="gestion-card">
-                <i class="fas fa-trash-alt gestion-icon"></i>
-                <h3>Borrar Modalidad</h3>
-                <p>Elimina modalidades de caza que ya no estén activas o sean necesarias.</p>
-                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Eliminar</a>
-            </div>
-    
-            <!-- Listar Modalidades -->
-            <div class="gestion-card">
-                <i class="fas fa-list-ul gestion-icon"></i>
-                <h3>Listar Modalidades</h3>
-                <p>Visualiza todas las modalidades de caza disponibles en el sistema.</p>
-                <a href="./modalidades/listarmodalidades.php" class="btn btn-gold">Ver Lista</a>
-            </div>
-    
-            <!-- Filtrar Modalidades -->
-            <div class="gestion-card">
-                <i class="fas fa-filter gestion-icon"></i>
-                <h3>Filtrar Modalidades</h3>
-                <p>Busca y filtra modalidades según diferentes criterios y temporadas.</p>
-                <a href="./modalidades/filtromodalidades.php" class="btn btn-gold">Filtrar</a>
-            </div>
-
-            <div class="gestion-card">
-                <i class="fas fa-users-viewfinder gestion-icon"></i>
-                <h3>Búsqueda por Socio</h3>
-                <p>Busca las modalidades asignadas a cada socio.</p>
-                <a href="modalidades/asignaciones/busquedamodalidades.php" class="btn btn-gold">
-                    <i class="fas fa-search me-2"></i>Buscar
-                </a>
-            </div>
-        </div>
-    
-        <!-- Grupo 2: Gestión de Asignaciones -->
-        <h2 class="section-title">Gestión de Asignaciones</h2>
-        <div class="gestion-grid">
-            <!-- Asignar Modalidad -->
-            <div class="gestion-card">
-                <i class="fas fa-user-plus gestion-icon"></i>
-                <h3>Asignar Modalidad</h3>
-                <p>Vincula socios a modalidades específicas de caza según sus preferencias y permisos.</p>
-                <a href="./modalidades/asignaciones/asignarmodalidad.php" class="btn btn-gold">Asignar</a>
-            </div>
-    
-            <!-- Eliminar Asignación -->
-            <div class="gestion-card">
-                <i class="fas fa-user-minus gestion-icon"></i>
-                <h3>Eliminar Asignación</h3>
-                <p>Revoca la asignación de modalidades a socios cuando sea necesario.</p>
-                <a href="./modalidades/asignaciones/borrarasignacion.php" class="btn btn-gold">Eliminar Asignación</a>
-            </div>
-
-            <div class="gestion-card">
-                <i class="fas fa-trash-alt gestion-icon"></i>
-                <h3>Busqueda de Socios por Modalidad</h3>
-                <p>Filtro/Busqueda de socios por modalidad</p>
-                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Busca</a>
-            </div>
+    <!-- Contenido Principal -->
+    <div class="container my-5">
+        <div class="row">
+            <main class="content-main">
+                <div class="main-content">
+                    <div class="section">
+                        <h2><span class="icon-wrapper"><i class="fas fa-handshake icon-title"></i></span> Bienvenidos a la Sociedad de Cazadores Los Piporros</h2>
+                        <p>Somos una sociedad deportiva dedicada a la práctica de la caza en nuestro territorio, respetando la tradición y el medio ambiente.</p>
+                        <p>Nuestra organización tiene como objetivo principal fomentar la práctica de la caza responsable y sostenible, así como mantener las tradiciones cinegéticas locales.</p>
+                        
+                        <div class="row mt-4">
+                            <div class="card-column">
+                                <div class="feature-card">
+                                    <div class="feature-card-body">
+                                        <div class="icon-wrapper"><i class="fas fa-calendar-alt icon-card"></i></div>
+                                        <h4 class="card-title">Eventos Anuales</h4>
+                                        <p class="card-text">Participa en nuestras actividades programadas durante todo el año.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-column">
+                                <div class="feature-card">
+                                        <div class="feature-card-body">
+                                            <a href="./documentos/normativa.doc"><div class="icon-wrapper"><i class="fas fa-book icon-card"></i></div></a>
+                                            <h4 class="card-title">Normativa</h4>
+                                            <p class="card-text">Consulta nuestra normativa y regulaciones para una caza responsable.</p>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3><span class="icon-wrapper"><i class="fas fa-newspaper icon-title"></i></span> Noticias</h3>
+                        <div class="alert alert-dark" role="alert">
+                            <span class="icon-wrapper"><i class="fas fa-info-circle icon-list"></i></span> No hay noticias disponibles en este momento.
+                        </div>
+                        <a href="#" class="btn btn-gold mt-2"><span class="icon-wrapper"><i class="fas fa-list icon-btn"></i></span>Ver todas las noticias</a>
+                    </div>
+                    
+                    <div class="section">
+                        <h3><span class="icon-wrapper"><i class="fas fa-calendar-check icon-title"></i></span> Calendario</h3>
+                        <div id="mini-calendario" class="mt-3"></div>
+                        <a href="./documentos/CALENDARIO DE CAZA 24-25.pdf" class="btn btn-gold mt-2"><span class="icon-wrapper"><i class="fas fa-calendar-alt icon-btn"></i></span>Ver calendario completo</a>
+                    </div>
+                    
+                
+                </div>
+            </main>
+            
+            <aside class="content-sidebar">
+                <div class="sidebar mb-4">
+                    <h3 class="sidebar-title"><span class="icon-wrapper"><i class="fas fa-history icon-title"></i></span> HISTORIA</h3>
+                    <ul class="sidebar-menu">
+                        <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-camera icon-list"></i></span>Galería fotográfica</a></li>
+                        <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-file-alt icon-list"></i></span>Documentación</a></li>
+                        <li class="sidebar-item"><a href="./subpáginas/login.php" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-lock icon-list"></i></span>Área privada</a></li>
+                        <li class="sidebar-item"><a href="./contacto.html" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar mb-4">
+                    <h3 class="sidebar-title"><span class="icon-wrapper"><i class="fas fa-search icon-title"></i></span> BUSCAR</h3>
+                    <form class="search-form">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control bg-dark text-white border-secondary" placeholder="Buscar...">
+                            <button class="btn btn-gold" type="submit"><span class="icon-wrapper"><i class="fas fa-search"></i></span></button>
+                        </div>
+                    </form>
+                    
+                    <h3 class="sidebar-title mt-4"><span class="icon-wrapper"><i class="fas fa-bullhorn icon-title"></i></span> ÚLTIMAS ENTRADAS</h3>
+                    <div class="alert alert-dark" role="alert">
+                        <span class="icon-wrapper"><i class="fas fa-exclamation-circle icon-list"></i></span> NADA ENCONTRADO
+                    </div>
+                </div>
+                
+                <div class="sidebar">
+                    <h3 class="sidebar-title"><span class="icon-wrapper"><i class="fas fa-trophy icon-title"></i></span> TROFEOS</h3>
+                    <img src="https://via.placeholder.com/300x200.png?text=TROFEOS" alt="Trofeos" class="img-fluid rounded mb-3">
+                    <p>Galería de los mejores trofeos de la temporada.</p>
+                    <a href="#" class="btn btn-gold btn-sm w-100"><span class="icon-wrapper"><i class="fas fa-eye icon-btn"></i></span>Ver más</a>
+                </div>
+            </aside>
         </div>
     </div>
-
     
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                    <a href="https://aceuchal.com/"><img src="../../fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
+                    <a href="https://aceuchal.com/"><img src="../PÁGINA CAZADORES/fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
                 </div>
                 <div class="col-md-4 text-center mb-3 mb-md-0">
                     <h5 class="text-gold">CONTACTO</h5>
@@ -664,6 +691,13 @@ if ($rol !== 'Admin') {
         </div>
     </footer>
     
+    <!-- Script Base de Datos -->
+    <?php 
+    include_once('./php/conn2.php');
+    initializeDatabase($conn1, $db_name); 
+    ?>
+
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -692,6 +726,21 @@ if ($rol !== 'Admin') {
                 item.addEventListener('mouseleave', function() {
                     this.querySelector('.dropdown-menu').classList.remove('show');
                 });
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.es.min.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+            $('#mini-calendario').datepicker({
+                format: 'dd/mm/yyyy',
+                language: 'es',
+                todayHighlight: true,
+                autoclose: false,
+                defaultViewDate: { year: 2024, month: 0, day: 1 }
             });
         });
     </script>

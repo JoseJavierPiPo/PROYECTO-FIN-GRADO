@@ -1,6 +1,5 @@
 <?php
 session_start();
-include_once("../../../../php/conn.php");  
 include_once("../../../../php/funciones.php");
 
 // Verificar variables de sesión
@@ -18,7 +17,8 @@ if ($rol !== 'Admin') {
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $id_socio = $_POST['id_socio'];
     $id_modalidad = $_POST['id_modalidad'];
-    borrarmodalidadasocio ($conn, $id_socio, $id_modalidad);
+    $fecha_registro = date('Y-m-d');
+    asignarmodalidadsocio($conn, $id_socio, $id_modalidad, $fecha_registro);
 }
 ?>
 
@@ -223,7 +223,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
     <div class="container">
         <div class="form-container">
-                    <h1 class="form-title">Borrar Modalidad de Socio</h1>
+                    <h1 class="form-title">Asignar Modalidad a Socio</h1>
                     
                     <?php
                         if(isset($_SESSION['correcto'])) {
@@ -236,7 +236,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                         }
                     ?>
 
-                    <form method="POST" action="borrarasignacion.php">
+                    <form method="POST" action="asignarmodalidad.php">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -250,7 +250,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                         
                         <button type="submit" class="btn btn-gold">
-                            <i class="fas fa-plus-circle me-2"></i>BORRAR MODALIDAD AL SOCIO
+                            <i class="fas fa-plus-circle me-2"></i>AÑADIR MODALIDAD AL SOCIO
                         </button>
                     </form>
                 </div>

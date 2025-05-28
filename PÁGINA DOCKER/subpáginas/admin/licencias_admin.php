@@ -148,20 +148,6 @@ if ($rol !== 'Admin') {
         padding: 20px;
         flex: 1;
     }
-    .section-title {
-        color: var(--color-oro);
-        text-align: center;
-        margin: 40px 0 20px;
-        font-size: 1.8em;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border-bottom: 2px solid var(--color-oro);
-        padding-bottom: 10px;
-    }
-    
-    .gestion-grid {
-        margin-bottom: 40px;
-    }
 
     .gestion-title {
         color: var(--color-oro);
@@ -174,12 +160,11 @@ if ($rol !== 'Admin') {
 
     .gestion-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 2rem;
         padding: 2rem;
         margin: 0 auto;
-        max-width: 1200px;
-        justify-content: center;
+        max-width: 1400px;
     }
 
     .gestion-card {
@@ -215,6 +200,20 @@ if ($rol !== 'Admin') {
         margin-bottom: 1.5rem;
         font-size: 1em;
         line-height: 1.5;
+    }
+    .section-title {
+        color: var(--color-oro);
+        text-align: center;
+        margin: 40px 0 20px;
+        font-size: 1.8em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid var(--color-oro);
+        padding-bottom: 10px;
+    }
+    
+    .gestion-grid {
+        margin-bottom: 40px;
     }
 
     /* Botones */
@@ -557,83 +556,71 @@ if ($rol !== 'Admin') {
         <i class="fas fa-arrow-left"></i> Volver
     </a>
 
-    <div class="gestion-container">
-        <h1 class="gestion-title">GESTIÓN DE MODALIDADES DE CAZA</h1>
-        
-        <!-- Grupo 1: Gestión de Modalidades -->
-        <h2 class="section-title">Gestión de Modalidades</h2>
+    <!-- GRUPO 1  -->
+    <h2 class="section-title">Panel Gestión de Licencias</h2>
         <div class="gestion-grid">
-            <!-- Crear Modalidad -->
-            <div class="gestion-card">
-                <i class="fas fa-plus-circle gestion-icon"></i>
-                <h3>Crear Modalidad</h3>
-                <p>Añade nuevas modalidades de caza al sistema con sus respectivas características y requisitos.</p>
-                <a href="./modalidades/crearmodalidad.php" class="btn btn-gold">Crear Nueva</a>
-            </div>
-    
-            <!-- Borrar Modalidad -->
-            <div class="gestion-card">
-                <i class="fas fa-trash-alt gestion-icon"></i>
-                <h3>Borrar Modalidad</h3>
-                <p>Elimina modalidades de caza que ya no estén activas o sean necesarias.</p>
-                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Eliminar</a>
-            </div>
-    
-            <!-- Listar Modalidades -->
-            <div class="gestion-card">
-                <i class="fas fa-list-ul gestion-icon"></i>
-                <h3>Listar Modalidades</h3>
-                <p>Visualiza todas las modalidades de caza disponibles en el sistema.</p>
-                <a href="./modalidades/listarmodalidades.php" class="btn btn-gold">Ver Lista</a>
-            </div>
-    
-            <!-- Filtrar Modalidades -->
-            <div class="gestion-card">
-                <i class="fas fa-filter gestion-icon"></i>
-                <h3>Filtrar Modalidades</h3>
-                <p>Busca y filtra modalidades según diferentes criterios y temporadas.</p>
-                <a href="./modalidades/filtromodalidades.php" class="btn btn-gold">Filtrar</a>
-            </div>
 
-            <div class="gestion-card">
-                <i class="fas fa-users-viewfinder gestion-icon"></i>
-                <h3>Búsqueda por Socio</h3>
-                <p>Busca las modalidades asignadas a cada socio.</p>
-                <a href="modalidades/asignaciones/busquedamodalidades.php" class="btn btn-gold">
-                    <i class="fas fa-search me-2"></i>Buscar
-                </a>
-            </div>
-        </div>
-    
-        <!-- Grupo 2: Gestión de Asignaciones -->
-        <h2 class="section-title">Gestión de Asignaciones</h2>
-        <div class="gestion-grid">
-            <!-- Asignar Modalidad -->
             <div class="gestion-card">
                 <i class="fas fa-user-plus gestion-icon"></i>
-                <h3>Asignar Modalidad</h3>
-                <p>Vincula socios a modalidades específicas de caza según sus preferencias y permisos.</p>
-                <a href="./modalidades/asignaciones/asignarmodalidad.php" class="btn btn-gold">Asignar</a>
+                <h3>Crear Licencia</h3>
+                <p>Crea una nueva licencia (Anual, Federativa, Especial destinada a un tipo de caza) Contiene su vigencia en Años además de el Précio de tasas </p>
+                <a href="./licencias/insertarlicencia.php" class="btn btn-gold">CREAR</a>
             </div>
     
-            <!-- Eliminar Asignación -->
             <div class="gestion-card">
                 <i class="fas fa-user-minus gestion-icon"></i>
-                <h3>Eliminar Asignación</h3>
-                <p>Revoca la asignación de modalidades a socios cuando sea necesario.</p>
-                <a href="./modalidades/asignaciones/borrarasignacion.php" class="btn btn-gold">Eliminar Asignación</a>
+                <h3>Eliminar Licencia</h3>
+                <p>Eliminar una licencia creada en la base de datos.</p>
+                <a href="./licencias/borrarlicencia.php" class="btn btn-gold">ELIMINAR</a>
             </div>
 
             <div class="gestion-card">
-                <i class="fas fa-trash-alt gestion-icon"></i>
-                <h3>Busqueda de Socios por Modalidad</h3>
-                <p>Filtro/Busqueda de socios por modalidad</p>
-                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Busca</a>
+                <i class="fas fa-search gestion-icon"></i>
+                <h3>Consultar licencias</h3>
+                <p>Verificar el estado y validez de las licencias existentes</p>
+                <a href="./licencias/filtrolicencias.php" class="btn btn-gold">Consultar Datos</a>
             </div>
+
+            <div class="gestion-card">
+                <i class="fas fa-calendar-check gestion-icon"></i>
+                <h3>Editar información de licencias</h3>
+                <p>Actualizar fechas de validez y renovación de licencias</p>
+                <a href="./licencias/editarlicencias.php" class="btn btn-gold">Modificar Datos</a>
+            </div>
+
         </div>
     </div>
 
-    
+
+    <!-- GRUPO 2 -->
+    <h2 class="section-title">Panel de Asignación de Licencias</h2>
+    <div class="gestion-grid">
+        <div class="gestion-card">
+            <i class="fas fa-user-plus gestion-icon"></i>
+            <h3>Asignar Licencia a Socio</h3>
+            <p>Asigna licencias de caza a los socios según sus requisitos y documentación.</p>
+            <a href="./licencias/asignarlicenciasocio.php" class="btn btn-gold">Asignar</a>
+        </div>
+        <div class="gestion-card">
+            <i class="fas fa-user-minus gestion-icon"></i>
+            <h3>Revocar Licencia</h3>
+            <p>Revoca o cancela licencias por incumplimiento o solicitud.</p>
+            <a href="./licencias/revocarlicenciasocio.php" class="btn btn-gold">Revocar</a>
+        </div>
+        <div class="gestion-card">
+            <i class="fas fa-sync-alt gestion-icon"></i>
+            <h3>Renovar Licencia</h3>
+            <p>Gestiona la renovación de licencias próximas a caducar o ya caducadas.</p>
+            <a href="./licencias/renovarlicencia.php" class="btn btn-gold">Renovar</a>
+        </div>
+        <div class="gestion-card">
+                <i class="fas fa-search gestion-icon"></i>
+                <h3>Filtro Socios por Licencias</h3>
+                <p>Muestra las licencias asignadas a socios existentes</p>
+                <a href="./licencias/filtrosociolicencias.php" class="btn btn-gold">Consultar Datos</a>
+            </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -697,3 +684,5 @@ if ($rol !== 'Admin') {
     </script>
 </body>
 </html>
+
+

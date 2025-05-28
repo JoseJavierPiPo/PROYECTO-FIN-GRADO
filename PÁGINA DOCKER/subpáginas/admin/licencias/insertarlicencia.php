@@ -1,7 +1,6 @@
 <?php
 session_start();
-include_once("../../../../php/conn.php");  
-include_once("../../../../php/funciones.php");
+include_once("../../../php/funciones.php");
 
 // Verificar variables de sesión
 $nombre = isset($_SESSION['Nombre']) ? $_SESSION['Nombre'] : '';
@@ -16,9 +15,13 @@ if ($rol !== 'Admin') {
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
-    $id_socio = $_POST['id_socio'];
-    $id_modalidad = $_POST['id_modalidad'];
-    borrarmodalidadasocio ($conn, $id_socio, $id_modalidad);
+    $id_licencia = $_POST['id_licencia'];
+    $tipo_licencia = $_POST['tipo_licencia'];
+    $descripcion = $_POST['descripcion'];
+    $vigencia = $_POST['vigencia'];
+    $precio = $_POST['precio'];
+
+    insertarlicencia($conn, $id_licencia, $tipo_licencia, $descripcion, $vigencia, $precio);
 }
 ?>
 
@@ -32,7 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Variables globales */
         :root {
             --color-oro: #D4AF37;
             --color-oro-claro: #e8c252;
@@ -42,7 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             --color-texto: #eee;
         }
 
-        /* Estilos base */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--color-fondo);
@@ -55,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             padding: 2rem;
         }
 
-        /* Contenedores */
         .container {
             width: 100%;
             max-width: 1200px;
@@ -67,29 +67,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             background-color: rgba(0, 0, 0, 0.8);
             border: 1px solid var(--color-oro);
             border-radius: 10px;
-            padding: 3rem;
+            padding: 2rem;
             margin: 2rem auto;
-            max-width: 600px;
+            max-width: 800px;
             width: 100%;
         }
 
-        /* Grid del formulario */
-        .row {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .col-md-6 {
-            width: 100%;
-            max-width: 300px;
-        }
-
-        /* Elementos del formulario */
         .form-title {
             color: var(--color-oro);
             text-align: center;
@@ -99,61 +82,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             letter-spacing: 2px;
         }
 
-        .mb-3 {
-            width: 100%;
-            margin-bottom: 2rem;
-        }
-
-        .form-label {
-            color: var(--color-oro);
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: center;
-            display: block;
-        }
-
-        .form-control {
-            text-align: center;
-            width: 100%;
-            padding: 0.8rem;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--color-oro);
-            color: var(--color-texto);
-        }
-
-        /* Estilos para el select */
-        select.form-control {
-            cursor: pointer;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23D4AF37' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            padding-right: 2.5rem;
-        }
-
-        select.form-control option {
-            background-color: var(--color-fondo);
-            color: var(--color-texto);
-        }
-
-        select.form-control:focus {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-color: var(--color-oro-claro);
-            box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
-        }
-
-        /* Botones */
         .btn-gold {
             background-color: var(--color-oro);
             color: var(--color-fondo);
-            padding: 1rem 2rem;
+            padding: 0.8rem 2rem;
             border: none;
             border-radius: 5px;
             font-weight: 600;
@@ -161,9 +93,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             letter-spacing: 1px;
             transition: all 0.3s ease;
             width: auto;
-            min-width: 250px;
-            margin: 2rem auto 1rem;
+            min-width: 200px;
+            margin: 1rem auto;
             display: block;
+        }
+
+        /* Centrar los elementos del formulario */
+        .form-label {
+            text-align: center;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            text-align: center;
+        }
+
+        /* Estilos para el select */
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--color-oro);
+            color: var(--color-texto);
+            margin-bottom: 1rem;
+        }
+
+        /* Estilos para las opciones del select */
+        select.form-control option {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+        }
+
+        /* Estilos para cuando el select está abierto */
+        select.form-control:focus {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: var(--color-oro-claro);
+            color: var(--color-texto);
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Estilos específicos para el fondo del menú desplegable */
+        select.form-control option:hover,
+        select.form-control option:checked {
+            background-color: var(--color-oro);
+            color: var(--color-fondo);
+        }
+
+        .form-label {
+            color: var(--color-oro);
+            font-weight: 500;
+        }
+
+        .btn-gold {
+            background-color: var(--color-oro);
+            color: var(--color-fondo);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
         }
 
         .btn-gold:hover {
@@ -187,21 +178,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
         .back-button:hover {
             background-color: var(--color-oro-claro);
-            color: var(--color-fondo);
+            color:var(--color-fondo)
         }
-
-        /* Alertas */
+        /* Estilos para las alertas */
+        /* Centrar las alertas */
         .alert {
             text-align: center;
             width: 100%;
-            max-width: 400px;
-            margin: 1rem auto 2rem;
-            padding: 1rem;
+            max-width: 600px;
+            margin: 1rem auto;
+            margin-bottom: 1.5rem;
             border: 1px solid var(--color-oro);
             background-color: rgba(0, 0, 0, 0.8);
             color: var(--color-texto);
+            padding: 1rem;
             border-radius: 5px;
-            font-weight: 500;
+            text-align: center;
         }
 
         .alert-error {
@@ -217,13 +209,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 <body>
     <!-- Botón de volver -->
-    <a href="../../modalidades_admin.php" class="back-button">
+    <a href="../licencias_admin.php" class="back-button">
         <i class="fas fa-arrow-left"></i> Volver
     </a>
 
     <div class="container">
         <div class="form-container">
-                    <h1 class="form-title">Borrar Modalidad de Socio</h1>
+                    <h1 class="form-title">Insertar Licencia</h1>
                     
                     <?php
                         if(isset($_SESSION['correcto'])) {
@@ -236,21 +228,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                         }
                     ?>
 
-                    <form method="POST" action="borrarasignacion.php">
+                    <form method="POST" action="insertarlicencia.php">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                        <label for="id_modalidad" class="form-label">ID de la Modalidad</label>
-                                        <input type="number" class="form-control" name="id_modalidad" required>
-                                    </div>
-                                <div class="mb-3">
-                                    <label for="id_socio" class="form-label">ID del Socio</label>
-                                    <input type="number" class="form-control" name="id_socio" required>
+                                    <label for="id_licencia" class="form-label">ID de la Licencia a Registrar</label>
+                                    <input type="number" class="form-control" name="id_licencia" required>
                                 </div>
+                                <div class="mb-3">
+                                    <label for="tipo_licencia" class="form-label">Tipo de Licencia</label>
+                                    <select class="form-control" name="tipo_licencia" required>
+                                        <option value="" disabled selected>Selecciona un Tipo de Licencia</option>
+                                        <option value="Anual">Anual</option>
+                                        <option value="Federativa">Federativa</option>
+                                        <option value="Especial">Especial</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label">Descripción</label>
+                                    <input type="text" class="form-control" name="descripcion" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                
+                                <div class="mb-3">
+                                    <label for="vigencia" class="form-label">Vigencia en Años</label>
+                                    <input type="number" class="form-control" name="vigencia" required>
+                                    <p>1 año para Anual, 1-3 para federativas</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="precio" class="form-label">Precio</label>
+                                    <input type="number" class="form-control" name="precio" required placeholder="€">
+                                </div>
+                            </div>
                         </div>
                         
                         <button type="submit" class="btn btn-gold">
-                            <i class="fas fa-plus-circle me-2"></i>BORRAR MODALIDAD AL SOCIO
+                            <i class="fas fa-plus-circle me-2"></i>INSERTAR LICENCIA
                         </button>
                     </form>
                 </div>

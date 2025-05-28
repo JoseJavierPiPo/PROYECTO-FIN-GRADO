@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("../../php/funciones.php");
+include_once("../../../php/funciones.php");
 
 // Verificar variables de sesión
 $nombre = isset($_SESSION['Nombre']) ? $_SESSION['Nombre'] : '';
@@ -123,23 +123,6 @@ if ($rol !== 'Admin') {
         color: var(--color-oro) !important;
     }
 
-    /* Botones */
-    .btn-gold {
-        background-color: var(--color-oro);
-        color: #000;
-        font-weight: 600;
-        border: none;
-        transition: all 0.3s;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .btn-gold:hover {
-        background-color: var(--color-oro-claro);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
     /* Contenido principal */
 
     .gestion-container {
@@ -147,20 +130,6 @@ if ($rol !== 'Admin') {
         margin: 50px auto;
         padding: 20px;
         flex: 1;
-    }
-    .section-title {
-        color: var(--color-oro);
-        text-align: center;
-        margin: 40px 0 20px;
-        font-size: 1.8em;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border-bottom: 2px solid var(--color-oro);
-        padding-bottom: 10px;
-    }
-    
-    .gestion-grid {
-        margin-bottom: 40px;
     }
 
     .gestion-title {
@@ -174,12 +143,13 @@ if ($rol !== 'Admin') {
 
     .gestion-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 2rem;
         padding: 2rem;
         margin: 0 auto;
-        max-width: 1200px;
-        justify-content: center;
+        max-width: 1400px;
+        justify-items: center;
+        align-items: center;
     }
 
     .gestion-card {
@@ -194,6 +164,8 @@ if ($rol !== 'Admin') {
         justify-content: space-between;
         height: 100%;
         min-height: 350px;
+        width: 100%;
+        max-width: 300px;
     }
 
     .gestion-icon {
@@ -316,6 +288,20 @@ if ($rol !== 'Admin') {
         text-transform: uppercase;
         letter-spacing: 1px;
     }
+    .section-title {
+        color: var(--color-oro);
+        text-align: center;
+        margin: 40px 0 20px;
+        font-size: 1.8em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid var(--color-oro);
+        padding-bottom: 10px;
+    }
+    
+    .gestion-grid {
+        margin-bottom: 40px;
+    }
 
     /* Sistema de iconos */
     .icon-wrapper {
@@ -368,7 +354,7 @@ if ($rol !== 'Admin') {
         <div class="container header-content">
             <div class="row">
                 <div class="col-12 text-center">
-                    <a href="../../index.php"><img src="../../fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
+                    <a href="../../../index.php"><img src="../../../fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
                     <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
                     <h2 class="h3 nombre-sociedad">LOS PIPORROS</h2>
                 </div>
@@ -386,7 +372,7 @@ if ($rol !== 'Admin') {
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../../historia.html">
+                        <a class="nav-link" href="../../../historia.html">
                             <span class="icon-wrapper"><i class="fas fa-landmark icon-nav"></i></span>
                             HISTORIA
                         </a>
@@ -481,7 +467,7 @@ if ($rol !== 'Admin') {
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="../../subpáginas/admin/areaprivadaadmin.php">
+                                <a class="dropdown-item dropdown-toggle" href="../../../subpáginas/admin/areaprivadaadmin.php">
                                     <span class="icon-wrapper"><i class="bi bi-folder-fill"></i></span>
                                     ÁREA PRIVADA
                                 </a>
@@ -542,7 +528,7 @@ if ($rol !== 'Admin') {
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="../../contacto.html">
+                        <a class="nav-link" href="../../../contacto.html">
                             <span class="icon-wrapper"><i class="fas fa-envelope icon-nav"></i></span>
                             CONTACTO
                         </a>
@@ -553,98 +539,50 @@ if ($rol !== 'Admin') {
     </nav>
     
     <!-- Contenido principal -->
-    <a href="areaprivadaadmin.php" class="back-button">
+    <a href="../modalidades_admin.php" class="back-button">
         <i class="fas fa-arrow-left"></i> Volver
     </a>
 
     <div class="gestion-container">
-        <h1 class="gestion-title">GESTIÓN DE MODALIDADES DE CAZA</h1>
-        
-        <!-- Grupo 1: Gestión de Modalidades -->
-        <h2 class="section-title">Gestión de Modalidades</h2>
+        <h1 class="gestion-title">MODALIDADES ACTIVAS</h1>
         <div class="gestion-grid">
-            <!-- Crear Modalidad -->
+            <!-- Perdiz con Reclamo -->
             <div class="gestion-card">
-                <i class="fas fa-plus-circle gestion-icon"></i>
-                <h3>Crear Modalidad</h3>
-                <p>Añade nuevas modalidades de caza al sistema con sus respectivas características y requisitos.</p>
-                <a href="./modalidades/crearmodalidad.php" class="btn btn-gold">Crear Nueva</a>
+                <i class="fas fa-dove gestion-icon"></i>
+                <h3>Perdiz con Reclamo</h3>
+                <p>Modalidad tradicional de caza de perdiz utilizando reclamo. Requiere paciencia y conocimiento específico de la especie.</p>
+                <a href="./activas/reclamo.php" class="btn btn-gold">Gestionar</a>
             </div>
     
-            <!-- Borrar Modalidad -->
+            <!-- Al Salto con Escopeta -->
             <div class="gestion-card">
-                <i class="fas fa-trash-alt gestion-icon"></i>
-                <h3>Borrar Modalidad</h3>
-                <p>Elimina modalidades de caza que ya no estén activas o sean necesarias.</p>
-                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Eliminar</a>
+                <i class="fas fa-running gestion-icon"></i>
+                <h3>Al Salto con Escopeta</h3>
+                <p>Caza menor activa donde el cazador recorre el terreno en busca de piezas. Exige buena forma física y rapidez.</p>
+                <a href="./activas/salto.php" class="btn btn-gold">Gestionar</a>
             </div>
     
-            <!-- Listar Modalidades -->
+            <!-- Liebre con Galgos -->
             <div class="gestion-card">
-                <i class="fas fa-list-ul gestion-icon"></i>
-                <h3>Listar Modalidades</h3>
-                <p>Visualiza todas las modalidades de caza disponibles en el sistema.</p>
-                <a href="./modalidades/listarmodalidades.php" class="btn btn-gold">Ver Lista</a>
-            </div>
-    
-            <!-- Filtrar Modalidades -->
-            <div class="gestion-card">
-                <i class="fas fa-filter gestion-icon"></i>
-                <h3>Filtrar Modalidades</h3>
-                <p>Busca y filtra modalidades según diferentes criterios y temporadas.</p>
-                <a href="./modalidades/filtromodalidades.php" class="btn btn-gold">Filtrar</a>
-            </div>
-
-            <div class="gestion-card">
-                <i class="fas fa-users-viewfinder gestion-icon"></i>
-                <h3>Búsqueda por Socio</h3>
-                <p>Busca las modalidades asignadas a cada socio.</p>
-                <a href="modalidades/asignaciones/busquedamodalidades.php" class="btn btn-gold">
-                    <i class="fas fa-search me-2"></i>Buscar
-                </a>
-            </div>
-        </div>
-    
-        <!-- Grupo 2: Gestión de Asignaciones -->
-        <h2 class="section-title">Gestión de Asignaciones</h2>
-        <div class="gestion-grid">
-            <!-- Asignar Modalidad -->
-            <div class="gestion-card">
-                <i class="fas fa-user-plus gestion-icon"></i>
-                <h3>Asignar Modalidad</h3>
-                <p>Vincula socios a modalidades específicas de caza según sus preferencias y permisos.</p>
-                <a href="./modalidades/asignaciones/asignarmodalidad.php" class="btn btn-gold">Asignar</a>
-            </div>
-    
-            <!-- Eliminar Asignación -->
-            <div class="gestion-card">
-                <i class="fas fa-user-minus gestion-icon"></i>
-                <h3>Eliminar Asignación</h3>
-                <p>Revoca la asignación de modalidades a socios cuando sea necesario.</p>
-                <a href="./modalidades/asignaciones/borrarasignacion.php" class="btn btn-gold">Eliminar Asignación</a>
-            </div>
-
-            <div class="gestion-card">
-                <i class="fas fa-trash-alt gestion-icon"></i>
-                <h3>Busqueda de Socios por Modalidad</h3>
-                <p>Filtro/Busqueda de socios por modalidad</p>
-                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Busca</a>
+                <i class="fas fa-paw gestion-icon"></i>
+                <h3>Liebre con Galgos</h3>
+                <p>Modalidad tradicional de caza de liebre con galgos. Combina la velocidad de los perros con la astucia de la liebre.</p>
+                <a href="./activas/liebre.php" class="btn btn-gold">Gestionar</a>
             </div>
         </div>
     </div>
-
     
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                    <a href="https://aceuchal.com/"><img src="../../fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
+                    <a href="https://aceuchal.com/"><img src="../../../fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
                 </div>
                 <div class="col-md-4 text-center mb-3 mb-md-0">
                     <h5 class="text-gold">CONTACTO</h5>
                     <p><span class="icon-wrapper"><i class="fas fa-phone icon-list"></i></span>924 680 033</p>
-                    <p><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>cazadorespiporros@hotmail.com</p>
+                    <p><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>info@sociotral.com</p>
                 </div>
                 <div class="col-md-4 social-section">
                     <h5 class="text-gold">SÍGUENOS</h5>
@@ -664,7 +602,7 @@ if ($rol !== 'Admin') {
         </div>
     </footer>
     
-    <!-- Bootstrap JS -->
+ 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Efecto parallax

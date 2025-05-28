@@ -1,0 +1,308 @@
+
+:root {
+        --color-oro: #D4AF37;
+        --color-oro-claro: #e8c252;
+        --color-oro-oscuro: #b8972e;
+        --color-fondo: #111;
+        --color-fondo-claro: #222;
+        --color-texto: #eee;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--color-fondo);
+        color: var(--color-texto);
+        overflow-x: hidden;
+    }
+
+    .text-gold {
+        color: var(--color-oro);
+        padding-left: 15px;
+        margin-bottom: 20px !important;
+        padding-bottom: 10px;
+    }
+
+    /* Header */
+    .parallax-header {
+        background: url('https://wallpaperaccess.com/full/412761.jpg') fixed center/cover;
+        height: 60vh;
+        position: relative;
+    }
+
+    .parallax-overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .header-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .logo-img {
+        max-width: 400px;
+        filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7));
+    }
+
+    .nombre-sociedad {
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
+
+    /* Navbar */
+    .navbar-custom {
+        background-color: rgba(0, 0, 0, 0.9) !important;
+        border-top: 1px solid var(--color-oro);
+        border-bottom: 1px solid var(--color-oro);
+    }
+
+    .navbar-custom .nav-link {
+        color: white;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 0.5rem 1rem;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-custom .nav-link:hover,
+    .navbar-custom .active > .nav-link {
+        color: var(--color-oro);
+    }
+
+    /* Iconos en navbar y dropdown */
+    .navbar-custom .icon-nav,
+    .dropdown-menu .icon-nav {
+        color: var(--color-oro);
+        font-size: 1rem;
+        width: 1.5em;
+    }
+
+    /* Dropdown */
+    .dropdown-menu {
+        background-color: rgba(0, 0, 0, 0.95) !important;
+        border: 1px solid var(--color-oro);
+    }
+
+    .dropdown-item {
+        color: var(--color-texto) !important;
+        padding: 0.5rem 1.5rem;
+        border-bottom: 1px solid #333;
+        display: flex;
+        align-items: center;
+        background-color: transparent !important;
+    }
+
+    .dropdown-item:hover {
+        background-color: rgba(212, 175, 55, 0.1) !important;
+        color: var(--color-oro) !important;
+    }
+
+    /* INFORMACIÓN DE USUARIO */
+    .user-info {
+        background-color: rgba(0, 0, 0, 0.8);
+        border: 2px solid var(--color-oro);
+        border-radius: 15px;
+        padding: 2rem;
+    }
+
+    .user-avatar {
+        width: 120px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    .user-avatar i {
+        font-size: 80px;
+        color: var(--color-oro);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .user-details {
+        text-align: left;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Título INFORMACIÓN USUARIO */
+    .user-info h3 {
+        color: var(--color-oro);
+        padding-left: 15px;
+        margin-bottom: 20px !important;
+        padding-bottom: 10px;
+        text-align: left;
+        border-bottom: 2px solid var(--color-oro);
+    }
+
+
+    /* Iconos específicos de la tarjeta de usuario */
+    .user-info i,
+    .user-info .fa-id-card,
+    .user-info .fa-user,
+    .user-info .fa-user-tag,
+    .user-info .fa-calendar-alt {
+        color: var(--color-oro) !important; /* Asegura que el color sea el mismo para todos los iconos */
+        width: 24px;
+        text-align: center;
+        margin-right: 1rem;
+    }
+
+    /*TARJETAS*/
+
+    .dashboard-card {
+        background-color: rgba(0, 0, 0, 0.7);
+        border: 1px solid var(--color-oro);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+    }
+    
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+    }
+    
+    .dashboard-icon {
+        font-size: 2.5em;
+        color: var(--color-oro);
+        margin-bottom: 15px;
+    }
+    
+    .dashboard-title {
+        color: var(--color-oro);
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+    
+
+    /* Botones */
+    .btn-gold {
+        background-color: var(--color-oro);
+        color: #000;
+        font-weight: 600;
+        border: none;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .btn-gold i {
+        color: var(--color-fondo) !important;
+        opacity: 1 !important;
+    }
+
+    .btn-gold:hover {
+        background-color: var(--color-oro-claro);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer */
+    .footer {
+        background-color: #000;
+        border-top: 1px solid var(--color-oro);
+        padding: 2rem 0;
+        margin-top: 3rem;
+    }
+
+    .text-gold {
+        color: var(--color-oro);
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .footer p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .social-section {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    .social-icons a {
+        color: var(--color-oro);
+        font-size: 1.5rem;
+        transition: all 0.3s;
+    }
+
+    .social-icons a:hover {
+        color: var(--color-oro-claro);
+        transform: translateY(-3px);
+    }
+
+    .copyright {
+        margin-top: 1.5rem;
+        text-align: center;
+        font-weight: 600;
+        color: var(--color-oro);
+        font-size: 1.1em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Sistema de iconos */
+    .icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.5em;
+        margin-right: 0.5rem;
+    }
+
+    .icon-card {
+        font-size: 3em;
+        margin-bottom: 0.5rem;
+        color: var(--color-oro);
+    }
+
+    .icon-list {
+        margin-right: 0.5rem;
+        color: var(--color-oro);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+        .parallax-header {
+            background-attachment: scroll;
+            height: 50vh;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .header-content {
+            text-align: center;
+        }
+        
+        .logo-img {
+            max-width: 200px;
+        }
+        
+        .navbar-custom .nav-link {
+            padding: 0.5rem 0.75rem;
+        }
+    }
+   
