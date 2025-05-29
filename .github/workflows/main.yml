@@ -1,6 +1,7 @@
 name: Windows CI - Build PHP project
 
 on:
+  workflow_dispatch
   push:
     branches:
       - main
