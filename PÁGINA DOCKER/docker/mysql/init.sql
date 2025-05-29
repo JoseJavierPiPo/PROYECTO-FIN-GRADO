@@ -84,7 +84,7 @@ CREATE TABLE `pago_socios` (
   `ID_Licencia` INT NOT NULL,
   `Concepto` enum('Licencia','1_Cuota','2_Cuota') NOT NULL,
   `Monto` decimal(10,2) NOT NULL,
-  `Fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Fecha_Pago` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID_Pago`),
   KEY (`ID_Socio`),
   KEY (`ID_Licencia`),

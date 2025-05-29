@@ -305,28 +305,45 @@ if ($rol !== 'Admin') {
                 display: none;
             }
 
-            .table tbody tr {
-                display: block;
-                margin-bottom: 1rem;
-                border: 1px solid var(--color-oro);
-                border-radius: 5px;
-            }
+            .table {
+            width: 100%;
+            margin: 0 auto;
+            background-color: #000000;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
 
-            .table td {
-                display: block;
-                text-align: right;
-                padding: 0.5rem 1rem;
-                position: relative;
-            }
+        .table thead th {
+            background-color: var(--color-oro);
+            color: #000000;
+            border: none;
+            padding: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            vertical-align: middle;
+        }
 
-            .table td::before {
-                content: attr(data-label);
-                position: absolute;
-                left: 1rem;
-                font-weight: 600;
-                text-transform: uppercase;
-                color: var(--color-oro);
-            }
+        .table tbody tr {
+            background-color: #000000 !important;
+            transition: all 0.3s ease;
+        }
+
+        .table tbody tr:hover {
+            background-color: #1a1a1a !important;
+            transform: scale(1.01);
+        }
+
+        .table td {
+            padding: 0.8rem;
+            text-align: center;
+            vertical-align: middle;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            color: #ffffff !important;
+            background-color: #000000;
+        }
+
         }
 
         /* Paginación si la necesitas */
@@ -467,4 +484,6 @@ if ($rol !== 'Admin') {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
 

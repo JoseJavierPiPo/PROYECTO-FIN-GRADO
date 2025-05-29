@@ -1,6 +1,16 @@
 <?php
 $db_name = "cazadores_bd";
-$conn1 = mysqli_connect("localhost", "root", "", "");
+$conn1 = mysqli_connect("db", "root", "rootpassword");
+
+if (!$conn1) {
+    die("Error de conexión: " . mysqli_connect_error());
+}
+
+// Seleccionar la base de datos
+if (!mysqli_select_db($conn1, $db_name)) {
+    die("Error al seleccionar la base de datos: " . mysqli_error($conn1));
+}
+
 function initializeDatabase($conn1, $db_name) {
     // 1. Crear la base de datos si no existe
     $sql = "CREATE DATABASE IF NOT EXISTS `$db_name` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci";
@@ -14,10 +24,10 @@ function initializeDatabase($conn1, $db_name) {
     // Usar la conexión existente en lugar de crear una nueva
     $conn = $conn1;
     
-    $lo = "localhost";
+    $lo = "db";
     $db = "cazadores_bd";
     $user = "root";
-    $pass = "";
+    $pass = "rootpassword";
     $conn = mysqli_connect($lo, $user, $pass, $db);
 
     mysqli_select_db($conn, $db_name);
@@ -93,7 +103,7 @@ function initializeDatabase($conn1, $db_name) {
                 `ID` int(11) NOT NULL AUTO_INCREMENT,
                 `ID_Socio` int(11) NOT NULL,
                 `ID_Modalidad` int(11) NOT NULL,
-                `Fecha_Registro` date NOT NULL DEFAULT current_timestamp(),
+                `Fecha_Registro` date NOT NULL DEFAULT (CURRENT_DATE),
                 PRIMARY KEY (`ID`),
                 UNIQUE KEY `uc_socio_modalidad` (`ID_Socio`,`ID_Modalidad`),
                 KEY `ID_Modalidad` (`ID_Modalidad`)
@@ -107,7 +117,7 @@ function initializeDatabase($conn1, $db_name) {
                 `ID_Licencia` int(11) NOT NULL,
                 `Concepto` enum('Licencia','1_Cuota','2_Cuota') NOT NULL,
                 `Monto` decimal(10,2) NOT NULL,
-                `Fecha_Pago` date NOT NULL DEFAULT current_timestamp(),
+                `Fecha_Pago` date NOT NULL DEFAULT (CURRENT_DATE),
                 PRIMARY KEY (`ID_Pago`),
                 KEY `ID_Socio` (`ID_Socio`),
                 KEY `ID_Licencia` (`ID_Licencia`)

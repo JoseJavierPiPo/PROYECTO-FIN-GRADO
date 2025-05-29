@@ -38,6 +38,9 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
     <!-- Bootstrap CSS primero -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
+        <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
     <!-- Font Awesome después -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -73,88 +76,88 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../../historia.html">
+                        <a class="nav-link" href="historia.html">
                             <span class="icon-wrapper"><i class="fas fa-landmark icon-nav"></i></span>
                             HISTORIA
                         </a>
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="galeriaDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="./galeria.html" id="galeriaDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-camera icon-nav"></i></span>
                             GALERÍA
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
+                                <a class="dropdown-item dropdown-toggle" href="./galeria.html">
                                     <span class="icon-wrapper"><i class="fas fa-images icon-nav"></i></span>
                                     BATIDAS
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2012-2013</a></li>
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2012-2013</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2013-2014</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
+                                <a class="dropdown-item dropdown-toggle" href="./galeria.html">
                                     <span class="icon-wrapper"><i class="fas fa-deer icon-nav"></i></span>
                                     RECECHOS
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
-                                    <li><a class="dropdown-item" href="#">2015-2016</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2013-2014</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2015-2016</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
+                                <a class="dropdown-item dropdown-toggle" href="./galeria.html">
                                     <span class="icon-wrapper"><i class="fas fa-calendar-alt icon-nav"></i></span>
                                     TEMPORADAS
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
-                                    <li><a class="dropdown-item" href="#">2015-2016</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2013-2014</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2015-2016</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
+                                <a class="dropdown-item dropdown-toggle" href="./galeria.html">
                                     <span class="icon-wrapper"><i class="fas fa-calendar-day icon-nav"></i></span>
                                     JORNADAS
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
-                                    <li><a class="dropdown-item" href="#">2015-2016</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2013-2014</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2015-2016</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="x" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="documentación.html" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-file-alt icon-nav"></i></span>
                             DOCUMENTACIÓN
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="../../documentación.html#actas-content">
+                            <li><a class="dropdown-item" href="documentación.html#actas-content">
                                 <span class="icon-wrapper"><i class="fas fa-file-signature icon-nav"></i></span>
                                 ACTAS
                             </a></li>
-                            <li><a class="dropdown-item" href="../../documentación.html#estatutos-content">
+                            <li><a class="dropdown-item" href="#">
                                 <span class="icon-wrapper"><i class="fas fa-book icon-nav"></i></span>
                                 ESTATUTOS
                             </a></li>
-                            <li><a class="dropdown-item" href="../../documentación.html#autorizaciones-content">
+                            <li><a class="dropdown-item" href="#">
                                 <span class="icon-wrapper"><i class="fas fa-file-contract icon-nav"></i></span>
                                 AUTORIZACIONES
                             </a></li>
-                            <li><a class="dropdown-item" href="../../documentación.html#armas-content">
+                            <li><a class="dropdown-item" href="#">
                                 <span class="icon-wrapper"><i class="fas fa-gun icon-nav"></i></span>
                                 ARMAS
                             </a></li>
-                            <li><a class="dropdown-item" href="../../documentación.html#normativa-content">
+                            <li><a class="dropdown-item" href="#">
                                 <span class="icon-wrapper"><i class="fas fa-gavel icon-nav"></i></span>
                                 NORMATIVA
                             </a></li>
-                            <li><a class="dropdown-item" href="../../documentación.html#inscripcion-content">
+                            <li><a class="dropdown-item" href="#">
                                 <span class="icon-wrapper"><i class="fas fa-user-plus icon-nav"></i></span>
                                 INSCRIPCIÓN SOCIOS
                             </a></li>
@@ -166,22 +169,23 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                             <span class="icon-wrapper"><i class="fas fa-lock icon-nav"></i></span>
                             ÁREA PRIVADA
                         </a>
+                        
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="../../subpáginas/login.php">
+                                <a class="dropdown-item dropdown-toggle" href="./subpáginas/login.php">
                                     <span class="icon-wrapper"><i class="fas fa-users-cog icon-nav"></i></span>
-                                    ÁREA PRIVADA
+                                    ÁREA PRIVADA ADMINISTRATIVA
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="../../subpáginas/admin/gestion_admin.php">
+                                    <li><a class="dropdown-item" href="./subpáginas/admin/gestion_admin.php">
                                         <span class="icon-wrapper"><i class="fas fa-users icon-nav"></i></span>
                                         Gestión Socios
                                     </a></li>
-                                    <li><a class="dropdown-item" href="../../subpáginas/admin/licencias_admin.php">
+                                    <li><a class="dropdown-item" href="./subpáginas/admin/licencias_admin.php">
                                         <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
                                         Gestión de Licencias
                                     </a></li>
-                                    <li><a class="dropdown-item" href="../../subpáginas/admin/modalidades_admin.php">
+                                    <li><a class="dropdown-item" href="./subpáginas/admin/modalidades_admin.php">
                                         <span class="icon-wrapper"><i class="fas fa-bullseye icon-nav"></i></span>
                                         Modalidades de Caza
                                     </a></li>
@@ -191,6 +195,10 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                                     </a></li>
                                 </ul>
                             </li>
+                            <a class="dropdown-item" href="./subpáginas/socios/areaprivadasocio.php">
+                                <span class="icon-wrapper"><i class="fas fa-users-cog icon-nav"></i></span>
+                                ÁREA PRIVADA SOCIOS
+                            </a>
                             <li class="dropdown-submenu">
                                 <a class="dropdown-item dropdown-toggle" href="#">
                                     <span class="icon-wrapper"><i class="fas fa-calculator icon-nav"></i></span>
@@ -219,11 +227,11 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                             DATOS DE INTERÉS
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="../../documentos/cuadro limites zonas de seguridad y terrenos no cinegeticos.pdf">
+                            <li><a class="dropdown-item" href="./documentos/cuadro limites zonas de seguridad y terrenos no cinegeticos.pdf">
                                 <span class="icon-wrapper"><i class="fas fa-shield-alt icon-nav"></i></span>
                                 ZONAS DE SEGURIDAD
                             </a></li>
-                            <li><a class="dropdown-item" href="../../documentos/Licencia de caza mayores 65.pdf">
+                            <li><a class="dropdown-item" href="./documentos/Licencia de caza mayores 65.pdf">
                                 <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
                                 LICENCIAS +65
                             </a></li>
@@ -231,7 +239,7 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="../../contacto.html">
+                        <a class="nav-link" href="./contacto.html">
                             <span class="icon-wrapper"><i class="fas fa-envelope icon-nav"></i></span>
                             CONTACTO
                         </a>
@@ -282,13 +290,13 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                     <!-- Tarjetas de Gestión (mitad inferior) -->
                     <div class="col-12">
                         <div class="row">
-                            <!-- Tarjeta de Documentos -->
+                            <!-- Tarjeta de Pagos -->
                             <div class="col-md-4">
                                 <div class="dashboard-card text-center h-100">
-                                    <i class="fas fa-file-alt dashboard-icon"></i>
-                                    <h3 class="dashboard-title">Documentos</h3>
-                                    <p>Accede a documentos importantes</p>
-                                    <a href="#" class="btn btn-gold btn-sm">Ver Documentos</a>
+                                    <i class="fas fa-credit-card dashboard-icon text-warning"></i>
+                                    <h3 class="dashboard-title">PAGOS</h3>
+                                    <p>Accede a pagar la cuota de la Sociedad</p>
+                                    <a href="../../vendor/pago/pagosocio.php" class="btn btn-gold btn-sm">PAGAR CUOTA</a>
                                 </div>
                             </div>
 
@@ -308,7 +316,7 @@ $fecha_alta = isset($_SESSION['Fecha_Alta'])? $_SESSION['Fecha_Alta'] : '';
                                     <i class="fas fa-calculator dashboard-icon"></i>
                                     <h3 class="dashboard-title">Cuentas</h3>
                                     <p>Revisa el estado financiero</p>
-                                    <a href="#" class="btn btn-gold btn-sm">Ver Cuentas</a>
+                                    <a href="../../documentos/Estado_Cuentas_Sociedad_Cazadores_2024.pdf" class="btn btn-gold btn-sm">Ver Cuentas</a>
                                 </div>
                             </div>
                         </div>

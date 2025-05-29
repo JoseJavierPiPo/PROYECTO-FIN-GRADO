@@ -62,7 +62,7 @@ if ($rol !== 'Admin') {
     }
 
     .logo-img {
-        max-width: 150px;
+        max-width: 400px;
         filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7));
     }
 
@@ -351,7 +351,7 @@ if ($rol !== 'Admin') {
         }
         
         .logo-img {
-            max-width: 120px;
+            max-width: 2000px;
         }
         
         .navbar-custom .nav-link {
@@ -368,7 +368,7 @@ if ($rol !== 'Admin') {
         <div class="container header-content">
             <div class="row">
                 <div class="col-12 text-center">
-                    <a href="../../index.php"><img src="../../fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
+                    <a href="../../index.php"><img src="../../fotos/logosociedad.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
                     <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
                     <h2 class="h3 nombre-sociedad">LOS PIPORROS</h2>
                 </div>
@@ -386,68 +386,68 @@ if ($rol !== 'Admin') {
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../../historia.html">
+                        <a class="nav-link" href="historia.html">
                             <span class="icon-wrapper"><i class="fas fa-landmark icon-nav"></i></span>
                             HISTORIA
                         </a>
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="galeriaDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="./galeria.html" id="galeriaDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-camera icon-nav"></i></span>
                             GALERÍA
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
+                                <a class="dropdown-item dropdown-toggle" href="./galeria.html">
                                     <span class="icon-wrapper"><i class="fas fa-images icon-nav"></i></span>
                                     BATIDAS
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2012-2013</a></li>
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2012-2013</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2013-2014</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
+                                <a class="dropdown-item dropdown-toggle" href="./galeria.html">
                                     <span class="icon-wrapper"><i class="fas fa-deer icon-nav"></i></span>
                                     RECECHOS
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
-                                    <li><a class="dropdown-item" href="#">2015-2016</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2013-2014</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2015-2016</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
+                                <a class="dropdown-item dropdown-toggle" href="./galeria.html">
                                     <span class="icon-wrapper"><i class="fas fa-calendar-alt icon-nav"></i></span>
                                     TEMPORADAS
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
-                                    <li><a class="dropdown-item" href="#">2015-2016</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2013-2014</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2015-2016</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
+                                <a class="dropdown-item dropdown-toggle" href="./galeria.html">
                                     <span class="icon-wrapper"><i class="fas fa-calendar-day icon-nav"></i></span>
                                     JORNADAS
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
-                                    <li><a class="dropdown-item" href="#">2015-2016</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2013-2014</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2015-2016</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="documentación.html" id="documentacionDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-file-alt icon-nav"></i></span>
                             DOCUMENTACIÓN
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="documentación.html#actas-content">
                                 <span class="icon-wrapper"><i class="fas fa-file-signature icon-nav"></i></span>
                                 ACTAS
                             </a></li>
@@ -475,29 +475,40 @@ if ($rol !== 'Admin') {
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="x" id="areaPrivadaDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="areaPrivadaDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-lock icon-nav"></i></span>
                             ÁREA PRIVADA
                         </a>
+                        
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="../../subpáginas/admin/areaprivadaadmin.php">
-                                    <span class="icon-wrapper"><i class="bi bi-folder-fill"></i></span>
-                                    ÁREA PRIVADA
-                                </a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
-                                    <span class="icon-wrapper"><i class="fas fa-handshake icon-nav"></i></span>
-                                    ACUERDOS
+                                <a class="dropdown-item dropdown-toggle" href="./subpáginas/login.php">
+                                    <span class="icon-wrapper"><i class="fas fa-users-cog icon-nav"></i></span>
+                                    ÁREA PRIVADA ADMINISTRATIVA
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">
-                                        <span class="icon-wrapper"><i class="fas fa-vote-yea icon-nav"></i></span>
-                                        ELECCIONES
+                                    <li><a class="dropdown-item" href="./subpáginas/admin/gestion_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-users icon-nav"></i></span>
+                                        Gestión Socios
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="./subpáginas/admin/licencias_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
+                                        Gestión de Licencias
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="./subpáginas/admin/modalidades_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-bullseye icon-nav"></i></span>
+                                        Modalidades de Caza
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="panel_admin.php">
+                                        <span class="icon-wrapper"><i class="fas fa-user-shield icon-nav"></i></span>
+                                        Panel Admin
                                     </a></li>
                                 </ul>
                             </li>
+                            <a class="dropdown-item" href="../../subpáginas/socios/areaprivadasocio.php">
+                                <span class="icon-wrapper"><i class="fas fa-users-cog icon-nav"></i></span>
+                                ÁREA PRIVADA SOCIOS
+                            </a>
                             <li class="dropdown-submenu">
                                 <a class="dropdown-item dropdown-toggle" href="#">
                                     <span class="icon-wrapper"><i class="fas fa-calculator icon-nav"></i></span>
@@ -526,15 +537,11 @@ if ($rol !== 'Admin') {
                             DATOS DE INTERÉS
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">
-                                <span class="icon-wrapper"><i class="fas fa-map-marker-alt icon-nav"></i></span>
-                                DIRECCIONES
-                            </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="./documentos/cuadro limites zonas de seguridad y terrenos no cinegeticos.pdf">
                                 <span class="icon-wrapper"><i class="fas fa-shield-alt icon-nav"></i></span>
                                 ZONAS DE SEGURIDAD
                             </a></li>
-                            <li><a class="dropdown-item" href="#">
+                            <li><a class="dropdown-item" href="./documentos/Licencia de caza mayores 65.pdf">
                                 <span class="icon-wrapper"><i class="fas fa-id-card icon-nav"></i></span>
                                 LICENCIAS +65
                             </a></li>
@@ -542,7 +549,7 @@ if ($rol !== 'Admin') {
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="../../contacto.html">
+                        <a class="nav-link" href="./contacto.html">
                             <span class="icon-wrapper"><i class="fas fa-envelope icon-nav"></i></span>
                             CONTACTO
                         </a>

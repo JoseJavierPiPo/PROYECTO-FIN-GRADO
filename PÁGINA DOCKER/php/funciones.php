@@ -300,7 +300,7 @@ function buscarsocios($conn){
 
          if($result && mysqli_num_rows($result) > 0) {
              echo "<table border='1' cellpadding='5' cellspacing='0'>";
-             echo "<tr>
+             echo "<thead><tr>
                          <th>ID</th>
                          <th>Nombre</th>
                          <th>Descripción</th>
@@ -309,7 +309,8 @@ function buscarsocios($conn){
                          <th>Tipo de Caza</th>
                          <th>Arma Predominante</th>
                          <th>Requiere Permiso</th>
-                     </tr>";
+                     </tr></thead><tbody>";
+
                  while($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>
                         <td>{$row['ID_Modalidad']}</td>
@@ -858,6 +859,7 @@ function mostrarpagos($conn,$id_socio){
     $_SESSION['Fecha_Pago'] = isset($row['Fecha_Pago'])? $row['Fecha_Pago'] : '';
 
 }
+
 
 
 ?>

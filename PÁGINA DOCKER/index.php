@@ -10,11 +10,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
 
-
-
-    <style>
-         :root {
+<style>
+    :root {
         --color-oro: #D4AF37;
         --color-oro-claro: #e8c252;
         --color-oro-oscuro: #b8972e;
@@ -22,7 +21,6 @@
         --color-fondo-claro: #222;
         --color-texto: #eee;
     }
-
     /* Estructura Base */
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -379,7 +377,7 @@
             padding: 0.5rem 0.75rem;
         }
     }
-    </style>
+</style>
     
 </head>
 <body>
@@ -414,49 +412,49 @@
                     </li>
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="galeriaDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="./galeria.html" id="galeriaDropdown" role="button" data-bs-toggle="dropdown">
                             <span class="icon-wrapper"><i class="fas fa-camera icon-nav"></i></span>
                             GALERÍA
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
+                                <a class="dropdown-item dropdown-toggle" href="./galeria.html">
                                     <span class="icon-wrapper"><i class="fas fa-images icon-nav"></i></span>
                                     BATIDAS
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2012-2013</a></li>
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2012-2013</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2013-2014</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
+                                <a class="dropdown-item dropdown-toggle" href="./galeria.html">
                                     <span class="icon-wrapper"><i class="fas fa-deer icon-nav"></i></span>
                                     RECECHOS
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
-                                    <li><a class="dropdown-item" href="#">2015-2016</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2013-2014</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2015-2016</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
+                                <a class="dropdown-item dropdown-toggle" href="./galeria.html">
                                     <span class="icon-wrapper"><i class="fas fa-calendar-alt icon-nav"></i></span>
                                     TEMPORADAS
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
-                                    <li><a class="dropdown-item" href="#">2015-2016</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2013-2014</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2015-2016</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">
+                                <a class="dropdown-item dropdown-toggle" href="./galeria.html">
                                     <span class="icon-wrapper"><i class="fas fa-calendar-day icon-nav"></i></span>
                                     JORNADAS
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2013-2014</a></li>
-                                    <li><a class="dropdown-item" href="#">2015-2016</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2013-2014</a></li>
+                                    <li><a class="dropdown-item" href="./galeria.html">2015-2016</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -500,11 +498,12 @@
                             <span class="icon-wrapper"><i class="fas fa-lock icon-nav"></i></span>
                             ÁREA PRIVADA
                         </a>
+                        
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
                                 <a class="dropdown-item dropdown-toggle" href="./subpáginas/login.php">
                                     <span class="icon-wrapper"><i class="fas fa-users-cog icon-nav"></i></span>
-                                    ÁREA PRIVADA
+                                    ÁREA PRIVADA ADMINISTRATIVA
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="./subpáginas/admin/gestion_admin.php">
@@ -525,6 +524,10 @@
                                     </a></li>
                                 </ul>
                             </li>
+                            <a class="dropdown-item" href="./subpáginas/socios/areaprivadasocio.php">
+                                <span class="icon-wrapper"><i class="fas fa-users-cog icon-nav"></i></span>
+                                ÁREA PRIVADA SOCIOS
+                            </a>
                             <li class="dropdown-submenu">
                                 <a class="dropdown-item dropdown-toggle" href="#">
                                     <span class="icon-wrapper"><i class="fas fa-calculator icon-nav"></i></span>
@@ -630,7 +633,7 @@
                     <h3 class="sidebar-title"><span class="icon-wrapper"><i class="fas fa-history icon-title"></i></span> HISTORIA</h3>
                     <ul class="sidebar-menu">
                         <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-camera icon-list"></i></span>Galería fotográfica</a></li>
-                        <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-file-alt icon-list"></i></span>Documentación</a></li>
+                        <li class="sidebar-item"><a href="./documentación.html" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-file-alt icon-list"></i></span>Documentación</a></li>
                         <li class="sidebar-item"><a href="./subpáginas/login.php" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-lock icon-list"></i></span>Área privada</a></li>
                         <li class="sidebar-item"><a href="./contacto.html" class="sidebar-link"><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>Contacto</a></li>
                     </ul>
@@ -666,7 +669,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                    <a href="https://aceuchal.com/"><img src="../PÁGINA CAZADORES/fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
+                    <a href="https://aceuchal.com/"><img src="./fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
                 </div>
                 <div class="col-md-4 text-center mb-3 mb-md-0">
                     <h5 class="text-gold">CONTACTO</h5>
@@ -691,58 +694,52 @@
         </div>
     </footer>
     
-    <!-- Script Base de Datos -->
-    <?php 
-    include_once('./php/conn2.php');
-    initializeDatabase($conn1, $db_name); 
-    ?>
 
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     <!-- Antes de Bootstrap JS -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     <script>
+         // Efecto parallax
+         document.addEventListener('DOMContentLoaded', function() {
+             const parallaxHeader = document.querySelector('.parallax-header');
+             const headerHeight = parallaxHeader.offsetHeight;
+             
+             window.addEventListener('scroll', function() {
+                 const scrollPosition = window.pageYOffset;
+                 const limit = headerHeight;
+                 
+                 if (scrollPosition <= limit) {
+                     parallaxHeader.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+                 }
+             });
+             
+             // Submenús en dropdown
+             const dropdownSubmenus = document.querySelectorAll('.dropdown-submenu');
+             
+             dropdownSubmenus.forEach(function(item) {
+                 item.addEventListener('mouseenter', function() {
+                     this.querySelector('.dropdown-menu').classList.add('show');
+                 });
+                 
+                 item.addEventListener('mouseleave', function() {
+                     this.querySelector('.dropdown-menu').classList.remove('show');
+                 });
+             });
+         });
+     </script>
     <script>
-        // Efecto parallax
         document.addEventListener('DOMContentLoaded', function() {
-            const parallaxHeader = document.querySelector('.parallax-header');
-            const headerHeight = parallaxHeader.offsetHeight;
-            
-            window.addEventListener('scroll', function() {
-                const scrollPosition = window.pageYOffset;
-                const limit = headerHeight;
-                
-                if (scrollPosition <= limit) {
-                    parallaxHeader.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
-                }
-            });
-            
-            // Submenús en dropdown
-            const dropdownSubmenus = document.querySelectorAll('.dropdown-submenu');
-            
-            dropdownSubmenus.forEach(function(item) {
-                item.addEventListener('mouseenter', function() {
-                    this.querySelector('.dropdown-menu').classList.add('show');
-                });
-                
-                item.addEventListener('mouseleave', function() {
-                    this.querySelector('.dropdown-menu').classList.remove('show');
-                });
-            });
-        });
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.es.min.js"></script>
-    
-    <script>
-        $(document).ready(function(){
+        if ($.fn.datepicker) {
             $('#mini-calendario').datepicker({
                 format: 'dd/mm/yyyy',
                 language: 'es',
                 todayHighlight: true,
-                autoclose: false,
+                autoclose: true,
                 defaultViewDate: { year: 2024, month: 0, day: 1 }
             });
-        });
+        }
+    });
     </script>
+
 </body>
 </html>

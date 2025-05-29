@@ -292,7 +292,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>  
                 
                 <button type="submit" class="btn-gold">
-                    <i class="fas fa-id-card"></i> Revocar Licencia
+                    <i class="fas fa-id-card"></i> Renovar Licencia
                 </button>
             </form>
         </div>
