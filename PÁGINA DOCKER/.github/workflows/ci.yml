@@ -1,48 +1,30 @@
-name: CI - Build and Test Docker Compose
+name: Windows CI - Build PHP project
 
 on:
   push:
     branches:
+      - main
       - master
   pull_request:
 
 jobs:
   build:
     runs-on: windows-latest
-    services:
-      mysql:
-        image: mysql:5.7
-        ports:
-          - 3306:3306
-        env:
-          MYSQL_DATABASE: cazadores_bd
-          MYSQL_USER: user
-          MYSQL_PASSWORD: password
-          MYSQL_ROOT_PASSWORD: rootpassword
-        options: >-
-          --health-cmd="mysqladmin ping --silent"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          extensions: mysqli, pdo, pdo_mysql
 
-      - name: Build and start containers with docker-compose
-        run: |
-          docker-compose build
-          docker-compose up -d
+      - name: Check PHP version
+        run: php -v
 
-      - name: Wait for web service to be healthy
-        run: |
-          # Esperamos 10 segundos para que el servidor web inicie
-          sleep 10
-          # Opcional: probar que el servidor web responde
-          curl -f http://localhost:8080 || exit 1
+      - name: List project files
+        run: dir
 
-      - name: Tear down containers
-        run: docker-compose down
+      # Aquí podrías agregar comandos de prueba si los tuvieras
