@@ -1,18 +1,3 @@
-<?php
-session_start();
-include_once("../../php/funciones.php");
-
-// Verificar variables de sesión
-$nombre = isset($_SESSION['Nombre']) ? $_SESSION['Nombre'] : '';
-$dni = isset($_SESSION['DNI']) ? $_SESSION['DNI'] : '';
-$rol = isset($_SESSION['ROL']) ? $_SESSION['ROL'] : '';
-
-// Verificar si el usuario es administrador
-if ($rol !== 'Admin') {
-    header("Location: ../login.php");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,6 +10,8 @@ if ($rol !== 'Admin') {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
 
    <style>
     :root {
@@ -140,126 +127,6 @@ if ($rol !== 'Admin') {
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-    /* Contenido principal */
-
-    .gestion-container {
-        max-width: 1200px;
-        margin: 50px auto;
-        padding: 20px;
-        flex: 1;
-    }
-    .section-title {
-        color: var(--color-oro);
-        text-align: center;
-        margin: 40px 0 20px;
-        font-size: 1.8em;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border-bottom: 2px solid var(--color-oro);
-        padding-bottom: 10px;
-    }
-    
-    .gestion-grid {
-        margin-bottom: 40px;
-    }
-
-    .gestion-title {
-        color: var(--color-oro);
-        text-align: center;
-        margin-bottom: 40px;
-        font-size: 2.5em;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-    }
-
-    .gestion-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-        padding: 2rem;
-        margin: 0 auto;
-        max-width: 1200px;
-        justify-content: center;
-    }
-
-    .gestion-card {
-        background-color: rgba(0, 0, 0, 0.8);
-        border: 1px solid var(--color-oro);
-        border-radius: 10px;
-        padding: 2rem;
-        text-align: center;
-        transition: all 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 100%;
-        min-height: 350px;
-    }
-
-    .gestion-icon {
-        font-size: 3.5em;
-        color: var(--color-oro) !important;
-        margin-bottom: 1.5rem;
-    }
-
-    .gestion-card h3 {
-        color: var(--color-oro);
-        font-size: 1.5em;
-        margin-bottom: 1rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .gestion-card p {
-        color: var(--color-texto);
-        margin-bottom: 1.5rem;
-        font-size: 1em;
-        line-height: 1.5;
-    }
-
-    /* Botones */
-    .btn-gold {
-        background-color: var(--color-oro);
-        color: var(--color-fondo);
-        padding: 0.8rem 1.5rem;
-        border: none;
-        border-radius: 5px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: all 0.3s ease;
-        width: 100%;
-        max-width: 200px;
-        margin: 0 auto;
-        display: block;
-        text-align: center;
-        position: relative;
-        bottom: 1rem;
-    }
-
-    .btn-gold:hover {
-        background-color: var(--color-oro-claro);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
-    }
-
-    .back-button {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        background-color: var(--color-oro);
-        color: var(--color-fondo);
-        padding: 10px 20px;
-        border-radius: 5px;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        z-index: 1000;
-    }
-
-    .back-button:hover {
-        background-color: var(--color-oro-claro);
-        color: var(--color-fondo);
-    }
 
     /* Footer */
     .footer {
@@ -368,7 +235,7 @@ if ($rol !== 'Admin') {
         <div class="container header-content">
             <div class="row">
                 <div class="col-12 text-center">
-                    <a href="../../index.php"><img src="../../fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
+                    <a href="index.php"><img src="./fotos/logo-aceuchal1-1.png" alt="Logo Los Piporros" class="logo-img mb-4"></a>
                     <h1 class="display-4 fw-bold mb-3">SOCIEDAD DE CAZADORES</h1>
                     <h2 class="h3 nombre-sociedad">LOS PIPORROS</h2>
                 </div>
@@ -555,98 +422,19 @@ if ($rol !== 'Admin') {
     </nav>
     
     <!-- Contenido principal -->
-    <a href="areaprivadaadmin.php" class="back-button">
-        <i class="fas fa-arrow-left"></i> Volver
-    </a>
-
-    <div class="gestion-container">
-        <h1 class="gestion-title">GESTIÓN DE MODALIDADES DE CAZA</h1>
-        
-        <!-- Grupo 1: Gestión de Modalidades -->
-        <h2 class="section-title">Gestión de Modalidades</h2>
-        <div class="gestion-grid">
-            <!-- Crear Modalidad -->
-            <div class="gestion-card">
-                <i class="fas fa-plus-circle gestion-icon"></i>
-                <h3>Crear Modalidad</h3>
-                <p>Añade nuevas modalidades de caza al sistema con sus respectivas características y requisitos.</p>
-                <a href="./modalidades/crearmodalidad.php" class="btn btn-gold">Crear Nueva</a>
-            </div>
-    
-            <!-- Borrar Modalidad -->
-            <div class="gestion-card">
-                <i class="fas fa-trash-alt gestion-icon"></i>
-                <h3>Borrar Modalidad</h3>
-                <p>Elimina modalidades de caza que ya no estén activas o sean necesarias.</p>
-                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Eliminar</a>
-            </div>
-    
-            <!-- Listar Modalidades -->
-            <div class="gestion-card">
-                <i class="fas fa-list-ul gestion-icon"></i>
-                <h3>Listar Modalidades</h3>
-                <p>Visualiza todas las modalidades de caza disponibles en el sistema.</p>
-                <a href="./modalidades/listarmodalidades.php" class="btn btn-gold">Ver Lista</a>
-            </div>
-    
-            <!-- Filtrar Modalidades -->
-            <div class="gestion-card">
-                <i class="fas fa-filter gestion-icon"></i>
-                <h3>Filtrar Modalidades</h3>
-                <p>Busca y filtra modalidades según diferentes criterios y temporadas.</p>
-                <a href="./modalidades/filtromodalidades.php" class="btn btn-gold">Filtrar</a>
-            </div>
-
-            <div class="gestion-card">
-                <i class="fas fa-users-viewfinder gestion-icon"></i>
-                <h3>Búsqueda por Socio</h3>
-                <p>Busca las modalidades asignadas a cada socio.</p>
-                <a href="modalidades/asignaciones/busquedamodalidades.php" class="btn btn-gold">
-                    <i class="fas fa-search me-2"></i>Buscar
-                </a>
-            </div>
-        </div>
-    
-        <!-- Grupo 2: Gestión de Asignaciones -->
-        <h2 class="section-title">Gestión de Asignaciones</h2>
-        <div class="gestion-grid">
-            <!-- Asignar Modalidad -->
-            <div class="gestion-card">
-                <i class="fas fa-user-plus gestion-icon"></i>
-                <h3>Asignar Modalidad</h3>
-                <p>Vincula socios a modalidades específicas de caza según sus preferencias y permisos.</p>
-                <a href="./modalidades/asignaciones/asignarmodalidad.php" class="btn btn-gold">Asignar</a>
-            </div>
-    
-            <!-- Eliminar Asignación -->
-            <div class="gestion-card">
-                <i class="fas fa-user-minus gestion-icon"></i>
-                <h3>Eliminar Asignación</h3>
-                <p>Revoca la asignación de modalidades a socios cuando sea necesario.</p>
-                <a href="./modalidades/asignaciones/borrarasignacion.php" class="btn btn-gold">Eliminar Asignación</a>
-            </div>
-
-            <div class="gestion-card">
-                <i class="fas fa-trash-alt gestion-icon"></i>
-                <h3>Busqueda de Socios por Modalidad</h3>
-                <p>Filtro/Busqueda de socios por modalidad</p>
-                <a href="./modalidades/borrarmodalidad.php" class="btn btn-gold">Busca</a>
-            </div>
-        </div>
-    </div>
-
+    <p>EN MANTENIMIENTO FUTURAS ACTUALIZACIONES</p>
     
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                    <a href="https://aceuchal.com/"><img src="../../fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
+                    <a href="https://aceuchal.com/"><img src="../PÁGINA CAZADORES/fotos/logo-aceuchal1-1.png" class="img-fluid" style="max-height: 50px;"></a>
                 </div>
                 <div class="col-md-4 text-center mb-3 mb-md-0">
                     <h5 class="text-gold">CONTACTO</h5>
                     <p><span class="icon-wrapper"><i class="fas fa-phone icon-list"></i></span>924 680 033</p>
-                    <p><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>cazadorespiporros@hotmail.com</p>
+                    <p><span class="icon-wrapper"><i class="fas fa-envelope icon-list"></i></span>info@sociotral.com</p>
                 </div>
                 <div class="col-md-4 social-section">
                     <h5 class="text-gold">SÍGUENOS</h5>

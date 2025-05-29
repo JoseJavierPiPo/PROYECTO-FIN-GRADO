@@ -10,11 +10,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
 
-
-
-    <style>
-         :root {
+<style>
+    :root {
         --color-oro: #D4AF37;
         --color-oro-claro: #e8c252;
         --color-oro-oscuro: #b8972e;
@@ -22,7 +21,6 @@
         --color-fondo-claro: #222;
         --color-texto: #eee;
     }
-
     /* Estructura Base */
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -379,7 +377,7 @@
             padding: 0.5rem 0.75rem;
         }
     }
-    </style>
+</style>
     
 </head>
 <body>
@@ -398,6 +396,7 @@
     </header>
     
     <!-- Menú de navegación -->
+    
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
@@ -691,58 +690,58 @@
         </div>
     </footer>
     
+
+     <!-- Antes de Bootstrap JS -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     <script>
+         // Efecto parallax
+         document.addEventListener('DOMContentLoaded', function() {
+             const parallaxHeader = document.querySelector('.parallax-header');
+             const headerHeight = parallaxHeader.offsetHeight;
+             
+             window.addEventListener('scroll', function() {
+                 const scrollPosition = window.pageYOffset;
+                 const limit = headerHeight;
+                 
+                 if (scrollPosition <= limit) {
+                     parallaxHeader.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+                 }
+             });
+             
+             // Submenús en dropdown
+             const dropdownSubmenus = document.querySelectorAll('.dropdown-submenu');
+             
+             dropdownSubmenus.forEach(function(item) {
+                 item.addEventListener('mouseenter', function() {
+                     this.querySelector('.dropdown-menu').classList.add('show');
+                 });
+                 
+                 item.addEventListener('mouseleave', function() {
+                     this.querySelector('.dropdown-menu').classList.remove('show');
+                 });
+             });
+         });
+     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        if ($.fn.datepicker) {
+            $('#mini-calendario').datepicker({
+                format: 'dd/mm/yyyy',
+                language: 'es',
+                todayHighlight: true,
+                autoclose: true,
+                defaultViewDate: { year: 2024, month: 0, day: 1 }
+            });
+        }
+    });
+    </script>
+
     <!-- Script Base de Datos -->
     <?php 
     include_once('./php/conn2.php');
     initializeDatabase($conn1, $db_name); 
     ?>
 
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Efecto parallax
-        document.addEventListener('DOMContentLoaded', function() {
-            const parallaxHeader = document.querySelector('.parallax-header');
-            const headerHeight = parallaxHeader.offsetHeight;
-            
-            window.addEventListener('scroll', function() {
-                const scrollPosition = window.pageYOffset;
-                const limit = headerHeight;
-                
-                if (scrollPosition <= limit) {
-                    parallaxHeader.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
-                }
-            });
-            
-            // Submenús en dropdown
-            const dropdownSubmenus = document.querySelectorAll('.dropdown-submenu');
-            
-            dropdownSubmenus.forEach(function(item) {
-                item.addEventListener('mouseenter', function() {
-                    this.querySelector('.dropdown-menu').classList.add('show');
-                });
-                
-                item.addEventListener('mouseleave', function() {
-                    this.querySelector('.dropdown-menu').classList.remove('show');
-                });
-            });
-        });
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.es.min.js"></script>
-    
-    <script>
-        $(document).ready(function(){
-            $('#mini-calendario').datepicker({
-                format: 'dd/mm/yyyy',
-                language: 'es',
-                todayHighlight: true,
-                autoclose: false,
-                defaultViewDate: { year: 2024, month: 0, day: 1 }
-            });
-        });
-    </script>
 </body>
 </html>
