@@ -20,9 +20,8 @@ Antes de comenzar, asegúrate de tener instalado:
 git clone https://github.com/JoseJavierPiPo/PROYECTO-FIN-GRADO
 cd PROYECTO-FIN-GRADO
 
-```
+Construimos los contenedores con un
 
-### Construimos los contenedores con un 
 ```bash
 docker-compose up --build
 
