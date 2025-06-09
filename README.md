@@ -23,9 +23,9 @@ cd PROYECTO-FIN-GRADO
 ```
 
 ### Construimos los contenedores con un 
-
 ```bash
 docker-compose up --build
+
 ```
 
 Verifica que todos los servicios estén corriendo:
