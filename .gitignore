@@ -1,0 +1,7 @@
+# Ignorar dependencias de PHP
+/vendor/
+
+# Ignorar archivos de configuración privados
+.env
+*.key
+stripe-secret-key.js
